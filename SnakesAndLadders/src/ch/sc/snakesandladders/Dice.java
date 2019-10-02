@@ -12,9 +12,5 @@ public class Dice {
         value = generator.nextInt(6) + 1;
         return value;
     }
-
-    public void test() {
-        System.out.println("test");
-    }
 }
 
