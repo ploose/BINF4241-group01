@@ -9,7 +9,7 @@ public class Dice {
         value = generator.nextInt(6) + 1;
     }
 
-    public int throw_dice() {
+    public int throwDice() {
         value = generator.nextInt(6) + 1;
         return value;
     }

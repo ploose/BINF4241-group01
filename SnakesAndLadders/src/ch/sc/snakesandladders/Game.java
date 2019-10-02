@@ -1,9 +1,12 @@
+import Dice;
+
 public class Game {
     private boolean isRunning;
     private Players players;
     private Player current;
     private Board board;
     private Ui userInterface;
+    private Dice dice;
 
     public static void main(String[] args) {
         //TODO
@@ -18,12 +21,14 @@ public class Game {
         is_running = false;
         this.players = players;
         current = this.players.currentPlayer();
-        board = new Board(4, 6);
+        board = new Board();
+        dice = new Dice();
     }
 
-    private runTheGame() {
+    private void runTheGame() {
         while (is_running) {
-
+            this.userInterface.getInputNextTurn();
+            current.move(Dice.throwDice());
         }
     }
 }
