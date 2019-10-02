@@ -1,8 +1,8 @@
 //Author: Pascal Marty
 //TODO: Can multiple people land on the last square or is the game finished, as soon as the first player reaches it?
 public class LastSquare extends Square{
-    public LastSquare(int index){
-        super(index);
+    public LastSquare(Game game, int index){
+        super(game, index);
     }
 
     public Square requestLanding(){

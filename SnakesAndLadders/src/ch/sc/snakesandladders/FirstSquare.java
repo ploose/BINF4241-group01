@@ -1,8 +1,8 @@
 //Author: Pascal Marty
 public class FirstSquare extends Square{
-    public FirstSquare(int index){
+    public FirstSquare(Game game, int index){
         // passes singleSpace = false because there can be multiple players on the first square
-        super(index, false);
+        super(game, index, false);
     }
 
     public Square requestLanding(Player p){

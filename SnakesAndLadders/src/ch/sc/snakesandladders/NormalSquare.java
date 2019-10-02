@@ -1,7 +1,7 @@
 //Author: Pascal Marty
 public class NormalSquare extends Square{
-    public NormalSquare(int index){
-        super(index);
+    public NormalSquare(Game game, int index){
+        super(game, index);
     }
 
     public Square requestLanding(){
