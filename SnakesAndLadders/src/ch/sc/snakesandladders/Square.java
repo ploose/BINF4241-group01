@@ -12,7 +12,7 @@ public abstract class Square {
     private Game game;
 
     public Square(Game game, int index) {
-        Square(index, true);
+        Square(game, index, true);
     }
 
     public Square(Game game, int index, boolean singleSpace) {
