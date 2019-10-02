@@ -13,8 +13,8 @@ public class LastSquare extends Square{
         return true;
     }
 
-    private void finishGame(){
-        /* Do stuff to finish the game */
+    public boolean isLastSquare(){
+        return true;
     }
 
 }

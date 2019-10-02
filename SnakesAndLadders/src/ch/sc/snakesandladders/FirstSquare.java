@@ -10,4 +10,8 @@ public class FirstSquare extends Square{
         addPlayer(p);
         return true;
     }
+
+    public boolean isLastSquare(){
+        return false;
+    }
 }

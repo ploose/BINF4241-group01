@@ -12,4 +12,7 @@ public class NormalSquare extends Square{
         return false;
     }
 
+    public boolean isLastSquare(){
+        return false;
+    }
 }
