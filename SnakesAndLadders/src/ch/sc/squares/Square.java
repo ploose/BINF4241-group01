@@ -5,12 +5,13 @@
 - getSize() : function that returns amount of squares on the gameboard
 - findSquare(index) : Find and return square from Squarelist
  */
+package ch.sc.squares;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
-import Game;
-import Player;
+import ch.sc.snakesandladders.Game;
+import ch.sc.snakesandladders.Player;
 
 public abstract class Square {
     private int index; // Index of tile instance

@@ -1,5 +1,7 @@
 //Author: Pascal Marty
 //TODO: Can multiple people land on the last square or is the game finished, as soon as the first player reaches it?
+package ch.sc.squares;
+
 public class LastSquare extends Square{
     public LastSquare(Game game, int index){
         super(game, index);
