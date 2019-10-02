@@ -1,4 +1,11 @@
 //Author: Pascal Marty
+/* TODO: Squares need / call the following functions in Game:
+- Squarelist to store all squares
+- populate method to initialize gameboard
+- getSize() : function that returns amount of squares on the gameboard
+- findSquare(index) : Find and return square from Squarelist
+ */
+
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -42,8 +49,8 @@ public abstract class Square {
     public Square moveAndLand(int distance){
         //TODO: If we move onto an occupied square, do we stay or do we need to go to the very begining? Also how to handle 'overshots'
         // We can't move if we would 'fall' off the board
-        if (this.getIndex() + distance <= game.getSize() + 1){
-            Square nextSquare = game.findSquare(distance);
+        if (getIndex() + distance <= game.getSize()){
+            Square nextSquare = game.findSquare(getIndex() + distance);
             nextSquare = nextSquare.requestLanding();
             // If we can move to the requestLanding() function will return a valid Square object, else we get null
             if(nextSquare != null){
