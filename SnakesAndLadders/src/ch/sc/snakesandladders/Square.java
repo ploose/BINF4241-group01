@@ -2,18 +2,21 @@
 import java.awt.Point;
 import java.util.ArrayList;
 
+import Game;
 import Player;
 
 public abstract class Square {
     private int index; // Index of tile instance
     private boolean singleSpace; // boolean that indicates, whether the tile is limited to one player (if true) or if there is no limit (if false)
     private ArrayList<Player> curPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
+    private Game game;
 
-    public Square(int index) {
+    public Square(Game game, int index) {
         Square(index, true);
     }
 
-    public Square(int index, boolean singleSpace) {
+    public Square(Game game, int index, boolean singleSpace) {
+        this.game = game;
         this.index = index;
         this.singleSpace = singleSpace;
     }
@@ -36,7 +39,22 @@ public abstract class Square {
         return curPlayers.remove(p);
     }
 
-    public abstract boolean requestLanding();
+    public Square moveAndLand(int distance){
+        //TODO: If we move onto an occupied square, do we stay or do we need to go to the very begining? Also how to handle 'overshots'
+        // We can't move if we would 'fall' off the board
+        if (this.getIndex() + distance <= game.getSize() + 1){
+            Square nextSquare = game.findSquare(distance);
+            nextSquare = nextSquare.requestLanding();
+            // If we can move to the requestLanding() function will return a valid Square object, else we get null
+            if(nextSquare != null){
+                return nextSquare;
+            }
+        }
+        // If we can't move, we will return the current Square (i.e. stay on the same square)
+        return this;
+    }
+
+    public Square boolean requestLanding();
 
     public abstract boolean isLastSquare();
 

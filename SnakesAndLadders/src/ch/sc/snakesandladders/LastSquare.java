@@ -5,12 +5,10 @@ public class LastSquare extends Square{
         super(index);
     }
 
-    public boolean requestLanding(Player p){
+    public Square requestLanding(){
         // Assuming the game ends after first player reaches the last square, we don't need to check whether it is
         // occupied, because there will always only be one player that reaches it.
-        addPlayer(p);
-        finishGame();
-        return true;
+        return this;
     }
 
     public boolean isLastSquare(){

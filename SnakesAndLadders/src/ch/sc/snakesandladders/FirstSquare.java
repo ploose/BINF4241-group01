@@ -5,10 +5,9 @@ public class FirstSquare extends Square{
         super(index, false);
     }
 
-    public boolean requestLanding(Player p){
+    public Square requestLanding(Player p){
         // Players can always land on the first square
-        addPlayer(p);
-        return true;
+        return this;
     }
 
     public boolean isLastSquare(){

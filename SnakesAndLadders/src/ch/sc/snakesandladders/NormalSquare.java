@@ -4,12 +4,11 @@ public class NormalSquare extends Square{
         super(index);
     }
 
-    public boolean requestLanding(Player p){
+    public Square requestLanding(){
         if (!isOccupied){
-            addPlayer(p);
-            return true;
+            return this;
         }
-        return false;
+        return null;
     }
 
     public boolean isLastSquare(){
