@@ -7,7 +7,6 @@
  */
 package ch.sc.squares;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import ch.sc.snakesandladders.*; //Debugged TB
@@ -18,8 +17,8 @@ public abstract class Square {
     private ArrayList<Player> currentPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
     private Board board;
 
-// unused constructor -PL // Debugged because it is used in LastSquare ;) TB
-    Square(Board board, int index) {
+    // unused constructor -PL // Debugged because it is used in LastSquare ;) TB
+    public Square(Board board, int index) {
         this.board = board;
         this.index = index;
     }
@@ -47,14 +46,14 @@ public abstract class Square {
         currentPlayers.remove(p); //Debugged TB
     }
 
-    public Square moveAndLand(int distance){
+    public Square moveAndLand(int distance) {
         //TODO: If we move onto an occupied square, do we stay or do we need to go to the very beginning? Also how to handle 'overshot's'
         // We can't move if we would 'fall' off the board
-        if (getIndex() + distance <= board.getSize()){
+        if (getIndex() + distance <= board.getSize()) {
             Square nextSquare = board.findSquare(getIndex() + distance);
             nextSquare = nextSquare.requestLanding();
             // If we can move to the requestLanding() function will return a valid Square object, else we get null
-            if(nextSquare != null){
+            if (nextSquare != null) {
                 return nextSquare;
             } else {
                 return board.findSquare(0);

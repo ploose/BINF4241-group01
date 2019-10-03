@@ -1,15 +1,15 @@
 //Author: Pascal Marty
 package ch.sc.squares;
 
-import ch.sc.snakesandladders.Game;
+import ch.sc.snakesandladders.*;
 
-public class FirstSquare extends Square{
-    public FirstSquare(Game game, int index){
+public class FirstSquare extends Square {
+    public FirstSquare(Board board, int index) {
 
-        super(game, index);
+        super(board, index);
     }
 
-    public Square requestLanding(Player p){
+    public Square requestLanding(Player p) {
         return this;
     }
 }

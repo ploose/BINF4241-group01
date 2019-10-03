@@ -1,17 +1,17 @@
 //Author: Pascal Marty
 package ch.sc.squares;
 
-import ch.sc.snakesandladders.Game;
+import ch.sc.snakesandladders.*;
 
-public class NormalSquare extends Square{
+public class NormalSquare extends Square {
 
-    public NormalSquare(Game game, int index){
-        super(game, index);
+    public NormalSquare(Board board, int index) {
+        super(board, index);
     }
 
 
-    public Square requestLanding(){
-        if (!isOccupied){
+    public Square requestLanding() {
+        if (!isOccupied) {
             return this;
         }
         return null;
