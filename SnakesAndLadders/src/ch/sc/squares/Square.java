@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import ch.sc.snakesandladders.*; //Debugged TB
 
 public abstract class Square {
+    protected Board board;
     private int index; // Index of tile instance
     private boolean singleSpace; // boolean that indicates, whether the tile is limited to one player (if true) or if there is no limit (if false)
     private ArrayList<Player> currentPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
-    private Board board;
 
     // unused constructor -PL // Debugged because it is used in LastSquare ;) TB
     public Square(Board board, int index) {

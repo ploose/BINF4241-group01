@@ -17,7 +17,7 @@ public class LadderSquare extends Square {
     // TODO: Multiple ladders could end up at same square, also snakes could spawn on ladders
     private void initJumpDistance(int index) {
         Random random = new Random();
-        this.jumpDistance = random.nextInt(board.getSize() - index - 1) + 1 + index;
+        this.jumpDistance = random.nextInt((board.getSize() - index - 1) + 1 + index);
     }
 
     public Square requestLanding(Player p) {
