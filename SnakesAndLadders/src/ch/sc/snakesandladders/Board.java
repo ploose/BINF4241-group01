@@ -51,8 +51,7 @@ public class Board {
         this.squareList.add(size-1,lastSquare);
     }
 
-    //TODO: Added by TB
-    public Square findSquare() {
-        return square;
-    }
+    public Square findSquare(int index) {
+        return squareList.get(index);
+    } // Added by PM
 }

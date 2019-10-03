@@ -10,7 +10,7 @@ public class LastSquare extends Square {
     }
 
     public Square requestLanding(Player p) {
-        game.setWinner(p);
+        board.setWinner(p);
         return this;
     }
 }

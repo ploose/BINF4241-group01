@@ -1,10 +1,9 @@
 //Author: Pascal Marty
 package ch.sc.squares;
 
-import ch.sc.snakesandladders.Board;
+import ch.sc.snakesandladders.*;
 
 import java.util.Random;
-
 
 public class LadderSquare extends Square {
     private int jumpDistance;
@@ -21,7 +20,7 @@ public class LadderSquare extends Square {
         this.jumpDistance = random.nextInt(board.getSize() - index - 1) + 1 + index;
     }
 
-    public Square requestLanding() {
+    public Square requestLanding(Player p) {
         return moveAndLand(jumpDistance);
     }
 }

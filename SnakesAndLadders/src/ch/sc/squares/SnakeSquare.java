@@ -23,7 +23,7 @@ public class SnakeSquare extends Square {
         this.jumpDistance = random.nextInt(index - 2) + 2;
     }
 
-    public Square requestLanding() {
+    public Square requestLanding(Player p) {
         return moveAndLand(jumpDistance);
     }
 }

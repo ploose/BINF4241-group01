@@ -10,7 +10,7 @@ public class NormalSquare extends Square {
     }
 
 
-    public Square requestLanding() {
+    public Square requestLanding(Player p) {
         if (!isOccupied) {
             return this;
         }

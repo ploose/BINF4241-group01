@@ -64,8 +64,6 @@ public abstract class Square {
         return this;
     }
 
-    public boolean requestLanding(Square target) {
-        //TODO:
-        return true;
-    }
+    // This method gets implemented in the children!
+    public abstract Square requestLanding(Player p);
 }
