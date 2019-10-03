@@ -54,4 +54,8 @@ public class Board {
     public Square findSquare(int index) {
         return squareList.get(index);
     } // Added by PM
+
+    // Added by PM
+    // TODO: This function should pass winning player (which it gets from lastsquare) to game
+    public void setWinner(Player p){}
 }

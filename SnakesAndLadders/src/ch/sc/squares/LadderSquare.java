@@ -21,6 +21,6 @@ public class LadderSquare extends Square {
     }
 
     public Square requestLanding(Player p) {
-        return moveAndLand(jumpDistance);
+        return moveAndLand(jumpDistance, p);
     }
 }
