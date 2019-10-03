@@ -1,4 +1,4 @@
-import Dice;
+package ch.sc.snakesandladders;
 
 public class Game {
     private boolean isRunning;
