@@ -27,8 +27,8 @@ public class Board {
     private void initBoard(int size, ArrayList PlayerQueue, Game game){
         this.size = size;
         this.game = game;
-        this.firstSquare = new FirstSquare(this.game ,0);
-        this.lastSquare = new LastSquare(this.game, size-1);
+        this.firstSquare = new FirstSquare(this,0); // Debugged by PM
+        this.lastSquare = new LastSquare(this, size-1); // Debugged by PM
         Square square;
 
         // Creates a list with all squares in order
@@ -42,9 +42,9 @@ public class Board {
                 What's with the singleSpace?
             */
 
-            if ( i == 4 || i == 7){ square = new LadderSquare(this.game, i); }
-            else if (i==9){ square = new SnakeSquare(this.game, i); }
-            else { square = new NormalSquare(this.game, i); }
+            if ( i == 4 || i == 7){ square = new LadderSquare(this, i); } // Debugged by PM
+            else if (i==9){ square = new SnakeSquare(this, i); } // Debugged by PM
+            else { square = new NormalSquare(this, i); } // Debugged by PM
             this.squareList.add(i, square);
         }
         // Add last square
