@@ -1,0 +1,75 @@
+Game class: PL, PM, TB
+    fields:
+    - boolean isRunning
+    - Players players
+    - Player current
+    - Player winner
+    - Board board
+    - Ui userInterface
+
+    methods:
+    - main
+    - runTheGame
+    - setWinner
+
+Dice class: TB
+    fields:
+    - int value
+    - Random generator
+
+    methods:
+    - Dice:
+        input: none
+        output: none
+        //Constructor
+
+    - throwDice:
+        input: none
+        output: a random generated int between 0 and 7 (exclusive)
+
+Board class: PL
+    fields:
+    - ArrayList<Square> squareList
+    - Players players
+    - int size
+
+    methods:
+    - getSize()
+        returns size
+
+    - initBoard(int size, Queue playerQueue)
+        fills board with squares and sets players on the first square
+
+UI class: TB
+    fields:
+    - none
+
+    methods:
+    - getPlayers
+    - printGame
+    - celebrateWinner
+
+Player class: PL
+    fields:
+    - Square currentSquare
+    - String name
+
+    methods:
+    - getCurrentSquare
+    - setCurrentSquare
+    - moveFwd
+
+Players class: PL
+    fields:
+    - Queue<Player> playerQueue
+    - ArrayList<Player> playerList
+
+    methods:
+    - initQueue
+    - getQueue
+    - remove
+    - add
+Squares class: PM
+
+
+

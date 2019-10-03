@@ -1,4 +1,7 @@
-import Dice;
+package ch.sc.snakesandladders;
+
+import ch.sc.snakesandladders;
+import ch.sc.squares;
 
 public class Game {
     private boolean isRunning;
@@ -17,7 +20,7 @@ public class Game {
         Game game = new Game(players);
         game.runTheGame();
 
-        game.celebrateWinner();
+        userInterface.celebrateWinner();
     }
 
     private Game(Players players) {

@@ -10,9 +10,4 @@ public class LastSquare extends Square{
         game.setWinner(p);
         return this;
     }
-
-    public boolean isLastSquare(){
-        return true;
-    }
-
 }

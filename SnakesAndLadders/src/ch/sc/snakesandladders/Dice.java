@@ -5,7 +5,7 @@ public class Dice {
     private Random generator;
 
     public Dice() {
-        generator = new Random()
+        generator = new Random();
         value = generator.nextInt(6) + 1;
     }
 
