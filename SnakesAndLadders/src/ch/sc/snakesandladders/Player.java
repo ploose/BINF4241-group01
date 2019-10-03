@@ -12,7 +12,7 @@ package ch.sc.snakesandladders;
 public class Player {
 
     String Name;
-    private Square  CurrentSquare;
+    private Square CurrentSquare;
 
     public Square getCurrentSquare() {
         return CurrentSquare;
