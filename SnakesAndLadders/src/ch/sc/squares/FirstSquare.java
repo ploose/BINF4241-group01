@@ -8,7 +8,6 @@ public class FirstSquare extends Square{
     }
 
     public Square requestLanding(Player p){
-        // Players can always land on the first square
         return this;
     }
 }
