@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 
 public class Players {
-
     private Queue<Player> playerQueue;
     private ArrayList<Player> playerList;
 
@@ -25,7 +24,7 @@ public class Players {
         return (List) this.playerQueue;
     }
 
-    public Player remove(){
+    public Player getCurrentPlayer(){
         return playerQueue.remove();
     }
 

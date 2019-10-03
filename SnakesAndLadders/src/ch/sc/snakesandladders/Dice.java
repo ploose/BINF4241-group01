@@ -1,18 +1,19 @@
-//added missing package statement -PL
-package ch.sc.snakesandladders;
+package ch.sc.snakesandladders; //added missing package statement -PL
+
 import java.util.Random;
 
+class Dice {
+    private static int value;
+    private static Random generator;
 
-public class Dice {
-    private int value;
-    private Random generator;
-
-    public Dice() {
+    //Constructor for the Dice class
+    Dice() {
         generator = new Random();
         value = generator.nextInt(6) + 1;
     }
 
-    public int throwDice() {
+    //Return a random generated integer like a real dice :)
+    static int throwDice() {
         value = generator.nextInt(6) + 1;
         return value;
     }

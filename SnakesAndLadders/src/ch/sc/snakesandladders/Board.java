@@ -19,12 +19,11 @@ public class Board {
 
     }
 
-    private int getSize(){
+    public int getSize(){
         return this.size;
     }
 
     // Initializes board with given size
-
     private void initBoard(int size, ArrayList PlayerQueue, Game game){
         this.size = size;
         this.game = game;
@@ -52,9 +51,8 @@ public class Board {
         this.squareList.add(size-1,lastSquare);
     }
 
-
-
-
-
-
+    //TODO: Added by TB
+    public Square findSquare() {
+        return square;
+    }
 }
