@@ -50,14 +50,17 @@ public abstract class Square {
     public Square moveAndLand(int distance){
         //TODO: If we move onto an occupied square, do we stay or do we need to go to the very begining? Also how to handle 'overshots'
         // We can't move if we would 'fall' off the board
-        if (getIndex() + distance <= game.getSize()){
-            Square nextSquare = game.findSquare(getIndex() + distance);
+        if (getIndex() + distance <= board.getSize()){
+            Square nextSquare = board.findSquare(getIndex() + distance);
             nextSquare = nextSquare.requestLanding();
             // If we can move to the requestLanding() function will return a valid Square object, else we get null
             if(nextSquare != null){
                 return nextSquare;
+            } else {
+                return board.findSquare(0);
             }
-        }
+        } else
+            return board.findSquare(board.getSize() - ((getIndex() + distance) - board.getSize))
         // If we can't move, we will return the current Square (i.e. stay on the same square)
         return this;
     }

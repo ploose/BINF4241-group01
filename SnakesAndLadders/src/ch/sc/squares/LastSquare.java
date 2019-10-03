@@ -1,5 +1,4 @@
-//Author: Pascal Marty
-//TODO: Can multiple people land on the last square or is the game finished, as soon as the first player reaches it?
+//Author: Pascal Marty, Tim Brunner
 package ch.sc.squares;
 
 public class LastSquare extends Square{
@@ -7,9 +6,8 @@ public class LastSquare extends Square{
         super(game, index);
     }
 
-    public Square requestLanding(){
-        // Assuming the game ends after first player reaches the last square, we don't need to check whether it is
-        // occupied, because there will always only be one player that reaches it.
+    public Square requestLanding(Player p){
+        game.setWinner(p);
         return this;
     }
 

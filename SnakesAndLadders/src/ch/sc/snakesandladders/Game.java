@@ -4,6 +4,7 @@ public class Game {
     private boolean isRunning;
     private Players players;
     private Player current;
+    private Player winner;
     private Board board;
     private Ui userInterface;
     private Dice dice;
@@ -15,20 +16,30 @@ public class Game {
 
         Game game = new Game(players);
         game.runTheGame();
+
+        game.celebrateWinner();
     }
 
     private Game(Players players) {
-        is_running = false;
+        isRunning = false;
         this.players = players;
         current = this.players.currentPlayer();
+        winner = null;
         board = new Board();
         dice = new Dice();
     }
 
     private void runTheGame() {
-        while (is_running) {
+        isRunning = true;
+
+        while (isRunning) {
             this.userInterface.getInputNextTurn();
             current.move(Dice.throwDice());
         }
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+        isRunning = false;
     }
 }
