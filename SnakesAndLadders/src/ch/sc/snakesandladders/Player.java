@@ -11,7 +11,7 @@ setCurrentSquare:
 package ch.sc.snakesandladders;
 public class Player {
 
-    String Name;
+    private String Name;
     private Square CurrentSquare;
 
     public Square getCurrentSquare() {
@@ -22,6 +22,7 @@ public class Player {
         CurrentSquare = currentSquare;
     }
 
-    public void moveFwd()
+    public void moveFwd(){
 
+    }
 }

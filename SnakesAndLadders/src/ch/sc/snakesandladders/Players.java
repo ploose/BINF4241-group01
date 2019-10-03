@@ -6,20 +6,41 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.List;
 import java.util.ArrayList;
+import Player;
 
 public class Players {
 
-    private Queue<String> playerQueue = new LinkedList<>();
 
-    public void setQueue(List inputList) {
+    private Queue<Player> playerQueue;
+    private ArrayList<Player> playerList;
 
-        this.playerQueue.addAll(inputList);
+
+    public Players(ArrayList playerList){
+        this.playerList = playerList;
+
+    }
+
+    private Queue initQueue(ArrayList playerList){
+
+        this.playerQueue.addAll(playerList);
 
     }
 
     public List getQueue(){
 
         return (List) this.playerQueue;
+    }
+
+    public Player remove(){
+
+        return playerQueue.remove();
+
+    }
+
+    public void add(Player Player){
+
+        playerQueue.add(Player);
+
     }
 
 }
