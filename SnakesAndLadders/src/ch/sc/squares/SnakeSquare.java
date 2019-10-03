@@ -10,7 +10,7 @@ public class SnakeSquare extends Square {
 
     public SnakeSquare(Board board, int index) {
         super(board, index);
-        initDistance(this.index);
+        initJumpDistance(index);
     }
 
     // Initializes distance, which the snake will move the player, calculated between (index-1) and (start+1)

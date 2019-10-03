@@ -10,7 +10,7 @@ public class LadderSquare extends Square {
 
     public LadderSquare(Board board, int index) {
         super(board, index);
-        initDistance(this.index);
+        initJumpDistance(index);
     }
 
     // Initializes distance, which the ladder will move the player, calculated between (index+1) and (end-1)
