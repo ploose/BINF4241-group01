@@ -66,7 +66,4 @@ public abstract class Square {
     }
 
     public Square boolean requestLanding();
-
-    public abstract boolean isLastSquare();
-
 }

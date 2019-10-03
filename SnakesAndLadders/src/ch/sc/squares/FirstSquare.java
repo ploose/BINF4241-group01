@@ -11,8 +11,4 @@ public class FirstSquare extends Square{
         // Players can always land on the first square
         return this;
     }
-
-    public boolean isLastSquare(){
-        return false;
-    }
 }

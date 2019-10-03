@@ -12,8 +12,4 @@ public class NormalSquare extends Square{
         }
         return null;
     }
-
-    public boolean isLastSquare(){
-        return false;
-    }
 }

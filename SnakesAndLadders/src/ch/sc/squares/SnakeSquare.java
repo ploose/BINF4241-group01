@@ -20,8 +20,4 @@ public class SnakeSquare extends Square{
     public Square requestLanding(){
         return moveAndLand(jumpDistance);
     }
-
-    public boolean isLastSquare(){
-        return false;
-    }
 }
