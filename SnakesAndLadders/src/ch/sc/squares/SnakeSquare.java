@@ -1,6 +1,8 @@
 //Author: Pascal Marty
 package ch.sc.squares;
 
+import ch.sc.snakesandladders.Game;
+
 import java.util.Random;
 
 public class SnakeSquare extends Square{
@@ -10,9 +12,13 @@ public class SnakeSquare extends Square{
         initDistance(this.index);
     }
 
+
     // Initializes distance, which the snake will move the player, calculated between (index-1) and (start+1)
     // TODO: Multiple snakes could end up at same square, also ladders could spawn on snakes
-    private initJumpDistance(int index){
+
+    // added "void" -PL
+    private void initJumpDistance(int index){
+
         Random random = new Random();
         this.jumpDistance = random.nextInt(index -2) + 2;
     }

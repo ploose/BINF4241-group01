@@ -9,6 +9,8 @@ setCurrentSquare:
  */
 
 package ch.sc.snakesandladders;
+import ch.sc.squares.*;
+
 public class Player {
 
     private String Name;

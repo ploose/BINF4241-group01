@@ -1,7 +1,5 @@
 package ch.sc.snakesandladders;
 
-import ch.sc.snakesandladders;
-import ch.sc.squares;
 
 public class Game {
     private boolean isRunning;

@@ -1,4 +1,7 @@
+//added missing package statement -PL
+package ch.sc.snakesandladders;
 import java.util.Random;
+
 
 public class Dice {
     private int value;

@@ -1,10 +1,13 @@
 //Author: Pascal Marty
 package ch.sc.squares;
 
+import ch.sc.snakesandladders.Game;
+
 import java.util.Random;
 
 public class LadderSquare extends Square{
     private int jumpDistance;
+
     public LadderSquare(Game game, int index){
         super(game, index);
         initDistance(this.index);

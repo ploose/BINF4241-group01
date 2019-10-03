@@ -19,10 +19,11 @@ public abstract class Square {
     private ArrayList<Player> curPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
     private Game game;
 
+/* unused constructor -PL
     public Square(Game game, int index) {
         Square(game, index, true);
     }
-
+*/
     public Square(Game game, int index, boolean singleSpace) {
         this.game = game;
         this.index = index;
