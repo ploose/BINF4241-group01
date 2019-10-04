@@ -46,6 +46,8 @@ public abstract class Square {
         currentPlayers.remove(p); //Debugged TB
     }
 
+    // The square where the player is on calculates the next square for the current player occupying the square? -PL
+
     public Square moveAndLand(int distance, Player p) {
         //TODO: If we move onto an occupied square, do we stay or do we need to go to the very beginning? Also how to handle 'overshot's'
         // We can't move if we would 'fall' off the board

@@ -11,6 +11,8 @@ public class Board {
     private int size;
     private FirstSquare firstSquare;
     private LastSquare lastSquare;
+    // TODO
+    private Players players;
 
 
     private Game game;
@@ -23,7 +25,9 @@ public class Board {
         return this.size;
     }
 
+
     // Initializes board with given size
+    // TODO: Find a way to let the board know all the players? Is this even necessary?
     private void initBoard(int size, ArrayList PlayerQueue, Game game){
         this.size = size;
         this.game = game;
@@ -39,7 +43,7 @@ public class Board {
 
             // predefined ladder and snake places
             /*TODO: (optional)Randomize ladder/snake generation,
-                What's with the singleSpace?
+
             */
 
             if ( i == 4 || i == 7){ square = new LadderSquare(this, i); } // Debugged by PM
@@ -50,6 +54,7 @@ public class Board {
         // Add last square
         this.squareList.add(size-1,lastSquare);
     }
+
 
     public Square findSquare(int index) {
         return squareList.get(index);

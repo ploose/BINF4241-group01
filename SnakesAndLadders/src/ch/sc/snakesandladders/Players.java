@@ -31,4 +31,10 @@ public class Players {
     public void add(Player Player){
         playerQueue.add(Player);
     }
+
+    //Added remove function
+
+    public Player remove(){
+        return this.playerQueue.remove();
+    }
 }

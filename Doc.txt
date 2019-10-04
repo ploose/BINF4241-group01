@@ -29,16 +29,22 @@ Dice class: TB
 
 Board class: PL
     fields:
-    - ArrayList<Square> squareList
-    - Players players
-    - int size
+    - DONE: ArrayList<Square> squareList
+    - TODO: Players players
+    - DONE: int size
+    - DONE: firstSquare
+    - DONE: lastSquare
+
 
     methods:
-    - getSize()
+    - DONE: getSize()
         returns size
 
-    - initBoard(int size, Queue playerQueue)
+    - DONE: initBoard(int size, Queue playerQueue)
         fills board with squares and sets players on the first square
+
+    - DONE: findSquare
+    - DONE: setWinner
 
 UI class: TB
     fields:
@@ -55,9 +61,10 @@ Player class: PL
     - String name
 
     methods:
-    - getCurrentSquare
-    - setCurrentSquare
-    - moveFwd
+    - DONE: getCurrentSquare
+    - DONE: setCurrentSquare
+    - DONE: moveFwd
+    - DONE: getName
 
 Players class: PL
     fields:
@@ -65,10 +72,13 @@ Players class: PL
     - ArrayList<Player> playerList
 
     methods:
-    - initQueue
-    - getQueue
-    - remove
-    - add
+    - DONE: initQueue
+    - DONE: getQueue
+    - DONE: remove
+    - DONE: add
+    - DONE: getCurrentPlayer
+
+
 Squares class: PM
 
 

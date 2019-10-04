@@ -49,4 +49,12 @@ public class Game {
         Game.winner = winner;
         isRunning = false;
     }
+    // Added getter method to have the player to access the dice
+    public Dice getDice() {
+        return dice;
+    }
+    // Added getter method to have the player to access the board
+    public Board getBoard(){
+        return this.board;
+    }
 }
