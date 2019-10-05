@@ -86,24 +86,36 @@ public class Board {
         for (int i = 0; i < 4; i++) {
             Point point = new Point();
 
-            while (Arrays.asList(usedSquares).contains(result1)){
+            while (true){
+            if (usedSquares.contains(result1)){
                 result1 = r.nextInt(high - low) + low;
+            }
                 usedSquares.add(result1);
+                break;
             }
 
-            result2 = result1;
-            while (result2 == result1 || Arrays.asList(usedSquares).contains(result2) ) {
-                result2 = r.nextInt(high - low) + low;
+            while (true){
+
+                if (usedSquares.contains(result2)){
+                    result2 = r.nextInt(high - low) + low;
+                }
                 usedSquares.add(result2);
+                break;
             }
+            System.out.println("R1: " + result1);
+            System.out.println("R2: " + result2);
             if (result1 < result2){
                 point.setLocation(result1, result2);
                 myQueue.add(point);
             }
+
             else{
                 point.setLocation(result2, result1);
                 myQueue.add(point);
             }
+        }
+        for(int ints : usedSquares) {
+            System.out.println(ints);
         }
         return myQueue;
     }
