@@ -20,20 +20,27 @@ public class Board {
         this.size = size;
         this.players = players;
 
-        squareList = new ArrayList<>(size);
+        squareList = new ArrayList<>();
 
         initBoard();
     }
 
     public int getSize() {
-        return this.size;
+        return size;
     }
 
     // Initializes board with given size: Creates a list with all squares in order
     private void initBoard() {
+        squareList.add(0, new FirstSquare(this, 0));    // Add first square
+
         for (int i = 1; i < (size - 1); i++) {  // fill the board with normal squares
-            this.squareList.set(i, new NormalSquare(this, i));
+            this.squareList.add(i, new NormalSquare(this, i));
         }
+
+        squareList.add(size - 1, new LastSquare(this, size - 1));   // Add last square
+
+        System.out.println(squareList.size());
+
         // Add ladders
         for (int i = 0; i < 2; i++){
             Point tuple = tupleQueue.remove();
@@ -48,12 +55,6 @@ public class Board {
             int y = (int) tuple.getY();
             this.squareList.set(x, new SnakeSquare(this, y, x));
         }
-
-        // Add first square
-        squareList.set(0, new FirstSquare(this, 0));
-
-        // Add last square
-        squareList.set(size - 1, new LastSquare(this, size - 1));
 
         for (Player elem : players.getQueue()) {    //Sets every player on square one
             elem.setCurrentSquare(findSquare(0));
