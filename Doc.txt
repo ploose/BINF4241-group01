@@ -79,7 +79,49 @@ Players class: PL
     - DONE: getCurrentPlayer
 
 
-Squares class: PM
+Squares abstract class: PM
+    fields:
+    - Board board
+    - int index
+    - boolean singleSpace
+    - ArrayList<Player> currentPlayers
+    - String type
+
+    methods:
+    - isOccupied()
+        returns true if occupied, false if free
+
+    - getIndex()
+        returns index of square as int
+
+    - addPlayer(Player p)
+        takes Player p and adds it to ArrayList<Player> currentPlayers
+
+    - removePlayer(Player p)
+        removes Player p from ArrayList<Player> currentPlayers
+
+    - getType()
+        returns string which indicates the type of the square
+
+    - setType(String type)
+        sets type of square to given string (Needs to be a valid type!)
+
+    - moveAndLand(int distance, Player p)
+        given an integer distance and Player p, this method calculates & returns the square the player will move to
+
+    - requestLanding(Player p)
+        abstract method which gets implemented by children. The reason for this is, that it differs quite a bit across
+        the types of squares.
+
+
+FirstSquare class PM
+    fields:
+    - inherits all fields from abstract class Squares
+
+    methods:
+    - inherits all methods from abstract class Squares
+
+
 
 
 

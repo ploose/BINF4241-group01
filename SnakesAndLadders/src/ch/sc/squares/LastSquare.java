@@ -6,7 +6,7 @@ import ch.sc.snakesandladders.*; //Debugged TB
 public class LastSquare extends Square {
 
     public LastSquare(Board board, int index) {
-        super(board, index);
+        super(board, index, "last");
     }
 
     public Square requestLanding(Player p) {

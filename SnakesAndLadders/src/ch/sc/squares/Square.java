@@ -16,16 +16,19 @@ public abstract class Square {
     private int index; // Index of tile instance
     private boolean singleSpace; // boolean that indicates, whether the tile is limited to one player (if true) or if there is no limit (if false)
     private ArrayList<Player> currentPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
+    private String type;
 
     // unused constructor -PL // Debugged because it is used in LastSquare ;) TB
-    public Square(Board board, int index) {
+    public Square(Board board, int index, String type) {
         this.board = board;
         this.index = index;
+        this.type = type;
     }
 
-    public Square(Board board, int index, boolean singleSpace) {
+    public Square(Board board, int index, boolean singleSpace, String type) {
         this.board = board;
         this.index = index;
+        this.type = type;
         this.singleSpace = singleSpace;
     }
 
@@ -46,8 +49,16 @@ public abstract class Square {
         currentPlayers.remove(p); //Debugged TB
     }
 
-    // The square where the player is on calculates the next square for the current player occupying the square? -PL
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        // Allowed types: "first", "last", "normal", "ladder", "snake"
+        this.type = type;
+    }
+
+    // The square where the player is on calculates the next square for the current player occupying the square? -PL
     public Square moveAndLand(int distance, Player p) {
         //TODO: If we move onto an occupied square, do we stay or do we need to go to the very beginning? Also how to handle 'overshot's'
         // We can't move if we would 'fall' off the board
