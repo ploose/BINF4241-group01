@@ -1,10 +1,8 @@
 package ch.sc.snakesandladders;
 
 import ch.sc.squares.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+
+import java.util.*;
 import java.awt.Point;
 
 
@@ -79,14 +77,24 @@ public class Board {
         int low = 1;
         int high = 10;
         Queue<Point> myQueue = new LinkedList<>();
+        List<Integer> usedSquares = new ArrayList<Integer>();
+
+        usedSquares.add(0);
+        result1 = 0;
+        result2 = 0;
 
         for (int i = 0; i < 4; i++) {
             Point point = new Point();
 
-            result1 = r.nextInt(high - low) + low;
+            while (Arrays.asList(usedSquares).contains(result1)){
+                result1 = r.nextInt(high - low) + low;
+                usedSquares.add(result1);
+            }
+
             result2 = result1;
-            while (result2 == result1) {
+            while (result2 == result1 || Arrays.asList(usedSquares).contains(result2) ) {
                 result2 = r.nextInt(high - low) + low;
+                usedSquares.add(result2);
             }
             if (result1 < result2){
                 point.setLocation(result1, result2);
