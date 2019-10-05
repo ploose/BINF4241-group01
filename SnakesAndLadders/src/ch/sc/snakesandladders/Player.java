@@ -34,6 +34,8 @@ public class Player {
 
     // Moves the player forward to the square calculated by
     void moveFwd(int steps){
+        CurrentSquare.removePlayer(this);
         CurrentSquare = CurrentSquare.moveAndLand(steps, this);
+        CurrentSquare.addPlayer(this);
     }
 }
