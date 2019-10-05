@@ -8,8 +8,7 @@ class Game {
     private Board board;
     private Ui userInterface;
 
-    //Constructor for the Game class
-    Game(Players players, Ui userInterface) {
+    Game(Players players, Ui userInterface) {   //Constructor for the Game class
         isRunning = false;
         this.players = players;
         board = new Board(12, players);
@@ -18,8 +17,7 @@ class Game {
         this.userInterface = userInterface;
     }
 
-    //Starts the game
-    void run() {
+    void run() {    //Starts the game
         isRunning = true;
         int positionBeforeTurn;
         int positionAfterTurn;
