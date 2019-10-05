@@ -5,14 +5,13 @@ import ch.sc.snakesandladders.*;
 
 public class LadderSquare extends Square {
     private int jumpDistance, indexNext;
-    private Square squareTarget;
+    //private Square squareTarget;
 
     public LadderSquare(Board board, int index, int indexNext) {
         super(board, index, "ladder");
         jumpDistance = indexNext - index;
-        squareTarget = requestLanding(null);
-        squareTarget.setType("ladder");
-        System.out.println("Ladder: " + jumpDistance);
+        //squareTarget = requestLanding(null);
+        //squareTarget.setType("ladder");
     }
 
     public Square requestLanding(Player p) {
