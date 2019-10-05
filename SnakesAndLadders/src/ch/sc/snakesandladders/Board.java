@@ -64,12 +64,13 @@ public class Board {
         return squareList.get(index);
     } // Added by PM
 
-    // Added by PM
-    // TODO: This function should pass winning player (which it gets from lastsquare) to game
     public void setWinner(Player winner) {
         this.winner = winner;
     }
 
+    public Player getWinner() {
+        return winner;
+    }
 
     private Queue<Point> tupleQueueGenerator() {
         int result1;

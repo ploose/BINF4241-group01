@@ -17,7 +17,5 @@ public class Main {
 
         Game game = new Game(players, userInterface);
         game.run();
-
-        userInterface.celebrateWinner(game.getWinner());
     }
 }

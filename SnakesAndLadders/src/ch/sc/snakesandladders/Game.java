@@ -1,6 +1,6 @@
 package ch.sc.snakesandladders;
 
-public class Game {
+class Game {
     private static Player winner;
     private boolean isRunning;
     private Players players;
@@ -39,21 +39,17 @@ public class Game {
             players.add(currentPlayer);
 
             currentPlayer = players.getCurrentPlayer();
+
+            checkWinner();
         }
+        userInterface.celebrateWinner(winner);
     }
 
-    //Sets a winner if a player lands on the last Square
-    public void setWinner(Player winner) {
-        Game.winner = winner;
-        isRunning = false;
-    }
 
-    Player getWinner() {
-        return winner;
-    }
-
-    // Added getter method to have the player to access the board
-    public Board getBoard(){
-        return this.board;
+    private void checkWinner() {  //Sets a winner if a player lands on the last Square
+        winner = board.getWinner();
+        if (winner != null) {
+            isRunning = false;
+        }
     }
 }
