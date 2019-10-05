@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         //TODO
         Ui userInterface = new Ui();
+
         ArrayList playerList;
         playerList = userInterface.getPlayers();
 
