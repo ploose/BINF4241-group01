@@ -53,6 +53,21 @@ class Ui {
     }
 
     void printTurn(int positionBeforeTurn, int positionAfterTurn, int steps, Player current) {  //Describes what happened in this turn
+        // Types are probably a better alternative to find out what is goind on. / Added by PM
+        if(current.getCurrentSquare().getType() == "ladder"){
+            System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
+            System.out.println("This field was a ladder and thus he landed on the field " + (positionAfterTurn + 1) + ".");
+        }else if(current.getCurrentSquare().getType() == "snake"){
+            System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
+            System.out.println("This field was a snake and thus he landed on the field " + (positionAfterTurn + 1) + ".");
+        }else{
+            System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
+            System.out.println("He landed on the field " + (current.getCurrentSquare().getIndex()+1));
+        }
+
+        /*
         if (positionBeforeTurn + steps < positionAfterTurn) {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
             System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
@@ -65,5 +80,6 @@ class Ui {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
             System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
         }
+        */
     }
 }
