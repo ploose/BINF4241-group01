@@ -12,67 +12,51 @@ public class Board {
 
     private ArrayList<Square> squareList;
     private int size;
-    private FirstSquare firstSquare;
-    private LastSquare lastSquare;
-    // TODO
     private Players players;
     Queue<Point> tupleQueue;
 
-
-    private Game game;
-
-    public Board() {
+    public Board(int size, Players players) {
+        squareList = new ArrayList<>();
         tupleQueue = tupleQueueGenerator();
+        this.size = size;
+        this.players = players;
+
+        initBoard();
     }
 
     public int getSize() {
         return this.size;
     }
 
-
-    // Initializes board with given size
-    // TODO: Find a way to let the board know all the players? Is this even necessary?
-    private void initBoard(int size, ArrayList PlayerQueue, Game game) {
-        this.size = size;
-        this.game = game;
-
-        Square square;
-
-        // Creates a list with all squares in order
-
-        // fill the board with normal squares
-        for (int i = 1; i < (size - 1); i++) {
-            // predefined ladder and snake places
-            /* TODO: (optional)Randomize ladder/snake generation,
-                Tupel übergeben (umkehren für snake)
-            */
-                square = new NormalSquare(this, i);
-                this.squareList.add(i, square);
+    // Initializes board with given size: Creates a list with all squares in order
+    private void initBoard() {
+        for (Player elem : players.getQueue()) {    //Sets every player on square one
+            elem.setCurrentSquare(findSquare(0));
         }
 
+        for (int i = 1; i < (size - 1); i++) {  // fill the board with normal squares
+            this.squareList.add(i, new NormalSquare(this, i));
+        }
         // Add ladders
         for (int i = 0; i < 2; i++){
             Point tuple = tupleQueue.remove();
             int x = (int)tuple.getX();
             int y = (int)tuple.getY();
-            square = new LadderSquare(this,x,y);
-            this.squareList.add(x,square);
+            this.squareList.set(x, new LadderSquare(this, x, y));
         }
         // Add snakes
         for (int i = 0; i < 2; i++) {
             Point tuple = tupleQueue.remove();
             int x = (int) tuple.getX();
             int y = (int) tuple.getY();
-            square = new SnakeSquare(this, y, x);
-            this.squareList.add(x, square);
+            this.squareList.set(x, new SnakeSquare(this, y, x));
         }
 
         // Add first square
-        this.firstSquare = new FirstSquare(this, 0);
-        this.squareList.add(0, this.firstSquare);
+        squareList.set(0, new FirstSquare(this, 0));
+
         // Add last square
-        this.lastSquare = new LastSquare(this, size - 1);
-        this.squareList.add(size - 1, this.lastSquare);
+        squareList.set(size - 1, new LastSquare(this, size - 1));
     }
 
 
