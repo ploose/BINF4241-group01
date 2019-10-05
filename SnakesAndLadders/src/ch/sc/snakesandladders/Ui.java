@@ -61,15 +61,15 @@ class Ui {
     void printTurn(int positionBeforeTurn, int positionAfterTurn, int steps, Player current) {
         if (positionBeforeTurn + steps < positionAfterTurn) {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
-            System.out.println("He landed on the field " + positionBeforeTurn + steps);
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps));
             System.out.println("This field was a ladder and thus he landed on the field " + positionAfterTurn + ".");
         } else if (positionBeforeTurn + steps > positionAfterTurn) {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
-            System.out.println("He landed on the field " + positionBeforeTurn + steps);
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps));
             System.out.println("This field was a snake and thus he landed on the field " + positionAfterTurn + ".");
         } else {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
-            System.out.println("He landed on the field " + positionBeforeTurn + steps);
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps));
         }
     }
 }
