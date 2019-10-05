@@ -19,7 +19,7 @@ public abstract class Square {
     private String type;
 
     // unused constructor -PL // Debugged because it is used in LastSquare ;) TB
-    public Square(Board board, int index, String type) {
+    Square(Board board, int index, String type) {
         this.board = board;
         this.index = index;
         this.type = type;

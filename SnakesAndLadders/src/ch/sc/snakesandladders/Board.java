@@ -62,13 +62,13 @@ public class Board {
 
     public Square findSquare(int index) {
         return squareList.get(index);
-    } // Added by PM
+    }
 
     public void setWinner(Player winner) {
         this.winner = winner;
     }
 
-    public Player getWinner() {
+    Player getWinner() {
         return winner;
     }
 

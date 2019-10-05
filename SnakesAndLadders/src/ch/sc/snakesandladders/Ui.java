@@ -6,15 +6,12 @@ import java.util.Scanner;
 class Ui {
     private Scanner input;
 
-    //Constructor for Ui class
-    Ui() {
+    Ui() {  //Constructor for Ui class
         input = new Scanner(System.in);
         System.out.println("Hello, and welcome to a new game of snakes and ladders!");
     }
 
-    //Takes user-input and creates players
-
-    ArrayList getPlayers() {
+    ArrayList<Player> getPlayers() {    //Takes user-input and creates players
         int numberOfPlayers = 0;
         System.out.println("How many players want to play?\n");
 
@@ -40,8 +37,7 @@ class Ui {
         return playerList;
     }
 
-    //Takes user-input for resuming with next turn
-    void getInputNextTurn() {
+    void getInputNextTurn() {   //Takes user-input for resuming with next turn
         String answer;
 
         System.out.println("Ready for the next turn? (y for yes, n for no)");
@@ -52,24 +48,22 @@ class Ui {
         }
     }
 
-    //Prints the winner of the game
-    void celebrateWinner(Player winner) {
+    void celebrateWinner(Player winner) {   //Prints the winner of the game
         System.out.println("Hurrah, the player " + winner.getName() + " has won!");
     }
 
-    //Describes what happened in this turn
-    void printTurn(int positionBeforeTurn, int positionAfterTurn, int steps, Player current) {
+    void printTurn(int positionBeforeTurn, int positionAfterTurn, int steps, Player current) {  //Describes what happened in this turn
         if (positionBeforeTurn + steps < positionAfterTurn) {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
-            System.out.println("He landed on the field " + (positionBeforeTurn + steps));
-            System.out.println("This field was a ladder and thus he landed on the field " + positionAfterTurn + ".");
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
+            System.out.println("This field was a ladder and thus he landed on the field " + (positionAfterTurn + 1) + ".");
         } else if (positionBeforeTurn + steps > positionAfterTurn) {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
-            System.out.println("He landed on the field " + (positionBeforeTurn + steps));
-            System.out.println("This field was a snake and thus he landed on the field " + positionAfterTurn + ".");
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
+            System.out.println("This field was a snake and thus he landed on the field " + (positionAfterTurn + 1) + ".");
         } else {
             System.out.println("The Player " + current.getName() + " diced a " + steps + ".");
-            System.out.println("He landed on the field " + (positionBeforeTurn + steps));
+            System.out.println("He landed on the field " + (positionBeforeTurn + steps + 1));
         }
     }
 }
