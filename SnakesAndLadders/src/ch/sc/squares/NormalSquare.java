@@ -6,9 +6,8 @@ import ch.sc.snakesandladders.*;
 public class NormalSquare extends Square {
 
     public NormalSquare(Board board, int index) {
-        super(board, index);
+        super(board, index, "normal");
     }
-
 
     public Square requestLanding(Player p) {
         if (!isOccupied()) {

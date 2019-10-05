@@ -7,10 +7,13 @@ import java.util.Random;
 
 public class LadderSquare extends Square {
     private int jumpDistance;
+    private Square squareTarget;
 
     public LadderSquare(Board board, int index) {
-        super(board, index);
+        super(board, index, "ladder");
         initJumpDistance(index);
+        squareTarget = requestLanding(null); // get square the ladder points to
+        squareTarget.setType("ladder"); // set that square's type to "ladder"
     }
 
     // Initializes distance, which the ladder will move the player, calculated between (index+1) and (end-1)
