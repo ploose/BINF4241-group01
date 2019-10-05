@@ -14,7 +14,7 @@ public class Game {
         this.players = players;
         currentPlayer = this.players.getCurrentPlayer();
         winner = null;
-        board = new Board(21, players, this);
+        board = new Board(21, players);
         this.userInterface = userInterface;
     }
 
