@@ -42,7 +42,7 @@ public class Board {
         for (int i = 1; i < (size - 1); i++){
 
             // predefined ladder and snake places
-            /*TODO: (optional)Randomize ladder/snake generation,
+            /* TODO: (optional)Randomize ladder/snake generation,
 
             */
 
