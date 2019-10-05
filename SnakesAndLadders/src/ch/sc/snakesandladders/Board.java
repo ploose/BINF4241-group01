@@ -16,10 +16,11 @@ public class Board {
     Queue<Point> tupleQueue;
 
     public Board(int size, Players players) {
-        squareList = new ArrayList<>();
         tupleQueue = tupleQueueGenerator();
         this.size = size;
         this.players = players;
+
+        squareList = new ArrayList<>(size);
 
         initBoard();
     }
@@ -30,12 +31,8 @@ public class Board {
 
     // Initializes board with given size: Creates a list with all squares in order
     private void initBoard() {
-        for (Player elem : players.getQueue()) {    //Sets every player on square one
-            elem.setCurrentSquare(findSquare(0));
-        }
-
         for (int i = 1; i < (size - 1); i++) {  // fill the board with normal squares
-            this.squareList.add(i, new NormalSquare(this, i));
+            this.squareList.set(i, new NormalSquare(this, i));
         }
         // Add ladders
         for (int i = 0; i < 2; i++){
@@ -57,6 +54,10 @@ public class Board {
 
         // Add last square
         squareList.set(size - 1, new LastSquare(this, size - 1));
+
+        for (Player elem : players.getQueue()) {    //Sets every player on square one
+            elem.setCurrentSquare(findSquare(0));
+        }
     }
 
 
