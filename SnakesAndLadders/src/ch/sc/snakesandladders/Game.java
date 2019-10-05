@@ -34,7 +34,7 @@ public class Game {
             currentPlayer.moveFwd(steps);
             positionAfterTurn = currentPlayer.getCurrentSquare().getIndex();
 
-            userInterface.printTurn(positionBeforeTurn, positionAfterTurn, steps);
+            userInterface.printTurn(positionBeforeTurn, positionAfterTurn, steps, currentPlayer);
 
             players.add(currentPlayer);
 
