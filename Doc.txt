@@ -154,20 +154,15 @@ LadderSquare class PM
     fields:
         - inherits all fields from abstract class Squares
         - int jumpDistance
-        - Square squareTarget
 
         methods:
         - inherits all methods from abstract class Squares
 
-        - constructor
-            initializes distance to targetSquare
-            gets the targetSquare and sets it's type to "ladder"
-
-        -  initJumpDistance(int index)
-            used by constructor to calculate valid jumpDistance
+        - constructor (... , int indexNext)
+            initializes distance to targetSquare with own index and indexNext of next square
 
         - requestLanding(Player p)
-            just passes on call to targetSquare
+            just passes on call to next square via call with jumpDistance and Player p
 
 
 SnakeSquare class PM
@@ -179,15 +174,11 @@ SnakeSquare class PM
         methods:
         - inherits all methods from abstract class Squares
 
-        - constructor
-            initializes distance to targetSquare
-            gets the targetSquare and sets it's type to "snake"
-
-        -  initJumpDistance(int index)
-            used by constructor to calculate valid jumpDistance
+        - constructor (... , int indexNext)
+            initializes distance to targetSquare with own index and indexNext of next square
 
         - requestLanding(Player p)
-            just passes on call to targetSquare
+            just passes on call to next square via call with jumpDistance and Player p
 
 
 
