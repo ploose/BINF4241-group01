@@ -2,10 +2,9 @@
 
 package ch.sc.snakesandladders;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Players {
@@ -20,7 +19,7 @@ public class Players {
         playerQueue.addAll(playerList);
     }
 
-    public List getQueue(){
+    public List<Player> getQueue(){
         return playerQueue;
     }
 

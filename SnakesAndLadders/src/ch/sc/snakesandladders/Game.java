@@ -7,7 +7,6 @@ public class Game {
     private Player currentPlayer;
     private Board board;
     private Ui userInterface;
-    private Dice dice;
 
     //Constructor for the Game class
     Game(Players players, Ui userInterface) {
@@ -15,18 +14,28 @@ public class Game {
         this.players = players;
         currentPlayer = this.players.getCurrentPlayer();
         winner = null;
-        board = new Board();
-        dice = new Dice();
+        board = new Board(21, players, this);
         this.userInterface = userInterface;
     }
 
     //Starts the game
     void run() {
         isRunning = true;
+        int positionBeforeTurn;
+        int positionAfterTurn;
+        int steps;
 
         while (isRunning) {
             userInterface.getInputNextTurn();
-            currentPlayer.moveFwd(Dice.throwDice());
+
+            steps = Dice.throwDice();
+
+            positionBeforeTurn = currentPlayer.getCurrentSquare().getIndex();
+            currentPlayer.moveFwd(steps);
+            positionAfterTurn = currentPlayer.getCurrentSquare().getIndex();
+
+            userInterface.printTurn(positionBeforeTurn, positionAfterTurn, steps, currentPlayer);
+
             players.add(currentPlayer);
 
             currentPlayer = players.getCurrentPlayer();
@@ -39,7 +48,7 @@ public class Game {
         isRunning = false;
     }
 
-    public Player getWinner() {
+    Player getWinner() {
         return winner;
     }
 
