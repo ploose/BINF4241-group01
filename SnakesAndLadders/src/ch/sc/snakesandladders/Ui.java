@@ -17,12 +17,12 @@ public class Ui {
         int numberOfPlayers = 0;
 
         while (numberOfPlayers < 2 || numberOfPlayers > 4) {
-            System.out.println("How many players want to play? (2-4 players)");
+            System.out.println("How many players want to play? (2-4 players) ");
             numberOfPlayers = input.nextInt();
         }
         ArrayList<Player> playerList = new ArrayList<Player>();
 
-        for (int i = 0; i <= numberOfPlayers; i++) {
+        for (int i = 1; i <= numberOfPlayers; i++) {
             System.out.print("Name of the " + i + ". player: ");
             Player player = new Player(input.nextLine());
             playerList.add(player);

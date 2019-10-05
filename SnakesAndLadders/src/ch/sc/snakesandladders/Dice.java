@@ -14,7 +14,7 @@ class Dice {
 
     //Return a random generated integer like a real dice :)
     //Added public statement to have the player access it. -PL
-    public static int throwDice() {
+    static int throwDice() {
         value = generator.nextInt(6) + 1;
         return value;
     }

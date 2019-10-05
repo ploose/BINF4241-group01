@@ -9,20 +9,8 @@ public class Game {
     private Ui userInterface;
     private Dice dice;
 
-    //Main the game
-    public static void main(String[] args) {
-        //TODO
-        Ui userInterface = new Ui();
-        Players players = userInterface.getPlayers();
-
-        Game game = new Game(players);
-        game.run();
-
-        userInterface.celebrateWinner(winner);
-    }
-
     //Constructor for the Game class
-    private Game(Players players) {
+    Game(Players players) {
         isRunning = false;
         this.players = players;
         currentPlayer = this.players.getCurrentPlayer();
@@ -32,7 +20,7 @@ public class Game {
     }
 
     //Starts the game
-    private void run() {
+    void run() {
         isRunning = true;
 
         while (isRunning) {
@@ -49,10 +37,11 @@ public class Game {
         Game.winner = winner;
         isRunning = false;
     }
-    // Added getter method to have the player to access the dice
-    public Dice getDice() {
-        return dice;
+
+    public Player getWinner() {
+        return winner;
     }
+
     // Added getter method to have the player to access the board
     public Board getBoard(){
         return this.board;
