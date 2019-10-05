@@ -3,7 +3,7 @@ package ch.sc.snakesandladders;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ui {
+class Ui {
     private Scanner input;
 
     //Constructor for Ui class
@@ -29,7 +29,7 @@ public class Ui {
             numberOfPlayers = input.nextInt();
 
         }
-        ArrayList<Player> playerList = new ArrayList<Player>();
+        ArrayList<Player> playerList = new ArrayList<>();
 
         for (int i = 1; i <= numberOfPlayers; i++) {
             System.out.print("Name of the " + i + ". player: \n");
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     //Describes what happened in this turn
-    public void printTurn() {
+    void printTurn(int positionBeforeTurn, int positionAfterTurn, int steps) {
         //TODO: Print what happened in that round
     }
 }
