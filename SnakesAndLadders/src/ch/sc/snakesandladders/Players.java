@@ -9,32 +9,31 @@ import java.util.ArrayList;
 
 
 public class Players {
-    private Queue<Player> playerQueue;
-    private ArrayList<Player> playerList;
+    private LinkedList<Player> playerQueue;
 
-    public Players(ArrayList playerList){
-        this.playerList = playerList;
+    Players(ArrayList<Player> playerList){
+        playerQueue = new LinkedList<>();
+        initQueue(playerList);
     }
 
-    private void initQueue(ArrayList playerList){
-        this.playerQueue.addAll(playerList);
+    private void initQueue(ArrayList<Player> playerList){
+        playerQueue.addAll(playerList);
     }
 
     public List getQueue(){
-        return (List) this.playerQueue;
+        return playerQueue;
     }
 
-    public Player getCurrentPlayer(){
+    Player getCurrentPlayer(){
         return playerQueue.remove();
     }
 
-    public void add(Player Player){
+    void add(Player Player){
         playerQueue.add(Player);
     }
 
     //Added remove function
-
     public Player remove(){
-        return this.playerQueue.remove();
+        return playerQueue.remove();
     }
 }

@@ -13,23 +13,22 @@ public class Ui {
     }
 
     //Takes user-input and creates players
-    Players getPlayers() {
+    ArrayList getPlayers() {
         int numberOfPlayers = 0;
 
         while (numberOfPlayers < 2 || numberOfPlayers > 4) {
-            System.out.println("How many players want to play? (2-4 players) ");
+            System.out.println("How many players want to play? (2-4 players) \n");
             numberOfPlayers = input.nextInt();
         }
         ArrayList<Player> playerList = new ArrayList<Player>();
 
         for (int i = 1; i <= numberOfPlayers; i++) {
-            System.out.print("Name of the " + i + ". player: ");
-            Player player = new Player(input.nextLine());
+            System.out.print("Name of the " + i + ". player: \n");
+            Player player = new Player(input.next());
             playerList.add(player);
         }
 
-        Players players = new Players(playerList);
-        return players;
+        return playerList;
     }
 
     //Takes user-input for resuming with next turn

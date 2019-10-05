@@ -1,5 +1,7 @@
 package ch.sc.snakesandladders;
+
 import ch.sc.snakesandladders.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -7,9 +9,12 @@ public class Main {
     public static void main(String[] args) {
         //TODO
         Ui userInterface = new Ui();
-        Players players = userInterface.getPlayers();
+        ArrayList playerList;
+        playerList = userInterface.getPlayers();
 
-        Game game = new Game(players);
+        Players players = new Players(playerList);
+
+        Game game = new Game(players, userInterface);
         game.run();
 
         userInterface.celebrateWinner(game.getWinner());

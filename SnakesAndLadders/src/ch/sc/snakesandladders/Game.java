@@ -10,13 +10,14 @@ public class Game {
     private Dice dice;
 
     //Constructor for the Game class
-    Game(Players players) {
+    Game(Players players, Ui userInterface) {
         isRunning = false;
         this.players = players;
         currentPlayer = this.players.getCurrentPlayer();
         winner = null;
         board = new Board();
         dice = new Dice();
+        this.userInterface = userInterface;
     }
 
     //Starts the game
