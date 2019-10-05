@@ -13,9 +13,9 @@ public class Board {
     private ArrayList<Square> squareList;
     private int size;
     private Players players;
-    Queue<Point> tupleQueue;
+    private Queue<Point> tupleQueue;
 
-    public Board(int size, Players players) {
+    Board(int size, Players players) {   //Constructor
         tupleQueue = tupleQueueGenerator();
         this.size = size;
         this.players = players;
@@ -25,12 +25,11 @@ public class Board {
         initBoard();
     }
 
-    public int getSize() {
+    public int getSize() {  //Returns size
         return size;
     }
 
-    // Initializes board with given size: Creates a list with all squares in order
-    private void initBoard() {
+    private void initBoard() {  // Initializes board with given size: Creates a list with all squares in order
         squareList.add(0, new FirstSquare(this, 0));    // Add first square
 
         for (int i = 1; i < (size - 1); i++) {  // fill the board with normal squares
@@ -39,24 +38,22 @@ public class Board {
 
         squareList.add(size - 1, new LastSquare(this, size - 1));   // Add last square
 
-        System.out.println(squareList.size());
 
-        // Add ladders
-        for (int i = 0; i < 2; i++){
+        for (int i = 0; i < 2; i++){    // Add ladders
             Point tuple = tupleQueue.remove();
             int x = (int)tuple.getX();
             int y = (int)tuple.getY();
             this.squareList.set(x, new LadderSquare(this, x, y));
         }
-        // Add snakes
-        for (int i = 0; i < 2; i++) {
+
+        for (int i = 0; i < 2; i++) {   // Add snakes
             Point tuple = tupleQueue.remove();
             int x = (int) tuple.getX();
             int y = (int) tuple.getY();
             this.squareList.set(x, new SnakeSquare(this, y, x));
         }
 
-        for (Player elem : players.getQueue()) {    //Sets every player on square one
+        for (Player elem : players.getQueue()) {    //Sets every player on first square
             elem.setCurrentSquare(findSquare(0));
         }
     }

@@ -12,9 +12,9 @@ public class Game {
     Game(Players players, Ui userInterface) {
         isRunning = false;
         this.players = players;
+        board = new Board(12, players);
         currentPlayer = this.players.getCurrentPlayer();
         winner = null;
-        board = new Board(12, players);
         this.userInterface = userInterface;
     }
 
