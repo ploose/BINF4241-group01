@@ -9,8 +9,8 @@ public class LastSquare extends Square {
         super(board, index, "last");
     }
 
-    public Square requestLanding(Player p) {
-        super.board.setWinner(p);
+    public Square requestLanding(Player winner) {
+        super.board.setWinner(winner);
         return this;
     }
 }

@@ -12,6 +12,7 @@ public class Board {
 
     private ArrayList<Square> squareList;
     private int size;
+    private Player winner;
     private Players players;
     private Queue<Point> tupleQueue;
 
@@ -65,7 +66,8 @@ public class Board {
 
     // Added by PM
     // TODO: This function should pass winning player (which it gets from lastsquare) to game
-    public void setWinner(Player p) {
+    public void setWinner(Player winner) {
+        this.winner = winner;
     }
 
 
