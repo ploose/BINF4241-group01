@@ -72,16 +72,15 @@ public class Board {
 
 
     private Queue<Point> tupleQueueGenerator() {
-
         int result1;
         int result2;
         Random r = new Random();
         int low = 1;
         int high = 10;
-        Point point = new Point();
         Queue<Point> myQueue = new LinkedList<>();
 
         for (int i = 0; i < 4; i++) {
+            Point point = new Point();
 
             result1 = r.nextInt(high - low) + low;
             result2 = result1;
