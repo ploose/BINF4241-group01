@@ -23,6 +23,7 @@ public abstract class Square {
         this.board = board;
         this.index = index;
         this.type = type;
+        this.singleSpace = true;
     }
 
     public Square(Board board, int index, boolean singleSpace, String type) {
