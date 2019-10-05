@@ -12,6 +12,7 @@ public class LadderSquare extends Square {
         jumpDistance = indexNext - index;
         squareTarget = requestLanding(null);
         squareTarget.setType("ladder");
+        System.out.println("Ladder: " + jumpDistance);
     }
 
     public Square requestLanding(Player p) {

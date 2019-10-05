@@ -10,7 +10,8 @@ public class SnakeSquare extends Square {
 
     public SnakeSquare(Board board, int index, int indexNext) {
         super(board, index, "snake");
-        jumpDistance = index - indexNext;
+        jumpDistance = indexNext - index;
+        System.out.println("Snake:" + jumpDistance);
     }
 
     public Square requestLanding(Player p) {

@@ -88,9 +88,14 @@ public class Board {
             while (result2 == result1) {
                 result2 = r.nextInt(high - low) + low;
             }
-            point.setLocation(result1, result2);
-            myQueue.add(point);
-
+            if (result1 < result2){
+                point.setLocation(result1, result2);
+                myQueue.add(point);
+            }
+            else{
+                point.setLocation(result2, result1);
+                myQueue.add(point);
+            }
         }
         return myQueue;
     }
