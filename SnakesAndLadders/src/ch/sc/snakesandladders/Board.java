@@ -40,15 +40,12 @@ public class Board {
         this.squareList.add(0, this.firstSquare);
         // Add normal, snake and ladder squares
         for (int i = 1; i < (size - 1); i++){
-
             // predefined ladder and snake places
             /* TODO: (optional)Randomize ladder/snake generation,
-
             */
-
-            if ( i == 4 || i == 7){ square = new LadderSquare(this, i); } // Debugged by PM
-            else if (i==9){ square = new SnakeSquare(this, i); } // Debugged by PM
-            else { square = new NormalSquare(this, i); } // Debugged by PM
+            if ( i == 4 || i == 7){ square = new LadderSquare(this, i); }
+            else if (i==9){ square = new SnakeSquare(this, i); }
+            else { square = new NormalSquare(this, i); }
             this.squareList.add(i, square);
         }
         // Add last square

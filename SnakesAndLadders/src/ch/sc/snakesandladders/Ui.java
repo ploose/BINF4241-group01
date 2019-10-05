@@ -13,12 +13,21 @@ public class Ui {
     }
 
     //Takes user-input and creates players
+
     ArrayList getPlayers() {
         int numberOfPlayers = 0;
+        System.out.println("How many players want to play?\n");
 
+        // Checks for invalid input - PL
         while (numberOfPlayers < 2 || numberOfPlayers > 4) {
-            System.out.println("How many players want to play? (2-4 players) \n");
+            System.out.println("Please enter a number between 2 and 4.");
+            Scanner input = new Scanner(System.in);
+            while(!input.hasNextInt()){
+                System.out.println("Please enter a number between 2 and 4.");
+                input.next();
+            }
             numberOfPlayers = input.nextInt();
+
         }
         ArrayList<Player> playerList = new ArrayList<Player>();
 
