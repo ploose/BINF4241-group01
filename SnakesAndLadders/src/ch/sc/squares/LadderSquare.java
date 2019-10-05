@@ -12,6 +12,7 @@ public class LadderSquare extends Square {
     public LadderSquare(Board board, int index) {
         super(board, index, "ladder");
         initJumpDistance(index);
+        //TODO: Check whether targetSquare has type normal, else try to find another one
         squareTarget = requestLanding(null); // get square the ladder points to
         squareTarget.setType("ladder"); // set that square's type to "ladder"
     }
