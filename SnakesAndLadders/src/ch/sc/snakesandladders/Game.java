@@ -43,7 +43,7 @@ class Game {
 
             checkWinner();
         }
-        userInterface.celebrateWinner(winner);
+        userInterface.celebrateWinner(board, winner);
     }
 
     private void checkWinner() {  //Sets a winner if a player lands on the last Square

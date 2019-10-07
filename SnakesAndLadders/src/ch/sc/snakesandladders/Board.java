@@ -5,6 +5,7 @@ import ch.sc.squares.*;
 import java.sql.SQLInvalidAuthorizationSpecException;
 import java.util.*;
 import java.awt.Point;
+import java.lang.Math.*;
 
 
 public class Board {
@@ -16,10 +17,10 @@ public class Board {
     private Queue<Point> tupleQueue;
 
     Board(int size, Players players) {   //Constructor
-        tupleQueue = tupleQueueGenerator();
         this.size = size;
         this.players = players;
 
+        tupleQueue = tupleQueueGenerator(); // Debugged py PM
         squareList = new ArrayList<>();
 
         initBoard();
@@ -39,10 +40,11 @@ public class Board {
         squareList.add(size - 1, new LastSquare(this, size - 1));   // Add last square
 
 
-        for (int i = 0; i < 2; i++){    // Add ladders
+        for (int i = 0; i < 2; i++) {    // Add ladders
             Point tuple = tupleQueue.remove();
-            int x = (int)tuple.getX();
-            int y = (int)tuple.getY();
+            int x = (int) tuple.getX();
+            int y = (int) tuple.getY();
+            System.out.println("Add the following ladder: (" + x + "->" + y + ")");
             this.squareList.set(x, new LadderSquare(this, x, y));
         }
 
@@ -50,7 +52,8 @@ public class Board {
             Point tuple = tupleQueue.remove();
             int x = (int) tuple.getX();
             int y = (int) tuple.getY();
-            this.squareList.set(x, new SnakeSquare(this, y, x));
+            System.out.println("Add the following snake: (" + x + "<-" + y + ")");
+            this.squareList.set(y, new SnakeSquare(this, y, x)); // Debugged by PM
         }
 
         for (Player elem : players.getQueue()) {    //Sets every player on first square
@@ -74,54 +77,44 @@ public class Board {
         return winner;
     }
 
+    // Improved & fixed tupleQueueGenerator added by PM
     private Queue<Point> tupleQueueGenerator() {
-        int result1;
-        int result2;
+        int result1, result2;
         Random r = new Random();
-        int low = 1;
-        int high = 10;
+        int low = 1; // lower limit is 2. square
+        int high = size - 1; // upper limit is 2. last square
         Queue<Point> myQueue = new LinkedList<>();
-        List<Integer> usedSquares = new ArrayList<Integer>();
+        boolean usedSquares[] = new boolean[size]; // For checking which values are already used
+        usedSquares[0] = true; // set first square as used
+        usedSquares[size - 1] = true; // set last square as used
 
-        usedSquares.add(0);
-        result1 = 0;
-        result2 = 0;
-
-        for (int i = 0; i < 4; i++) {
+        // Generate tuples
+        int numTuples = 4;
+        for (int i = 0; i < numTuples; i++) {
             Point point = new Point();
 
-            while (true){
-            if (usedSquares.contains(result1)){
+            // calculating 1. tuple point
+            do {
                 result1 = r.nextInt(high - low) + low;
-            }
-                usedSquares.add(result1);
-                break;
-            }
+            } while (usedSquares[result1]);
+            usedSquares[result1] = true;
 
-            while (true){
+            // calculating 2. tuple point
+            do {
+                result2 = r.nextInt(high - low) + low;
+            } while (usedSquares[result2]);
+            usedSquares[result2] = true;
 
-                if (usedSquares.contains(result2)){
-                    result2 = r.nextInt(high - low) + low;
-                }
-                usedSquares.add(result2);
-                break;
-            }
-            System.out.println("R1: " + result1);
-            System.out.println("R2: " + result2);
-            if (result1 < result2){
-                point.setLocation(result1, result2);
-                myQueue.add(point);
-            }
-
-            else{
-                point.setLocation(result2, result1);
-                myQueue.add(point);
-            }
+            point.setLocation(Math.min(result1, result2), Math.max(result1, result2));
+            myQueue.add(point);
         }
-        for(int ints : usedSquares) {
-            System.out.println(ints);
+
+        for (Point p : myQueue) {
+            System.out.println(p);
         }
+
         return myQueue;
     }
+
 }
 

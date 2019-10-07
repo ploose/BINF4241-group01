@@ -51,7 +51,9 @@ class Ui {
         }
     }
 
-    void celebrateWinner(Player winner) {   //Prints the winner of the game
+    void celebrateWinner(Board board, Player winner) {   //Prints the winner of the game
+        System.out.print("Final state: ");
+        printBoard(board);
         System.out.println("Hurrah, the player " + winner.getName() + " has won!");
     }
 
