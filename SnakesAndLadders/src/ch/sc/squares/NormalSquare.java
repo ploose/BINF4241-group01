@@ -15,4 +15,13 @@ public class NormalSquare extends Square {
         }
         return null;
     }
+
+    public String toString() {
+        String output = "[" + (getIndex()+1);
+        for (Player p : getPlayers()) {
+            output += "<" + p.getName() + ">";
+        }
+        output+="]";
+        return output;
+    }
 }

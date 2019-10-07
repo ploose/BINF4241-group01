@@ -13,4 +13,13 @@ public class LastSquare extends Square {
         super.board.setWinner(winner);
         return this;
     }
+
+    public String toString() {
+        String output = "[" + (getIndex()+1);
+        for (Player p : getPlayers()) {
+            output += "<" + p.getName() + ">";
+        }
+        output+="]";
+        return output;
+    }
 }

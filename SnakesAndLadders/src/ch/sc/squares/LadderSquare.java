@@ -9,6 +9,7 @@ public class LadderSquare extends Square {
 
     public LadderSquare(Board board, int index, int indexNext) {
         super(board, index, "ladder");
+        this.indexNext = indexNext;
         jumpDistance = indexNext - index;
         //squareTarget = requestLanding(null);
         //squareTarget.setType("ladder");
@@ -16,5 +17,9 @@ public class LadderSquare extends Square {
 
     public Square requestLanding(Player p) {
         return moveAndLand(jumpDistance, p);
+    }
+
+    public String toString() {
+        return "[" + (getIndex()+1) + "->" + this.indexNext + "]";
     }
 }

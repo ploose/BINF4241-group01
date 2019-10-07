@@ -2,6 +2,7 @@ package ch.sc.snakesandladders;
 
 import ch.sc.squares.*;
 
+import java.sql.SQLInvalidAuthorizationSpecException;
 import java.util.*;
 import java.awt.Point;
 
@@ -53,7 +54,10 @@ public class Board {
         }
 
         for (Player elem : players.getQueue()) {    //Sets every player on first square
+            // Add first square to players
             elem.setCurrentSquare(findSquare(0));
+            // Add players to first square
+            findSquare(0).addPlayer(elem); // Debugged by PM
         }
     }
 

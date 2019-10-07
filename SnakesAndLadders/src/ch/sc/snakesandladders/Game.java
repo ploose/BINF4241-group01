@@ -23,16 +23,19 @@ class Game {
         int positionAfterTurn;
         int steps;
 
+        userInterface.printInitialState(board);
+
         while (isRunning) {
             userInterface.getInputNextTurn();
 
             steps = Dice.throwDice();
 
-            positionBeforeTurn = currentPlayer.getCurrentSquare().getIndex();
+            // positionBeforeTurn = currentPlayer.getCurrentSquare().getIndex();
             currentPlayer.moveFwd(steps);
-            positionAfterTurn = currentPlayer.getCurrentSquare().getIndex();
+            // positionAfterTurn = currentPlayer.getCurrentSquare().getIndex();
 
-            userInterface.printTurn(positionBeforeTurn, positionAfterTurn, steps, currentPlayer);
+            // userInterface.printTurn(positionBeforeTurn, positionAfterTurn, steps, currentPlayer);
+            userInterface.printTurn(board, steps, currentPlayer);
 
             players.add(currentPlayer);
 
@@ -42,7 +45,6 @@ class Game {
         }
         userInterface.celebrateWinner(winner);
     }
-
 
     private void checkWinner() {  //Sets a winner if a player lands on the last Square
         winner = board.getWinner();

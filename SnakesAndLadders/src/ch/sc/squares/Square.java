@@ -50,6 +50,10 @@ public abstract class Square {
         currentPlayers.remove(p); //Debugged TB
     }
 
+    public ArrayList<Player> getPlayers() {
+        return currentPlayers;
+    }
+
     public String getType() {
         return type;
     }
@@ -74,16 +78,18 @@ public abstract class Square {
                 return board.findSquare(0);
             }
         } else
-            nextSquare = board.findSquare((board.getSize()-1)- ((getIndex() + distance) % (board.getSize()-1)));
-            nextSquare = nextSquare.requestLanding(p);
-            // If we can move to the requestLanding() function will return a valid Square object, else we get null
-            if (nextSquare != null) {
-                return nextSquare;
-            } else {
-                return board.findSquare(0);
-            }
+            nextSquare = board.findSquare((board.getSize() - 1) - ((getIndex() + distance) % (board.getSize() - 1)));
+        nextSquare = nextSquare.requestLanding(p);
+        // If we can move to the requestLanding() function will return a valid Square object, else we get null
+        if (nextSquare != null) {
+            return nextSquare;
+        } else {
+            return board.findSquare(0);
+        }
     }
 
     // This method gets implemented in the children!
     public abstract Square requestLanding(Player p);
+
+    public abstract String toString();
 }

@@ -20,9 +20,9 @@ public class Player {
         this.name = name;
     }
 
-    String getName() {
+    public String getName() {
         return name;
-    }
+    } // Debugged by PM
 
     public Square getCurrentSquare() {
         return CurrentSquare;

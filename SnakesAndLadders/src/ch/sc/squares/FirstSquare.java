@@ -11,4 +11,13 @@ public class FirstSquare extends Square {
     public Square requestLanding(Player p) {
         return this;
     }
+
+    public String toString() {
+        String output = "[" + (getIndex()+1);
+        for (Player p : getPlayers()) {
+            output += "<" + p.getName() + ">";
+        }
+        output+="]";
+        return output;
+    }
 }
