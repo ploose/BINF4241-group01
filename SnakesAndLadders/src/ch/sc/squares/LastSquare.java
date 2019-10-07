@@ -1,7 +1,7 @@
-//Author: Pascal Marty, Tim Brunner
+
 package ch.sc.squares;
 
-import ch.sc.snakesandladders.*; //Debugged TB
+import ch.sc.snakesandladders.*;
 
 public class LastSquare extends Square {
 

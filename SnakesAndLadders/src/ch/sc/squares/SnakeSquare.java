@@ -1,4 +1,4 @@
-//Author: Pascal Marty
+
 package ch.sc.squares;
 
 import ch.sc.snakesandladders.*;

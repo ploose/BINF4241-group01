@@ -1,4 +1,4 @@
-// Created by Patrick Looser
+
 
 package ch.sc.snakesandladders;
 

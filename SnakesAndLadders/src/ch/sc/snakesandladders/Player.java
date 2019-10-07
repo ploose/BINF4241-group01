@@ -1,4 +1,4 @@
-// Patrick Looser
+
 
 /*
 getCurrentSquare:
@@ -22,7 +22,7 @@ public class Player {
 
     public String getName() {
         return name;
-    } // Debugged by PM
+    }
 
     public Square getCurrentSquare() {
         return CurrentSquare;

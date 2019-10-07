@@ -1,4 +1,4 @@
-//Author: Pascal Marty
+
 package ch.sc.squares;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public abstract class Square {
     private ArrayList<Player> currentPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
     private String type;
 
-    // unused constructor -PL // Debugged because it is used in LastSquare ;) TB
+
     Square(Board board, int index, String type) {
         this.board = board;
         this.index = index;
@@ -29,19 +29,17 @@ public abstract class Square {
 
     // Tile is occupied iff it's a singleSpace and there is already a player on it, otherwise it is not occupied.
     public boolean isOccupied() {
-        return singleSpace && currentPlayers.size() == 1; //Debugged TB
-    }
+        return singleSpace && currentPlayers.size() == 1;
 
     public int getIndex() {
-        return index; //Debugged TB
-    }
+        return index;
 
     public void addPlayer(Player p) {
         this.currentPlayers.add(p);
     }
 
     public void removePlayer(Player p) {
-        currentPlayers.remove(p); //Debugged TB
+        currentPlayers.remove(p);
     }
 
     public ArrayList<Player> getPlayers() {

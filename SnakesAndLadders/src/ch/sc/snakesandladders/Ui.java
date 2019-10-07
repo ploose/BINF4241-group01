@@ -36,7 +36,7 @@ class Ui {
         int numberOfPlayers = 0;
         System.out.println("How many players want to play?");
 
-        // Checks for invalid input - PL
+        // Checks for invalid input
         while (numberOfPlayers < 2 || numberOfPlayers > 4) {
             System.out.print("Please enter a number between 2 and 4: ");
             Scanner input = new Scanner(System.in);
