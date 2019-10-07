@@ -11,7 +11,7 @@ import java.lang.Math.*;
 public class Board {
 
     private ArrayList<Square> squareList;
-    private int size;
+    private int size, density, numTuples;
     private Player winner;
     private Players players;
     private Queue<Point> tupleQueue;
@@ -19,6 +19,9 @@ public class Board {
     Board(int size, Players players) {   //Constructor
         this.size = size;
         this.players = players;
+
+        density = 3; // How many snake/ladders we want per density, i.e. 1 snake/ladder per 3 squares
+        numTuples = (int) ((this.size - 2) / 3);
 
         tupleQueue = tupleQueueGenerator(); // Debugged py PM
         squareList = new ArrayList<>();
@@ -39,21 +42,20 @@ public class Board {
 
         squareList.add(size - 1, new LastSquare(this, size - 1));   // Add last square
 
+        Random r = new Random();
 
-        for (int i = 0; i < 2; i++) {    // Add ladders
+        for (int i = 0; i < numTuples; i++) {    // Add ladders & snakes
             Point tuple = tupleQueue.remove();
             int x = (int) tuple.getX();
             int y = (int) tuple.getY();
-            System.out.println("Add the following ladder: (" + x + "->" + y + ")");
-            this.squareList.set(x, new LadderSquare(this, x, y));
-        }
 
-        for (int i = 0; i < 2; i++) {   // Add snakes
-            Point tuple = tupleQueue.remove();
-            int x = (int) tuple.getX();
-            int y = (int) tuple.getY();
-            System.out.println("Add the following snake: (" + x + "<-" + y + ")");
-            this.squareList.set(y, new SnakeSquare(this, y, x)); // Debugged by PM
+            if (r.nextBoolean()) { // Probability p = 0.5 for ladders & snakes
+                System.out.println("Add the following ladder: (" + x + "->" + y + ")");
+                this.squareList.set(x, new LadderSquare(this, x, y));
+            } else {
+                System.out.println("Add the following snake: (" + x + "<-" + y + ")");
+                this.squareList.set(y, new SnakeSquare(this, y, x)); // Debugged by PM
+            }
         }
 
         for (Player elem : players.getQueue()) {    //Sets every player on first square
@@ -80,16 +82,15 @@ public class Board {
     // Improved & fixed tupleQueueGenerator added by PM
     private Queue<Point> tupleQueueGenerator() {
         int result1, result2;
-        Random r = new Random();
         int low = 1; // lower limit is 2. square
         int high = size - 1; // upper limit is 2. last square
+        Random r = new Random();
         Queue<Point> myQueue = new LinkedList<>();
         boolean usedSquares[] = new boolean[size]; // For checking which values are already used
         usedSquares[0] = true; // set first square as used
         usedSquares[size - 1] = true; // set last square as used
 
         // Generate tuples
-        int numTuples = 4;
         for (int i = 0; i < numTuples; i++) {
             Point point = new Point();
 
