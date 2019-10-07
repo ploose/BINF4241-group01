@@ -3,11 +3,15 @@ package ch.sc.snakesandladders;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import  java.lang.Math.*;
+
 class Ui {
     private Scanner input;
+    private int spacing; // Determines length until board printing (to ensure consistent output formatting)
 
     Ui() {  //Constructor for Ui class
         input = new Scanner(System.in);
+        setSpacing("Initial state");
         System.out.println("Hello and Welcome to a new Game of Snakes & Ladders!\n");
     }
 
@@ -47,25 +51,30 @@ class Ui {
         for (int i = 1; i <= numberOfPlayers; i++) {
             System.out.print("Name of the " + i + ". player: ");
             Player player = new Player(input.next());
+            setSpacing(player.getName() + " rolls X");
             playerList.add(player);
         }
         System.out.println("");
         return playerList;
     }
 
+    private void setSpacing(String input){
+        spacing = Math.max(spacing, (input).length());
+    }
+
     void celebrateWinner(Board board, Player winner) {   //Prints the winner of the game
-        System.out.print("Final state: ");
+        System.out.print(String.format("%-" + spacing + "s", "Final state")+": ");
         printBoard(board);
         System.out.println(winner.getName() + " wins!");
     }
 
     void printTurn(Board board, int steps, Player current){
-        System.out.print(current.getName() + " rolls " + steps + ":   ");
+        System.out.print(String.format("%-" + spacing + "s", (current.getName() + " rolls " + steps))+": ");
         printBoard(board);
     }
 
     void printInitialState(Board board){
-        System.out.print("Initial state: ");
+        System.out.print(String.format("%-" + spacing + "s", "Initial State")+": ");
         printBoard(board);
     }
 
