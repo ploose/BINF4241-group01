@@ -50,10 +50,8 @@ public class Board {
             int y = (int) tuple.getY();
 
             if (r.nextBoolean()) { // Probability p = 0.5 for ladders & snakes
-                System.out.println("Add the following ladder: (" + x + "->" + y + ")");
                 this.squareList.set(x, new LadderSquare(this, x, y));
             } else {
-                System.out.println("Add the following snake: (" + x + "<-" + y + ")");
                 this.squareList.set(y, new SnakeSquare(this, y, x)); // Debugged by PM
             }
         }
@@ -108,10 +106,6 @@ public class Board {
 
             point.setLocation(Math.min(result1, result2), Math.max(result1, result2));
             myQueue.add(point);
-        }
-
-        for (Point p : myQueue) {
-            System.out.println(p);
         }
 
         return myQueue;

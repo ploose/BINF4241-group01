@@ -1,10 +1,4 @@
 //Author: Pascal Marty
-/* TODO: Squares need / call the following functions in Game:
-- Squarelist to store all squares
-- populate method to initialize gameboard
-- getSize() : function that returns amount of squares on the gameboard
-- findSquare(index) : Find and return square from Squarelist
- */
 package ch.sc.squares;
 
 import java.util.ArrayList;
@@ -65,8 +59,6 @@ public abstract class Square {
 
     // The square where the player is on calculates the next square for the current player occupying the square? -PL
     public Square moveAndLand(int distance, Player p) {
-        //TODO: If we move onto an occupied square, do we stay or do we need to go to the very beginning? Also how to handle 'overshot's'
-        // We can't move if we would 'fall' off the board
         Square nextSquare;
         if (getIndex() + distance < board.getSize()) {
             nextSquare = board.findSquare(getIndex() + distance);
@@ -77,15 +69,22 @@ public abstract class Square {
             } else {
                 return board.findSquare(0);
             }
-        } else
-            nextSquare = board.findSquare((board.getSize() - 1) - ((getIndex() + distance) % (board.getSize() - 1)));
-        nextSquare = nextSquare.requestLanding(p);
-        // If we can move to the requestLanding() function will return a valid Square object, else we get null
-        if (nextSquare != null) {
-            return nextSquare;
         } else {
-            return board.findSquare(0);
+            // nextSquare = board.findSquare((board.getSize() - 1) - ((getIndex() + distance) % (board.getSize() - 1)));
+            int position = (board.getSize() - 1) - (distance - (board.getSize() - 1) + getIndex());
+            if (position < 0) {
+                position = 0;
+            }
+            nextSquare = board.findSquare(position);
+            nextSquare = nextSquare.requestLanding(p);
+            // If we can move to the requestLanding() function will return a valid Square object, else we get null
+            if (nextSquare != null) {
+                return nextSquare;
+            } else {
+                return board.findSquare(0);
+            }
         }
+
     }
 
     // This method gets implemented in the children!

@@ -8,7 +8,7 @@ class Ui {
 
     Ui() {  //Constructor for Ui class
         input = new Scanner(System.in);
-        System.out.println("Hello, and welcome to a new game of snakes and ladders!");
+        System.out.println("Hello and Welcome to a new Game of Snakes & Ladders!\n");
     }
 
     public int getBoardSize(){ // Takes user-input and returns given size Added by PM
@@ -23,8 +23,8 @@ class Ui {
                 input.next();
             }
             boardSize = input.nextInt();
-
         }
+        System.out.println("");
         return boardSize;
     }
 
@@ -41,7 +41,6 @@ class Ui {
                 input.next();
             }
             numberOfPlayers = input.nextInt();
-
         }
         ArrayList<Player> playerList = new ArrayList<>();
 
@@ -50,14 +49,14 @@ class Ui {
             Player player = new Player(input.next());
             playerList.add(player);
         }
-
+        System.out.println("");
         return playerList;
     }
 
     void celebrateWinner(Board board, Player winner) {   //Prints the winner of the game
         System.out.print("Final state: ");
         printBoard(board);
-        System.out.println("Hurrah, the player " + winner.getName() + " has won!");
+        System.out.println(winner.getName() + " wins!");
     }
 
     void printTurn(Board board, int steps, Player current){
