@@ -30,9 +30,11 @@ public abstract class Square {
     // Tile is occupied iff it's a singleSpace and there is already a player on it, otherwise it is not occupied.
     public boolean isOccupied() {
         return singleSpace && currentPlayers.size() == 1;
+    }
 
     public int getIndex() {
         return index;
+    }
 
     public void addPlayer(Player p) {
         this.currentPlayers.add(p);
