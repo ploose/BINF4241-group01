@@ -1,5 +1,3 @@
-
-
 package ch.sc.snakesandladders;
 
 import java.util.ArrayList;

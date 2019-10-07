@@ -1,4 +1,3 @@
-
 package ch.sc.squares;
 
 import ch.sc.snakesandladders.*;

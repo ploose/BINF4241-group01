@@ -23,7 +23,7 @@ public class Board {
         density = 3; // How many snake/ladders we want per density, i.e. 1 snake/ladder per 3 squares
         numTuples = (int) ((this.size - 2) / 3);
 
-        tupleQueue = tupleQueueGenerator(); // Debugged py PM
+        tupleQueue = tupleQueueGenerator();
         squareList = new ArrayList<>();
 
         initBoard();
@@ -52,7 +52,7 @@ public class Board {
             if (r.nextBoolean()) { // Probability p = 0.5 for ladders & snakes
                 this.squareList.set(x, new LadderSquare(this, x, y));
             } else {
-                this.squareList.set(y, new SnakeSquare(this, y, x)); // Debugged by PM
+                this.squareList.set(y, new SnakeSquare(this, y, x));
             }
         }
 
@@ -60,7 +60,7 @@ public class Board {
             // Add first square to players
             elem.setCurrentSquare(findSquare(0));
             // Add players to first square
-            findSquare(0).addPlayer(elem); // Debugged by PM
+            findSquare(0).addPlayer(elem);
         }
     }
 

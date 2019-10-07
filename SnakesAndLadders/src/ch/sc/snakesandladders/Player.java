@@ -1,14 +1,5 @@
-
-
-/*
-getCurrentSquare:
-    return Square
-
-setCurrentSquare:
-    sets the current square
- */
-
 package ch.sc.snakesandladders;
+
 import ch.sc.squares.*;
 
 public class Player {
