@@ -6,7 +6,7 @@ public class SnakeSquare extends Square {
     private int jumpDistance, indexNext;
 
     public SnakeSquare(Board board, int index, int indexNext) {
-        super(board, index, "snake");
+        super(board, index);
         this.indexNext = indexNext;
         jumpDistance = indexNext - index;
     }

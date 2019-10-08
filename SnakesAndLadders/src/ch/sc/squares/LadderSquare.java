@@ -6,7 +6,7 @@ public class LadderSquare extends Square {
     private int jumpDistance, indexNext;
 
     public LadderSquare(Board board, int index, int indexNext) {
-        super(board, index, "ladder");
+        super(board, index);
         this.indexNext = indexNext;
         jumpDistance = indexNext - index;
     }

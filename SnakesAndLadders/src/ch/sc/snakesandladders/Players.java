@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Players {
+class Players {
     private LinkedList<Player> playerQueue;
 
     Players(ArrayList<Player> playerList){
@@ -17,7 +17,7 @@ public class Players {
         playerQueue.addAll(playerList);
     }
 
-    public List<Player> getQueue(){
+    List<Player> getQueue(){
         return playerQueue;
     }
 
@@ -27,10 +27,5 @@ public class Players {
 
     void add(Player Player){
         playerQueue.add(Player);
-    }
-
-    //Added remove function
-    public Player remove(){
-        return playerQueue.remove();
     }
 }

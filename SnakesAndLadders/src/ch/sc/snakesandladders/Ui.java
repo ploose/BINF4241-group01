@@ -3,8 +3,6 @@ package ch.sc.snakesandladders;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import  java.lang.Math.*;
-
 class Ui {
     private Scanner input;
     private int spacing; // Determines length until board printing (to ensure consistent output formatting)
@@ -15,7 +13,7 @@ class Ui {
         System.out.println("Hello and Welcome to a new Game of Snakes & Ladders!\n");
     }
 
-    public int getBoardSize(){ // Takes user-input and returns given size Added by PM
+    int getBoardSize(){ // Takes user-input and returns given size Added by PM
         int boardSize = 0;
         System.out.println("How many squares should the gameboard have?");
 
@@ -28,7 +26,7 @@ class Ui {
             }
             boardSize = input.nextInt();
         }
-        System.out.println("");
+        System.out.println();
         return boardSize;
     }
 
@@ -54,7 +52,7 @@ class Ui {
             setSpacing(player.getName() + " rolls X");
             playerList.add(player);
         }
-        System.out.println("");
+        System.out.println();
         return playerList;
     }
 
@@ -78,10 +76,10 @@ class Ui {
         printBoard(board);
     }
 
-    void printBoard(Board board){
-        String output = "";
+    private void printBoard(Board board){
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < board.getSize(); i++){
-            output+= board.findSquare(i).toString();
+            output.append(board.findSquare(i).toString());
         }
         System.out.println(output);
 

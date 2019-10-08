@@ -5,33 +5,23 @@ import java.util.ArrayList;
 import ch.sc.snakesandladders.*;
 
 public abstract class Square {
-    protected Board board;
+    Board board;
     private int index; // Index of tile instance
     private boolean singleSpace; // boolean that indicates, whether the tile is limited to one player (if true) or if there is no limit (if false)
-    private ArrayList<Player> currentPlayers = new ArrayList<Player>(); // ArrayList with all players that are currently on the tile
-    private String type;
+    private ArrayList<Player> currentPlayers = new ArrayList<>(); // ArrayList with all players that are currently on the tile
 
-
-    Square(Board board, int index, String type) {
+    Square(Board board, int index) {
         this.board = board;
         this.index = index;
-        this.type = type;
         this.singleSpace = true;
     }
 
-    public Square(Board board, int index, boolean singleSpace, String type) {
-        this.board = board;
-        this.index = index;
-        this.type = type;
-        this.singleSpace = singleSpace;
-    }
-
     // Tile is occupied iff it's a singleSpace and there is already a player on it, otherwise it is not occupied.
-    public boolean isOccupied() {
+    boolean isOccupied() {
         return singleSpace && currentPlayers.size() == 1;
     }
 
-    public int getIndex() {
+    int getIndex() {
         return index;
     }
 
@@ -44,17 +34,8 @@ public abstract class Square {
         currentPlayers.remove(p);
     }
 
-    public ArrayList<Player> getPlayers() {
+    ArrayList<Player> getPlayers() {
         return currentPlayers;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        // Allowed types: "first", "last", "normal", "ladder", "snake"
-        this.type = type;
     }
 
     // The square where the player is on calculates the next square for the current player occupying the square? -PL

@@ -5,7 +5,7 @@ import ch.sc.snakesandladders.*;
 public class LastSquare extends Square {
 
     public LastSquare(Board board, int index) {
-        super(board, index, "last");
+        super(board, index);
     }
 
     public Square requestLanding(Player winner) {
@@ -14,11 +14,11 @@ public class LastSquare extends Square {
     }
 
     public String toString() {
-        String output = "[" + (getIndex()+1);
+        StringBuilder output = new StringBuilder("[" + (getIndex() + 1));
         for (Player p : getPlayers()) {
-            output += "<" + p.getName() + ">";
+            output.append("<").append(p.getName()).append(">");
         }
-        output+="]";
-        return output;
+        output.append("]");
+        return output.toString();
     }
 }

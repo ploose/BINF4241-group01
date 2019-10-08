@@ -7,10 +7,8 @@ class Game {
     private Player currentPlayer;
     private Board board;
     private Ui userInterface;
-    private int size;
 
     Game(Players players, Ui userInterface, int size) {   //Constructor for the Game class
-        this.size = size;
         this.players = players;
         this.userInterface = userInterface;
         board = new Board(size, players);
@@ -19,20 +17,14 @@ class Game {
 
     void run() {    //Starts the game
         isRunning = true;
-        int positionBeforeTurn;
-        int positionAfterTurn;
         int steps;
 
         userInterface.printInitialState(board);
 
         while (isRunning) {
             steps = Dice.throwDice();
-
-            // positionBeforeTurn = currentPlayer.getCurrentSquare().getIndex();
             currentPlayer.moveFwd(steps);
-            // positionAfterTurn = currentPlayer.getCurrentSquare().getIndex();
 
-            // userInterface.printTurn(positionBeforeTurn, positionAfterTurn, steps, currentPlayer);
             userInterface.printTurn(board, steps, currentPlayer);
 
             players.add(currentPlayer);

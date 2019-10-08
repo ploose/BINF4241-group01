@@ -2,16 +2,17 @@ package ch.sc.snakesandladders;
 
 import ch.sc.squares.*;
 
-import java.sql.SQLInvalidAuthorizationSpecException;
-import java.util.*;
-import java.awt.Point;
-import java.lang.Math.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
 
 
 public class Board {
 
     private ArrayList<Square> squareList;
-    private int size, density, numTuples;
+    private int size, numTuples;
     private Player winner;
     private Players players;
     private Queue<Point> tupleQueue;
@@ -20,8 +21,7 @@ public class Board {
         this.size = size;
         this.players = players;
 
-        density = 3; // How many snake/ladders we want per density, i.e. 1 snake/ladder per 3 squares
-        numTuples = (int) ((this.size - 2) / 3);
+        numTuples = ((this.size - 2) / 3);
 
         tupleQueue = tupleQueueGenerator();
         squareList = new ArrayList<>();
@@ -84,7 +84,7 @@ public class Board {
         int high = size - 1; // upper limit is 2. last square
         Random r = new Random();
         Queue<Point> myQueue = new LinkedList<>();
-        boolean usedSquares[] = new boolean[size]; // For checking which values are already used
+        boolean[] usedSquares = new boolean[size]; // For checking which values are already used
         usedSquares[0] = true; // set first square as used
         usedSquares[size - 1] = true; // set last square as used
 

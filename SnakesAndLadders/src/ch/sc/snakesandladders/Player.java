@@ -15,11 +15,7 @@ public class Player {
         return name;
     }
 
-    public Square getCurrentSquare() {
-        return CurrentSquare;
-    }
-
-    public void setCurrentSquare(Square currentSquare) {
+    void setCurrentSquare(Square currentSquare) {
         CurrentSquare = currentSquare;
     }
 
