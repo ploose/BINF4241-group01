@@ -6,5 +6,5 @@ These are the rules of our chess game implementation:
 
 
 ## Features
-
+- Raytracing
 
