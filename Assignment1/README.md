@@ -16,3 +16,10 @@ These are the rules of our Snakes & Ladders implementation:
 - The game ends when the first player reaches the last square.
 
 
+## Features
+
+- Variable size for the Gameboard (2 to (theoretically) MAX_INTEGER squares).
+- Randomly generated & placed Snakes & Ladders.
+- Dynamic padding of output.
+- Supports 2 - 4 Players.
+
