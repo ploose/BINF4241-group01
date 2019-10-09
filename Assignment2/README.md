@@ -7,4 +7,6 @@ These are the rules of our chess game implementation:
 
 ## Features
 - Raytracing
-
+- Finisher moves
+- 8k support
+- 64 core processing
