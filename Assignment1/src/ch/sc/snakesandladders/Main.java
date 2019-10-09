@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    //Main the game
+    //Main of the game
     public static void main(String[] args) {
         Ui userInterface = new Ui();
 
