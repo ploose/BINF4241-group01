@@ -1,6 +1,8 @@
-package ChessGame;
+package src.ChessGame;
 
-public class Ui {
+import src.ChessGame.Enums.*;
 
-    void celebrateWinner() {}
+class Ui {
+
+    void celebrateWinner(Color winner) {}
 }

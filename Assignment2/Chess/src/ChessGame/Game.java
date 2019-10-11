@@ -1,28 +1,36 @@
-package ChessGame;
+package src.ChessGame;
 
+import src.ChessGame.Enums.*;
 
-public class Game {
+class Game {
+    private Board board;
+    private Ui userInterface;
+    private boolean isRunning;
 
-    private Player white;
-    private Player black;
+    Game(){
+        board = new Board(this);
+        userInterface = new Ui();
+        isRunning = false;
+    }
 
     private void run() {
+        isRunning = true;
 
+        while (isRunning) {
+            //TODO
+        }
     }
-    Game(){
 
-        Board board = new Board();
-
+    void setWinner(Color winner){
+        isRunning = false;
+        userInterface.celebrateWinner(winner);
     }
 
     private void checkCheck() {}
 
     private void checkCheckMate() {}
 
-    // Gets input from interface
-    private void move(currentSpot, NewSpot) {
-
-
+    private void move(Square currentSpot, Square newSpot) {   // Gets input from interface
 
     }
  /* Might not be needed

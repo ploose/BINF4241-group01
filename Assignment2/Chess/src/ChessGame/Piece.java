@@ -1,11 +1,17 @@
-package ChessGame;
+package src.ChessGame;
 
-public class Piece {
+import src.ChessGame.Enums.*;
 
-    //pl
-    public boolean isValidMove(){
+abstract class Piece {
+    final private Color color;
 
-        return true;
+    Piece(Color color) {
+        this.color = color;
     }
 
+    Color getColor() {
+        return color;
+    }
+
+    abstract boolean isValidMove(Square current, Square next);
 }
