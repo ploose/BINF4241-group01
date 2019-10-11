@@ -1,4 +1,4 @@
-package src;
+package ChessGame;
 
 public class Rook {
 }
