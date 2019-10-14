@@ -1,7 +1,5 @@
 package ChessGame;
 
-import src.ChessGame.Enums.*;
-
 class Pawn extends Piece{
     private boolean hasMoved = false;
 

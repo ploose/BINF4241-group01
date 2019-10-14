@@ -1,15 +1,120 @@
 package ChessGame;
 
-import src.ChessGame.Enums.*;
-
 class Queen extends Piece {
 
     Queen(Color color) {
         super(color);
     }
 
-    @Override
-    boolean isValidMove(Square current, Square next) {
+    boolean isValidMove(Board board, Square current, Square next) {
+        int x, y;
+        Square temp;
+        // Check movement up-left
+        x = current.x;
+        y = current.y;
+        while (true) {
+            x--;
+            y--;
+            if (x < 0 || y < 0) {
+                break;
+            }
+            temp = board.getSquare(x, y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+
+        // Check movement up-right
+        x = current.x;
+        y = current.y;
+        while (true) {
+            x++;
+            y--;
+            if (x > 7 || y < 0) {
+                break;
+            }
+            temp = board.getSquare(x, y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+
+        // Check movement down-right
+        x = current.x;
+        y = current.y;
+        while (true) {
+            x++;
+            y++;
+            if (x > 7 || y > 8) {
+                break;
+            }
+            temp = board.getSquare(x, y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+
+        // Check movement down-left
+        x = current.x;
+        y = current.y;
+        while (true) {
+            x--;
+            y++;
+            if (x < 0 || y > 8) {
+                break;
+            }
+            temp = board.getSquare(x, y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+
+        // Check movement up
+        for (y = current.y - 1; y >= 0; y--) {
+            temp = board.getSquare(current.x, y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+        // Check movement down
+        for (y = current.y + 1; y < 8; y++) {
+            temp = board.getSquare(current.x, y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+
+        // Check movement left
+        for (x = current.x - 1; x >= 0; x--) {
+            temp = board.getSquare(x, current.y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
+
+        // Check movement right
+        for (x = current.x + 1; x < 8; x++) {
+            temp = board.getSquare(x, current.y);
+            if (temp == next) {
+                return true;
+            } else if (temp.isOccupied()) {
+                break;
+            }
+        }
         return false;
     }
 }
