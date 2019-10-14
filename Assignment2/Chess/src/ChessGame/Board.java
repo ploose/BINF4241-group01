@@ -1,4 +1,4 @@
-package src.ChessGame;
+package ChessGame;
 
 import src.ChessGame.Enums.*;
 
@@ -16,7 +16,7 @@ public class Board {
     private void initBoard() {  // setting up the board
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                squares[i][j] = new Square();
+                squares[i][j] = new Square(i, j);
             }
         }
         setPieces();
