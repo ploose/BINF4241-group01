@@ -1,7 +1,5 @@
 package ChessGame;
 
-import src.ChessGame.Enums.*;
-
 public class King extends Piece{
 
     // TODO: We have to ask if we should use int or enums for the coordinates.
@@ -14,8 +12,22 @@ public class King extends Piece{
         return true;
     }
 
-    @Override
-    boolean isValidMove(Square current, Square next) {
+    // TODO: Current system allows player to land & eat own pieces, needs fixing!
+    boolean isValidMove(Board board, Square current, Square next) {
+        for(int x = current.x - 1; x < 8; x++){
+            for(int y = current.y - 1; y < 8; y++){
+                // Ignores square the king is currently on
+                if (x == current.x  && y == current.y){
+                    continue;
+                }
+                Square temp = board.getSquare(x, y);
+                if (temp == next){
+                    return true;
+                }else if (temp.isOccupied()){
+                    break;
+                }
+            }
+        }
         return false;
     }
 }
