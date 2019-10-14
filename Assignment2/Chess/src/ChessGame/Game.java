@@ -1,7 +1,5 @@
 package ChessGame;
 
-import src.ChessGame.Enums.*;
-
 class Game {
     private Board board;
     private Ui userInterface;
