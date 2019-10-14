@@ -6,6 +6,7 @@ class Bishop extends Piece {
         super(color);
     }
 
+    // TODO: Current system allows player to land & eat own pieces, needs fixing!
     boolean isValidMove(Board board, Square current, Square next) {
         int x, y;
         // Check movement up-left

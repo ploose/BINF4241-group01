@@ -11,6 +11,7 @@ class Pawn extends Piece{
         return true;
     }
 
+    // TODO: Current system allows player to land & eat own pieces, needs fixing!
     boolean isValidMove(Board board, Square current, Square next) {
         Square temp;
         if(getColor() == Color.WHITE){ // only moves up

@@ -6,6 +6,7 @@ class Rook extends Piece {
         super(color);
     }
 
+    // TODO: Current system allows player to land & eat own pieces, needs fixing!
     boolean isValidMove(Board board, Square current, Square next) {
         // Check if alignment is correct
         if (current.x != next.x && current.y != next.y){
