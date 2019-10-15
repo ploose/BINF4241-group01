@@ -33,6 +33,9 @@ public class King extends Piece{
 
     @Override
     public String toString() {
-        return "King, " + getColor();
-    }
+        if (getColor() == Color.BLACK){
+            return "BK";
+        } else {
+            return "WK";
+        }    }
 }

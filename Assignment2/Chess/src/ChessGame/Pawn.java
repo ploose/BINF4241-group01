@@ -72,6 +72,9 @@ class Pawn extends Piece{
 
     @Override
     public String toString() {
-        return "Pawn, " + getColor();
-    }
+        if (getColor() == Color.BLACK){
+            return "BP";
+        } else {
+            return "WP";
+        }    }
 }
