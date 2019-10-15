@@ -52,7 +52,7 @@ public class Board {
         return squares[row][column];
     }
 
-    void setWinner(Color winner) {
+    void setWinner(Player winner) {
         game.setWinner(winner);
     }
 

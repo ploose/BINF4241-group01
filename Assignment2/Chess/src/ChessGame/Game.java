@@ -23,7 +23,7 @@ class Game {
         }
     }
 
-    void setWinner(Color winner){
+    void setWinner(Player winner){
         isRunning = false;
         userInterface.celebrateWinner(winner);
     }

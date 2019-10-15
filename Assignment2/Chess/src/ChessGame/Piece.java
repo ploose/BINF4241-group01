@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Piece {
+abstract class Piece {
     final private Color color;
 
     Piece(Color color) {

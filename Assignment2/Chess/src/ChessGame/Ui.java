@@ -1,10 +1,10 @@
 package ChessGame;
 
-import src.ChessGame.Enums.*;
-
 class Ui {
 
-    void celebrateWinner(Color winner) {}
+    void celebrateWinner(Player winner) {
+        System.out.println("Hurrah, the player " + winner.getName() + " has won!");
+    }
 
     void printBoard(Square[][] squares) {
         for (int i = 0; i < 8; i++) {
