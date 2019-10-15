@@ -1,4 +1,4 @@
-package ChessGame;
+package src.ChessGame;
 
 class Pawn extends Piece{
     private boolean hasMoved = false;
@@ -68,5 +68,10 @@ class Pawn extends Piece{
             hasMoved = true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Pawn, " + getColor();
     }
 }

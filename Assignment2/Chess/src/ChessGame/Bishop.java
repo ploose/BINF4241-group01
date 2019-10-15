@@ -1,4 +1,4 @@
-package ChessGame;
+package src.ChessGame;
 
 class Bishop extends Piece {
 
@@ -78,5 +78,10 @@ class Bishop extends Piece {
         }
 
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Bishop, " + getColor();
     }
 }

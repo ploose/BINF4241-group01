@@ -1,4 +1,4 @@
-package ChessGame;
+package src.ChessGame;
 
 public class Board {
     final private Square[][] squares;
@@ -48,11 +48,15 @@ public class Board {
         }
     }
 
-    public Square getSquare(int row, int column){
+    Square getSquare(int row, int column){
         return squares[row][column];
     }
 
     void setWinner(Color winner) {
         game.setWinner(winner);
+    }
+
+    Square[][] getBoard() {
+        return squares;
     }
 }

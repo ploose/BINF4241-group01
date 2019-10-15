@@ -1,4 +1,4 @@
-package ChessGame;
+package src.ChessGame;
 
 class Game {
     private Board board;
@@ -9,13 +9,17 @@ class Game {
         board = new Board(this);
         userInterface = new Ui();
         isRunning = false;
+
+        run();
     }
 
     private void run() {
         isRunning = true;
 
         while (isRunning) {
-            //TODO
+            //
+            userInterface.printBoard(board.getBoard());
+            isRunning = false;
         }
     }
 

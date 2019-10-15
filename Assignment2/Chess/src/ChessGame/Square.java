@@ -1,14 +1,13 @@
-package ChessGame;
+package src.ChessGame;
 
 class Square {
     int x, y;
+    private Piece currentPiece;
 
     Square(int x, int y){
         this.x = x;
         this.y = y;
     }
-
-    private Piece currentPiece;
 
     void addPiece(Piece piece) {
         currentPiece = piece;
@@ -23,4 +22,13 @@ class Square {
         currentPiece = null;
         return tmp;
     }
+
+    String printPiece() {
+        if (currentPiece == null) {
+            return "";
+        } else {
+            return currentPiece.toString();
+        }
+    }
+
 }

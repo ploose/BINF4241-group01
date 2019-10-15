@@ -1,4 +1,4 @@
-package ChessGame;
+package src.ChessGame;
 
 class Enums {
     enum Row { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT }

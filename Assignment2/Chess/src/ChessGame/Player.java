@@ -1,4 +1,4 @@
-package ChessGame;
+package src.ChessGame;
 
 public class Player {
 
