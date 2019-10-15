@@ -1,4 +1,4 @@
-package src.ChessGame;
+package ChessGame;
 
 class Piece {
     final private Color color;

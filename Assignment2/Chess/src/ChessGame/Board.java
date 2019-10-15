@@ -1,4 +1,4 @@
-package src.ChessGame;
+package ChessGame;
 
 public class Board {
     final private Square[][] squares;

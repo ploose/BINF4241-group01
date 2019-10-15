@@ -1,4 +1,4 @@
-package src.ChessGame;
+package ChessGame;
 
 class Square {
     int x, y;

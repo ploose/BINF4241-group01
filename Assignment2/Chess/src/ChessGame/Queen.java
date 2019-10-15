@@ -1,4 +1,4 @@
-package src.ChessGame;
+package ChessGame;
 
 class Queen extends Piece {
 

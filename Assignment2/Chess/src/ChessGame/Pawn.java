@@ -1,4 +1,4 @@
-package src.ChessGame;
+package ChessGame;
 
 class Pawn extends Piece{
     private boolean hasMoved = false;
