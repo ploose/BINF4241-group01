@@ -1,10 +1,12 @@
 package ChessGame;
 
-class Rook implements MovementStrategy {
+class Rook implements MovementStrategy, IRook {
 
     Color color = null;
     private boolean hasMoved;
+    public void move(){
 
+    }
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         // Check if alignment is correct

@@ -9,10 +9,24 @@ public interface MovementStrategy {
 }
 
 // specialized behaviour for specific pieces
-interface IPawn extends MovementStrategy{
+    interface IPawn extends MovementStrategy {
     public boolean checkPromote();
 }
+    interface IKing extends MovementStrategy{
+        public boolean isCheckMate();
+    }
 
-interface IKing extends MovementStrategy{
-    public boolean isCheckMate();
-}
+    interface IQueen extends MovementStrategy{
+        public void move();
+    }
+    interface IBishop extends MovementStrategy{
+        public void move();
+    }
+    interface IKnight extends MovementStrategy{
+        public void move();
+    }
+    interface IRook extends MovementStrategy{
+        public void move();
+    }
+
+

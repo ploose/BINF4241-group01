@@ -4,7 +4,9 @@ package ChessGame;
 
     // TODO: We have to ask if we should use int or enums for the coordinates.
     //  Probably enums would be shit. Enums are shit
+    public void move(){
 
+    }
 
         Color color = null;
         private boolean hasMoved;

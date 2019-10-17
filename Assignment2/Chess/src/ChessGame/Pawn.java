@@ -4,6 +4,9 @@ class Pawn implements MovementStrategy, IPawn{
 
     Color color = null;
     private boolean hasMoved;
+    public void move(){
+
+    }
     public boolean checkPromote(){
         return true;
     }

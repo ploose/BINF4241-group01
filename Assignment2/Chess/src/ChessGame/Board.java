@@ -21,7 +21,7 @@ public class Board {
     }
 
     private void setPieces() {
-        squares[0][0].addPiece(new Rook(Color.BLACK));
+        squares[0][0].addPiece(new Rook(Color.BLACK, new Rook()));
         squares[7][0].addPiece(new Rook(Color.WHITE));
         squares[0][7].addPiece(new Rook(Color.BLACK));
         squares[7][7].addPiece(new Rook(Color.WHITE));
