@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Pawn extends Piece{
+class Pawn implements MovementStrategy, IPawn{
     private boolean hasMoved = false;
 
     Pawn(Color color) {
@@ -11,8 +11,11 @@ class Pawn extends Piece{
         return true;
     }
 
+
+
+
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
-    boolean isValidMove(Board board, Square current, Square next) {
+    public boolean isValidMove(Board board, Square current, Square next) {
         Square temp;
         if(getColor() == Color.WHITE){ // only moves up
             // capture
@@ -68,6 +71,10 @@ class Pawn extends Piece{
             hasMoved = true;
         }
         return false;
+    }
+
+    public boolean canBePromoted(){
+        return True
     }
 
     @Override
