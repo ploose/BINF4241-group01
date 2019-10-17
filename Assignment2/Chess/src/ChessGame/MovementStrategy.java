@@ -1,6 +1,8 @@
 package ChessGame;
 
 // Strategy every piece has to implement
+
+
 public interface MovementStrategy {
 
     public boolean isValidMove(Board board, Square current, Square next);
@@ -28,5 +30,6 @@ public interface MovementStrategy {
     interface IRook extends MovementStrategy{
         public void move();
     }
+
 
 

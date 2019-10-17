@@ -5,9 +5,16 @@ class Knight implements MovementStrategy, IKnight{
     Color color = null;
     private boolean hasMoved;
 
+
     public void move(){
 
     }
+
+    Knight(Color color){
+        this.color = color;
+    }
+
+
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         Square temp;

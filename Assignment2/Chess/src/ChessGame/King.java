@@ -15,6 +15,10 @@ package ChessGame;
         return true;
     }
 
+    King(Color color){
+            this.color = color;
+    }
+
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         for(int x = current.x - 1; x < 8; x++){

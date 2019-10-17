@@ -11,6 +11,10 @@ class Pawn implements MovementStrategy, IPawn{
         return true;
     }
 
+    Pawn(Color color){
+        this.color = color;
+    }
+
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         Square temp;

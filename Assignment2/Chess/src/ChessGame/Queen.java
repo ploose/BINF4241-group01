@@ -7,6 +7,10 @@ class Queen implements MovementStrategy, IQueen {
 
     public void move(){
 
+
+    Queen(Color color){
+        this.color = color;
+
     }
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {

@@ -20,8 +20,15 @@ public class Board {
         setPieces();
     }
 
+    // To be optimized! -PL
     private void setPieces() {
+
         squares[0][0].addPiece(new Rook(Color.BLACK, new Rook()));
+
+
+        whitePlayerList = PiecePot.getWhitePieces;
+        squares[0][0].addPiece(new Rook(Color.BLACK));
+
         squares[7][0].addPiece(new Rook(Color.WHITE));
         squares[0][7].addPiece(new Rook(Color.BLACK));
         squares[7][7].addPiece(new Rook(Color.WHITE));
