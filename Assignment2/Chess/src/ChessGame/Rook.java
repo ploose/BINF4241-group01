@@ -1,13 +1,12 @@
 package ChessGame;
 
-class Rook extends Piece {
+class Rook implements MovementStrategy {
 
-    Rook(Color color) {
-        super(color);
-    }
+    Color color = null;
+    private boolean hasMoved;
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
-    boolean isValidMove(Board board, Square current, Square next) {
+    public boolean isValidMove(Board board, Square current, Square next) {
         // Check if alignment is correct
         if (current.x != next.x && current.y != next.y){
             return false;
@@ -55,9 +54,6 @@ class Rook extends Piece {
 
     @Override
     public String toString() {
-        if (getColor() == Color.BLACK){
-            return "BT";
-        } else {
-            return "WT";
-        }    }
+        return "Rook, " + color;
+    }
 }

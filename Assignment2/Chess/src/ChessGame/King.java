@@ -1,19 +1,20 @@
 package ChessGame;
 
-public class King extends Piece{
+    class King implements MovementStrategy, IKing{
 
     // TODO: We have to ask if we should use int or enums for the coordinates.
     //  Probably enums would be shit. Enums are shit
-    King(Color color){
-        super(color);
-    }
 
-    public boolean CanBeCaptured(){
+
+        Color color = null;
+        private boolean hasMoved;
+
+        public boolean CanBeCaptured(){
         return true;
     }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
-    boolean isValidMove(Board board, Square current, Square next) {
+    public boolean isValidMove(Board board, Square current, Square next) {
         for(int x = current.x - 1; x < 8; x++){
             for(int y = current.y - 1; y < 8; y++){
                 // Ignores square the king is currently on
@@ -31,11 +32,15 @@ public class King extends Piece{
         return false;
     }
 
-    @Override
+    public boolean isCheckMate() {
+        return false;
+        }
+/*
+        @Override
     public String toString() {
-        if (getColor() == Color.BLACK){
-            return "BK";
-        } else {
-            return "WK";
-        }    }
+        return "King, " + getColor();
+    }
+*/
 }
+
+

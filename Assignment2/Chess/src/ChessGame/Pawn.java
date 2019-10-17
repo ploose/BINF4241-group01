@@ -1,23 +1,17 @@
 package ChessGame;
 
 class Pawn implements MovementStrategy, IPawn{
-    private boolean hasMoved = false;
 
-    Pawn(Color color) {
-        super(color);
-    }
-
-    public boolean CheckPromote(){
+    Color color = null;
+    private boolean hasMoved;
+    public boolean checkPromote(){
         return true;
     }
-
-
-
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         Square temp;
-        if(getColor() == Color.WHITE){ // only moves up
+        if(this.color == Color.WHITE){ // only moves up
             // capture
             temp = board.getSquare(current.x - 1, current.y - 1);
             if (temp == next && temp.isOccupied()){
@@ -41,7 +35,7 @@ class Pawn implements MovementStrategy, IPawn{
                 }
             }
 
-        }else if (getColor() == Color.BLACK){ // only moves down
+        }else if (this.color == Color.BLACK){ // only moves down
             // capture
             temp = board.getSquare(current.x - 1, current.y + 1);
             if (temp == next && temp.isOccupied()){
@@ -74,14 +68,13 @@ class Pawn implements MovementStrategy, IPawn{
     }
 
     public boolean canBePromoted(){
-        return True
+        return true;
     }
-
+/*
     @Override
     public String toString() {
-        if (getColor() == Color.BLACK){
-            return "BP";
-        } else {
-            return "WP";
-        }    }
+        return "Pawn, " + getColor();
+    }
+
+ */
 }
