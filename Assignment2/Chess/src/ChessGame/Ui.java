@@ -9,4 +9,8 @@ class Ui {
     void printBoard(String board) {
         System.out.print(board);
     }
+
+    void printScore(String score) {
+        System.out.print(score);
+    }
 }

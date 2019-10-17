@@ -3,12 +3,17 @@ package ChessGame;
 class Game {
     private Board board;
     private Ui userInterface;
+    private Player currentPlayer, black, white;
     private boolean isRunning;
 
     Game(){
         board = new Board(this);
         userInterface = new Ui();
         isRunning = false;
+
+        getPlayers();
+
+        currentPlayer = black;
 
         run();
     }
@@ -21,6 +26,7 @@ class Game {
         while (isRunning) {
             //
             userInterface.printBoard(board.toString());
+            userInterface.printScore(currentPlayer.lostPieces());
             isRunning = false;
 
             while (!isValidMove) {
@@ -36,9 +42,17 @@ class Game {
 
     private void checkCheck() {}
 
-    private void checkCheckMate() {}
+    private void checkCheckMate() {
+        if (black.isChecked() || white.isChecked()) {
+
+        }
+    }
 
     private void move(Square currentSpot, Square newSpot) {   // Gets input from interface
+
+    }
+
+    private void getPlayers() {
 
     }
  /* Might not be needed
