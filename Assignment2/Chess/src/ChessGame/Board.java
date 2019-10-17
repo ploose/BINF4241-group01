@@ -21,6 +21,8 @@ public class Board {
     }
 
     private void setPieces() {
+
+        whitePlayerList = PiecePot.getWhitePieces;
         squares[0][0].addPiece(new Rook(Color.BLACK));
         squares[7][0].addPiece(new Rook(Color.WHITE));
         squares[0][7].addPiece(new Rook(Color.BLACK));

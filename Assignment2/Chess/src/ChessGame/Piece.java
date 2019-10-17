@@ -1,12 +1,16 @@
+/* Might not be necessary
+
 package ChessGame;
 
     class Piece {
 
-        final private Color color;
+
         private boolean hasMoved;
 
-        Piece(Color color){
-            this.color = color;
+            Piece(Color colorFromClient, MovementStrategy strategy, MovementStrategy IPawn){
+            final Color color = colorFromClient;
+
         }
 }
+*/
 

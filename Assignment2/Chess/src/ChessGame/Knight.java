@@ -5,6 +5,10 @@ class Knight implements MovementStrategy{
     Color color = null;
     private boolean hasMoved;
 
+    Knight(Color color){
+        this.color = color;
+    }
+
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         Square temp;

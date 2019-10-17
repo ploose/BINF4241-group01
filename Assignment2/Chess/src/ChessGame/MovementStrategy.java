@@ -16,3 +16,5 @@ interface IPawn extends MovementStrategy{
 interface IKing extends MovementStrategy{
     public boolean isCheckMate();
 }
+
+

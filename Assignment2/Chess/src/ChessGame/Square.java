@@ -2,23 +2,23 @@ package ChessGame;
 
 class Square {
     int x, y;
-    private Piece currentPiece;
+    private Object currentPiece;
 
     Square(int x, int y){
         this.x = x;
         this.y = y;
     }
 
-    void addPiece(Piece piece) {
-        currentPiece = piece;
+    void addPiece(Object object) {
+        currentPiece = object;
     }
 
     public boolean isOccupied(){
         return currentPiece != null;
     }
 
-    Piece removePiece() {
-        Piece tmp = currentPiece;
+    Object removePiece() {
+        Object tmp = currentPiece;
         currentPiece = null;
         return tmp;
     }
