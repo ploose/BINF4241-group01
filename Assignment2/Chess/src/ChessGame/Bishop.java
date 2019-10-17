@@ -1,13 +1,12 @@
 package ChessGame;
 
-class Bishop extends Piece {
+class Bishop implements MovementStrategy {
 
-    Bishop(Color color) {
-        super(color);
-    }
+    Color color = null;
+    private boolean hasMoved;
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
-    boolean isValidMove(Board board, Square current, Square next) {
+    public boolean isValidMove(Board board, Square current, Square next) {
         int x, y;
         // Check movement up-left
         x = current.x;
@@ -79,9 +78,11 @@ class Bishop extends Piece {
 
         return false;
     }
-
+/*
     @Override
     public String toString() {
         return "Bishop, " + getColor();
     }
+
+ */
 }

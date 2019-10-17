@@ -1,13 +1,11 @@
 package ChessGame;
 
-class Queen extends Piece {
+class Queen implements MovementStrategy {
 
-    Queen(Color color) {
-        super(color);
-    }
-
+    Color color = null;
+    private boolean hasMoved;
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
-    boolean isValidMove(Board board, Square current, Square next) {
+    public boolean isValidMove(Board board, Square current, Square next) {
         int x, y;
         Square temp;
         // Check movement up-left
@@ -118,9 +116,11 @@ class Queen extends Piece {
         }
         return false;
     }
-
+/*
     @Override
     public String toString() {
         return "Queen, " + getColor();
     }
+
+ */
 }

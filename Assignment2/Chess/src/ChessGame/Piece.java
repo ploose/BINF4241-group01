@@ -1,13 +1,12 @@
 package ChessGame;
 
-abstract class Piece {
-    final private Color color;
+    class Piece {
 
-    Piece(Color color) {
-        this.color = color;
-    }
+        final private Color color;
+        private boolean hasMoved;
 
-    Color getColor() {
-        return color;
-    }
+        Piece(Color color){
+            this.color = color;
+        }
 }
+
