@@ -85,7 +85,11 @@ class Bishop implements MovementStrategy, IBishop {
 /*
     @Override
     public String toString() {
-        return "Bishop, " + getColor();
+        if (getColor() == Color.BLACK){
+            return "BB";
+        } else {
+            return "WB";
+        }
     }
 
  */

@@ -3,12 +3,17 @@ package ChessGame;
 class Game {
     private Board board;
     private Ui userInterface;
+    private Player currentPlayer, black, white;
     private boolean isRunning;
 
-    Game(){
+    Game() {
         board = new Board(this);
         userInterface = new Ui();
         isRunning = false;
+
+        getPlayers();
+
+        currentPlayer = black;
 
         run();
     }
@@ -16,27 +21,39 @@ class Game {
     private void run() {
         isRunning = true;
 
+        boolean isValidMove = false;
+
         while (isRunning) {
             //
-            userInterface.printBoard(board.getBoard());
+            userInterface.printBoard(board.toString());
+            userInterface.printScore(currentPlayer.lostPieces());
             isRunning = false;
+
+            while (!isValidMove) {
+                isValidMove = board.move();
+            }
         }
     }
 
-    void setWinner(Player winner){
+    void setWinner(Player winner) {
         isRunning = false;
         userInterface.celebrateWinner(winner);
     }
 
-    private void checkCheck() {}
+    private void checkCheck() {
+    }
 
-    private void checkCheckMate() {}
+    private void checkCheckMate() {
+        if (black.isChecked() || white.isChecked()) {
+
+        }
+    }
 
     private void move(Square currentSpot, Square newSpot) {   // Gets input from interface
 
     }
- /* Might not be needed
-    private void initQueue() {}
- */
-    private void getCurrentPlayer() {}
+
+    private void getPlayers() {
+
+    }
 }

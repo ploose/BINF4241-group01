@@ -13,7 +13,7 @@ class Square {
         currentPiece = piece;
     }
 
-    public boolean isOccupied(){
+    boolean isOccupied(){
         return currentPiece != null;
     }
 
@@ -25,7 +25,7 @@ class Square {
 
     String printPiece() {
         if (currentPiece == null) {
-            return "";
+            return "  ";
         } else {
             return currentPiece.toString();
         }

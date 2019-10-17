@@ -6,13 +6,11 @@ class Ui {
         System.out.println("Hurrah, the player " + winner.getName() + " has won!");
     }
 
-    void printBoard(Square[][] squares) {
-        for (int i = 0; i < 8; i++) {
-            System.out.print(i);
-            for(int j = 0; j < 8; j++) {
-                System.out.print("[" + squares[i][j].printPiece() + "]");
-            }
-            System.out.println();
-        }
+    void printBoard(String board) {
+        System.out.print(board);
+    }
+
+    void printScore(String score) {
+        System.out.print(score);
     }
 }
