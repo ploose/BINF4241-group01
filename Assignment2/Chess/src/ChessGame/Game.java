@@ -6,7 +6,7 @@ class Game {
     private Player currentPlayer, black, white;
     private boolean isRunning;
 
-    Game(){
+    Game() {
         board = new Board(this);
         userInterface = new Ui();
         isRunning = false;
@@ -35,12 +35,13 @@ class Game {
         }
     }
 
-    void setWinner(Player winner){
+    void setWinner(Player winner) {
         isRunning = false;
         userInterface.celebrateWinner(winner);
     }
 
-    private void checkCheck() {}
+    private void checkCheck() {
+    }
 
     private void checkCheckMate() {
         if (black.isChecked() || white.isChecked()) {
@@ -55,8 +56,4 @@ class Game {
     private void getPlayers() {
 
     }
- /* Might not be needed
-    private void initQueue() {}
- */
-    private void getCurrentPlayer() {}
 }
