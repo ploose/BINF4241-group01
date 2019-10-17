@@ -20,7 +20,7 @@ class Game {
 
         while (isRunning) {
             //
-            userInterface.printBoard(board.getBoard());
+            userInterface.printBoard(board.toString());
             isRunning = false;
 
             while (!isValidMove) {

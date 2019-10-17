@@ -56,10 +56,6 @@ public class Board {
         game.setWinner(winner);
     }
 
-    Square[][] getBoard() {
-        return squares;
-    }
-
     boolean move() {    //TODO
        return true;
     }
@@ -67,7 +63,7 @@ public class Board {
     public String toString() {
         StringBuilder board = new StringBuilder();
 
-        Enums.Column[] values = Enums.Column.values();
+        Column[] values = Column.values();
 
         for (int i = 0; i < 8; i++) {
             board.append(values[i]);
@@ -76,10 +72,10 @@ public class Board {
             for(int j = 0; j < 8; j++) {
                 board.append("[").append(squares[i][j].printPiece()).append("]");
             }
-            board.append("\r");
+            board.append("\n");
         }
 
-        board.append("   1   2   3   4   5   6   7   8");
+        board.append("    1   2   3   4   5   6   7   8");
 
         return board.toString();
     }
