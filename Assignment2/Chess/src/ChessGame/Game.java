@@ -16,10 +16,16 @@ class Game {
     private void run() {
         isRunning = true;
 
+        boolean isValidMove = false;
+
         while (isRunning) {
             //
             userInterface.printBoard(board.getBoard());
             isRunning = false;
+
+            while (!isValidMove) {
+                isValidMove = board.move();
+            }
         }
     }
 

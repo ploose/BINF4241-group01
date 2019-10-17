@@ -59,4 +59,28 @@ public class Board {
     Square[][] getBoard() {
         return squares;
     }
+
+    boolean move() {    //TODO
+       return true;
+    }
+
+    public String toString() {
+        StringBuilder board = new StringBuilder();
+
+        Enums.Column[] values = Enums.Column.values();
+
+        for (int i = 0; i < 8; i++) {
+            board.append(values[i]);
+            board.append("  ");
+
+            for(int j = 0; j < 8; j++) {
+                board.append("[").append(squares[i][j].printPiece()).append("]");
+            }
+            board.append("\r");
+        }
+
+        board.append("   1   2   3   4   5   6   7   8");
+
+        return board.toString();
+    }
 }
