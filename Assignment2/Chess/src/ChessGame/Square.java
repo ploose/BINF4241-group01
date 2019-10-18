@@ -13,7 +13,8 @@ class Square {
         currentPiece = object;
     }
 
-    public boolean isOccupied(){
+    // TODO: Does this work for squares "outside" the board?
+    boolean isOccupied(){
         return currentPiece != null;
     }
 
@@ -25,7 +26,7 @@ class Square {
 
     String printPiece() {
         if (currentPiece == null) {
-            return "";
+            return "  ";
         } else {
             return currentPiece.toString();
         }

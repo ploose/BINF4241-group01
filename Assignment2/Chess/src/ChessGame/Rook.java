@@ -1,13 +1,23 @@
 package ChessGame;
 
-class Rook implements MovementStrategy {
+import java.util.ArrayList;
+
+class Rook extends Piece implements MovementStrategy, IRook {
 
     Color color = null;
     private boolean hasMoved;
+    ArrayList<Square> possibleMoveSquares;
+
+
+    public void move(){
+
+
+    }
 
     Rook(Color color){
         this.color = color;
     }
+
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
@@ -57,9 +67,38 @@ class Rook implements MovementStrategy {
     }
     //needs to be implemented for Checkmate
     public boolean isBlocking(Square blockedSquare, Square targetSquare){
+        return false;
+    }
+    public ArrayList<Square> getMoveSquares(Board board, Square current){
+
+        int x;
+        int y;
+        Square temp;
+
+        // Check movement up
+        y = current.y - 1;
+        temp = board.getSquare(current.x, y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        // Check movement down
+        y = current.y + 1;
+        temp = board.getSquare(current.x, y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        // Check movement left
+        x = current.x - 1;
+        temp = board.getSquare(x, current.y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        // Check movement right
+        x = current.x + 1;
+        temp = board.getSquare(x, current.y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        return possibleMoveSquares;
 
     }
-/*
+    /*
     @Override
     public String toString() {
         return "Rook, " + color;

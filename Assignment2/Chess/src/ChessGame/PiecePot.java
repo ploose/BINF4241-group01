@@ -110,10 +110,6 @@ public class PiecePot {
         return this.whitePlayerListOffBoard.get(i);
     }
 
-
-
-
-
     public int getWhiteOnBoardCounter(){
         int tmp = this.whiteOnBoard;
         return tmp;
