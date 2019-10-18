@@ -9,7 +9,7 @@ public class CheckmateChecker {
     Board board;
     Color color;
     PiecePot piecePot;
-    Object piece;
+    Piece piece;
 
 // TODO:      - Can i move out of mate?
 //            - Can I block mate?
@@ -20,7 +20,7 @@ public class CheckmateChecker {
         boolean isChecked = false;
 
         if (color == Color.WHITE){
-            for (Object piece : piecePot.whitePlayerList){
+            for (piece : piecePot.whitePlayerList){
                 for (Square square : piece.getAttackedSquares){
                     if (square == kingSquare){
                         isChecked = true;
@@ -29,8 +29,8 @@ public class CheckmateChecker {
             }
         }
         else{
-            for (Object piece : piecePot.blackPlayerList){
-                for (Square square : piece.getAttackedSquares){
+            for (piece : piecePot.blackPlayerList){
+                for (Square square : piece.getMoveSquares()){
                     if (square == kingSquare){
                         isChecked = true;
                     }
@@ -42,15 +42,14 @@ public class CheckmateChecker {
 
         }
      public boolean isCheckMate(PiecePot piecePot, Square kingSquare, Color color, ArrayList<Square> attackedSquares, King king){
-        boolean isCheckMate;
-        if (!(isChecked(piecePot, kingSquare, color))){isCheckMate = false;}
 
-     else{
-         Object piece;
+        if (!(isChecked(piecePot, kingSquare, color))){return false;}
+
+        piece;
          //requirements of which at least one has to be true for the king to not be checkmated
-         boolean canMoveOut;
-         boolean canBlock;
-         boolean canTake;
+         boolean canMoveOut = false;
+         boolean canBlock = false;
+         boolean canTake =false;
          ArrayList<Square> safeSquares = king.getMoveSquares();
          Object attacker = null;
 
@@ -58,7 +57,7 @@ public class CheckmateChecker {
          //move out
             if(color == Color.WHITE) {
                 // TODO: Implement getCurrentSquare
-                if (piecePot.getWhiteOnBoardCounter() == 1) { safeSquares.add(king.getCurrentSquare)}
+                if (piecePot.getWhiteOnBoardCounter() == 1) { safeSquares.add(king.getCurrentSquare);}
                 int whiteOnBoard = piecePot.getWhiteOnBoardCounter();
                 for(int i = 0; i < whiteOnBoard; i++){
                     piece = piecePot.getWhiteOnBoard(i);
@@ -89,21 +88,23 @@ public class CheckmateChecker {
 
 
                 //canEat
-                if (king.getMoveSquares().contains(attacker.getCurrentSquare())){
+                if (king.getMoveSquares(board, kingSquare).contains(attacker.getMoveSquares())){
                     canTake = true;
                 }
             }
 
             //The same process for the black pieces
+            // TODO: Once its done for the white pieces, just copy paste and change variables
             else{
                 
 
             }
 
-         //take attacker
+            //Final check
+            if (canMoveOut || canBlock || canTake){ return false;}
+            else{return true;}
 
-         //Block attacker
-        }
+
 
 
     }

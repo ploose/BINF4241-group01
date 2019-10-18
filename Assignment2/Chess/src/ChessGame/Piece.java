@@ -1,10 +1,10 @@
-/* Might not be necessary
+
 
 package ChessGame;
 
     class Piece {
 
-
+/*
         private boolean hasMoved;
         MovementStrategy strategy;
         MovementStrategy
@@ -19,7 +19,7 @@ package ChessGame;
             final Color color = colorFromClient;
 
 
-        }
+        } */
 }
-*/
+
 

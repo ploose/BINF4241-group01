@@ -1,9 +1,14 @@
 package ChessGame;
 
-class Rook implements MovementStrategy, IRook {
+import java.util.ArrayList;
+
+class Rook extends Piece implements MovementStrategy, IRook {
 
     Color color = null;
     private boolean hasMoved;
+    ArrayList<Square> possibleMoveSquares;
+
+
     public void move(){
 
 
@@ -62,9 +67,38 @@ class Rook implements MovementStrategy, IRook {
     }
     //needs to be implemented for Checkmate
     public boolean isBlocking(Square blockedSquare, Square targetSquare){
+        return false;
+    }
+    public ArrayList<Square> getMoveSquares(Board board, Square current){
+
+        int x;
+        int y;
+        Square temp;
+
+        // Check movement up
+        y = current.y - 1;
+        temp = board.getSquare(current.x, y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        // Check movement down
+        y = current.y + 1;
+        temp = board.getSquare(current.x, y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        // Check movement left
+        x = current.x - 1;
+        temp = board.getSquare(x, current.y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        // Check movement right
+        x = current.x + 1;
+        temp = board.getSquare(x, current.y);
+        if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+
+        return possibleMoveSquares;
 
     }
-/*
+    /*
     @Override
     public String toString() {
         return "Rook, " + color;

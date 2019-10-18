@@ -13,6 +13,7 @@ class Square {
         currentPiece = object;
     }
 
+    // TODO: Does this work for squares "outside" the board?
     boolean isOccupied(){
         return currentPiece != null;
     }

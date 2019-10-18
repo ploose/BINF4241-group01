@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public interface MovementStrategy {
 
+
     public boolean isValidMove(Board board, Square current, Square next);
 
     // We need this to check for potential checkmate
-    public ArrayList<Square> getMoveSquares();
+    public ArrayList<Square> getMoveSquares(Board board, Square current);
 
 
 }
@@ -40,7 +41,6 @@ public interface MovementStrategy {
 interface IBlockedPath {
 
     public boolean isBlocking(Square blockedSquare, Square targetSquare);
-
 }
 
 
