@@ -1,16 +1,18 @@
 package ChessGame;
 
-class Queen implements MovementStrategy, IQueen {
+class Queen implements MovementStrategy {
 
     Color color = null;
     private boolean hasMoved;
 
-    public void move(){
+    public void move() {
+
+    }
+
 
 
     Queen(Color color){
         this.color = color;
-
     }
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
@@ -123,6 +125,12 @@ class Queen implements MovementStrategy, IQueen {
             }
         }
         return false;
+    }
+
+    //needs to be implemented for Checkmate
+    public boolean isBlocking(Square blockedSquare, Square targetSquare){
+        if
+
     }
 /*
     @Override

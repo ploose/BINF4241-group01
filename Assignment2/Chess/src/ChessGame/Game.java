@@ -6,8 +6,10 @@ class Game {
     private Player currentPlayer, black, white;
     private boolean isRunning;
 
+
     Game() {
-        board = new Board(this);
+        board = new Board(this, new PiecePot());
+
         userInterface = new Ui();
         isRunning = false;
 

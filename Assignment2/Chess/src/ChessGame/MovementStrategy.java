@@ -1,11 +1,16 @@
 package ChessGame;
 
+import java.util.ArrayList;
+
 // Strategy every piece has to implement
 
 
 public interface MovementStrategy {
 
     public boolean isValidMove(Board board, Square current, Square next);
+
+    // We need this to check for potential checkmate
+    public ArrayList<Square> getMoveSquares();
 
 
 }
@@ -31,5 +36,11 @@ public interface MovementStrategy {
         public void move();
     }
 
+
+interface IBlockedPath {
+
+    public boolean isBlocking(Square blockedSquare, Square targetSquare);
+
+}
 
 
