@@ -5,14 +5,12 @@ class Queen implements MovementStrategy {
     Color color = null;
     private boolean hasMoved;
 
-<<<<<<< Updated upstream
-=======
     public void move() {
 
     }
 
 
->>>>>>> Stashed changes
+
     Queen(Color color){
         this.color = color;
     }
@@ -127,6 +125,12 @@ class Queen implements MovementStrategy {
             }
         }
         return false;
+    }
+
+    //needs to be implemented for Checkmate
+    public boolean isBlocking(Square blockedSquare, Square targetSquare){
+        if
+
     }
 /*
     @Override

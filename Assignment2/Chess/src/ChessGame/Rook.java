@@ -55,9 +55,15 @@ class Rook implements MovementStrategy {
         }
         return false;
     }
+    //needs to be implemented for Checkmate
+    public boolean isBlocking(Square blockedSquare, Square targetSquare){
 
+    }
+/*
     @Override
     public String toString() {
         return "Rook, " + color;
     }
+    */
+
 }
