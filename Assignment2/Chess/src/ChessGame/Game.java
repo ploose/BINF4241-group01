@@ -5,8 +5,13 @@ class Game {
     private Ui userInterface;
     private boolean isRunning;
 
+<<<<<<< Updated upstream
     Game(){
         board = new Board(this);
+=======
+    Game() {
+        board = new Board(this, new PiecePot());
+>>>>>>> Stashed changes
         userInterface = new Ui();
         isRunning = false;
 

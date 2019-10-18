@@ -5,6 +5,14 @@ class Queen implements MovementStrategy {
     Color color = null;
     private boolean hasMoved;
 
+<<<<<<< Updated upstream
+=======
+    public void move() {
+
+    }
+
+
+>>>>>>> Stashed changes
     Queen(Color color){
         this.color = color;
     }
