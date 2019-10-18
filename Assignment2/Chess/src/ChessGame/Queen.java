@@ -5,16 +5,21 @@ import java.util.ArrayList;
 class Queen extends Piece implements MovementStrategy {
 
     Color color = null;
-    private boolean hasMoved;
+    Square current;
     private ArrayList<Square> possibleMoveSquares;
+
+
+
     public void move() {
 
     }
 
 
 
-    Queen(Color color){
+    Queen(Color color, int x, int y, Board board){
         this.color = color;
+        this.current = board.getSquare(x,y);
+
     }
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
@@ -131,7 +136,9 @@ class Queen extends Piece implements MovementStrategy {
 
 
     // TODO: Every piece has to know its current location and the board
-    public ArrayList<Square> getMoveSquares(Board board, Square current){
+    public ArrayList<Square> getMoveSquares(Board board){
+
+        Square current = this.current;
         int x, y;
         Square temp;
         // Check movement up-left

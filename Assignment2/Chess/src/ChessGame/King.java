@@ -6,18 +6,25 @@ class King extends Piece implements MovementStrategy, IKing{
 
     // TODO: We have to ask if we should use int or enums for the coordinates.
     //  Probably enums would be shit. Enums are shit
+
+        ArrayList<Square> possibleMoveSquares;
+        Color color = null;
+        Square current;
+
+
+
+    King(Color color, int x, int y, Board board){
+            this.color = color;
+            this.current = board.getSquare(x,y);
+    }
+
+    //TODO for all pieces
     public void move(){
 
     }
-        ArrayList<Square> possibleMoveSquares;
-        Color color = null;
-        private boolean hasMoved;
-        public boolean CanBeCaptured(){
+    // TODO !
+    public boolean CanBeCaptured(){
         return true;
-    }
-
-    King(Color color){
-            this.color = color;
     }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
@@ -43,7 +50,9 @@ class King extends Piece implements MovementStrategy, IKing{
         return false;
         }
 
-    public ArrayList<Square> getMoveSquares(Board board, Square current){
+    public ArrayList<Square> getMoveSquares(Board board){
+
+        Square current = this.current;
         int x, y;
         Square temp;
         // Check movement up

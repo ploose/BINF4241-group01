@@ -5,16 +5,21 @@ import java.util.ArrayList;
 class Knight extends Piece implements MovementStrategy, IKnight {
 
     Color color = null;
-    private boolean hasMoved;
+    Square current;
     ArrayList<Square> possibleMoveSquares;
+
+
 
     public void move() {
 
     }
 
-    Knight(Color color) {
+    Knight(Color color, int x, int y, Board board) {
         this.color = color;
+        this.current = board.getSquare(x,y);
+
     }
+
 
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
@@ -81,9 +86,10 @@ class Knight extends Piece implements MovementStrategy, IKnight {
     }
 
 
-    public ArrayList<Square> getMoveSquares(Board board, Square current){
+    public ArrayList<Square> getMoveSquares(Board board){
 
     Square temp;
+    Square current = this.current;
     int x,y;
 
     // up-right

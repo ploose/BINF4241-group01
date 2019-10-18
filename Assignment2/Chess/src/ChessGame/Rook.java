@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Rook extends Piece implements MovementStrategy, IRook {
 
     Color color = null;
-    private boolean hasMoved;
+    Square current;
     ArrayList<Square> possibleMoveSquares;
 
 
@@ -14,8 +14,10 @@ class Rook extends Piece implements MovementStrategy, IRook {
 
     }
 
-    Rook(Color color){
+    Rook(Color color, int x, int y, Board board){
         this.color = color;
+        this.current = board.getSquare(x,y);
+
     }
 
 
@@ -69,8 +71,9 @@ class Rook extends Piece implements MovementStrategy, IRook {
     public boolean isBlocking(Square blockedSquare, Square targetSquare){
         return false;
     }
-    public ArrayList<Square> getMoveSquares(Board board, Square current){
+    public ArrayList<Square> getMoveSquares(Board board){
 
+        Square current = this.current;
         int x;
         int y;
         Square temp;

@@ -2,7 +2,13 @@
 
 package ChessGame;
 
-    class Piece {
+import java.util.ArrayList;
+
+abstract class Piece {
+
+        public abstract ArrayList<Square> getMoveSquares(Board board);
+        // public abstract Square getCurrentSquare();
+        // public abstract ArrayList<Square> getAttackedSquares();
 
 /*
         private boolean hasMoved;

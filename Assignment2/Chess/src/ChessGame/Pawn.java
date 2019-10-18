@@ -7,16 +7,23 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
     Color color = null;
     private boolean hasMoved;
     ArrayList<Square> possibleMoveSquares;
+    Square current;
+
+    Pawn(Color color, int x, int y, Board board) {
+        this.color = color;
+        this.current = board.getSquare(x,y);
+
+    }
+
+    public boolean CanBeCaptured(){
+        return true;
+    }
     public void move() {
 
     }
 
     public boolean checkPromote() {
         return true;
-    }
-
-    Pawn(Color color) {
-        this.color = color;
     }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
@@ -84,8 +91,9 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
 
     //TODO: Important: seperate the movesquares from the attacksquares for the pawn!
 
-    public ArrayList<Square> getMoveSquares(Board board, Square current){
+    public ArrayList<Square> getMoveSquares(Board board){
 
+        Square current = this.current;
         Square temp;
         int x,y;
         if(this.color == Color.WHITE)

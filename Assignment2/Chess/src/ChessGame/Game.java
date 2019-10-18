@@ -8,7 +8,7 @@ class Game {
 
 
     Game() {
-        board = new Board(this, new PiecePot());
+        board = new Board(this, new PiecePot(this));
 
         userInterface = new Ui();
         isRunning = false;
@@ -18,6 +18,10 @@ class Game {
         currentPlayer = black;
 
         run();
+    }
+
+    public Board getBoard() {
+        return board;
     }
 
     private void run() {

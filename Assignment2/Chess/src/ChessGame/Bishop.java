@@ -5,15 +5,20 @@ import java.util.ArrayList;
 class Bishop extends Piece implements MovementStrategy, IBishop {
 
     Color color = null;
-    private boolean hasMoved;
+    Square current;
     ArrayList<Square> possibleMoveSquares;
-    public void move(){
+    Board board;
 
+
+
+    public void move(){
     }
 
 
-    Bishop(Color color){
+    Bishop(Color color, int x, int y, Board board){
         this.color = color;
+        this.current = board.getSquare(x,y);
+
   }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
@@ -94,7 +99,9 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
     public boolean isBlocking(Square blockedSquare, Square targetSquare){
         return false;
     }
-    public ArrayList<Square> getMoveSquares(Board board, Square current){
+
+    @Override
+    public ArrayList<Square> getMoveSquares(Board board){
         int x, y;
         Square temp;
         // Check movement up-left
