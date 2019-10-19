@@ -7,6 +7,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
     Color color = null;
     private boolean hasMoved;
     ArrayList<Square> possibleMoveSquares;
+    ArrayList<Square> possibleAttackSquares;
     Square current;
 
     Pawn(Color color, int x, int y, Board board) {
@@ -101,10 +102,10 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                 //TODO: Check if out of board
             // capture
             temp = board.getSquare(current.x - 1, current.y - 1);
-            if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
 
             temp = board.getSquare(current.x + 1, current.y - 1);
-            if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
 
             // move
             temp = board.getSquare(current.x, current.y - 1);
@@ -120,10 +121,10 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
         { // only moves down
             // capture
             temp = board.getSquare(current.x - 1, current.y + 1);
-            if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
 
             temp = board.getSquare(current.x + 1, current.y + 1);
-            if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
 
             // move
             temp = board.getSquare(current.x, current.y + 1);
