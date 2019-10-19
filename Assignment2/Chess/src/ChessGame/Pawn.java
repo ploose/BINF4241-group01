@@ -8,9 +8,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
     private final Color color;
     private boolean hasMoved;
 
-    ArrayList<Square> possibleMoveSquares;
     ArrayList<Square> possibleAttackSquares;
-    Square current;
 
 
     Pawn(Color color, int x, int y, Board board) {
@@ -95,58 +93,67 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
 
     //TODO: Important: seperate the movesquares from the attacksquares for the pawn!
 
-    public ArrayList<Square> getMoveSquares(Board board){
+    public ArrayList<Square> getMoveSquares(Board board) {
 
         Square current = this.current;
         Square temp;
-        int x,y;
-        if(this.color == Color.WHITE)
-
-            { // only moves up
-                //TODO: Check if out of board
+        int x, y;
+        if (this.color == Color.WHITE) { // only moves up
+            //TODO: Check if out of board
             // capture
             temp = board.getSquare(current.x - 1, current.y - 1);
-            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
+            if (!temp.isOccupied()) {
+                possibleAttackSquares.add(temp);
+            }
 
             temp = board.getSquare(current.x + 1, current.y - 1);
-            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
+            if (!temp.isOccupied()) {
+                possibleAttackSquares.add(temp);
+            }
 
             // move
             temp = board.getSquare(current.x, current.y - 1);
-            if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+            if (!temp.isOccupied()) {
+                possibleMoveSquares.add(temp);
+            }
 
             if (!hasMoved) {
                 temp = board.getSquare(current.x, current.y - 2);
-                if (!temp.isOccupied()) {possibleMoveSquares.add(temp);}
+                if (!temp.isOccupied()) {
+                    possibleMoveSquares.add(temp);
+                }
             }
 
-        }else if(this.color ==Color.BLACK)
-
-        { // only moves down
+        } else if (this.color == Color.BLACK) { // only moves down
             // capture
             temp = board.getSquare(current.x - 1, current.y + 1);
-            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
+            if (!temp.isOccupied()) {
+                possibleAttackSquares.add(temp);
+            }
 
             temp = board.getSquare(current.x + 1, current.y + 1);
-            if (!temp.isOccupied()) {possibleAttackSquares.add(temp); }
+            if (!temp.isOccupied()) {
+                possibleAttackSquares.add(temp);
+            }
 
             // move
             temp = board.getSquare(current.x, current.y + 1);
-            if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+            if (!temp.isOccupied()) {
+                possibleMoveSquares.add(temp);
+            }
 
             if (!hasMoved) {
                 temp = board.getSquare(current.x, current.y + 2);
-                if (!temp.isOccupied()) {possibleMoveSquares.add(temp); }
+                if (!temp.isOccupied()) {
+                    possibleMoveSquares.add(temp);
+                }
             }
 
-    }
+        }
         return possibleMoveSquares;
-}
-/*
-    @Override
-    public String toString() {
-        return "Pawn, " + getColor();
     }
 
- */
+    public String toString() {
+        return color.toString().charAt(0) + "P";
+    }
 }
