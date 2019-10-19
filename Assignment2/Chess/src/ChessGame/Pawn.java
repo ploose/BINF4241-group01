@@ -12,7 +12,6 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
     Pawn(Color color, int x, int y, Board board) {
         this.color = color;
         this.current = board.getSquare(x,y);
-
     }
 
     public boolean CanBeCaptured(){
