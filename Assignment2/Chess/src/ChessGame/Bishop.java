@@ -3,23 +3,17 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Bishop extends Piece implements MovementStrategy, IBishop {
-
-    Color color = null;
-    Square current;
-    ArrayList<Square> possibleMoveSquares;
-    Board board;
-
-
-
-    public void move(){
-    }
-
+    private Color color;
+    private Square current;
+    private ArrayList<Square> possibleMoveSquares;
 
     Bishop(Color color, int x, int y, Board board){
         this.color = color;
         this.current = board.getSquare(x,y);
+    }
 
-  }
+    //TODO
+    public void move(){}
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
@@ -180,16 +174,9 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
 
         return possibleMoveSquares;
     }
-/*
 
     @Override
     public String toString() {
-        if (getColor() == Color.BLACK){
-            return "BB";
-        } else {
-            return "WB";
-        }
+        return color.toString().charAt(0) + "B";
     }
-
- */
 }

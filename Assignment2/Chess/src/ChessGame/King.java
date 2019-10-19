@@ -3,15 +3,9 @@ package ChessGame;
 import java.util.ArrayList;
 
 class King extends Piece implements MovementStrategy, IKing{
-
-    // TODO: We have to ask if we should use int or enums for the coordinates.
-    //  Probably enums would be shit. Enums are shit
-
-        ArrayList<Square> possibleMoveSquares;
-        Color color = null;
-        Square current;
-
-
+    private Color color;
+    private Square current;
+    private ArrayList<Square> possibleMoveSquares;
 
     King(Color color, int x, int y, Board board){
             this.color = color;
@@ -19,9 +13,8 @@ class King extends Piece implements MovementStrategy, IKing{
     }
 
     //TODO for all pieces
-    public void move(){
+    public void move(){    }
 
-    }
     // TODO !
     public boolean CanBeCaptured(){
         return true;
@@ -77,12 +70,11 @@ class King extends Piece implements MovementStrategy, IKing{
 
         return possibleMoveSquares;
     }
-/*
-        @Override
+
+    @Override
     public String toString() {
-        return "King, " + getColor();
+        return color.toString().charAt(0) + "K";
     }
-*/
 }
 
 

@@ -3,16 +3,9 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Rook extends Piece implements MovementStrategy, IRook {
-
-    Color color = null;
-    Square current;
-    ArrayList<Square> possibleMoveSquares;
-
-
-    public void move(){
-
-
-    }
+    private Color color;
+    private Square current;
+    private ArrayList<Square> possibleMoveSquares;
 
     Rook(Color color, int x, int y, Board board){
         this.color = color;
@@ -20,6 +13,8 @@ class Rook extends Piece implements MovementStrategy, IRook {
 
     }
 
+    //TODO
+    public void move(){    }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
@@ -67,10 +62,12 @@ class Rook extends Piece implements MovementStrategy, IRook {
         }
         return false;
     }
+
     //needs to be implemented for Checkmate
     public boolean isBlocking(Square blockedSquare, Square targetSquare){
         return false;
     }
+
     public ArrayList<Square> getMoveSquares(Board board){
 
         Square current = this.current;
@@ -101,11 +98,8 @@ class Rook extends Piece implements MovementStrategy, IRook {
         return possibleMoveSquares;
 
     }
-    /*
-    @Override
-    public String toString() {
-        return "Rook, " + color;
-    }
-    */
 
+    public String toString() {
+        return color.toString().charAt(0) + "T";
+    }
 }

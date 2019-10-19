@@ -3,24 +3,20 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Queen extends Piece implements MovementStrategy {
-
-    Color color = null;
-    Square current;
+    private Color color;
+    private Square current;
     private ArrayList<Square> possibleMoveSquares;
-
-
-
-    public void move() {
-
-    }
-
-
 
     Queen(Color color, int x, int y, Board board){
         this.color = color;
         this.current = board.getSquare(x,y);
 
     }
+
+    public void move() {
+
+    }
+
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         int x, y;
@@ -133,7 +129,6 @@ class Queen extends Piece implements MovementStrategy {
         }
         return false;
     }
-
 
     // TODO: Every piece has to know its current location and the board
     public ArrayList<Square> getMoveSquares(Board board){
@@ -259,16 +254,8 @@ class Queen extends Piece implements MovementStrategy {
         return possibleMoveSquares;
     }
 
-    //needs to be implemented for Checkmate
-    /*
-    public boolean isBlocking(Square blockedSquare, Square targetSquare){
-        if(){break;}
-*/
-    }
-/*
     @Override
     public String toString() {
-        return "Queen, " + getColor();
+        return color.toString().charAt(0) + "Q";
     }
-
- */
+}
