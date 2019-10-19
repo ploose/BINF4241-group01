@@ -3,13 +3,10 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Bishop extends Piece implements MovementStrategy, IBishop {
-    private Color color;
-    private Square current;
     private ArrayList<Square> possibleMoveSquares;
 
-    Bishop(Color color, int x, int y, Board board){
-        this.color = color;
-        this.current = board.getSquare(x,y);
+    Bishop(Color color, Square current){
+        super(color, current);
     }
 
     //TODO

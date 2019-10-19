@@ -3,18 +3,14 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Knight extends Piece implements MovementStrategy, IKnight {
-    private Color color;
-    private Square current;
     private ArrayList<Square> possibleMoveSquares;
+
+    Knight(Color color, Square current) {
+        super(color, current);
+    }
 
     //TODO
     public void move() {    }
-
-    Knight(Color color, int x, int y, Board board) {
-        this.color = color;
-        this.current = board.getSquare(x,y);
-
-    }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {

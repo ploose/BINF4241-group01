@@ -3,19 +3,16 @@ package ChessGame;
 import java.util.ArrayList;
 
 class King extends Piece implements MovementStrategy, IKing{
-    private Color color;
-    private Square current;
     private ArrayList<Square> possibleMoveSquares;
 
-    King(Color color, int x, int y, Board board){
-            this.color = color;
-            this.current = board.getSquare(x,y);
+    King(Color color, Square current){
+            super(color, current);
     }
 
-    //TODO for all pieces
+    //TODO:
     public void move(){    }
 
-    // TODO !
+    // TODO:
     public boolean CanBeCaptured(){
         return true;
     }

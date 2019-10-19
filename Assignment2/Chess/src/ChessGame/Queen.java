@@ -3,16 +3,13 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Queen extends Piece implements MovementStrategy {
-    private Color color;
-    private Square current;
     private ArrayList<Square> possibleMoveSquares;
 
-    Queen(Color color, int x, int y, Board board){
-        this.color = color;
-        this.current = board.getSquare(x,y);
-
+    Queen(Color color, Square current){
+        super(color, current);
     }
 
+    //TODO:
     public void move() {
 
     }

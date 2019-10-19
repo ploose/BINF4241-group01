@@ -1,15 +1,11 @@
 package ChessGame;
 
-import java.util.ArrayList;
-
-public class Player {
+class Player {
     final private String name;
-    final private Color color;
     private boolean isChecked;
 
-    Player(String name, Color color){
+    Player(String name){
         this.name = name;
-        this.color = color;
         isChecked = false;
     }
 
@@ -23,9 +19,5 @@ public class Player {
 
     String getName() {
         return name;
-    }
-
-    Color getColor() {
-        return color;
     }
 }

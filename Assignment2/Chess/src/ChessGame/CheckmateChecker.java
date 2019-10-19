@@ -2,23 +2,22 @@ package ChessGame;
 
 import java.util.ArrayList;
 
-public class CheckmateChecker {
-
-    Square kingSquare;
-    boolean isChecked;
-    Board board;
-    Color color;
-    PiecePot piecePot;
-    Piece piece;
+class CheckmateChecker {
+    private Square kingSquare;
+    private boolean isChecked;
+    private Board board;
+    private Color color;
+    private PiecePot piecePot;
+    private Piece piece;
 
 // TODO:      - Can i move out of mate?
 //            - Can I block mate?
 //            - Can I take the attacker?
 
-    public boolean isChecked(PiecePot piecePot, Square kingSquare, Color color){
+    private boolean isChecked(PiecePot piecePot, Square kingSquare, Color color){
+        isChecked = false;
 
-        boolean isChecked = false;
-
+        //TODO: should be boards responsibility
         if (color == Color.WHITE){
             int whiteOnBoard = piecePot.getWhiteOnBoardCounter();
             for(int i = 0; i < whiteOnBoard; i++){
@@ -29,13 +28,12 @@ public class CheckmateChecker {
                     }
                 }
             }
-        }
-        else{
+        } else {
             int whiteOnBoard = piecePot.getWhiteOnBoardCounter();
             for(int i = 0; i < whiteOnBoard; i++){
                 piece = piecePot.getWhiteOnBoard(i);
                 for (Square square : piece.getMoveSquares(board)){
-                    if (square == kingSquare){
+                    if (square == kingSquare) {
                         isChecked = true;
                     }
                 }
@@ -43,20 +41,20 @@ public class CheckmateChecker {
             }
         return isChecked;
         // Returns if the square is checked
+    }
 
+    public boolean isCheckMate(PiecePot piecePot, Square kingSquare, Color color, ArrayList<Square> attackedSquares, King king){
+        //requirements of which at least one has to be true for the king to not be checkmated
+        boolean canMoveOut = false;
+        boolean canBlock = false;
+        boolean canTake =false;
+        ArrayList<Square> safeSquares = king.getMoveSquares(board);
+        Piece attacker = null;
+        Piece piece;
+
+        if (!(isChecked(piecePot, kingSquare, color))){
+            return false;
         }
-     public boolean isCheckMate(PiecePot piecePot, Square kingSquare, Color color, ArrayList<Square> attackedSquares, King king){
-
-        if (!(isChecked(piecePot, kingSquare, color))){return false;}
-
-         //requirements of which at least one has to be true for the king to not be checkmated
-         boolean canMoveOut = false;
-         boolean canBlock = false;
-         boolean canTake =false;
-         ArrayList<Square> safeSquares = king.getMoveSquares(board);
-         Piece attacker = null;
-         Piece piece;
-
 
          //move out
             if(color == Color.WHITE) {
@@ -112,7 +110,5 @@ public class CheckmateChecker {
 
 
     }
-
-
-    }
+}
 

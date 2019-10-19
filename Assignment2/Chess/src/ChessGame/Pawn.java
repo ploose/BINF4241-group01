@@ -4,25 +4,20 @@ import java.util.ArrayList;
 
 class Pawn extends Piece implements MovementStrategy, IPawn {
     private ArrayList<Square> possibleMoveSquares;
-    private Square current;
-    private final Color color;
     private boolean hasMoved;
 
-    ArrayList<Square> possibleAttackSquares;
+    private ArrayList<Square> possibleAttackSquares;
 
-
-    Pawn(Color color, int x, int y, Board board) {
-        this.color = color;
-        current = board.getSquare(x,y);
+    Pawn(Color color, Square current) {
+        super(color, current);
     }
 
     public boolean CanBeCaptured(){
         return true;
     }
 
-    public void move() {
-
-    }
+    //TODO:
+    public void move() {}
 
     public boolean checkPromote() {
         return true;

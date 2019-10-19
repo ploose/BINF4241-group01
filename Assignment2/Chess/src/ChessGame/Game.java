@@ -6,7 +6,6 @@ class Game {
     private Player currentPlayer, black, white;
     private boolean isRunning;
 
-
     Game() {
         board = new Board(this);
 
@@ -37,12 +36,9 @@ class Game {
             while (!isValidMove) {
                 isValidMove = move();
             }
-        }
-    }
 
-    void setWinner(Player winner) {
-        isRunning = false;
-        userInterface.celebrateWinner(winner);
+            swapPlayer();
+        }
     }
 
     private boolean checkCheck() {
@@ -56,5 +52,18 @@ class Game {
     //TODO: Gets input from interface
     private boolean move() {
         return true;
+    }
+
+    private void swapPlayer() {
+        if (currentPlayer == black) {
+            currentPlayer = white;
+        } else {
+            currentPlayer = black;
+        }
+    }
+
+    void setWinner(Player winner) {
+        isRunning = false;
+        userInterface.celebrateWinner(winner);
     }
 }

@@ -1,8 +1,6 @@
 package ChessGame;
 
-import java.util.ArrayList;
-
-public class Board {
+class Board {
     final private Square[][] squares;
     final private Game game;
     private PiecePot piecePot;
@@ -13,7 +11,7 @@ public class Board {
         squares = new Square[8][8];
         initBoard();
 
-        piecePot = new PiecePot(this);
+        piecePot = new PiecePot();
         setPieces();
     }
 
@@ -26,30 +24,30 @@ public class Board {
     }
 
     private void setPieces() {  // Takes the pieces from the PiecePot
-        squares[0][0].addPiece(piecePot.getBlackOnBoard(8));
-        squares[7][0].addPiece(piecePot.getWhiteOnBoard(8));
-        squares[0][7].addPiece(piecePot.getBlackOnBoard(9));
-        squares[7][7].addPiece(piecePot.getWhiteOnBoard(9));
+        squares[0][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[0][0])));
+        squares[7][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[7][0])));
+        squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
+        squares[7][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[7][7])));
 
-        squares[0][1].addPiece(piecePot.getBlackOnBoard(10));
-        squares[7][1].addPiece(piecePot.getWhiteOnBoard(10));
-        squares[0][6].addPiece(piecePot.getBlackOnBoard(11));
-        squares[7][6].addPiece(piecePot.getWhiteOnBoard(11));
+        squares[1][0].addPiece(piecePot.add(new Knight(Color.BLACK, squares[1][0])));
+        squares[6][0].addPiece(piecePot.add(new Knight(Color.BLACK, squares[6][7])));
+        squares[1][7].addPiece(piecePot.add(new Knight(Color.WHITE, squares[1][0])));
+        squares[6][7].addPiece(piecePot.add(new Knight(Color.WHITE, squares[6][7])));
 
-        squares[0][2].addPiece(piecePot.getBlackOnBoard(12));
-        squares[7][2].addPiece(piecePot.getWhiteOnBoard(12));
-        squares[0][5].addPiece(piecePot.getBlackOnBoard(13));
-        squares[7][5].addPiece(piecePot.getWhiteOnBoard(13));
+        squares[2][0].addPiece(piecePot.add(new Bishop(Color.BLACK, squares[2][0])));
+        squares[5][0].addPiece(piecePot.add(new Bishop(Color.BLACK, squares[5][7])));
+        squares[2][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[2][0])));
+        squares[5][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[5][7])));
 
-        squares[0][3].addPiece(piecePot.getBlackOnBoard(14));
-        squares[7][3].addPiece(piecePot.getWhiteOnBoard(14));
+        squares[3][0].addPiece(piecePot.add(new Queen(Color.BLACK, squares[3][0])));
+        squares[3][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[3][7])));
 
-        squares[0][4].addPiece(piecePot.getBlackOnBoard(15));
-        squares[7][4].addPiece(piecePot.getWhiteOnBoard(15));
+        squares[4][0].addPiece(piecePot.add(new King(Color.BLACK, squares[4][0])));
+        squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
 
         for (int i = 0; i < 8; i++) {
-            squares[1][i].addPiece(piecePot.getBlackOnBoard(i));
-            squares[6][i].addPiece(piecePot.getWhiteOnBoard(i));
+            squares[i][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[1][i])));
+            squares[i][6].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[1][i])));
         }
     }
 
@@ -79,7 +77,7 @@ public class Board {
             board.append("  ");
 
             for(int j = 0; j < 8; j++) {
-                board.append("[").append(squares[i][j].printPiece()).append("]");
+                board.append("[").append(squares[j][i].printPiece()).append("]");
             }
             board.append("\n");
         }

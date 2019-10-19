@@ -3,14 +3,10 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Rook extends Piece implements MovementStrategy, IRook {
-    private Color color;
-    private Square current;
     private ArrayList<Square> possibleMoveSquares;
 
-    Rook(Color color, int x, int y, Board board){
-        this.color = color;
-        this.current = board.getSquare(x,y);
-
+    Rook(Color color, Square current){
+        super(color, current);
     }
 
     //TODO
