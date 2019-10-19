@@ -8,7 +8,9 @@ class Game {
 
 
     Game() {
-        board = new Board(this, new PiecePot(this));
+        board = new Board(this);
+        board.initPiecePot();
+        board.setPieces();
 
         userInterface = new Ui();
         isRunning = false;

@@ -17,8 +17,12 @@ public class PiecePot {
 
     private Board board;
 
-    PiecePot(Game game) {
-        board = game.getBoard();
+    PiecePot(Board board) {
+        this.board = board;
+
+        blackPlayerList = new ArrayList<>();
+        whitePlayerList = new ArrayList<>();
+
         initPots();
     }
 
@@ -41,7 +45,7 @@ public class PiecePot {
         Color color = Color.BLACK;
         int i;
 
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < 8; i++) {
             blackPlayerList.add(i, new Pawn(color, 1, i, board));
         }
 
