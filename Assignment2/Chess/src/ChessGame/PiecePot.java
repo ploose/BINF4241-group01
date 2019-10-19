@@ -23,6 +23,9 @@ public class PiecePot {
         blackPlayerList = new ArrayList<>();
         whitePlayerList = new ArrayList<>();
 
+        blackPlayerListOffBoard = new ArrayList<>();
+        whitePlayerListOffBoard = new ArrayList<>();
+
         initPots();
     }
 
@@ -39,7 +42,6 @@ public class PiecePot {
         blackOffBoard = 0;
     }
 
-    // TODO: Find a way to initialize a PlayerPot
     // TODO: Add methods that add/subtract from the piecescount
     private void initBlackPlayerPot() {     // Initializing blackPlayerPot
         Color color = Color.BLACK;
@@ -108,23 +110,24 @@ public class PiecePot {
         return blackOnBoard;
     }
 
-    public int getWhiteOffBoardCounter(){
-        return whiteOffBoard;
-    }
+    String lostPieces() {
+        StringBuilder list = new StringBuilder();
 
-    public int getBlackOffBoardCounter(){
-        return blackOffBoard;
-    }
+        list.append("Pieces lost: \n");
 
-    /*
-    no good encapsulation
-    public ArrayList<Object> getWhitePieces() {
-        return this.whitePlayerList;
-    }
+        list.append("Black: ");
+        for (Piece element : blackPlayerListOffBoard) {
+            list.append(element);
+        }
+        list.append("\n");
 
-    public ArrayList<Object> getBlackPieces() {
-        return this.blackPlayerList;
+        list.append("White: ");
+        for (Piece element : whitePlayerListOffBoard) {
+            list.append(element);
+        }
+        list.append("\n");
+
+        return list.toString();
     }
-    */
 }
 

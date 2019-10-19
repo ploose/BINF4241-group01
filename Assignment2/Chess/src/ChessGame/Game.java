@@ -9,8 +9,6 @@ class Game {
 
     Game() {
         board = new Board(this);
-        board.initPiecePot();
-        board.setPieces();
 
         userInterface = new Ui();
         isRunning = false;
@@ -22,9 +20,8 @@ class Game {
         run();
     }
 
-    public Board getBoard() {
-        return board;
-    }
+    //TODO
+    private void getPlayers() {}
 
     private void run() {
         isRunning = true;
@@ -32,13 +29,13 @@ class Game {
         boolean isValidMove = false;
 
         while (isRunning) {
-            //
             userInterface.printBoard(board.toString());
-            userInterface.printScore(currentPlayer.lostPieces());
+            userInterface.printScore(board.lostPieces());
+
             isRunning = false;
 
             while (!isValidMove) {
-                isValidMove = board.move();
+                isValidMove = move();
             }
         }
     }
@@ -56,11 +53,8 @@ class Game {
         return false;
     }
 
-    private void move(Square currentSpot, Square newSpot) {   // Gets input from interface
-
-    }
-
-    private void getPlayers() {
-
+    //TODO: Gets input from interface
+    private boolean move() {
+        return true;
     }
 }
