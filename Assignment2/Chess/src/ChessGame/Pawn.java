@@ -3,20 +3,21 @@ package ChessGame;
 import java.util.ArrayList;
 
 class Pawn extends Piece implements MovementStrategy, IPawn {
-
-    Color color = null;
+    private ArrayList<Square> possibleMoveSquares;
+    private Square current;
+    private final Color color;
     private boolean hasMoved;
-    ArrayList<Square> possibleMoveSquares;
-    Square current;
+
 
     Pawn(Color color, int x, int y, Board board) {
         this.color = color;
-        this.current = board.getSquare(x,y);
+        current = board.getSquare(x,y);
     }
 
     public boolean CanBeCaptured(){
         return true;
     }
+
     public void move() {
 
     }

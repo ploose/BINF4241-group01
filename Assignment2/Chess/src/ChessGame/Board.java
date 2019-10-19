@@ -7,12 +7,17 @@ public class Board {
     final private Game game;
     private PiecePot piecePot;
 
-    Board(Game game, PiecePot piecePot){ //Constructor
+    Board(Game game){ //Constructor
         this.game = game;
-        this.piecePot = piecePot;
 
         squares = new Square[8][8];
         initBoard();
+
+        piecePot = new PiecePot(this);
+        setPieces();
+    }
+
+    void initPiecePot() {
     }
 
     private void initBoard() {  // setting up the board
@@ -21,15 +26,12 @@ public class Board {
                 squares[i][j] = new Square(i, j);
             }
         }
-        setPieces();
     }
 
-    // Takes the pieces from the PiecePot-PL
-    private void setPieces() {
-
+    void setPieces() {      // Takes the pieces from the PiecePot-PL
         squares[0][0].addPiece(this.piecePot.getWhiteOnBoard(8));
-
         squares[7][0].addPiece(this.piecePot.getWhiteOnBoard(8));
+
         squares[0][7].addPiece(this.piecePot.getWhiteOnBoard(9));
         squares[7][7].addPiece(this.piecePot.getWhiteOnBoard(9));
 
