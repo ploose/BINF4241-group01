@@ -46,13 +46,12 @@ class Game {
         userInterface.celebrateWinner(winner);
     }
 
-    private void checkCheck() {
+    private boolean checkCheck() {
+        return black.isChecked() || white.isChecked();
     }
 
-    private void checkCheckMate() {
-        if (black.isChecked() || white.isChecked()) {
-
-        }
+    private boolean checkCheckMate() { //TODO
+        return false;
     }
 
     private void move(Square currentSpot, Square newSpot) {   // Gets input from interface
