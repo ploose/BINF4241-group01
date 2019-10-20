@@ -1,35 +1,30 @@
 package ChessGame;
 
 class Square {
-    int x, y;
-    private Object currentPiece;
+    private Piece currentPiece;
 
-    Square(int x, int y){
-        this.x = x;
-        this.y = y;
+    Square(){
     }
 
-    void addPiece(Object object) {
-        currentPiece = object;
+    void addPiece(Piece piece) {
+        currentPiece = piece;
     }
 
-    // TODO: Does this work for squares "outside" the board?
     boolean isOccupied(){
         return currentPiece != null;
     }
 
-    Object removePiece() {
-        Object tmp = currentPiece;
+    Piece removePiece() {
+        Piece tmp = currentPiece;
         currentPiece = null;
         return tmp;
     }
 
-    String printPiece() {
+    public String toString() {
         if (currentPiece == null) {
             return "  ";
         } else {
             return currentPiece.toString();
         }
     }
-
 }

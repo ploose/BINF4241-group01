@@ -5,7 +5,8 @@ class Board {
     final private Game game;
     private PiecePot piecePot;
 
-    Board(Game game){   //Constructor
+    //Constructor
+    Board(Game game) {
         this.game = game;
 
         squares = new Square[8][8];
@@ -15,15 +16,17 @@ class Board {
         setPieces();
     }
 
-    private void initBoard() {  // setting up the board
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++){
-                squares[i][j] = new Square(i, j);
+    // setting up the board
+    private void initBoard() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                squares[i][j] = new Square();
             }
         }
     }
 
-    private void setPieces() {  // Takes the pieces from the PiecePot
+    // Takes the pieces from the PiecePot
+    private void setPieces() {
         squares[0][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[0][0])));
         squares[7][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[7][0])));
         squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
@@ -51,7 +54,7 @@ class Board {
         }
     }
 
-    Square getSquare(int row, int column){
+    Square getSquare(int row, int column) {
         return squares[row][column];
     }
 
@@ -59,12 +62,23 @@ class Board {
         game.setWinner(winner);
     }
 
-    boolean move() {    //TODO
-       return true;
+    //TODO:
+    boolean move(int x1, int y1, int x2, int y2) {
+        return true;
     }
 
     String lostPieces() {
         return piecePot.lostPieces();
+    }
+
+    //TODO:
+    boolean castle() {
+        return true;
+    }
+
+    //TODO:
+    boolean enPassent() {
+        return true;
     }
 
     public String toString() {
@@ -76,8 +90,8 @@ class Board {
             board.append(values[i]);
             board.append("  ");
 
-            for(int j = 0; j < 8; j++) {
-                board.append("[").append(squares[j][i].printPiece()).append("]");
+            for (int j = 0; j < 8; j++) {
+                board.append("[").append(squares[j][i]).append("]");
             }
             board.append("\n");
         }
