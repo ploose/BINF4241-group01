@@ -20,7 +20,7 @@ class Board {
     private void initBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                squares[i][j] = new Square();
+                squares[i][j] = new Square(i, j);
             }
         }
     }

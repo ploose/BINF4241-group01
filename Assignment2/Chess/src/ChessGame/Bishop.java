@@ -26,7 +26,7 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
 
     @Override
     public ArrayList<Square> getMoveSquares(Board board){
-        ArrayList<Square> possibleMoveSquares = new ArrayList<Square>();
+        ArrayList<Square> possibleMoveSquares = new ArrayList<>();
         Square temp, current = this.current;
         int x, y;
         // Check movement up-left

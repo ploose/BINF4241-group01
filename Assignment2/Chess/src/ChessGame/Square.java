@@ -1,9 +1,12 @@
 package ChessGame;
 
 class Square {
+    int x, y;
     private Piece currentPiece;
 
-    Square(){
+    Square(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     void addPiece(Piece piece) {
