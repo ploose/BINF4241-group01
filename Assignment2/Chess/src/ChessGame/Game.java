@@ -27,13 +27,12 @@ class Game {
     private void run() {
         isRunning = true;
 
-        boolean isValidMove = false;
 
         while (isRunning) {
+            boolean isValidMove = false;
+
             userInterface.printBoard(board.toString());
             userInterface.printScore(board.lostPieces());
-
-            isRunning = false;
 
             while (!isValidMove) {
                 isValidMove = move();
@@ -55,15 +54,49 @@ class Game {
     private boolean move() {
         String move = userInterface.getMove(currentPlayer);
 
-        if (move.equals("castle")) {
-            return board.castle(currentPlayer.getColor());
+        if (move.equals("castle long")) {
+            return castleLong();
         } else if (move.equals("en passent")) {
             return board.enPassent(currentPlayer.getColor());
         } else if (checkInput(move)) {
-            return board.move(translate(move.charAt(0)), move.charAt(1), translate(move.charAt(6)), move.charAt(7));
+            return board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(6)), translate(move.charAt(7)));
         } else {
             return userInterface.printWrongInput();
         }
+    }
+
+    //TODO:
+    private boolean castleLong() {
+        if (currentPlayer.getColor() == Color.BLACK) {
+            Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(0, 0);
+
+            if (!(squareOne.hasType("King") && squareTwo.hasType("Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() && squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            if (board.getSquare(1, 0).isOccupied() && board.getSquare(2, 0).isOccupied()
+                    && board.getSquare(3, 0).isOccupied()) {
+                return false;
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            board.move(0, 0, 4, 0);
+            squareTwo.addPiece(tmp);
+
+        } else {
+
+        }
+        return true;
+    }
+
+    //TODO:
+    private boolean castleShort(Color color) {
+        return true;
     }
 
     private void swapPlayer() {
@@ -96,30 +129,46 @@ class Game {
 
         switch (current) {
             case 'A':
+            case '0':
                 num = 0;
+                break;
 
             case 'B':
+            case '1':
                 num = 1;
+                break;
 
             case 'C':
+            case '2':
                 num = 2;
+                break;
 
             case 'D':
+            case '3':
                 num = 3;
+                break;
 
             case 'E':
+            case '4':
                 num = 4;
+                break;
 
             case 'F':
+            case '5':
                 num = 5;
+                break;
 
             case 'G':
+            case '6':
                 num = 6;
+                break;
 
             case 'H':
+            case '7':
                 num = 7;
+                break;
         }
-
+        System.out.println(num);
         return num;
     }
 }

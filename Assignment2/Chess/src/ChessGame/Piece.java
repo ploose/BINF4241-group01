@@ -7,14 +7,24 @@ import java.util.ArrayList;
 abstract class Piece {
         final protected Color color;
         protected Square current;
+        private boolean hasMoved;
 
         Piece(Color color, Square current){
                 this.color = color;
                 this.current = current;
+                hasMoved = false;
         }
 
         Color getColor() {
                 return color;
+        }
+
+        boolean hasMoved() {
+                return hasMoved;
+        }
+
+        void move() {
+                hasMoved = true;
         }
 
         public abstract ArrayList<Square> getMoveSquares(Board board);
@@ -28,26 +38,6 @@ abstract class Piece {
                 }
                 return false;
         }
-
-        // public abstract Square getCurrentSquare();
-        // public abstract ArrayList<Square> getAttackedSquares();
-
-/*
-        private boolean hasMoved;
-        MovementStrategy strategy;
-        MovementStrategy
-
-
-        Piece(Color color, MovementStrategy strategy, MovementStrategy IPawn){
-            this.color = color;
-            this.strategy = strategy;
-            this.specialStrategy = strategy
-
-            Piece(Color colorFromClient, MovementStrategy strategy, MovementStrategy IPawn){
-            final Color color = colorFromClient;
-
-
-        } */
 }
 
 

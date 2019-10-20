@@ -62,18 +62,14 @@ class Board {
         game.setWinner(winner);
     }
 
-    //TODO:
+    //TODO: check if valid move
     boolean move(int x1, int y1, int x2, int y2) {
+        squares[y2][x2].addPiece(squares[y1][x1].removePiece());
         return true;
     }
 
     String lostPieces() {
         return piecePot.lostPieces();
-    }
-
-    //TODO:
-    boolean castle(Color color) {
-        return true;
     }
 
     //TODO:

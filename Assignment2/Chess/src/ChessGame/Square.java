@@ -30,4 +30,16 @@ class Square {
             return currentPiece.toString();
         }
     }
+
+    boolean hasType(String type) {
+        if (currentPiece != null) {
+            return currentPiece.getColor().toString().equals(type);
+        } else {
+            return false;
+        }
+    }
+
+    Piece getCurrentPiece() {
+        return currentPiece;
+    }
 }
