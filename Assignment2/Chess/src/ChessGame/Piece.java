@@ -5,7 +5,7 @@ package ChessGame;
 import java.util.ArrayList;
 
 abstract class Piece {
-        protected Color color;
+        final protected Color color;
         protected Square current;
 
         Piece(Color color, Square current){

@@ -56,5 +56,21 @@ class PiecePot {
 
         return list.toString();
     }
+
+    int getOnBoardSize(Color color) {
+        if (color == Color.BLACK) {
+            return blackPlayerList.size();
+        } else {
+            return whitePlayerList.size();
+        }
+    }
+
+    Piece getOnBoard(int i, Color color) {
+        if (color == Color.BLACK) {
+            return blackPlayerList.get(i);
+        } else {
+            return whitePlayerList.get(i);
+        }
+    }
 }
 

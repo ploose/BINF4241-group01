@@ -14,41 +14,28 @@ class CheckmateChecker {
 //            - Can I block mate?
 //            - Can I take the attacker?
 
+    // Returns if the square is checked -> should be games responsibility
     private boolean isChecked(PiecePot piecePot, Square kingSquare, Color color){
         isChecked = false;
 
-        //TODO: should be boards responsibility
-        if (color == Color.WHITE){
-            int whiteOnBoard = piecePot.getWhiteOnBoardCounter();
-            for(int i = 0; i < whiteOnBoard; i++){
-                piece = piecePot.getWhiteOnBoard(i);
-                for (Square square : piece.getMoveSquares(board)){
-                    if (square == kingSquare){
-                        isChecked = true;
-                    }
+        for(int i = 0; i < piecePot.getOnBoardSize(color); i++) {
+            piece = piecePot.getOnBoard(i, color);
+            for (Square square : piece.getMoveSquares(board)) {
+                if (square == kingSquare) {
+                    isChecked = true;
+                    break;
                 }
             }
-        } else {
-            int whiteOnBoard = piecePot.getWhiteOnBoardCounter();
-            for(int i = 0; i < whiteOnBoard; i++){
-                piece = piecePot.getWhiteOnBoard(i);
-                for (Square square : piece.getMoveSquares(board)){
-                    if (square == kingSquare) {
-                        isChecked = true;
-                    }
-                }
-            }
-            }
+        }
+
         return isChecked;
-        // Returns if the square is checked
     }
 
     public boolean isCheckMate(PiecePot piecePot, Square kingSquare, Color color, ArrayList<Square> attackedSquares, King king){
-        //requirements of which at least one has to be true for the king to not be checkmated
         boolean canMoveOut = false;
         boolean canBlock = false;
         boolean canTake =false;
-        ArrayList<Square> safeSquares = king.getMoveSquares(board);
+        ArrayList<Square> safeSquares = king.getMoveSquares(board); //TODO: board shouldn't be a parameter
         Piece attacker = null;
         Piece piece;
 
@@ -56,59 +43,43 @@ class CheckmateChecker {
             return false;
         }
 
-         //move out
-            if(color == Color.WHITE) {
-                // TODO: Implement getCurrentSquare
-                if (piecePot.getWhiteOnBoardCounter() == 1) { safeSquares.add(kingSquare);}
-                int whiteOnBoard = piecePot.getWhiteOnBoardCounter();
-                for(int i = 0; i < whiteOnBoard; i++){
-                    piece = piecePot.getWhiteOnBoard(i);
+        // TODO: Implement getCurrentSquare
+        if (piecePot.getOnBoardSize(color) == 1) {
+            safeSquares.add(kingSquare);
+        }
 
+        for(int i = 0; i < piecePot.getOnBoardSize(color); i++){
+            piece = piecePot.getOnBoard(i, color);
 
-                    for (Square attackedSquare : piece.getMoveSquares(board)) {
-                        if (safeSquares.contains(attackedSquare)){
-                            safeSquares.remove(attackedSquare);
-                            attacker = piece;
-                        }
-
-                    }
-                }
-                // until here, we have a list of pieces that the king can move to without being attacked
-                // check if there are any safe squares
-
-                // TODO: Change this
-                if (safeSquares.isEmpty()){
-                    canMoveOut = false;
-                }
-                else{
-                    canMoveOut = true;
-                }
-
-                // TODO: CanBlock
-                //canBlock. Needed for: Queen, Bishop, Rook
-
-
-
-                //canEat
-                if (king.getMoveSquares(board).contains(attacker.getMoveSquares(board))){
-                    canTake = true;
+            for (Square attackedSquare : piece.getMoveSquares(board)) {
+                if (safeSquares.contains(attackedSquare)){
+                    safeSquares.remove(attackedSquare);
+                    attacker = piece;
                 }
             }
+        }
+        // until here, we have a list of squares that the king can move to without being attacked
+        // check if there are any safe squares
 
-            //The same process for the black pieces
-            // TODO: Once its done for the white pieces, just copy paste and change variables
-            else{
-                
+        // TODO: Change this
+        canMoveOut = !safeSquares.isEmpty();
 
-            }
-
-            //Final check
-            if (canMoveOut || canBlock || canTake){ return false;}
-            else{return true;}
+        // TODO: CanBlock
+        //canBlock. Needed for: Queen, Bishop, Rook
 
 
 
+        //canEat
+        if (king.getMoveSquares(board).contains(attacker.getMoveSquares(board))){
+            canTake = true;
+        }
 
+        //Final check
+        if (canMoveOut || canBlock || canTake) {
+                return false;
+        } else {
+                return true;
+        }
     }
 }
 
