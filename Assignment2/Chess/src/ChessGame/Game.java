@@ -20,8 +20,8 @@ class Game {
     }
 
     private void getPlayers() {
-        black = new Player(userInterface.getPlayerName(Color.BLACK));
-        white = new Player(userInterface.getPlayerName(Color.WHITE));
+        black = new Player(userInterface.getPlayerName(Color.BLACK), Color.BLACK);
+        white = new Player(userInterface.getPlayerName(Color.WHITE), Color.WHITE);
     }
 
     private void run() {
@@ -56,11 +56,11 @@ class Game {
         String move = userInterface.getMove(currentPlayer);
 
         if (move.equals("castle")) {
-            return board.castle();
+            return board.castle(currentPlayer.getColor());
         } else if (move.equals("en passent")) {
-            return board.enPassent();
+            return board.enPassent(currentPlayer.getColor());
         } else if (checkInput(move)) {
-            return board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(6)), translate(move.charAt(7)));
+            return board.move(translate(move.charAt(0)), move.charAt(1), translate(move.charAt(6)), move.charAt(7));
         } else {
             return userInterface.printWrongInput();
         }
@@ -80,9 +80,14 @@ class Game {
     }
 
     private boolean checkInput(String move) {
+        if (move.length() != 8) {
+            return false;
+        }
+
         boolean partOne = move.substring(0, 1).matches("[A-H]") && move.substring(1, 2).matches("[0-9]");
-        boolean partTwo = move.substring(2, 5).equals(" to ");
-        boolean partThree = move.substring(5, 6).matches("[A-H]") && move.substring(6, 7).matches("[0-9]");
+        boolean partTwo = move.substring(2, 6).matches(" to ");
+        boolean partThree = move.substring(6, 7).matches("[A-H]") && move.substring(7, 8).matches("[0-9]");
+
         return partOne && partTwo && partThree;
     }
 
@@ -112,30 +117,6 @@ class Game {
                 num = 6;
 
             case 'H':
-                num = 7;
-
-            case '0':
-                num = 0;
-
-            case '1':
-                num = 1;
-
-            case '2':
-                num = 2;
-
-            case '3':
-                num = 3;
-
-            case '4':
-                num = 4;
-
-            case '5':
-                num = 5;
-
-            case '6':
-                num = 6;
-
-            case '7':
                 num = 7;
         }
 

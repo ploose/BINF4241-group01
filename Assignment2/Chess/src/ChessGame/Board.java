@@ -72,12 +72,12 @@ class Board {
     }
 
     //TODO:
-    boolean castle() {
+    boolean castle(Color color) {
         return true;
     }
 
     //TODO:
-    boolean enPassent() {
+    boolean enPassent(Color color) {
         return true;
     }
 

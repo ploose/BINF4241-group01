@@ -2,10 +2,13 @@ package ChessGame;
 
 class Player {
     final private String name;
+    final private Color color;
     private boolean isChecked;
 
-    Player(String name){
+    Player(String name, Color color){
         this.name = name;
+        this.color = color;
+
         isChecked = false;
     }
 
@@ -19,5 +22,9 @@ class Player {
 
     String getName() {
         return name;
+    }
+
+    Color getColor() {
+        return color;
     }
 }
