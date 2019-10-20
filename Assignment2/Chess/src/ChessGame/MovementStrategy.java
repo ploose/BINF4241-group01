@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface MovementStrategy {
 
 
-    public boolean isValidMove(Board board, Square current, Square next);
+    public boolean isValidMove(Square current, Square next);
 
     // We need this to check for potential checkmate
     public ArrayList<Square> getMoveSquares(Board board);

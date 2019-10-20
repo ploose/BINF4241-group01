@@ -24,60 +24,9 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
         return true;
     }
 
-    public boolean isValidMove(Board board, Square current, Square next) {
-        Square temp;
-        if (this.color == Color.WHITE) { // only moves up
-            // capture
-            temp = board.getSquare(current.x - 1, current.y - 1);
-            if (temp == next && temp.isOccupied()) {
-                return true;
-            }
-            temp = board.getSquare(current.x + 1, current.y - 1);
-            if (temp == next && temp.isOccupied()) {
-                return true;
-            }
-            // move
-            temp = board.getSquare(current.x, current.y - 1);
-            if (temp == next) {
-                return true;
-            } else if (temp.isOccupied()) {
-                return false;
-            }
-            if (!hasMoved) {
-                temp = board.getSquare(current.x, current.y - 2);
-                if (temp == next) {
-                    return true;
-                }
-            }
-
-        } else if (this.color == Color.BLACK) { // only moves down
-            // capture
-            temp = board.getSquare(current.x - 1, current.y + 1);
-            if (temp == next && temp.isOccupied()) {
-                return true;
-            }
-            temp = board.getSquare(current.x + 1, current.y + 1);
-            if (temp == next && temp.isOccupied()) {
-                return true;
-            }
-            // move
-            temp = board.getSquare(current.x, current.y + 1);
-            if (temp == next) {
-                return true;
-            } else if (temp.isOccupied()) {
-                return false;
-            }
-            if (!hasMoved) {
-                temp = board.getSquare(current.x, current.y + 2);
-                if (temp == next) {
-                    return true;
-                }
-            }
-
-        }
-
-        if (!hasMoved) {
-            hasMoved = true;
+    public boolean isValidMove(Square current, Square next) {
+        if(current == this.current && possibleMoveSquares.contains(next)){
+            return true;
         }
         return false;
     }

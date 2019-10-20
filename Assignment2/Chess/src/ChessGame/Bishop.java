@@ -12,76 +12,10 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
     //TODO
     public void move(){}
 
-    public boolean isValidMove(Board board, Square current, Square next) {
-        int x, y;
-        // Check movement up-left
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x --;
-            y --;
-            if (x < 0 || y < 0) {
-                break;
-            }
-            Square temp = board.getSquare(x, y);
-            if (temp == next) {
-                return true;
-            } else if (temp.isOccupied()) {
-                break;
-            }
+    public boolean isValidMove(Square current, Square next) {
+        if(current == this.current && possibleMoveSquares.contains(next)){
+            return true;
         }
-
-        // Check movement up-right
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x ++;
-            y --;
-            if (x > 7 || y < 0) {
-                break;
-            }
-            Square temp = board.getSquare(x, y);
-            if (temp == next) {
-                return true;
-            } else if (temp.isOccupied()) {
-                break;
-            }
-        }
-
-        // Check movement down-right
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x ++;
-            y ++;
-            if (x > 7 || y > 7) {
-                break;
-            }
-            Square temp = board.getSquare(x, y);
-            if (temp == next) {
-                return true;
-            } else if (temp.isOccupied()) {
-                break;
-            }
-        }
-
-        // Check movement down-left
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x --;
-            y ++;
-            if (x < 0 || y > 7) {
-                break;
-            }
-            Square temp = board.getSquare(x, y);
-            if (temp == next) {
-                return true;
-            } else if (temp.isOccupied()) {
-                break;
-            }
-        }
-
         return false;
     }
 

@@ -15,7 +15,12 @@ class Queen extends Piece implements MovementStrategy {
     }
 
     // TODO: Current system allows player to land & eat own pieces, needs fixing!
-    public boolean isValidMove(Board board, Square current, Square next) {
+    public boolean isValidMove(Square current, Square next) {
+        if(current == this.current && possibleMoveSquares.contains(next)){
+            return true;
+        }
+        return false;
+        /*
         int x, y;
         Square temp;
         // Check movement up-left
@@ -125,6 +130,7 @@ class Queen extends Piece implements MovementStrategy {
             }
         }
         return false;
+         */
     }
 
     // TODO: Every piece has to know its current location and the board
