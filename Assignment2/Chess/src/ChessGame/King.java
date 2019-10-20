@@ -17,7 +17,6 @@ class King extends Piece implements MovementStrategy, IKing{
         return true;
     }
 
-    // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         for(int x = current.x - 1; x < 8; x++){
             for(int y = current.y - 1; y < 8; y++){
@@ -41,30 +40,57 @@ class King extends Piece implements MovementStrategy, IKing{
         }
 
     public ArrayList<Square> getMoveSquares(Board board){
-
-        Square current = this.current;
+        ArrayList<Square> possibleMoveSquares = new ArrayList<Square>();
+        Square temp, current = this.current;
         int x, y;
-        Square temp;
-        // Check movement up
-        y = current.y - 1;
-        x = current.x;
-        temp = board.getSquare(x, current.y);
-        if (!temp.isOccupied()) { possibleMoveSquares.add(temp); }
+        if (current.y - 1 >= 0) {
+            // Check movement up
+            y = current.y - 1;
+            temp = board.getSquare(current.x, y);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
         // Check movement down
-        y = current.y + 1;
-        temp = board.getSquare(x, current.y);
-        if (!temp.isOccupied()) {possibleMoveSquares.add(temp);}
-
+        if(current.y + 1 < 8){
+            y = current.y + 1;
+            temp = board.getSquare(current.x, y);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
         // Check movement left
-        x = current.x - 1;
-        temp = board.getSquare(x, current.y);
-        if (!temp.isOccupied()) { possibleMoveSquares.add(temp); }
-
+        if(current.x - 1 >= 0){
+            x = current.x - 1;
+            temp = board.getSquare(x, current.y);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
         // Check movement right
-        x = current.x + 1;
-        temp = board.getSquare(x, current.y);
-        if (!temp.isOccupied()) { possibleMoveSquares.add(temp);}
-
+        if(current.x + 1 < 8){
+            x = current.x + 1;
+            temp = board.getSquare(x, current.y);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
         return possibleMoveSquares;
     }
 

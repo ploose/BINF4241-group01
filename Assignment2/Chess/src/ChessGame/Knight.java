@@ -76,10 +76,98 @@ class Knight extends Piece implements MovementStrategy, IKnight {
     }
 
     public ArrayList<Square> getMoveSquares(Board board){
-    Square temp;
-    Square current = this.current;
-    int x,y;
+        ArrayList<Square> possibleMoveSquares = new ArrayList<Square>();
+        Square temp, current = this.current;
+        // up-left
+        if (current.x - 1 >= 0 && current.y - 2 >= 0) {
+            temp = board.getSquare(current.x - 1, current.y - 2);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // up-right
+        if (current.x + 1 < 8 && current.y - 2 >= 0) {
+            temp = board.getSquare(current.x + 1, current.y - 2);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // right-up
+        if (current.x + 2 < 8 && current.y - 1 >= 0) {
+            temp = board.getSquare(current.x + 2, current.y - 1);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // right-down
+        if (current.x + 2 < 8 && current.y + 1 < 8) {
+            temp = board.getSquare(current.x + 2, current.y + 1);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // down-right
+        if (current.x + 1 < 8 && current.y + 2 < 8) {
+            temp = board.getSquare(current.x + 1, current.y + 2);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // down-left
+        if (current.x - 1 >= 0 && current.y + 2 < 8) {
+            temp = board.getSquare(current.x - 1, current.y + 2);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // left-down
+        if (current.x - 2 >= 0 && current.y + 1 < 8) {
+            temp = board.getSquare(current.x - 2, current.y + 1);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
+        // left-up
+        if (current.x - 2 >= 0 && current.y - 1 >= 0) {
+            temp = board.getSquare(current.x - 2, current.y + 1);
+            if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
+                possibleMoveSquares.add(temp);
+            }
+        }
 
+    /*
     // up-right
 
         temp = board.getSquare(current.x -1,current.y -2);
@@ -114,10 +202,8 @@ class Knight extends Piece implements MovementStrategy, IKnight {
 
     temp = board.getSquare(current.x -1,current.y -2);
     if (!temp.isOccupied()) {possibleMoveSquares.add(temp);}
-
-
+     */
     return possibleMoveSquares;
-
 }
 
     @Override

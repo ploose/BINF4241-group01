@@ -129,10 +129,9 @@ class Queen extends Piece implements MovementStrategy {
 
     // TODO: Every piece has to know its current location and the board
     public ArrayList<Square> getMoveSquares(Board board){
-
-        Square current = this.current;
+        ArrayList<Square> possibleMoveSquares = new ArrayList<Square>();
+        Square temp, current = this.current;
         int x, y;
-        Square temp;
         // Check movement up-left
         x = current.x;
         y = current.y;
@@ -143,15 +142,16 @@ class Queen extends Piece implements MovementStrategy {
                 break;
             }
             temp = board.getSquare(x, y);
-
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement up-right
         x = current.x;
         y = current.y;
@@ -163,56 +163,65 @@ class Queen extends Piece implements MovementStrategy {
             }
             temp = board.getSquare(x, y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement down-right
         x = current.x;
         y = current.y;
         while (true) {
             x++;
             y++;
-            if (x > 7 || y > 8) {
+            if (x > 7 || y > 7) {
                 break;
             }
             temp = board.getSquare(x, y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement down-left
         x = current.x;
         y = current.y;
         while (true) {
             x--;
             y++;
-            if (x < 0 || y > 8) {
+            if (x < 0 || y > 7) {
                 break;
             }
             temp = board.getSquare(x, y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement up
         for (y = current.y - 1; y >= 0; y--) {
             temp = board.getSquare(current.x, y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
@@ -220,31 +229,36 @@ class Queen extends Piece implements MovementStrategy {
         for (y = current.y + 1; y < 8; y++) {
             temp = board.getSquare(current.x, y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement left
         for (x = current.x - 1; x >= 0; x--) {
             temp = board.getSquare(x, current.y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }else{
+                    break;
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement right
         for (x = current.x + 1; x < 8; x++) {
             temp = board.getSquare(x, current.y);
             if (temp.isOccupied()) {
-                break;
-            }
-            else{
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
+            } else {
                 possibleMoveSquares.add(temp);
             }
         }

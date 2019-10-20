@@ -18,6 +18,17 @@ abstract class Piece {
         }
 
         public abstract ArrayList<Square> getMoveSquares(Board board);
+
+        // Returns true if given square holds enemy, false if friendly
+        protected boolean hasEnemy(Square s) {
+                Piece target = (Piece) s.removePiece();
+                s.addPiece(target);
+                if (target.color != this.color) {
+                        return true;
+                }
+                return false;
+        }
+
         // public abstract Square getCurrentSquare();
         // public abstract ArrayList<Square> getAttackedSquares();
 

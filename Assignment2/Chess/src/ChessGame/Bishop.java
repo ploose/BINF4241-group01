@@ -12,7 +12,6 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
     //TODO
     public void move(){}
 
-    // TODO: Current system allows player to land & eat own pieces, needs fixing!
     public boolean isValidMove(Board board, Square current, Square next) {
         int x, y;
         // Check movement up-left
@@ -55,7 +54,7 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
         while (true) {
             x ++;
             y ++;
-            if (x > 7 || y > 8) {
+            if (x > 7 || y > 7) {
                 break;
             }
             Square temp = board.getSquare(x, y);
@@ -72,7 +71,7 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
         while (true) {
             x --;
             y ++;
-            if (x < 0 || y > 8) {
+            if (x < 0 || y > 7) {
                 break;
             }
             Square temp = board.getSquare(x, y);
@@ -93,8 +92,9 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
 
     @Override
     public ArrayList<Square> getMoveSquares(Board board){
+        ArrayList<Square> possibleMoveSquares = new ArrayList<Square>();
+        Square temp, current = this.current;
         int x, y;
-        Square temp;
         // Check movement up-left
         x = current.x;
         y = current.y;
@@ -105,15 +105,16 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
                 break;
             }
             temp = board.getSquare(x, y);
-
             if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
                 break;
             }
             else{
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement up-right
         x = current.x;
         y = current.y;
@@ -125,50 +126,55 @@ class Bishop extends Piece implements MovementStrategy, IBishop {
             }
             temp = board.getSquare(x, y);
             if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
                 break;
             }
             else{
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement down-right
         x = current.x;
         y = current.y;
         while (true) {
             x++;
             y++;
-            if (x > 7 || y > 8) {
+            if (x > 7 || y > 7) {
                 break;
             }
             temp = board.getSquare(x, y);
             if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
                 break;
             }
             else{
                 possibleMoveSquares.add(temp);
             }
         }
-
         // Check movement down-left
         x = current.x;
         y = current.y;
         while (true) {
             x--;
             y++;
-            if (x < 0 || y > 8) {
+            if (x < 0 || y > 7) {
                 break;
             }
             temp = board.getSquare(x, y);
             if (temp.isOccupied()) {
+                if(hasEnemy(temp)){
+                    possibleMoveSquares.add(temp);
+                }
                 break;
             }
             else{
                 possibleMoveSquares.add(temp);
             }
         }
-
-
         return possibleMoveSquares;
     }
 
