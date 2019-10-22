@@ -33,13 +33,13 @@ class Board {
         squares[7][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[7][7])));
 
         squares[1][0].addPiece(piecePot.add(new Knight(Color.BLACK, squares[1][0])));
-        squares[6][0].addPiece(piecePot.add(new Knight(Color.BLACK, squares[6][7])));
-        squares[1][7].addPiece(piecePot.add(new Knight(Color.WHITE, squares[1][0])));
+        squares[6][0].addPiece(piecePot.add(new Knight(Color.BLACK, squares[6][0])));
+        squares[1][7].addPiece(piecePot.add(new Knight(Color.WHITE, squares[1][7])));
         squares[6][7].addPiece(piecePot.add(new Knight(Color.WHITE, squares[6][7])));
 
         squares[2][0].addPiece(piecePot.add(new Bishop(Color.BLACK, squares[2][0])));
-        squares[5][0].addPiece(piecePot.add(new Bishop(Color.BLACK, squares[5][7])));
-        squares[2][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[2][0])));
+        squares[5][0].addPiece(piecePot.add(new Bishop(Color.BLACK, squares[5][0])));
+        squares[2][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[2][7])));
         squares[5][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[5][7])));
 
         squares[3][0].addPiece(piecePot.add(new Queen(Color.BLACK, squares[3][0])));
@@ -49,8 +49,8 @@ class Board {
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
 
         for (int i = 0; i < 8; i++) {
-            squares[i][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[1][i])));
-            squares[i][6].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[1][i])));
+            squares[i][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[i][1])));
+            squares[i][6].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[i][6])));
         }
     }
 

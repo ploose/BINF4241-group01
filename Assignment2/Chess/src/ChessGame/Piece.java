@@ -29,6 +29,7 @@ abstract class Piece implements MovementStrategy{
 
                 if (isValidMove(current, next)) {
                         hasMoved = true;
+                        this.current = next;
                         return true;
                 } else {
                         return false;
@@ -67,7 +68,7 @@ abstract class Piece implements MovementStrategy{
                 Square temp;
 
                 for (int i = 0; i < speed; i++) {
-                        if (y <= 8) {
+                        if (y <= 7) {
                                 temp = squares[current.x][y];
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
@@ -88,7 +89,7 @@ abstract class Piece implements MovementStrategy{
                 Square temp;
 
                 for (int i = 0; i < speed; i++) {
-                        if (x <= 8) {
+                        if (x <= 7) {
                                 temp = squares[x][current.y];
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
@@ -125,13 +126,97 @@ abstract class Piece implements MovementStrategy{
                 }
         }
 
-        protected void diagonalUpLeft() {}
+        protected void diagonalUpLeft(final Square[][] squares, int speed) {
+            int x = current.x - 1, y = current.y - 1;
+            Square temp;
 
-        protected void diagonalUpRight() {}
+            for (int i = 0; i < speed; i++) {
+                if (x >= 0 && y >= 0) {
+                    temp = squares[x][y];
 
-        protected void diagonalDownLeft() {}
+                    // Add square if empty or enemy on it
+                    if (temp.isOccupied()) {
+                        if(hasEnemy(temp)){
+                            possibleMoveSquares.add(temp);
+                        }
+                        break;
+                    } else {
+                        possibleMoveSquares.add(temp);
+                    }
+                    x--;
+                    y--;
+                }
+            }
+        }
 
-        protected void diagonalDownRight() {}
+        protected void diagonalUpRight(final Square[][] squares, int speed) {
+            int x = current.x + 1, y = current.y - 1;
+            Square temp;
+
+            for (int i = 0; i < speed; i++) {
+                if (x <= 7 && y >= 0) {
+                    temp = squares[x][y];
+
+                    // Add square if empty or enemy on it
+                    if (temp.isOccupied()) {
+                        if(hasEnemy(temp)){
+                            possibleMoveSquares.add(temp);
+                        }
+                        break;
+                    } else {
+                        possibleMoveSquares.add(temp);
+                    }
+                    x++;
+                    y--;
+                }
+            }
+        }
+
+        protected void diagonalDownLeft(final Square[][] squares, int speed) {
+            int x = current.x - 1, y = current.y + 1;
+            Square temp;
+
+            for (int i = 0; i < speed; i++) {
+                if (x >= 0 && y <= 7) {
+                    temp = squares[x][y];
+
+                    // Add square if empty or enemy on it
+                    if (temp.isOccupied()) {
+                        if(hasEnemy(temp)){
+                            possibleMoveSquares.add(temp);
+                        }
+                        break;
+                    } else {
+                        possibleMoveSquares.add(temp);
+                    }
+                    x--;
+                    y++;
+                }
+            }
+        }
+
+        protected void diagonalDownRight(final Square[][] squares, int speed) {
+            int x = current.x + 1, y = current.y + 1;
+            Square temp;
+
+            for (int i = 0; i < speed; i++) {
+                if (x <= 7 && y <= 7) {
+                    temp = squares[x][y];
+
+                    // Add square if empty or enemy on it
+                    if (temp.isOccupied()) {
+                        if(hasEnemy(temp)){
+                            possibleMoveSquares.add(temp);
+                        }
+                        break;
+                    } else {
+                        possibleMoveSquares.add(temp);
+                    }
+                    x++;
+                    y++;
+                }
+            }
+        }
 
 
         // Returns true if given square holds enemy, false if friendly

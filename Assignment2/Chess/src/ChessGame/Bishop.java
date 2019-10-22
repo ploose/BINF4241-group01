@@ -1,9 +1,12 @@
 package ChessGame;
 
 class Bishop extends Piece {
+    private final int speed;
 
     Bishop(Color color, Square current){
         super(color, current);
+
+        speed = 8;
     }
 
     //needs to be implemented for Checkmate
@@ -13,92 +16,10 @@ class Bishop extends Piece {
 
     @Override
     public void getMoveSquares(Square[][] squares){
-        Square temp, current = this.current;
-        int x, y;
-
-        // Check movement up-left
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x--;
-            y--;
-            if (x < 0 || y < 0) {
-                break;
-            }
-            temp = squares[x][y];
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            }
-            else{
-                possibleMoveSquares.add(temp);
-            }
-        }
-
-        // Check movement up-right
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x++;
-            y--;
-            if (x > 7 || y < 0) {
-                break;
-            }
-            temp = squares[x][y];
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            }
-            else{
-                possibleMoveSquares.add(temp);
-            }
-        }
-
-        // Check movement down-right
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x++;
-            y++;
-            if (x > 7 || y > 7) {
-                break;
-            }
-            temp = squares[x][y];
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            }
-            else{
-                possibleMoveSquares.add(temp);
-            }
-        }
-
-        // Check movement down-left
-        x = current.x;
-        y = current.y;
-        while (true) {
-            x--;
-            y++;
-            if (x < 0 || y > 7) {
-                break;
-            }
-            temp = squares[x][y];
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            }
-            else{
-                possibleMoveSquares.add(temp);
-            }
-        }
+        diagonalDownLeft(squares, speed);
+        diagonalDownRight(squares, speed);
+        diagonalUpLeft(squares, speed);
+        diagonalUpRight(squares, speed);
     }
 
     @Override
