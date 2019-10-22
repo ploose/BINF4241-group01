@@ -22,7 +22,7 @@ class Ui {
     }
 
     void printInvalidMove() {
-        System.out.print("Your piece is not allowed to do that! Please enter another move. Command: ");
+        System.out.println("Your piece is not allowed to do that! Please enter another move.");
     }
 
     boolean printWrongInput() {

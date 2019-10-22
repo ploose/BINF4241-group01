@@ -55,53 +55,148 @@ class Game {
         String move = userInterface.getMove(currentPlayer);
 
         if (move.equals("castle long")) {
-            return castleLong();
-        } else if (move.equals("en passent")) {
-            return board.enPassent(currentPlayer.getColor());
-        } else if (checkInput(move)) {
-            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(6)), translate(move.charAt(7)))) {
+            if (castleLong()) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
                 return false;
             }
+
+        } else if (move.equals("castle short")) {
+            if (castleShort()) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
+
+        } else if (move.equals("en passent")) {
+            if (board.enPassent(currentPlayer.getColor())) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
+
+        } else if (checkInput(move)) {
+            if (board.move(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(7)), translate(move.charAt(6)), currentPlayer.getColor())) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
+
         } else {
             return userInterface.printWrongInput();
         }
     }
 
-    //TODO:
+    //TODO: change to correct move
     private boolean castleLong() {
         if (currentPlayer.getColor() == Color.BLACK) {
             Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(0, 0);
 
-            if (!(squareOne.hasType("King") && squareTwo.hasType("Rook"))) {
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
                 return false;
             }
 
-            if (squareOne.getCurrentPiece().hasMoved() && squareTwo.getCurrentPiece().hasMoved()) {
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
                 return false;
             }
 
-            if (board.getSquare(1, 0).isOccupied() && board.getSquare(2, 0).isOccupied()
-                    && board.getSquare(3, 0).isOccupied()) {
-                return false;
+            for (int i = 1; i < 4; i++) {
+                if (board.getSquare(i, 0).isOccupied()) {
+                    return false;
+                }
             }
 
             Piece tmp = squareOne.removePiece();
 
-            board.move(0, 0, 4, 0);
-            squareTwo.addPiece(tmp);
+            board.move(0, 0, 3, 0, currentPlayer.getColor());
+            board.getSquare(2, 0).addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
 
         } else {
+            Square squareOne = board.getSquare(4, 7), squareTwo = board.getSquare(0, 7);
 
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 1; i < 4; i++) {
+                if (board.getSquare(i, 7).isOccupied()) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            board.move(0, 7, 3, 7, currentPlayer.getColor());
+            board.getSquare(2, 7).addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
         }
-        return true;
     }
 
-    //TODO:
-    private boolean castleShort(Color color) {
-        return true;
+    //TODO: change to correct move
+    private boolean castleShort() {
+        if (currentPlayer.getColor() == Color.BLACK) {
+            Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(7, 0);
+
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 5; i < 7; i++) {
+                if (board.getSquare(i, 0).isOccupied()) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            board.move(7, 0, 5, 0, currentPlayer.getColor());
+            board.getSquare(6, 0).addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
+
+        } else {
+            Square squareOne = board.getSquare(4, 7), squareTwo = board.getSquare(7, 7);
+
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 5; i < 7; i++) {
+                if (board.getSquare(i, 7).isOccupied()) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            board.move(7, 7, 5, 7, currentPlayer.getColor());
+            board.getSquare(6, 7).addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
+        }
     }
 
     private void swapPlayer() {

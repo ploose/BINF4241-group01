@@ -33,7 +33,7 @@ class Square {
 
     boolean hasType(String type) {
         if (currentPiece != null) {
-            return currentPiece.getColor().toString().equals(type);
+            return currentPiece.getClass().toString().equals(type);
         } else {
             return false;
         }
