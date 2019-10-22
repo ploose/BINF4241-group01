@@ -39,7 +39,100 @@ abstract class Piece implements MovementStrategy{
                 return current == this.current && possibleMoveSquares.contains(next);
         }
 
-        protected abstract void getMoveSquares(Square[][] squares);
+        protected abstract void getMoveSquares(final Square[][] squares);
+
+        protected void straightUp(final Square[][] squares, int speed) {
+                int y = current.y - 1;
+                Square temp;
+
+                for (int i = 0; i < speed; i++) {
+                        if (y >= 0) {
+                                temp = squares[current.x][y];
+                                // Add square if empty or enemy on it
+                                if (temp.isOccupied()) {
+                                        if(hasEnemy(temp)){
+                                                possibleMoveSquares.add(temp);
+                                        }
+                                        break;
+                                } else {
+                                        possibleMoveSquares.add(temp);
+                                }
+                                y--;
+                        }
+                }
+        }
+
+        protected void straightDown(final Square[][] squares, int speed) {
+                int y = current.y + 1;
+                Square temp;
+
+                for (int i = 0; i < speed; i++) {
+                        if (y <= 8) {
+                                temp = squares[current.x][y];
+                                // Add square if empty or enemy on it
+                                if (temp.isOccupied()) {
+                                        if(hasEnemy(temp)){
+                                                possibleMoveSquares.add(temp);
+                                        }
+                                        break;
+                                } else {
+                                        possibleMoveSquares.add(temp);
+                                }
+                                y++;
+                        }
+                }
+        }
+
+        protected void straightRight(final Square[][] squares, int speed) {
+                int x = current.x + 1;
+                Square temp;
+
+                for (int i = 0; i < speed; i++) {
+                        if (x <= 8) {
+                                temp = squares[x][current.y];
+                                // Add square if empty or enemy on it
+                                if (temp.isOccupied()) {
+                                        if(hasEnemy(temp)){
+                                                possibleMoveSquares.add(temp);
+                                        }
+                                        break;
+                                } else {
+                                        possibleMoveSquares.add(temp);
+                                }
+                                x++;
+                        }
+                }
+        }
+
+        protected void straightLeft(final Square[][] squares, int speed) {
+                int x = current.x - 1;
+                Square temp;
+
+                for (int i = 0; i < speed; i++) {
+                        if (x >= 0) {
+                                temp = squares[x][current.y];
+                                // Add square if empty or enemy on it
+                                if (temp.isOccupied()) {
+                                        if(hasEnemy(temp)){
+                                                possibleMoveSquares.add(temp);
+                                        }
+                                        break;
+                                } else {
+                                        possibleMoveSquares.add(temp);
+                                }
+                                x--;
+                        }
+                }
+        }
+
+        protected void diagonalUpLeft() {}
+
+        protected void diagonalUpRight() {}
+
+        protected void diagonalDownLeft() {}
+
+        protected void diagonalDownRight() {}
+
 
         // Returns true if given square holds enemy, false if friendly
         protected boolean hasEnemy(Square s) {

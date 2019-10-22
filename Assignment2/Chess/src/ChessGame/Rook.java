@@ -1,9 +1,12 @@
 package ChessGame;
 
 class Rook extends Piece {
+    private final int speed;
 
     Rook(Color color, Square current) {
         super(color, current);
+
+        speed = 8;
     }
 
     //needs to be implemented for Checkmate
@@ -12,64 +15,11 @@ class Rook extends Piece {
     }
 
     public void getMoveSquares(final Square[][] squares) {
-        Square temp, current = this.current;
-        int x, y;
+        straightUp(squares, speed);
+        straightDown(squares, speed);
 
-        // Check movement up
-        for (y = current.y - 1; y >= 0; y--) {
-            temp = squares[current.x][y];
-            // Add square if empty or enemy on it
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            } else {
-                possibleMoveSquares.add(temp);
-            }
-        }
-
-        // Check movement down
-        for (y = current.y + 1; y < 8; y++) {
-            temp = squares[current.x][y];
-            // Add square if empty or enemy on it
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            } else {
-                possibleMoveSquares.add(temp);
-            }
-        }
-
-        // Check movement left
-        for (x = current.x - 1; x >= 0; x--) {
-            temp = squares[x][current.y];
-            // Add square if empty or enemy on it
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            } else {
-                possibleMoveSquares.add(temp);
-            }
-        }
-
-        // Check movement right
-        for (x = current.x + 1; x < 8; x++) {
-            temp = squares[x][current.y];
-            // Add square if empty or enemy on it
-            if (temp.isOccupied()) {
-                if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
-                }
-                break;
-            } else {
-                possibleMoveSquares.add(temp);
-            }
-        }
+        straightLeft(squares, speed);
+        straightRight(squares, speed);
     }
 
     public String toString() {
