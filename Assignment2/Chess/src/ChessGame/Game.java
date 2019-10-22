@@ -71,7 +71,7 @@ class Game {
             }
 
         } else if (move.equals("en passent")) {
-            if (board.enPassent(currentPlayer.getColor())) {
+            if (enPassent()) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -91,7 +91,7 @@ class Game {
         }
     }
 
-    //TODO: change to correct move
+    //TODO: add danger check
     private boolean castleLong() {
         if (currentPlayer.getColor() == Color.BLACK) {
             Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(0, 0);
@@ -145,7 +145,7 @@ class Game {
         }
     }
 
-    //TODO: change to correct move
+    //TODO: add danger check
     private boolean castleShort() {
         if (currentPlayer.getColor() == Color.BLACK) {
             Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(7, 0);
@@ -197,6 +197,10 @@ class Game {
 
             return true;
         }
+    }
+
+    private boolean enPassent() {
+
     }
 
     private void swapPlayer() {
