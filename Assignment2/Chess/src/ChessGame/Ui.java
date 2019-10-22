@@ -21,6 +21,10 @@ class Ui {
         System.out.print(score);
     }
 
+    void printInvalidMove() {
+        System.out.print("Your piece is not allowed to do that! Please enter another move. Command: ");
+    }
+
     boolean printWrongInput() {
         System.out.println("Invalid Input!");
         return false;

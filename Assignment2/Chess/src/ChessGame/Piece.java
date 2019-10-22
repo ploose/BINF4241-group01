@@ -1,42 +1,52 @@
-
-
 package ChessGame;
 
 import java.util.ArrayList;
 
-abstract class Piece {
+abstract class Piece implements MovementStrategy{
         final protected Color color;
         protected Square current;
-        private boolean hasMoved;
+        protected boolean hasMoved;
+        protected ArrayList<Square> possibleMoveSquares;
 
         Piece(Color color, Square current){
                 this.color = color;
                 this.current = current;
                 hasMoved = false;
+
+                possibleMoveSquares = new ArrayList<>();
         }
 
-        Color getColor() {
+        public Color getColor() {
                 return color;
         }
 
-        boolean hasMoved() {
+        public boolean hasMoved() {
                 return hasMoved;
         }
 
-        void move() {
-                hasMoved = true;
+        public boolean move(Square current, Square next, final Square[][] squares) {
+                getMoveSquares(squares);
+
+                if (isValidMove(current, next)) {
+                        hasMoved = true;
+                        return true;
+                } else {
+                        return false;
+                }
         }
 
-        public abstract ArrayList<Square> getMoveSquares(Board board);
+        protected boolean isValidMove(Square current, Square next) {
+                return current == this.current && possibleMoveSquares.contains(next);
+        }
+
+        protected abstract void getMoveSquares(Square[][] squares);
 
         // Returns true if given square holds enemy, false if friendly
         protected boolean hasEnemy(Square s) {
-                Piece target = (Piece) s.removePiece();
+                Piece target = s.removePiece();
                 s.addPiece(target);
-                if (target.color != this.color) {
-                        return true;
-                }
-                return false;
+
+                return target.color != this.color;
         }
 }
 

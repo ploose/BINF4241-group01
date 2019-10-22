@@ -8,10 +8,14 @@ import java.util.ArrayList;
 public interface MovementStrategy {
 
 
-    public boolean isValidMove(Square current, Square next);
+    //boolean isValidMove(Square current, Square next);
+
+    boolean move(Square current, Square next, final Square[][] squares);
+    boolean hasMoved();
+    Color getColor();
 
     // We need this to check for potential checkmate
-    public ArrayList<Square> getMoveSquares(Board board);
+    //ArrayList<Square> getMoveSquares();
 
 
 }
@@ -25,10 +29,10 @@ public interface MovementStrategy {
     }
 
     interface IQueen extends MovementStrategy{
-        public void move();
+        public boolean move();
     }
     interface IBishop extends MovementStrategy{
-        public void move();
+        boolean move(Square current, Square next, Square[][] squares);
     }
     interface IKnight extends MovementStrategy{
         public void move();

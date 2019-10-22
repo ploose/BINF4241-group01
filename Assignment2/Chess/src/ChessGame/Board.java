@@ -64,8 +64,15 @@ class Board {
 
     //TODO: check if valid move
     boolean move(int x1, int y1, int x2, int y2) {
-        squares[y2][x2].addPiece(squares[y1][x1].removePiece());
-        return true;
+        if (squares[y1][x1].getCurrentPiece().move(squares[y1][x1], squares[y2][x2], squares)) {
+            if (squares[y2][x2].isOccupied()) {
+                piecePot.remove(squares[y2][x2].removePiece());
+            }
+            squares[y2][x2].addPiece(squares[y1][x1].removePiece());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     String lostPieces() {

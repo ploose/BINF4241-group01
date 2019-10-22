@@ -1,14 +1,9 @@
 package ChessGame;
 
-import java.util.ArrayList;
-
-class King extends Piece implements MovementStrategy, IKing{
-    private ArrayList<Square> possibleMoveSquares;
+class King extends Piece {
 
     King(Color color, Square current){
         super(color, current);
-
-        possibleMoveSquares = new ArrayList<>();
     }
 
     // TODO:
@@ -16,22 +11,19 @@ class King extends Piece implements MovementStrategy, IKing{
         return true;
     }
 
-    public boolean isValidMove(Square current, Square next) {
-        return current == this.current && possibleMoveSquares.contains(next);
-    }
-
     public boolean isCheckMate() {
         return false;
         }
 
-    public ArrayList<Square> getMoveSquares(Board board) {
+        //TODO: check movement diagonal
+    public void getMoveSquares(final Square[][] squares) {
         Square temp, current = this.current;
         int x, y;
 
         // Check movement up
         if (current.y - 1 > -1) {
             y = current.y - 1;
-            temp = board.getSquare(current.x, y);
+            temp = squares[current.x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
                     possibleMoveSquares.add(temp);
@@ -44,7 +36,7 @@ class King extends Piece implements MovementStrategy, IKing{
         // Check movement down
         if(current.y + 1 < 8){
             y = current.y + 1;
-            temp = board.getSquare(current.x, y);
+            temp = squares[current.x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
                     possibleMoveSquares.add(temp);
@@ -57,7 +49,7 @@ class King extends Piece implements MovementStrategy, IKing{
         // Check movement left
         if(current.x - 1 >= 0){
             x = current.x - 1;
-            temp = board.getSquare(x, current.y);
+            temp = squares[x][current.y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
                     possibleMoveSquares.add(temp);
@@ -70,7 +62,7 @@ class King extends Piece implements MovementStrategy, IKing{
         // Check movement right
         if(current.x + 1 < 8){
             x = current.x + 1;
-            temp = board.getSquare(x, current.y);
+            temp = squares[x][current.y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
                     possibleMoveSquares.add(temp);
@@ -79,8 +71,6 @@ class King extends Piece implements MovementStrategy, IKing{
                 possibleMoveSquares.add(temp);
             }
         }
-
-        return possibleMoveSquares;
     }
 
     @Override

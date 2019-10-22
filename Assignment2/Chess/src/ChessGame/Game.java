@@ -59,7 +59,12 @@ class Game {
         } else if (move.equals("en passent")) {
             return board.enPassent(currentPlayer.getColor());
         } else if (checkInput(move)) {
-            return board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(6)), translate(move.charAt(7)));
+            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(6)), translate(move.charAt(7)))) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
         } else {
             return userInterface.printWrongInput();
         }
@@ -129,46 +134,45 @@ class Game {
 
         switch (current) {
             case 'A':
-            case '0':
+            case '1':
                 num = 0;
                 break;
 
             case 'B':
-            case '1':
+            case '2':
                 num = 1;
                 break;
 
             case 'C':
-            case '2':
+            case '3':
                 num = 2;
                 break;
 
             case 'D':
-            case '3':
+            case '4':
                 num = 3;
                 break;
 
             case 'E':
-            case '4':
+            case '5':
                 num = 4;
                 break;
 
             case 'F':
-            case '5':
+            case '6':
                 num = 5;
                 break;
 
             case 'G':
-            case '6':
+            case '7':
                 num = 6;
                 break;
 
             case 'H':
-            case '7':
+            case '8':
                 num = 7;
                 break;
         }
-        System.out.println(num);
         return num;
     }
 }

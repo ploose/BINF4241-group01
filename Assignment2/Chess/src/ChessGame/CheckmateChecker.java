@@ -15,12 +15,13 @@ class CheckmateChecker {
 //            - Can I take the attacker?
 
     // Returns if the square is checked -> should be games responsibility
+    /*
     private boolean isChecked(PiecePot piecePot, Square kingSquare, Color color){
         isChecked = false;
 
         for(int i = 0; i < piecePot.getOnBoardSize(color); i++) {
             piece = piecePot.getOnBoard(i, color);
-            for (Square square : piece.getMoveSquares(board)) {
+            for (Square square : piece.getMoveSquares(board.)) {
                 if (square == kingSquare) {
                     isChecked = true;
                     break;
@@ -31,6 +32,9 @@ class CheckmateChecker {
         return isChecked;
     }
 
+     */
+
+    /*
     public boolean isCheckMate(PiecePot piecePot, Square kingSquare, Color color, ArrayList<Square> attackedSquares, King king){
         boolean canMoveOut = false;
         boolean canBlock = false;
@@ -81,5 +85,7 @@ class CheckmateChecker {
                 return true;
         }
     }
+
+     */
 }
 
