@@ -4,17 +4,11 @@ import java.util.ArrayList;
 
 class Pawn extends Piece implements MovementStrategy, IPawn {
     private final int speed;
-    private ArrayList<Square> possibleAttackSquares;
 
     Pawn(Color color, Square current) {
         super(color, current);
 
         speed = 1;
-        possibleAttackSquares = new ArrayList<>();
-    }
-
-    public boolean isValidMove(Square current, Square next) {
-        return (current == this.current && (possibleAttackSquares.contains(next) || possibleMoveSquares.contains(next)));
     }
 
     public boolean CanBeCaptured() {
@@ -29,7 +23,6 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
         return true;
     }
 
-    //TODO: Is this really necessary? What's the difference between a possible movesquare which holds an enemy and an attacksquare?
     public void getMoveSquares(final Square[][] squares) {
         Square temp;
         int x = current.x, y = current.y;
@@ -45,7 +38,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                 temp = squares[x - 1][y - 1];
                 if (temp.isOccupied()) {
                     if (hasEnemy(temp)) {
-                        possibleAttackSquares.add(temp);
+                        canEat.add(temp);
                     }
                 }
             }
@@ -54,7 +47,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                 temp = squares[x + 1][y - 1];
                 if (temp.isOccupied()) {
                     if (hasEnemy(temp)) {
-                        possibleAttackSquares.add(temp);
+                        canEat.add(temp);
                     }
                 }
             }
@@ -69,7 +62,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                 temp = squares[x - 1][y + 1];
                 if (temp.isOccupied()) {
                     if (hasEnemy(temp)) {
-                        possibleAttackSquares.add(temp);
+                        canEat.add(temp);
                     }
                 }
             }
@@ -78,7 +71,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                 temp = squares[x + 1][y + 1];
                 if (temp.isOccupied()) {
                     if (hasEnemy(temp)) {
-                        possibleAttackSquares.add(temp);
+                        canEat.add(temp);
                     }
                 }
             }

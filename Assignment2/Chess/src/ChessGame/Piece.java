@@ -7,6 +7,7 @@ abstract class Piece implements MovementStrategy{
         protected Square current;
         protected boolean hasMoved;
         protected ArrayList<Square> possibleMoveSquares;
+        protected ArrayList<Square> canEat;
 
         Piece(Color color, Square current){
                 this.color = color;
@@ -14,6 +15,7 @@ abstract class Piece implements MovementStrategy{
                 hasMoved = false;
 
                 possibleMoveSquares = new ArrayList<>();
+                canEat = new ArrayList<>();
         }
 
         public Color getColor() {
@@ -36,8 +38,24 @@ abstract class Piece implements MovementStrategy{
                 }
         }
 
+        public boolean eat(Square current, Square next, final Square[][] squares) {
+            getMoveSquares(squares);
+
+            if (isValidAttack(current, next)) {
+                hasMoved = true;
+                this.current = next;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         protected boolean isValidMove(Square current, Square next) {
-                return current == this.current && possibleMoveSquares.contains(next);
+            return current == this.current && possibleMoveSquares.contains(next);
+        }
+
+        protected boolean isValidAttack(Square current, Square next) {
+            return current == this.current && canEat.contains(next);
         }
 
         protected abstract void getMoveSquares(final Square[][] squares);
@@ -52,7 +70,7 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
-                                                possibleMoveSquares.add(temp);
+                                                canEat.add(temp);
                                         }
                                         break;
                                 } else {
@@ -73,7 +91,7 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
-                                                possibleMoveSquares.add(temp);
+                                                canEat.add(temp);
                                         }
                                         break;
                                 } else {
@@ -94,7 +112,7 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
-                                                possibleMoveSquares.add(temp);
+                                                canEat.add(temp);
                                         }
                                         break;
                                 } else {
@@ -115,7 +133,7 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
-                                                possibleMoveSquares.add(temp);
+                                                canEat.add(temp);
                                         }
                                         break;
                                 } else {
@@ -137,7 +155,7 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            possibleMoveSquares.add(temp);
+                            canEat.add(temp);
                         }
                         break;
                     } else {
@@ -160,7 +178,7 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            possibleMoveSquares.add(temp);
+                            canEat.add(temp);
                         }
                         break;
                     } else {
@@ -183,7 +201,7 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            possibleMoveSquares.add(temp);
+                            canEat.add(temp);
                         }
                         break;
                     } else {
@@ -206,7 +224,7 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            possibleMoveSquares.add(temp);
+                            canEat.add(temp);
                         }
                         break;
                     } else {
@@ -217,7 +235,6 @@ abstract class Piece implements MovementStrategy{
                 }
             }
         }
-
 
         // Returns true if given square holds enemy, false if friendly
         protected boolean hasEnemy(Square s) {

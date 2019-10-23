@@ -62,7 +62,6 @@ class Board {
         game.setWinner(winner);
     }
 
-    //TODO: check if valid move
     boolean move(int x1, int y1, int x2, int y2, Color color) {
         if (!squares[x1][y1].isOccupied()) {
             return false;
@@ -73,13 +72,28 @@ class Board {
         }
 
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
-            if (squares[x2][y2].isOccupied()) {
-                piecePot.remove(squares[x2][y2].removePiece());
-            }
-
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
             return true;
 
+        } else {
+            return false;
+        }
+    }
+
+    boolean eat(int x1, int y1, int x2, int y2, Color color) {
+        if (!squares[x1][y1].isOccupied()) {
+            return false;
+        }
+
+        if (!(color == squares[x1][y1].getCurrentPiece().getColor())) {
+            return false;
+        }
+
+        if (squares[x1][y1].getCurrentPiece().eat(squares[x1][y1], squares[x2][y2], squares)) {
+            piecePot.remove(squares[x2][y2].removePiece());
+            squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+
+            return true;
         } else {
             return false;
         }
@@ -89,9 +103,14 @@ class Board {
         return piecePot.lostPieces();
     }
 
-    //TODO:
-    boolean enPassent(Color color) {
-        return true;
+    void enPassant(int x1, int y1, int x2, int y2, Color color) {
+        squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+
+        if (color == Color.BLACK) {
+            piecePot.remove(squares[x2][y2 + 1].removePiece());
+        } else {
+            piecePot.remove(squares[x2][y2 - 1].removePiece());
+        }
     }
 
     public String toString() {

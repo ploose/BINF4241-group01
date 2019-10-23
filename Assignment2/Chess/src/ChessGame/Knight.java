@@ -14,7 +14,7 @@ class Knight extends Piece {
             temp = squares[current.x - 1][current.y - 2];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -26,7 +26,7 @@ class Knight extends Piece {
             temp = squares[current.x + 1][current.y - 2];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -38,7 +38,7 @@ class Knight extends Piece {
             temp = squares[current.x + 2][current.y - 1];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -50,7 +50,7 @@ class Knight extends Piece {
             temp = squares[current.x + 2][current.y + 1];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -62,7 +62,7 @@ class Knight extends Piece {
             temp = squares[current.x + 1][current.y + 2];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -74,7 +74,7 @@ class Knight extends Piece {
             temp = squares[current.x - 1][current.y + 2];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -86,7 +86,7 @@ class Knight extends Piece {
             temp = squares[current.x - 2][current.y + 1];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
@@ -98,7 +98,7 @@ class Knight extends Piece {
             temp = squares[current.x - 2][current.y + 1];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);

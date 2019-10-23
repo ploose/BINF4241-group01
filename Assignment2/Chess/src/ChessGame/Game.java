@@ -1,10 +1,14 @@
 package ChessGame;
 
+import java.util.ArrayList;
+
 class Game {
     private Board board;
     private Ui userInterface;
     private Player currentPlayer, black, white;
     private boolean isRunning;
+    private String move;
+    private ArrayList<String> log;
 
     Game() {
         board = new Board(this);
@@ -15,6 +19,8 @@ class Game {
         getPlayers();
 
         currentPlayer = black;
+
+        log = new ArrayList<>();
 
         run();
     }
@@ -37,7 +43,8 @@ class Game {
             while (!isValidMove) {
                 isValidMove = move();
             }
-
+            log.add(move);
+            System.out.println(log);
             swapPlayer();
         }
     }
@@ -52,9 +59,9 @@ class Game {
     }
 
     private boolean move() {
-        String move = userInterface.getMove(currentPlayer);
+        move = userInterface.getMove(currentPlayer);
 
-        if (move.equals("castle long")) {
+        if (move.equals("o-o-o")) {
             if (castleLong()) {
                 return true;
             } else {
@@ -62,7 +69,7 @@ class Game {
                 return false;
             }
 
-        } else if (move.equals("castle short")) {
+        } else if (move.equals("o-o")) {
             if (castleShort()) {
                 return true;
             } else {
@@ -70,16 +77,24 @@ class Game {
                 return false;
             }
 
-        } else if (move.equals("en passent")) {
-            if (enPassent()) {
+        } else if (checkInput(move, "en passant")) {
+            if (enPassant(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(4)), translate(move.charAt(3)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
                 return false;
             }
 
-        } else if (checkInput(move)) {
-            if (board.move(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(7)), translate(move.charAt(6)), currentPlayer.getColor())) {
+        } else if (checkInput(move, "move")) {
+            if (board.move(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(4)), translate(move.charAt(3)), currentPlayer.getColor())) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
+
+        } else if (checkInput(move, "eat")) {
+            if (board.eat(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(4)), translate(move.charAt(3)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -199,8 +214,9 @@ class Game {
         }
     }
 
-    private boolean enPassent() {
-
+    private boolean enPassant(int x1, int y1, int x2, int y2) {
+        board.enPassant(x1, y1, x2, y2, currentPlayer.getColor());
+        return true;
     }
 
     private void swapPlayer() {
@@ -216,58 +232,70 @@ class Game {
         userInterface.celebrateWinner(winner);
     }
 
-    private boolean checkInput(String move) {
-        if (move.length() != 8) {
+    private boolean checkInput(String move, String mode) {
+        if (move.length() < 5 || move.length() > 6) {
             return false;
         }
 
-        boolean partOne = move.substring(0, 1).matches("[A-H]") && move.substring(1, 2).matches("[0-9]");
-        boolean partTwo = move.substring(2, 6).matches(" to ");
-        boolean partThree = move.substring(6, 7).matches("[A-H]") && move.substring(7, 8).matches("[0-9]");
+        switch (mode) {
+            case "move":
+                return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                        move.substring(2, 3).matches("-") &&
+                        move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
 
-        return partOne && partTwo && partThree;
+            case "eat":
+                return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                        move.substring(2, 3).matches("x") &&
+                        move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+            case "en passant":
+                return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                        move.substring(2, 4).matches("ep") &&
+                        move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
+            default:
+                return false;
+        }
     }
 
     private int translate(char current) {
         int num = 0;
 
         switch (current) {
-            case 'A':
+            case 'a':
             case '1':
                 num = 0;
                 break;
 
-            case 'B':
+            case 'b':
             case '2':
                 num = 1;
                 break;
 
-            case 'C':
+            case 'c':
             case '3':
                 num = 2;
                 break;
 
-            case 'D':
+            case 'd':
             case '4':
                 num = 3;
                 break;
 
-            case 'E':
+            case 'e':
             case '5':
                 num = 4;
                 break;
 
-            case 'F':
+            case 'f':
             case '6':
                 num = 5;
                 break;
 
-            case 'G':
+            case 'g':
             case '7':
                 num = 6;
                 break;
 
-            case 'H':
+            case 'h':
             case '8':
                 num = 7;
                 break;
