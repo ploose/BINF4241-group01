@@ -78,7 +78,7 @@ class Game {
             }
 
         } else if (checkInput(move, "en passant")) {
-            if (enPassant(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(4)), translate(move.charAt(3)))) {
+            if (enPassant(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(5)), translate(move.charAt(4)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -215,6 +215,48 @@ class Game {
     }
 
     private boolean enPassant(int x1, int y1, int x2, int y2) {
+        String check = log.get(log.size() -1);
+
+        if (!board.getSquare(x1, y1).isOccupied()) {
+            return false;
+        }
+
+        if (currentPlayer.getColor() == Color.BLACK) {
+            if (board.getSquare(x2, y2 + 1).isOccupied()) {
+                if (board.getSquare(x2, y2 + 1).getCurrentPiece().getColor() == Color.BLACK) {
+                    return false;
+                }
+
+                return false;
+            }
+
+            if (translate(check.charAt(0)) != (y2 + 1) && translate(check.charAt(1)) != x2) {
+                return false;
+            }
+
+            if (translate(check.charAt(3)) != (y2 - 1) && translate(check.charAt(4)) != x2) {
+                return false;
+            }
+
+        } else {
+            if (board.getSquare(x2, y2 - 1).isOccupied()) {
+                if (board.getSquare(x2, y2 - 1).getCurrentPiece().getColor() == Color.WHITE) {
+                    return false;
+                }
+
+                return false;
+            }
+
+            if (translate(check.charAt(0)) != (y2 - 1) && translate(check.charAt(1)) != x2) {
+                return false;
+            }
+
+            if (translate(check.charAt(3)) != (y2 + 1) && translate(check.charAt(4)) != x2) {
+                return false;
+            }
+
+        }
+
         board.enPassant(x1, y1, x2, y2, currentPlayer.getColor());
         return true;
     }

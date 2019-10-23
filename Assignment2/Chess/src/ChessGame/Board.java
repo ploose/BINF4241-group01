@@ -107,9 +107,9 @@ class Board {
         squares[x2][y2].addPiece(squares[x1][y1].removePiece());
 
         if (color == Color.BLACK) {
-            piecePot.remove(squares[x2][y2 + 1].removePiece());
-        } else {
             piecePot.remove(squares[x2][y2 - 1].removePiece());
+        } else {
+            piecePot.remove(squares[x2][y2 + 1].removePiece());
         }
     }
 
