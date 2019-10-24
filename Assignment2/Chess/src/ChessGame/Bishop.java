@@ -1,5 +1,7 @@
 package ChessGame;
 
+import java.util.ArrayList;
+
 class Bishop extends Piece {
     private final int speed;
 
@@ -16,6 +18,8 @@ class Bishop extends Piece {
 
     @Override
     public void getMoveSquares(Square[][] squares){
+        possibleMoveSquares.clear();
+        canEat.clear();
         diagonalDownLeft(squares, speed);
         diagonalDownRight(squares, speed);
         diagonalUpLeft(squares, speed);

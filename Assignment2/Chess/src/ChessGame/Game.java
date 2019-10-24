@@ -33,29 +33,123 @@ class Game {
     private void run() {
         isRunning = true;
 
-
+        userInterface.printBoard(board.toString());
         while (isRunning) {
             boolean isValidMove = false;
 
-            userInterface.printBoard(board.toString());
-            userInterface.printScore(board.lostPieces());
+            board.refresh();
 
             while (!isValidMove) {
                 isValidMove = move();
             }
             log.add(move);
             System.out.println(log);
+
+            userInterface.printBoard(board.toString());
+            userInterface.printScore(board.lostPieces());
+
+            if(checkCheckMate(white)){
+                userInterface.celebrateWinner(black);
+                break;
+            }else if(checkCheckMate(black)){
+                userInterface.celebrateWinner(white);
+                break;
+            }
+
             swapPlayer();
         }
     }
 
-    private boolean checkCheck() {
-        return black.isChecked() || white.isChecked();
+    private boolean checkCheck(Player p) {
+        Piece king = board.getKingSquare(p).getCurrentPiece();
+        ArrayList<Piece> enemyPieces = board.getEnemies(p);
+
+        for (Piece enemyPiece : enemyPieces) { // go through all enemy pieces
+            for(Square targetSquare : enemyPiece.getPossibleTargets()) { // go through all their possible targets
+                // squares
+                if(targetSquare == king.current){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    //TODO:
-    private boolean checkCheckMate() {
+    // returns true if there is at least one remaining attacker for the king
+    private boolean isKingTarget(Piece king,  ArrayList<Piece> enemyPieces){
+        for (Piece enemyPiece : enemyPieces){ // go through all enemy pieces
+            if(enemyPiece.getPossibleTargets().contains(king.current)){ // returns true if king is possible target
+                return true;
+            }
+        }
         return false;
+    }
+
+    private boolean checkCheckMate(Player p) {
+        Piece king = board.getKingSquare(p).getCurrentPiece();
+        ArrayList<Piece> friendlyPieces = board.getFriendlies(p);
+        ArrayList<Piece> enemyPieces = board.getEnemies(p);
+        Square tempSquare;
+        Piece tempPiece;
+
+        if (!isKingTarget(king, enemyPieces)){
+            return false;
+        }
+
+        // run through all friendly pieces
+        for(Piece friendlyPiece : friendlyPieces){
+            tempSquare = friendlyPiece.current; // Save current square
+            // Test whether friendly piece can block attacker
+            for(Square moveSquare : friendlyPiece.getPossibleMoveSquares()){
+                tempSquare.removePiece(); // temporarily remove piece for checking
+                moveSquare.addPiece(friendlyPiece); // temporarily adds piece for checking
+                friendlyPiece.current = moveSquare;
+                board.refresh(); // refresh the move & eat squares of all pieces alive
+
+                if(!isKingTarget(king, enemyPieces)){ // If the king can now move again he isn't in a checkMate
+                    moveSquare.removePiece(); // remove piece
+                    tempSquare.addPiece(friendlyPiece); // add piece back
+                    friendlyPiece.current = tempSquare;
+                    board.refresh(); // refresh the move & eat squares of all pieces alive
+                    return false;
+                }
+
+                moveSquare.removePiece(); // remove piece
+                tempSquare.addPiece(friendlyPiece); // add piece back
+                friendlyPiece.current = tempSquare;
+                board.refresh(); // refresh the move & eat squares of all pieces alive
+
+            }
+
+            // Test whether friendly piece can eat attacker
+            for(Square targetSquare : friendlyPiece.getPossibleTargets()){
+                tempSquare.removePiece(); // temporarily remove piece for checking
+                tempPiece = targetSquare.removePiece(); // temporarily remove target for checking
+                enemyPieces.remove(tempPiece);
+                targetSquare.addPiece(friendlyPiece); // temporarily adds piece for checking
+                friendlyPiece.current = targetSquare;
+                board.refresh(); // refresh the move & eat squares of all pieces alive
+
+                if(!isKingTarget(king, enemyPieces)){ // If the king can now move again he isn't in a checkMate
+                    targetSquare.removePiece(); // remove piece
+                    targetSquare.addPiece(tempPiece); // add target back
+                    enemyPieces.add(tempPiece);
+                    tempSquare.addPiece(friendlyPiece); // add piece back
+                    friendlyPiece.current = tempSquare;
+                    board.refresh(); // refresh the move & eat squares of all pieces alive
+                    return false;
+                }
+
+                targetSquare.removePiece(); // remove piece
+                targetSquare.addPiece(tempPiece); // add target back
+                enemyPieces.add(tempPiece);
+                tempSquare.addPiece(friendlyPiece); // add piece back
+                friendlyPiece.current = tempSquare;
+                board.refresh(); // refresh the move & eat squares of all pieces alive
+
+            }
+        }
+        return true; // If no possible action could open up a movement option for the king, he's in a checkMate
     }
 
     private boolean move() {

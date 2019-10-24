@@ -1,5 +1,7 @@
 package ChessGame;
 
+import java.util.ArrayList;
+
 class Board {
     final private Square[][] squares;
     final private Game game;
@@ -27,6 +29,7 @@ class Board {
 
     // Takes the pieces from the PiecePot
     private void setPieces() {
+        /*
         squares[0][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[0][0])));
         squares[7][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[7][0])));
         squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
@@ -52,6 +55,15 @@ class Board {
             squares[i][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[i][1])));
             squares[i][6].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[i][6])));
         }
+        */
+
+        squares[0][0].addPiece(piecePot.add(new King(Color.BLACK, squares[0][0])));
+        squares[6][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][1])));
+
+        squares[7][0].addPiece(piecePot.add(new Rook(Color.WHITE, squares[7][0])));
+        squares[6][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[6][7])));
+        squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
+        squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
     }
 
     Square getSquare(int row, int column) {
@@ -110,6 +122,43 @@ class Board {
             piecePot.remove(squares[x2][y2 - 1].removePiece());
         } else {
             piecePot.remove(squares[x2][y2 + 1].removePiece());
+        }
+    }
+
+    public ArrayList<Piece> getFriendlies(Player p){
+        return piecePot.getPiecesAlive(p.getColor());
+    }
+
+    public ArrayList<Piece> getEnemies(Player p){
+        if(p.getColor() == Color.BLACK){
+            return piecePot.getPiecesAlive(Color.WHITE);
+        }else{
+            return piecePot.getPiecesAlive(Color.BLACK);
+        }
+    }
+
+    public Square getKingSquare(Player p){
+        Square kingSquare = null;
+        for(Piece piece : piecePot.getPiecesAlive(p.getColor())){
+            // System.out.println("Debug: " + piece.getClass() + " | " + King.class);
+            if(piece.getClass() == King.class){
+                kingSquare = piece.current;
+            }
+        }
+        return kingSquare;
+    }
+
+    public Square[][] getSquares(){
+        return squares;
+    }
+
+    public void refresh(){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(squares[i][j].isOccupied()){
+                    squares[i][j].getCurrentPiece().getMoveSquares(squares);
+                }
+            }
         }
     }
 
