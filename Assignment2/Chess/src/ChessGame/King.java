@@ -19,6 +19,8 @@ class King extends Piece {
         }
 
     public void getMoveSquares(final Square[][] squares) {
+        possibleMoveSquares.clear();
+        canEat.clear();
         straightDown(squares, speed);
         straightUp(squares, speed);
         straightLeft(squares, speed);

@@ -7,6 +7,8 @@ class Knight extends Piece {
     }
 
     public void getMoveSquares(final Square[][] squares){
+        possibleMoveSquares.clear();
+        canEat.clear();
         Square temp, current = this.current;
 
         // up-left

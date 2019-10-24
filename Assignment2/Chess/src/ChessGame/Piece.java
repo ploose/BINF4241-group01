@@ -9,6 +9,7 @@ abstract class Piece implements MovementStrategy{
         protected ArrayList<Square> possibleMoveSquares;
         protected ArrayList<Square> canEat;
 
+
         Piece(Color color, Square current){
                 this.color = color;
                 this.current = current;
@@ -16,6 +17,11 @@ abstract class Piece implements MovementStrategy{
 
                 possibleMoveSquares = new ArrayList<>();
                 canEat = new ArrayList<>();
+        }
+
+        protected void clearLists(){
+            possibleMoveSquares.clear();
+            canEat.clear();
         }
 
         public Color getColor() {
@@ -60,6 +66,14 @@ abstract class Piece implements MovementStrategy{
 
         protected abstract void getMoveSquares(final Square[][] squares);
 
+        protected ArrayList<Square> getPossibleMoveSquares(){
+            return new ArrayList<Square>(possibleMoveSquares);
+        }
+
+        protected ArrayList<Square> getPossibleTargets(){
+            return new ArrayList<Square>(canEat);
+        }
+
         protected void straightUp(final Square[][] squares, int speed) {
                 int y = current.y - 1;
                 Square temp;
@@ -70,11 +84,17 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
+                                            if(!canEat.contains(temp)){
                                                 canEat.add(temp);
+                                                possibleMoveSquares.remove(temp);
+                                            }
                                         }
                                         break;
                                 } else {
+                                    if(!possibleMoveSquares.contains(temp)){
                                         possibleMoveSquares.add(temp);
+                                        canEat.remove(temp);
+                                    }
                                 }
                                 y--;
                         }
@@ -91,11 +111,17 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
+                                            if(!canEat.contains(temp)){
                                                 canEat.add(temp);
+                                                possibleMoveSquares.remove(temp);
+                                            }
                                         }
                                         break;
                                 } else {
+                                    if(!possibleMoveSquares.contains(temp)){
                                         possibleMoveSquares.add(temp);
+                                        canEat.remove(temp);
+                                    }
                                 }
                                 y++;
                         }
@@ -112,11 +138,17 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
+                                            if(!canEat.contains(temp)){
                                                 canEat.add(temp);
+                                                possibleMoveSquares.remove(temp);
+                                            }
                                         }
                                         break;
                                 } else {
+                                    if(!possibleMoveSquares.contains(temp)){
                                         possibleMoveSquares.add(temp);
+                                        canEat.remove(temp);
+                                    }
                                 }
                                 x++;
                         }
@@ -133,11 +165,17 @@ abstract class Piece implements MovementStrategy{
                                 // Add square if empty or enemy on it
                                 if (temp.isOccupied()) {
                                         if(hasEnemy(temp)){
+                                            if(!canEat.contains(temp)){
                                                 canEat.add(temp);
+                                                possibleMoveSquares.remove(temp);
+                                            }
                                         }
                                         break;
                                 } else {
+                                    if(!possibleMoveSquares.contains(temp)){
                                         possibleMoveSquares.add(temp);
+                                        canEat.remove(temp);
+                                    }
                                 }
                                 x--;
                         }
@@ -155,11 +193,17 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            canEat.add(temp);
+                            if(!canEat.contains(temp)){
+                                canEat.add(temp);
+                                possibleMoveSquares.remove(temp);
+                            }
                         }
                         break;
                     } else {
-                        possibleMoveSquares.add(temp);
+                        if(!possibleMoveSquares.contains(temp)){
+                            possibleMoveSquares.add(temp);
+                            canEat.remove(temp);
+                        }
                     }
                     x--;
                     y--;
@@ -178,11 +222,17 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            canEat.add(temp);
+                            if(!canEat.contains(temp)){
+                                canEat.add(temp);
+                                possibleMoveSquares.remove(temp);
+                            }
                         }
                         break;
                     } else {
-                        possibleMoveSquares.add(temp);
+                        if(!possibleMoveSquares.contains(temp)){
+                            possibleMoveSquares.add(temp);
+                            canEat.remove(temp);
+                        }
                     }
                     x++;
                     y--;
@@ -201,11 +251,17 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            canEat.add(temp);
+                            if(!canEat.contains(temp)){
+                                canEat.add(temp);
+                                possibleMoveSquares.remove(temp);
+                            }
                         }
                         break;
                     } else {
-                        possibleMoveSquares.add(temp);
+                        if(!possibleMoveSquares.contains(temp)){
+                            possibleMoveSquares.add(temp);
+                            canEat.remove(temp);
+                        }
                     }
                     x--;
                     y++;
@@ -224,11 +280,17 @@ abstract class Piece implements MovementStrategy{
                     // Add square if empty or enemy on it
                     if (temp.isOccupied()) {
                         if(hasEnemy(temp)){
-                            canEat.add(temp);
+                            if(!canEat.contains(temp)){
+                                canEat.add(temp);
+                                possibleMoveSquares.remove(temp);
+                            }
                         }
                         break;
                     } else {
-                        possibleMoveSquares.add(temp);
+                        if(!possibleMoveSquares.contains(temp)){
+                            possibleMoveSquares.add(temp);
+                            canEat.remove(temp);
+                        }
                     }
                     x++;
                     y++;

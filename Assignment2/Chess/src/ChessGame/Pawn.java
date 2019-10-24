@@ -24,6 +24,8 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
     }
 
     public void getMoveSquares(final Square[][] squares) {
+        possibleMoveSquares.clear();
+        canEat.clear();
         Square temp;
         int x = current.x, y = current.y;
 

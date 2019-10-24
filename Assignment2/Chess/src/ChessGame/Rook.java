@@ -15,6 +15,8 @@ class Rook extends Piece {
     }
 
     public void getMoveSquares(final Square[][] squares) {
+        possibleMoveSquares.clear();
+        canEat.clear();
         straightUp(squares, speed);
         straightDown(squares, speed);
 

@@ -37,6 +37,14 @@ class PiecePot {
         }
     }
 
+    public ArrayList<Piece> getPiecesAlive(Color c){
+        if(c == Color.BLACK){
+            return new ArrayList<Piece>(blackPlayerList);
+        }else{
+            return new ArrayList<Piece>(whitePlayerList);
+        }
+    }
+
     String lostPieces() {
         StringBuilder list = new StringBuilder();
 

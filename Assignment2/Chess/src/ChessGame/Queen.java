@@ -7,6 +7,8 @@ class Queen extends Piece {
     }
 
     public void getMoveSquares(final Square[][] squares){
+        possibleMoveSquares.clear();
+        canEat.clear();
         Square temp, current = this.current;
         int x, y;
 
@@ -22,7 +24,7 @@ class Queen extends Piece {
             temp = squares[x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -43,7 +45,7 @@ class Queen extends Piece {
             temp = squares[x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -64,7 +66,7 @@ class Queen extends Piece {
             temp = squares[x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -85,7 +87,7 @@ class Queen extends Piece {
             temp = squares[x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -99,7 +101,7 @@ class Queen extends Piece {
             temp = squares[current.x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -113,7 +115,7 @@ class Queen extends Piece {
             temp = squares[current.x][y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -127,7 +129,7 @@ class Queen extends Piece {
             temp = squares[x][current.y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }else{
                     break;
                 }
@@ -141,7 +143,7 @@ class Queen extends Piece {
             temp = squares[x][current.y];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
-                    possibleMoveSquares.add(temp);
+                    canEat.add(temp);
                 }
             } else {
                 possibleMoveSquares.add(temp);
