@@ -39,15 +39,6 @@ class Game {
 
             board.refresh();
 
-            while (!isValidMove) {
-                isValidMove = move();
-            }
-            log.add(move);
-            System.out.println(log);
-
-            userInterface.printBoard(board.toString());
-            userInterface.printScore(board.lostPieces());
-
             if (checkCheck(white)) {
                 if(checkCheckMate(white)) {
                     userInterface.celebrateWinner(black);
@@ -63,6 +54,16 @@ class Game {
                     userInterface.check();
                 }
             }
+
+            while (!isValidMove) {
+                isValidMove = move();
+            }
+            log.add(move);
+            System.out.println(log);
+
+            userInterface.printBoard(board.toString());
+            userInterface.printScore(board.lostPieces());
+
             swapPlayer();
         }
     }
