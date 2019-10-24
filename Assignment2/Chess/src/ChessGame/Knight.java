@@ -95,7 +95,7 @@ class Knight extends Piece {
 
         // left-up
         if (current.x - 2 >= 0 && current.y - 1 >= 0) {
-            temp = squares[current.x - 2][current.y + 1];
+            temp = squares[current.x - 2][current.y - 1];
             if (temp.isOccupied()) {
                 if(hasEnemy(temp)){
                     canEat.add(temp);
