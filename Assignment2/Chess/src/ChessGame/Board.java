@@ -66,13 +66,13 @@ class Board {
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
     }
 
+
+
     Square getSquare(int row, int column) {
         return squares[row][column];
     }
 
-    void setWinner(Player winner) {
-        game.setWinner(winner);
-    }
+
 
     boolean move(int x1, int y1, int x2, int y2, Color color) {
         if (!squares[x1][y1].isOccupied()) {
@@ -83,14 +83,29 @@ class Board {
             return false;
         }
 
+        if (moveChecked(color,x1,y1, x2, y2)){
+            return false;
+            }
+
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
             return true;
-
-        } else {
+        }
+        else {
             return false;
         }
     }
+
+
+    // performs a fakemove: A move that is not checked if it's valid
+    public void doFakeMove(int x1, int y1, int x2, int y2, Color color) {
+       squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
+       squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+
+
+    }
+
+
 
     boolean eat(int x1, int y1, int x2, int y2, Color color) {
         if (!squares[x1][y1].isOccupied()) {
@@ -184,5 +199,23 @@ class Board {
         board.append("\n");
 
         return board.toString();
+    }
+
+
+    //checks if a certain move will lead to the player being checked
+    private boolean moveChecked(Color color, int x1, int y1, int x2, int y2){
+        boolean Checked = false;
+
+        doFakeMove( x1, y1, x2, y2, color) ;
+        this.refresh();
+        if (game.checkCheck(game.getPlayer(color))){
+            Checked = true;
+        }
+        doFakeMove(x2,y2,x1,y1,color);
+        this.refresh();
+
+        return Checked;
+
+
     }
 }

@@ -44,6 +44,15 @@ abstract class Piece implements MovementStrategy{
                 }
         }
 
+
+        // Move that is always valid. Necessary to put the pawn back to his original spot.
+        public boolean forcedMove(Square current, Square next, final Square[][] squares) {
+        getMoveSquares(squares);
+            hasMoved = true;
+            this.current = next;
+            return true;
+    }
+
         public boolean eat(Square current, Square next, final Square[][] squares) {
             getMoveSquares(squares);
 

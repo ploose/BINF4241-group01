@@ -10,13 +10,7 @@ class King extends Piece {
     }
 
     // TODO:
-    public boolean CanBeCaptured(){
-        return true;
-    }
 
-    public boolean isCheckMate() {
-        return false;
-        }
 
     public void getMoveSquares(final Square[][] squares) {
         possibleMoveSquares.clear();
@@ -29,6 +23,8 @@ class King extends Piece {
         diagonalDownRight(squares, speed);
         diagonalUpLeft(squares, speed);
         diagonalUpRight(squares, speed);
+
+
     }
 
     @Override

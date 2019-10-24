@@ -29,6 +29,14 @@ class Game {
         black = new Player(userInterface.getPlayerName(Color.BLACK), Color.BLACK);
         white = new Player(userInterface.getPlayerName(Color.WHITE), Color.WHITE);
     }
+    public Player getPlayer(Color color) {
+        if (color == Color.BLACK){
+            return black;
+        }
+        else{
+            return white;
+        }
+    }
 
     private void run() {
         isRunning = true;
@@ -44,6 +52,7 @@ class Game {
                     userInterface.celebrateWinner(black);
                     break;
                 } else {
+
                     userInterface.check();
                 }
             }else if(checkCheck(black)) {
@@ -68,20 +77,24 @@ class Game {
         }
     }
 
-    private boolean checkCheck(Player p) {
+    public boolean checkCheck(Player p) {
         Piece king = board.getKingSquare(p).getCurrentPiece();
         ArrayList<Piece> enemyPieces = board.getEnemies(p);
 
         for (Piece enemyPiece : enemyPieces) { // go through all enemy pieces
             for(Square targetSquare : enemyPiece.getPossibleTargets()) { // go through all their possible targets
                 // squares
+
                 if(targetSquare == king.current){
+
                     return true;
                 }
             }
         }
         return false;
     }
+
+
 
     // returns true if there is at least one remaining attacker for the king
     private boolean isKingTarget(Piece king,  ArrayList<Piece> enemyPieces){
