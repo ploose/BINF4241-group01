@@ -119,7 +119,8 @@ class Board {
         Column[] values = Column.values();
 
         for (int i = 0; i < 8; i++) {
-            board.append(values[i]);
+            //board.append(values[i]);
+            board.append(8 - i);
             board.append("  ");
 
             for (int j = 0; j < 8; j++) {
@@ -127,8 +128,11 @@ class Board {
             }
             board.append("\n");
         }
-
-        board.append("    1   2   3   4   5   6   7   8 \n");
+        board.append("    ");
+        for (Column col: values){
+            board.append(col + "   ");
+        }
+        board.append("\n");
 
         return board.toString();
     }
