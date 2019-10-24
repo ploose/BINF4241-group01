@@ -172,7 +172,7 @@ class Game {
             }
 
         } else if (checkInput(move, "en passant")) {
-            if (enPassant(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(5)), translate(move.charAt(4)))) {
+            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)), translate(move.charAt(5)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -180,7 +180,7 @@ class Game {
             }
 
         } else if (checkInput(move, "move")) {
-            if (board.move(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(4)), translate(move.charAt(3)), currentPlayer.getColor())) {
+            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -188,7 +188,7 @@ class Game {
             }
 
         } else if (checkInput(move, "eat")) {
-            if (board.eat(translate(move.charAt(1)), translate(move.charAt(0)), translate(move.charAt(4)), translate(move.charAt(3)), currentPlayer.getColor())) {
+            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -324,11 +324,11 @@ class Game {
                 return false;
             }
 
-            if (translate(check.charAt(0)) != (y2 + 1) && translate(check.charAt(1)) != x2) {
+            if (translate(check.charAt(1)) != (y2 + 1) && translate(check.charAt(0)) != x2) {
                 return false;
             }
 
-            if (translate(check.charAt(3)) != (y2 - 1) && translate(check.charAt(4)) != x2) {
+            if (translate(check.charAt(4)) != (y2 - 1) && translate(check.charAt(3)) != x2) {
                 return false;
             }
 
@@ -341,11 +341,11 @@ class Game {
                 return false;
             }
 
-            if (translate(check.charAt(0)) != (y2 - 1) && translate(check.charAt(1)) != x2) {
+            if (translate(check.charAt(1)) != (y2 - 1) && translate(check.charAt(0)) != x2) {
                 return false;
             }
 
-            if (translate(check.charAt(3)) != (y2 + 1) && translate(check.charAt(4)) != x2) {
+            if (translate(check.charAt(4)) != (y2 + 1) && translate(check.charAt(3)) != x2) {
                 return false;
             }
 
@@ -397,42 +397,42 @@ class Game {
 
         switch (current) {
             case 'a':
-            case '1':
+            case '8':
                 num = 0;
                 break;
 
             case 'b':
-            case '2':
+            case '7':
                 num = 1;
                 break;
 
             case 'c':
-            case '3':
+            case '6':
                 num = 2;
                 break;
 
             case 'd':
-            case '4':
+            case '5':
                 num = 3;
                 break;
 
             case 'e':
-            case '5':
+            case '4':
                 num = 4;
                 break;
 
             case 'f':
-            case '6':
+            case '3':
                 num = 5;
                 break;
 
             case 'g':
-            case '7':
+            case '2':
                 num = 6;
                 break;
 
             case 'h':
-            case '8':
+            case '1':
                 num = 7;
                 break;
         }
