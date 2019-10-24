@@ -10,7 +10,7 @@ class Ui {
     }
 
     void celebrateWinner(Player winner) {
-        System.out.println("Hurrah, the player " + winner.getName() + " has won!");
+        System.out.println("Hurrah, the player " + winner.getName() + " (" + winner.getColor() + ") has won!");
     }
 
     void printBoard(String board) {
@@ -22,6 +22,10 @@ class Ui {
     }
 
     void printInvalidMove() {
+        System.out.println("Your piece is not allowed to do that! Please enter another move.");
+    }
+
+    void printCheck(Player checked) {
         System.out.println("Your piece is not allowed to do that! Please enter another move.");
     }
 

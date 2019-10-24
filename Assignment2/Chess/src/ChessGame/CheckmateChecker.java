@@ -3,6 +3,9 @@ package ChessGame;
 import java.util.ArrayList;
 
 class CheckmateChecker {
+
+
+    /*
     private Square kingSquare;
     private boolean isChecked;
     private Board board;
@@ -15,7 +18,6 @@ class CheckmateChecker {
 //            - Can I take the attacker?
 
     // Returns if the square is checked -> should be games responsibility
-    /*
     private boolean isChecked(PiecePot piecePot, Square kingSquare, Color color){
         isChecked = false;
 

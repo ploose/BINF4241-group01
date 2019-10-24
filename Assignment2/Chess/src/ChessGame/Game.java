@@ -33,38 +33,37 @@ class Game {
     private void run() {
         isRunning = true;
 
-
+        userInterface.printBoard(board.toString());
         while (isRunning) {
             boolean isValidMove = false;
 
             board.refresh();
-
-            if(checkCheck()){
-                System.out.println(currentPlayer.getName() + " is checked!");
-            }
-
-            if(checkCheckMate()){
-                System.out.println(currentPlayer.getName() + " is in check mate!");
-            }
-
-            userInterface.printBoard(board.toString());
-            userInterface.printScore(board.lostPieces());
 
             while (!isValidMove) {
                 isValidMove = move();
             }
             log.add(move);
             System.out.println(log);
+
+            userInterface.printBoard(board.toString());
+            userInterface.printScore(board.lostPieces());
+
+            if(checkCheckMate(white)){
+                userInterface.celebrateWinner(black);
+                break;
+            }else if(checkCheckMate(black)){
+                userInterface.celebrateWinner(white);
+                break;
+            }
+
             swapPlayer();
-            // checkCheckMate();
         }
     }
 
-    private boolean checkCheck() {
-        Piece king = board.getKingSquare(currentPlayer).getCurrentPiece();
-        ArrayList<Piece> enemyPieces = board.getEnemies(currentPlayer);
+    private boolean checkCheck(Player p) {
+        Piece king = board.getKingSquare(p).getCurrentPiece();
+        ArrayList<Piece> enemyPieces = board.getEnemies(p);
 
-        ArrayList<Square> possibleKingMoveSquares = king.getPossibleMoveSquares();
         for (Piece enemyPiece : enemyPieces) { // go through all enemy pieces
             for(Square targetSquare : enemyPiece.getPossibleTargets()) { // go through all their possible targets
                 // squares
@@ -74,32 +73,8 @@ class Game {
             }
         }
         return false;
-
-        // return black.isChecked() || white.isChecked();
     }
 
-    //TODO:
-
-    /*
-    // returns true if there is at least one remaining possible move-square for the king
-    private boolean canKingMove(Piece king,  ArrayList<Piece> enemyPieces){
-        ArrayList<Square> possibleKingMoveSquares = king.getPossibleMoveSquares();
-        for (Piece enemyPiece : enemyPieces){ // go through all enemy pieces
-            for(Square moveSquare : enemyPiece.getPossibleMoveSquares()){ // go through all their possible movement
-                // squares
-                if(possibleKingMoveSquares.contains(moveSquare)){ // if one of them is also a move square of the king,
-                    // remove it from the kings move squares, as he would get eaten on that one
-                    possibleKingMoveSquares.remove(moveSquare);
-                }
-            }
-        }
-        if (possibleKingMoveSquares.size() >= 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    */
     // returns true if there is at least one remaining attacker for the king
     private boolean isKingTarget(Piece king,  ArrayList<Piece> enemyPieces){
         for (Piece enemyPiece : enemyPieces){ // go through all enemy pieces
@@ -110,21 +85,10 @@ class Game {
         return false;
     }
 
-    /*
-    private void refresh(ArrayList<Piece> friendlyPieces, ArrayList<Piece> enemyPieces){
-        for(Piece p : friendlyPieces){
-            p.getMoveSquares(board.getSquares());
-        }
-        for(Piece p : enemyPieces){
-            p.getMoveSquares(board.getSquares());
-        }
-    }
-    */
-
-    private boolean checkCheckMate() {
-        Piece king = board.getKingSquare(currentPlayer).getCurrentPiece();
-        ArrayList<Piece> friendlyPieces = board.getFriendlies(currentPlayer);
-        ArrayList<Piece> enemyPieces = board.getEnemies(currentPlayer);
+    private boolean checkCheckMate(Player p) {
+        Piece king = board.getKingSquare(p).getCurrentPiece();
+        ArrayList<Piece> friendlyPieces = board.getFriendlies(p);
+        ArrayList<Piece> enemyPieces = board.getEnemies(p);
         Square tempSquare;
         Piece tempPiece;
 
