@@ -13,6 +13,10 @@ class Ui {
         System.out.println("Hurrah, the player " + winner.getName() + " (" + winner.getColor() + ") has won!");
     }
 
+    void check() {
+        System.out.println("Check!");
+    }
+
     void printBoard(String board) {
         System.out.print(board);
     }

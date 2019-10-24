@@ -125,11 +125,11 @@ class Board {
         }
     }
 
-    public ArrayList<Piece> getFriendlies(Player p){
+    ArrayList<Piece> getFriendlies(Player p){
         return piecePot.getPiecesAlive(p.getColor());
     }
 
-    public ArrayList<Piece> getEnemies(Player p){
+    ArrayList<Piece> getEnemies(Player p){
         if(p.getColor() == Color.BLACK){
             return piecePot.getPiecesAlive(Color.WHITE);
         }else{
@@ -137,7 +137,7 @@ class Board {
         }
     }
 
-    public Square getKingSquare(Player p){
+    Square getKingSquare(Player p){
         Square kingSquare = null;
         for(Piece piece : piecePot.getPiecesAlive(p.getColor())){
             // System.out.println("Debug: " + piece.getClass() + " | " + King.class);
@@ -152,7 +152,7 @@ class Board {
         return squares;
     }
 
-    public void refresh(){
+    void refresh(){
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 if(squares[i][j].isOccupied()){

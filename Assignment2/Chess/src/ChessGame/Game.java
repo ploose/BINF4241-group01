@@ -48,14 +48,21 @@ class Game {
             userInterface.printBoard(board.toString());
             userInterface.printScore(board.lostPieces());
 
-            if(checkCheckMate(white)){
-                userInterface.celebrateWinner(black);
-                break;
-            }else if(checkCheckMate(black)){
-                userInterface.celebrateWinner(white);
-                break;
+            if (checkCheck(white)) {
+                if(checkCheckMate(white)) {
+                    userInterface.celebrateWinner(black);
+                    break;
+                } else {
+                    userInterface.check();
+                }
+            }else if(checkCheck(black)) {
+                if (checkCheckMate(black)) {
+                    userInterface.celebrateWinner(white);
+                    break;
+                } else {
+                    userInterface.check();
+                }
             }
-
             swapPlayer();
         }
     }
