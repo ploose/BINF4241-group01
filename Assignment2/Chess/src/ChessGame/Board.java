@@ -88,13 +88,7 @@ class Board {
 
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
-/*
-            if(squares[x2][y2].getCurrentPiece().getClass() == Pawn.class){ // Check whether moved piece was pawn
-                System.out.println("Moved Pawn!");
-                checkPromote(squares[x2][y2].getCurrentPiece());
-            }
 
- */
             return true;
         }
         else {
