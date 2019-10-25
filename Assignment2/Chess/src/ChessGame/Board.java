@@ -282,7 +282,7 @@ class Board {
 
     // performs a fakemove: A move that is not checked if it's valid
     private void doFakeMove(int x1, int y1, int x2, int y2) {
-        squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
+        squares[x1][y1].getCurrentPiece().forcedMove(squares[x2][y2], squares);
         squares[x2][y2].addPiece(squares[x1][y1].removePiece());
     }
 
