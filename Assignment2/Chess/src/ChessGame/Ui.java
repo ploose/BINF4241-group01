@@ -29,10 +29,6 @@ class Ui {
         System.out.println("Your piece is not allowed to do that! Please enter another move.");
     }
 
-    void printCheck(Player checked) {
-        System.out.println("Your piece is not allowed to do that! Please enter another move.");
-    }
-
     boolean printWrongInput() {
         System.out.println("Invalid Input!");
         return false;
@@ -40,11 +36,6 @@ class Ui {
 
     String getPlayerName(Color color) {
         System.out.println("What's the name of the player with the color " + color + "? ");
-        return input.nextLine();
-    }
-
-    String getPromotion() {
-        System.out.println("Your Pawn has reached the 8th rank! Promote him to (q)ueen, (k)night, (t)ower or (b)ishop?");
         return input.nextLine();
     }
 

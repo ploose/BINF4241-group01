@@ -19,11 +19,6 @@ abstract class Piece implements MovementStrategy{
                 canEat = new ArrayList<>();
         }
 
-        protected void clearLists(){
-            possibleMoveSquares.clear();
-            canEat.clear();
-        }
-
         public Color getColor() {
                 return color;
         }
@@ -46,13 +41,13 @@ abstract class Piece implements MovementStrategy{
 
 
         // Move that is always valid. Necessary to put the pawn back to his original spot.
-        boolean forcedMove(Square current, Square next, final Square[][] squares) {
+        boolean forcedMove(Square next, final Square[][] squares) {
         getMoveSquares(squares);
-            this.current = next;
+            current = next;
             return true;
     }
 
-        boolean eat(Square current, Square next, final Square[][] squares) {
+        public boolean eat(Square current, Square next, final Square[][] squares) {
             getMoveSquares(squares);
 
             if (isValidAttack(current, next)) {
