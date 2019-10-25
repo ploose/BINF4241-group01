@@ -29,7 +29,6 @@ class Board {
 
     // Takes the pieces from the PiecePot
     private void setPieces() {
-        /*
         squares[0][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[0][0])));
         squares[7][0].addPiece(piecePot.add(new Rook(Color.BLACK, squares[7][0])));
         squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
@@ -55,15 +54,15 @@ class Board {
             squares[i][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[i][1])));
             squares[i][6].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[i][6])));
         }
-        */
 
 
+/*
         squares[0][0].addPiece(piecePot.add(new King(Color.BLACK, squares[0][0])));
         squares[6][6].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][6])));
 
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
         squares[0][1].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[0][1])));
-
+*/
 
     }
 
@@ -159,6 +158,128 @@ class Board {
         return true;
     }
 
+    boolean castleLong(Color color) {
+        if (color == Color.BLACK) {
+            Square squareOne = squares[4][0], squareTwo = squares[0][0];
+
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 1; i < 4; i++) {
+                if (squares[i][0].isOccupied()) {
+                    return false;
+                }
+
+                if (moveChecked(color,4, 0, i, 0)) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            move(0, 0, 3, 0, color);
+            squares[2][0].addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
+
+        } else {
+            Square squareOne = squares[4][7], squareTwo = squares[0][7];
+
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 1; i < 4; i++) {
+                if (squares[i][7].isOccupied()) {
+                    return false;
+                }
+
+                if (moveChecked(color, 4, 7, i, 7)) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            move(0, 0, 3, 0, color);
+            squares[2][0].addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
+        }
+    }
+
+    boolean castleShort(Color color) {
+        if (color == Color.BLACK) {
+            Square squareOne = squares[4][0], squareTwo = squares[7][0];
+
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 5; i < 6; i++) {
+                if (squares[i][0].isOccupied()) {
+                    return false;
+                }
+
+                if (moveChecked(color,4, 0, i, 0)) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            move(7, 0, 5, 0, color);
+            squares[6][0].addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
+
+        } else {
+            Square squareOne = squares[4][7], squareTwo = squares[7][7];
+
+            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
+                return false;
+            }
+
+            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
+                return false;
+            }
+
+            for (int i = 5; i < 6; i++) {
+                if (squares[i][7].isOccupied()) {
+                    return false;
+                }
+
+                if (moveChecked(color,4, 7, i, 7)) {
+                    return false;
+                }
+            }
+
+            Piece tmp = squareOne.removePiece();
+
+            move(7, 7, 5, 7, color);
+            squares[6][7].addPiece(tmp);
+            tmp.hasMoved();
+
+            return true;
+        }
+    }
+
     // performs a fakemove: A move that is not checked if it's valid
     private void doFakeMove(int x1, int y1, int x2, int y2) {
         squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
@@ -192,7 +313,7 @@ class Board {
         return kingSquare;
     }
 
-    void refresh(){
+    void refresh() {
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 if(squares[i][j].isOccupied()){

@@ -119,20 +119,6 @@ class Game {
         }
         return false;
     }
-/*  replaced by iterator - ToDelete
-        for (Piece enemyPiece : enemyPieces) { // go through all enemy pieces
-            for(Square targetSquare : enemyPiece.getPossibleTargets()) { // go through all their possible targets
-                // squares
-
-                if(targetSquare == king.current){
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-*/
 
     private boolean checkCheckMate(Player p) {
         Piece king = board.getKingSquare(p).getCurrentPiece();
@@ -215,7 +201,7 @@ class Game {
         move = userInterface.getMove(currentPlayer);
 
         if (move.equals("o-o-o")) {
-            if (castleLong()) {
+            if (board.castleLong(currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -223,7 +209,7 @@ class Game {
             }
 
         } else if (move.equals("o-o")) {
-            if (castleShort()) {
+            if (board.castleShort(currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -269,115 +255,6 @@ class Game {
 
         } else {
             return userInterface.printWrongInput();
-        }
-    }
-
-    //TODO: add danger check
-    private boolean castleLong() {
-        if (currentPlayer.getColor() == Color.BLACK) {
-            Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(0, 0);
-
-            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
-                return false;
-            }
-
-            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
-                return false;
-            }
-
-            for (int i = 1; i < 4; i++) {
-                if (board.getSquare(i, 0).isOccupied()) {
-                    return false;
-                }
-            }
-
-            Piece tmp = squareOne.removePiece();
-
-            board.move(0, 0, 3, 0, currentPlayer.getColor());
-            board.getSquare(2, 0).addPiece(tmp);
-            tmp.hasMoved();
-
-            return true;
-
-        } else {
-            Square squareOne = board.getSquare(4, 7), squareTwo = board.getSquare(0, 7);
-
-            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
-                return false;
-            }
-
-            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
-                return false;
-            }
-
-            for (int i = 1; i < 4; i++) {
-                if (board.getSquare(i, 7).isOccupied()) {
-                    return false;
-                }
-            }
-
-            Piece tmp = squareOne.removePiece();
-
-            board.move(0, 7, 3, 7, currentPlayer.getColor());
-            board.getSquare(2, 7).addPiece(tmp);
-            tmp.hasMoved();
-
-            return true;
-        }
-    }
-
-    //TODO: add danger check
-    private boolean castleShort() {
-        if (currentPlayer.getColor() == Color.BLACK) {
-            Square squareOne = board.getSquare(4, 0), squareTwo = board.getSquare(7, 0);
-
-            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
-                return false;
-            }
-
-            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
-                return false;
-            }
-
-            for (int i = 5; i < 7; i++) {
-                if (board.getSquare(i, 0).isOccupied()) {
-                    return false;
-                }
-            }
-
-
-            Piece tmp = squareOne.removePiece();
-
-            board.move(7, 0, 5, 0, currentPlayer.getColor());
-            board.getSquare(6, 0).addPiece(tmp);
-            tmp.hasMoved();
-
-            return true;
-
-        } else {
-            Square squareOne = board.getSquare(4, 7), squareTwo = board.getSquare(7, 7);
-
-            if (!(squareOne.hasType("class ChessGame.King") && squareTwo.hasType("class ChessGame.Rook"))) {
-                return false;
-            }
-
-            if (squareOne.getCurrentPiece().hasMoved() || squareTwo.getCurrentPiece().hasMoved()) {
-                return false;
-            }
-
-            for (int i = 5; i < 7; i++) {
-                if (board.getSquare(i, 7).isOccupied()) {
-                    return false;
-                }
-            }
-
-            Piece tmp = squareOne.removePiece();
-
-            board.move(7, 7, 5, 7, currentPlayer.getColor());
-            board.getSquare(6, 7).addPiece(tmp);
-            tmp.hasMoved();
-
-            return true;
         }
     }
 
@@ -441,8 +318,8 @@ class Game {
             case "move":
                 if (move.length() == 5) {
                     return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("-") &&
-                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                            move.substring(2, 3).matches("-") && move.substring(3, 4).matches("[a-h]") &&
+                            move.substring(4, 5).matches("[0-9]");
                 } else {
                     return false;
                 }
