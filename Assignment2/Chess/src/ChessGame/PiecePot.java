@@ -2,7 +2,6 @@ package ChessGame;
 
 import java.util.ArrayList;
 
-// TODO: Add methods that add/subtract from the piecescount
 class PiecePot {
     private ArrayList<Piece> blackPlayerList;
     private ArrayList<Piece> whitePlayerList;
@@ -75,22 +74,6 @@ class PiecePot {
         list.append("\n");
 
         return list.toString();
-    }
-
-    int getOnBoardSize(Color color) {
-        if (color == Color.BLACK) {
-            return blackPlayerList.size();
-        } else {
-            return whitePlayerList.size();
-        }
-    }
-
-    Piece getOnBoard(int i, Color color) {
-        if (color == Color.BLACK) {
-            return blackPlayerList.get(i);
-        } else {
-            return whitePlayerList.get(i);
-        }
     }
 }
 
