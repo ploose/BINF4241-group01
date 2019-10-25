@@ -76,6 +76,10 @@ class Board {
             return false;
         }
 
+        if (squares[x2][y2].isOccupied()) {
+            return false;
+        }
+
         if (!(color == squares[x1][y1].getCurrentPiece().getColor())) {
             return false;
         }
