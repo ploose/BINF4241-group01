@@ -29,7 +29,8 @@ class Game {
         black = new Player(userInterface.getPlayerName(Color.BLACK), Color.BLACK);
         white = new Player(userInterface.getPlayerName(Color.WHITE), Color.WHITE);
     }
-    public Player getPlayer(Color color) {
+
+    Player getPlayer(Color color) {
         if (color == Color.BLACK){
             return black;
         }
@@ -42,6 +43,7 @@ class Game {
         isRunning = true;
 
         userInterface.printBoard(board.toString());
+
         while (isRunning) {
             boolean isValidMove = false;
 
@@ -51,24 +53,23 @@ class Game {
                 if(checkCheckMate(white)) {
                     userInterface.celebrateWinner(black);
                     break;
-                } else {
-
-                    userInterface.check();
                 }
-            }else if(checkCheck(black)) {
+                userInterface.check();
+            }
+
+            if (checkCheck(black)) {
                 if (checkCheckMate(black)) {
                     userInterface.celebrateWinner(white);
                     break;
-                } else {
-                    userInterface.check();
                 }
+                userInterface.check();
             }
 
             while (!isValidMove) {
                 isValidMove = move();
             }
+
             log.add(move);
-            System.out.println(log);
 
             userInterface.printBoard(board.toString());
             userInterface.printScore(board.lostPieces());
@@ -77,7 +78,7 @@ class Game {
         }
     }
 
-    public boolean checkCheck(Player p) {
+    boolean checkCheck(Player p) {
         Piece king = board.getKingSquare(p).getCurrentPiece();
         ArrayList<Piece> enemyPieces = board.getEnemies(p);
 
@@ -86,21 +87,8 @@ class Game {
                 // squares
 
                 if(targetSquare == king.current){
-
                     return true;
                 }
-            }
-        }
-        return false;
-    }
-
-
-
-    // returns true if there is at least one remaining attacker for the king
-    private boolean isKingTarget(Piece king,  ArrayList<Piece> enemyPieces){
-        for (Piece enemyPiece : enemyPieces){ // go through all enemy pieces
-            if(enemyPiece.getPossibleTargets().contains(king.current)){ // returns true if king is possible target
-                return true;
             }
         }
         return false;
@@ -173,6 +161,16 @@ class Game {
         return true; // If no possible action could open up a movement option for the king, he's in a checkMate
     }
 
+    // returns true if there is at least one remaining attacker for the king
+    private boolean isKingTarget(Piece king,  ArrayList<Piece> enemyPieces){
+        for (Piece enemyPiece : enemyPieces){ // go through all enemy pieces
+            if(enemyPiece.getPossibleTargets().contains(king.current)){ // returns true if king is possible target
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean move() {
         move = userInterface.getMove(currentPlayer);
 
@@ -192,14 +190,6 @@ class Game {
                 return false;
             }
 
-        } else if (checkInput(move, "en passant")) {
-            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)), translate(move.charAt(5)))) {
-                return true;
-            } else {
-                userInterface.printInvalidMove();
-                return false;
-            }
-
         } else if (checkInput(move, "move")) {
             if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
@@ -210,6 +200,14 @@ class Game {
 
         } else if (checkInput(move, "eat")) {
             if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
+
+        } else if (checkInput(move, "en passant")) {
+            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)), translate(move.charAt(5)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -384,30 +382,45 @@ class Game {
         }
     }
 
-    void setWinner(Player winner) {
-        isRunning = false;
-        userInterface.celebrateWinner(winner);
-    }
-
     private boolean checkInput(String move, String mode) {
-        if (move.length() < 5 || move.length() > 6) {
-            return false;
-        }
-
         switch (mode) {
             case "move":
-                return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                        move.substring(2, 3).matches("-") &&
-                        move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                if (move.length() == 5) {
+                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                            move.substring(2, 3).matches("-") &&
+                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                } else {
+                    return false;
+                }
 
             case "eat":
-                return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                        move.substring(2, 3).matches("x") &&
-                        move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                if (move.length() == 5) {
+                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                            move.substring(2, 3).matches("x") &&
+                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                } else {
+                    return false;
+                }
+
             case "en passant":
-                return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                        move.substring(2, 4).matches("ep") &&
-                        move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
+                if (move.length() == 6) {
+                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                            move.substring(2, 4).matches("ep") &&
+                            move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
+                } else {
+                    return false;
+                }
+
+            case "promotion":
+                if (move.length() == 7) {
+                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
+                            move.substring(2, 3).matches("-") &&
+                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]") &&
+                            move.substring(5, 6).matches("=") && move.substring(6, 7).matches("[TNBQ]");
+                } else {
+                    return false;
+                }
+
             default:
                 return false;
         }

@@ -183,7 +183,6 @@ class Board {
         Column[] values = Column.values();
 
         for (int i = 0; i < 8; i++) {
-            //board.append(values[i]);
             board.append(8 - i);
             board.append("  ");
 
@@ -194,7 +193,7 @@ class Board {
         }
         board.append("    ");
         for (Column col: values){
-            board.append(col + "   ");
+            board.append(col).append("   ");
         }
         board.append("\n");
 
