@@ -217,7 +217,10 @@ class Game {
             }
 
         } else if (checkInput(move, "move")) {
-            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+            if (move.length() == 6 && board.move(translate(move.charAt(1)), translate(move.charAt(2)), translate(move.charAt(4)),
+                    translate(move.charAt(5)), currentPlayer.getColor())) {
+                return true;
+            }else if (move.length() == 5 && board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
                     translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
@@ -226,7 +229,10 @@ class Game {
             }
 
         } else if (checkInput(move, "eat")) {
-            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+            if (board.eat(translate(move.charAt(1)), translate(move.charAt(2)), translate(move.charAt(4)),
+                    translate(move.charAt(5)), currentPlayer.getColor())) {
+                return true;
+            }else if (move.length() == 5 && board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
                     translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
@@ -316,19 +322,25 @@ class Game {
     private boolean checkInput(String move, String mode) {
         switch (mode) {
             case "move":
-                if (move.length() == 5) {
-                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("-") && move.substring(3, 4).matches("[a-h]") &&
-                            move.substring(4, 5).matches("[0-9]");
+                if (move.length() == 6) {
+                    return move.substring(0, 1).matches("[TNBKQ]") && move.substring(1, 2).matches("[a-h]") &&
+                            move.substring(2, 3).matches("[0-9]") && move.substring(3, 4).matches("-") &&
+                            move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
+                }else if (move.length() == 5) {
+                    return move.substring(0, 1).matches("[a-h]") &&
+                            move.substring(1, 2).matches("[0-9]") && move.substring(2, 3).matches("-") &&
+                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]") &&
+                            (board.getSquare(translate(move.charAt(0)), translate(move.charAt(1))).getCurrentPiece().getClass() == Pawn.class);
+
                 } else {
                     return false;
                 }
 
             case "eat":
-                if (move.length() == 5) {
-                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("x") &&
-                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                if (move.length() == 6) {
+                    return move.substring(0, 1).matches("[TNBKQ]") && move.substring(1, 2).matches("[a-h]") &&
+                            move.substring(2, 3).matches("[0-9]") && move.substring(3, 4).matches("x") &&
+                            move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
                 } else {
                     return false;
                 }
@@ -345,7 +357,7 @@ class Game {
             case "promotion":
                 if (move.length() == 7) {
                     return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("[-x]") &&
+                            move.substring(2, 3).matches("-") &&
                             move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]") &&
                             move.substring(5, 6).matches("=") && move.substring(6, 7).matches("[TNBQ]");
                 } else {
