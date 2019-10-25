@@ -231,7 +231,8 @@ class Game {
             }
 
         } else if (checkInput(move, "move")) {
-            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -239,7 +240,8 @@ class Game {
             }
 
         } else if (checkInput(move, "eat")) {
-            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -247,11 +249,18 @@ class Game {
             }
 
         } else if(checkInput(move, "promotion")) {
-            return false;
-        }
+            if (board.promotion(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), move.substring(6, 7), currentPlayer.getColor())){
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
 
-        else if (checkInput(move, "en passant")) {
-            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)), translate(move.charAt(5)))) {
+
+        } else if (checkInput(move, "en passant")) {
+            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)),
+                    translate(move.charAt(5)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();

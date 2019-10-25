@@ -37,15 +37,15 @@ class PiecePot {
         }
     }
 
-    public ArrayList<Piece> getPiecesAlive(Color c){
+    ArrayList<Piece> getPiecesAlive(Color c){
         if(c == Color.BLACK){
-            return new ArrayList<Piece>(blackPlayerList);
+            return new ArrayList<>(blackPlayerList);
         }else{
-            return new ArrayList<Piece>(whitePlayerList);
+            return new ArrayList<>(whitePlayerList);
         }
     }
 
-    public void replace (Piece o, Piece n){
+    void replace(Piece o, Piece n){
         if(o.getColor() == n.getColor()){
             if(o.getColor() == Color.BLACK){
                 blackPlayerList.remove(o);

@@ -68,13 +68,9 @@ class Board {
 
     }
 
-
-
     Square getSquare(int row, int column) {
         return squares[row][column];
     }
-
-
 
     boolean move(int x1, int y1, int x2, int y2, Color color) {
         if (!squares[x1][y1].isOccupied()) {
@@ -91,28 +87,19 @@ class Board {
 
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
-
+/*
             if(squares[x2][y2].getCurrentPiece().getClass() == Pawn.class){ // Check whether moved piece was pawn
                 System.out.println("Moved Pawn!");
                 checkPromote(squares[x2][y2].getCurrentPiece());
             }
+
+ */
             return true;
         }
         else {
             return false;
         }
     }
-
-
-    // performs a fakemove: A move that is not checked if it's valid
-    public void doFakeMove(int x1, int y1, int x2, int y2, Color color) {
-       squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
-       squares[x2][y2].addPiece(squares[x1][y1].removePiece());
-
-
-    }
-
-
 
     boolean eat(int x1, int y1, int x2, int y2, Color color) {
         if (!squares[x1][y1].isOccupied()) {
@@ -133,10 +120,6 @@ class Board {
         }
     }
 
-    String lostPieces() {
-        return piecePot.lostPieces();
-    }
-
     void enPassant(int x1, int y1, int x2, int y2, Color color) {
         squares[x2][y2].addPiece(squares[x1][y1].removePiece());
 
@@ -145,6 +128,48 @@ class Board {
         } else {
             piecePot.remove(squares[x2][y2 + 1].removePiece());
         }
+    }
+
+    boolean promotion(int x1, int y1, int x2, int y2, String piece, Color color) {
+        if (!move(x1, y1, x2, y2, color)) {
+            return false;
+        }
+
+        Piece promoted;
+
+        switch (piece) {
+            case "T":
+                promoted = new Rook(color, squares[x2][y2]);
+                break;
+
+            case "N":
+                promoted = new Knight(color, squares[x2][y2]);
+                break;
+
+            case "B":
+                promoted = new Bishop(color, squares[x2][y2]);
+                break;
+
+            default:
+                promoted = new Queen(color, squares[x2][y2]);
+                break;
+        }
+
+        Piece pawn = squares[x2][y2].removePiece();
+        squares[x2][y2].addPiece(promoted);
+        piecePot.replace(pawn, promoted);
+
+        return true;
+    }
+
+    // performs a fakemove: A move that is not checked if it's valid
+    private void doFakeMove(int x1, int y1, int x2, int y2, Color color) {
+       squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
+       squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+    }
+
+    String lostPieces() {
+        return piecePot.lostPieces();
     }
 
     ArrayList<Piece> getFriendlies(Player p){
@@ -183,30 +208,6 @@ class Board {
             }
         }
     }
-
-    public String toString() {
-        StringBuilder board = new StringBuilder();
-
-        Column[] values = Column.values();
-
-        for (int i = 0; i < 8; i++) {
-            board.append(8 - i);
-            board.append("  ");
-
-            for (int j = 0; j < 8; j++) {
-                board.append("[").append(squares[j][i]).append("]");
-            }
-            board.append("\n");
-        }
-        board.append("    ");
-        for (Column col: values){
-            board.append(col).append("   ");
-        }
-        board.append("\n");
-
-        return board.toString();
-    }
-
 
     //checks if a certain move will lead to the player being checked
     private boolean moveChecked(Color color, int x1, int y1, int x2, int y2){
@@ -269,5 +270,28 @@ class Board {
                 promotePawn(p);
             }
         }
+    }
+
+    public String toString() {
+        StringBuilder board = new StringBuilder();
+
+        Column[] values = Column.values();
+
+        for (int i = 0; i < 8; i++) {
+            board.append(8 - i);
+            board.append("  ");
+
+            for (int j = 0; j < 8; j++) {
+                board.append("[").append(squares[j][i]).append("]");
+            }
+            board.append("\n");
+        }
+        board.append("    ");
+        for (Column col: values){
+            board.append(col).append("   ");
+        }
+        board.append("\n");
+
+        return board.toString();
     }
 }
