@@ -5,11 +5,13 @@ import java.util.ArrayList;
 class Board {
     final private Square[][] squares;
     final private Game game;
+    final private Ui ui;
     private PiecePot piecePot;
 
     //Constructor
-    Board(Game game) {
+    Board(Game game, Ui ui) {
         this.game = game;
+        this.ui = ui;
 
         squares = new Square[8][8];
         initBoard();
@@ -59,11 +61,8 @@ class Board {
 
 
         squares[0][0].addPiece(piecePot.add(new King(Color.BLACK, squares[0][0])));
-        squares[6][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][1])));
+        squares[6][6].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][6])));
 
-        squares[7][0].addPiece(piecePot.add(new Rook(Color.WHITE, squares[7][0])));
-        squares[6][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[6][7])));
-        squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
 
 
@@ -92,6 +91,11 @@ class Board {
 
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+
+            if(squares[x2][y2].getCurrentPiece().getClass() == Pawn.class){ // Check whether moved piece was pawn
+                System.out.println("Moved Pawn!");
+                checkPromote(squares[x2][y2].getCurrentPiece());
+            }
             return true;
         }
         else {
@@ -219,5 +223,51 @@ class Board {
         return Checked;
 
 
+    }
+
+    private void promotePawn(Piece p){
+        Piece t;
+        while (true){
+            String input = ui.getPromotion();
+
+            System.out.println(input);
+            if(input.equals("q")){
+                t = new Queen(p.getColor(), p.current);
+                p.current.removePiece();
+                t.current.addPiece(t);
+                piecePot.replace(p, t);
+                break;
+            }else if(input.equals("k")){
+                t = new Knight(p.getColor(), p.current);
+                p.current.removePiece();
+                t.current.addPiece(t);
+                piecePot.replace(p, t);
+                break;
+            }else if(input.equals("t")){
+                t = new Rook(p.getColor(), p.current);
+                p.current.removePiece();
+                t.current.addPiece(t);
+                piecePot.replace(p, t);
+                break;
+            }else if(input.equals("b")){
+                t = new Bishop(p.getColor(), p.current);
+                p.current.removePiece();
+                t.current.addPiece(t);
+                piecePot.replace(p, t);
+                break;
+            }
+        }
+    }
+
+    private void checkPromote(Piece p){
+        if(p.getColor()== Color.BLACK){
+            if(p.current.y == 7){
+                promotePawn(p);
+            }
+        }else{
+            if(p.current.y == 0){
+                promotePawn(p);
+            }
+        }
     }
 }

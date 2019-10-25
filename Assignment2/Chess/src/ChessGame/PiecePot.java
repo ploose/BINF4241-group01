@@ -45,6 +45,18 @@ class PiecePot {
         }
     }
 
+    public void replace (Piece o, Piece n){
+        if(o.getColor() == n.getColor()){
+            if(o.getColor() == Color.BLACK){
+                blackPlayerList.remove(o);
+                blackPlayerList.add(n);
+            }else{
+                whitePlayerList.remove(o);
+                whitePlayerList.add(o);
+            }
+        }
+    }
+
     String lostPieces() {
         StringBuilder list = new StringBuilder();
 

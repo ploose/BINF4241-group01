@@ -11,9 +11,9 @@ class Game {
     private ArrayList<String> log;
 
     Game() {
-        board = new Board(this);
-
         userInterface = new Ui();
+        board = new Board(this, userInterface);
+
         isRunning = false;
 
         getPlayers();

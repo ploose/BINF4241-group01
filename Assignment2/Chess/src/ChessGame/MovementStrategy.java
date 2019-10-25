@@ -22,8 +22,8 @@ public interface MovementStrategy {
 
 // specialized behaviour for specific pieces
     interface IPawn extends MovementStrategy {
-    public boolean checkPromote();
-}
+        //public boolean checkPromote();
+    }
     interface IKing extends MovementStrategy{
         public boolean isCheckMate();
     }

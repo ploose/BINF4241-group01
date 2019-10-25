@@ -43,6 +43,11 @@ class Ui {
         return input.nextLine();
     }
 
+    String getPromotion(){
+        System.out.println("Your Pawn has reached the 8th rank! Promote him to (q)ueen, (k)night, (t)ower or (b)ishop?");
+        return input.nextLine();
+    }
+
     String getMove(Player player) {
         System.out.print("It's " + player.getName() + "'s move. Please enter your move. Command: ");
         return input.nextLine();

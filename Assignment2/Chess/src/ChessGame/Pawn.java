@@ -15,6 +15,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
         return true;
     }
 
+    /*
     public boolean checkPromote() {
         return true;
     }
@@ -22,6 +23,7 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
     public boolean canBePromoted() {
         return true;
     }
+    */
 
     public void getMoveSquares(final Square[][] squares) {
         possibleMoveSquares.clear();
