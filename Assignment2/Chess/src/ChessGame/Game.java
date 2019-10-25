@@ -341,6 +341,12 @@ class Game {
                     return move.substring(0, 1).matches("[TNBKQ]") && move.substring(1, 2).matches("[a-h]") &&
                             move.substring(2, 3).matches("[0-9]") && move.substring(3, 4).matches("x") &&
                             move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
+                }else if (move.length() == 5) {
+                    return move.substring(0, 1).matches("[a-h]") &&
+                            move.substring(1, 2).matches("[0-9]") && move.substring(2, 3).matches("-") &&
+                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]") &&
+                            (board.getSquare(translate(move.charAt(0)), translate(move.charAt(1))).getCurrentPiece().getClass() == Pawn.class);
+
                 } else {
                     return false;
                 }
