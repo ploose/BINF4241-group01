@@ -5,13 +5,11 @@ import java.util.ArrayList;
 class Board {
     final private Square[][] squares;
     final private Game game;
-    final private Ui ui;
     private PiecePot piecePot;
 
     //Constructor
-    Board(Game game, Ui ui) {
+    Board(Game game) {
         this.game = game;
-        this.ui = ui;
 
         squares = new Square[8][8];
         initBoard();
@@ -158,7 +156,7 @@ class Board {
     }
 
     // performs a fakemove: A move that is not checked if it's valid
-    private void doFakeMove(int x1, int y1, int x2, int y2, Color color) {
+    private void doFakeMove(int x1, int y1, int x2, int y2) {
        squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
        squares[x2][y2].addPiece(squares[x1][y1].removePiece());
     }
@@ -208,63 +206,15 @@ class Board {
     private boolean moveChecked(Color color, int x1, int y1, int x2, int y2){
         boolean Checked = false;
 
-        doFakeMove( x1, y1, x2, y2, color) ;
+        doFakeMove(x1, y1, x2, y2) ;
         this.refresh();
         if (game.checkCheck(game.getPlayer(color))){
             Checked = true;
         }
-        doFakeMove(x2,y2,x1,y1,color);
+        doFakeMove(x2, y2, x1, y1);
         this.refresh();
 
         return Checked;
-
-
-    }
-
-    private void promotePawn(Piece p){
-        Piece t;
-        while (true){
-            String input = ui.getPromotion();
-
-            System.out.println(input);
-            if(input.equals("q")){
-                t = new Queen(p.getColor(), p.current);
-                p.current.removePiece();
-                t.current.addPiece(t);
-                piecePot.replace(p, t);
-                break;
-            }else if(input.equals("k")){
-                t = new Knight(p.getColor(), p.current);
-                p.current.removePiece();
-                t.current.addPiece(t);
-                piecePot.replace(p, t);
-                break;
-            }else if(input.equals("t")){
-                t = new Rook(p.getColor(), p.current);
-                p.current.removePiece();
-                t.current.addPiece(t);
-                piecePot.replace(p, t);
-                break;
-            }else if(input.equals("b")){
-                t = new Bishop(p.getColor(), p.current);
-                p.current.removePiece();
-                t.current.addPiece(t);
-                piecePot.replace(p, t);
-                break;
-            }
-        }
-    }
-
-    private void checkPromote(Piece p){
-        if(p.getColor()== Color.BLACK){
-            if(p.current.y == 7){
-                promotePawn(p);
-            }
-        }else{
-            if(p.current.y == 0){
-                promotePawn(p);
-            }
-        }
     }
 
     public String toString() {

@@ -12,7 +12,7 @@ class Game {
 
     Game() {
         userInterface = new Ui();
-        board = new Board(this, userInterface);
+        board = new Board(this);
 
         isRunning = false;
 
@@ -119,20 +119,6 @@ class Game {
         }
         return false;
     }
-/*  replaced by iterator - ToDelete
-        for (Piece enemyPiece : enemyPieces) { // go through all enemy pieces
-            for(Square targetSquare : enemyPiece.getPossibleTargets()) { // go through all their possible targets
-                // squares
-
-                if(targetSquare == king.current){
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-*/
 
     private boolean checkCheckMate(Player p) {
         Piece king = board.getKingSquare(p).getCurrentPiece();

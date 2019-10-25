@@ -1,7 +1,5 @@
 package ChessGame;
 
-import java.util.ArrayList;
-
 class Pawn extends Piece implements MovementStrategy, IPawn {
     private final int speed;
 
