@@ -12,7 +12,7 @@ class Game {
 
     Game() {
         userInterface = new Ui();
-        board = new Board(this, userInterface);
+        board = new Board(this);
 
         isRunning = false;
 
@@ -231,7 +231,8 @@ class Game {
             }
 
         } else if (checkInput(move, "move")) {
-            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -239,7 +240,8 @@ class Game {
             }
 
         } else if (checkInput(move, "eat")) {
-            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -247,11 +249,18 @@ class Game {
             }
 
         } else if(checkInput(move, "promotion")) {
-            return false;
+            if (board.promotion(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), move.substring(4, 5), currentPlayer.getColor())) {
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
         }
 
         else if (checkInput(move, "en passant")) {
-            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)), translate(move.charAt(5)))) {
+            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)),
+                    translate(move.charAt(5)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -459,7 +468,7 @@ class Game {
             case "promotion":
                 if (move.length() == 7) {
                     return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("-") &&
+                            move.substring(2, 3).matches("[-x]") &&
                             move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]") &&
                             move.substring(5, 6).matches("=") && move.substring(6, 7).matches("[TNBQ]");
                 } else {
