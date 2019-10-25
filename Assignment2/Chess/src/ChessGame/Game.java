@@ -12,7 +12,7 @@ class Game {
 
     Game() {
         userInterface = new Ui();
-        board = new Board(this, userInterface);
+        board = new Board(this);
 
         isRunning = false;
 
@@ -119,20 +119,6 @@ class Game {
         }
         return false;
     }
-/*  replaced by iterator - ToDelete
-        for (Piece enemyPiece : enemyPieces) { // go through all enemy pieces
-            for(Square targetSquare : enemyPiece.getPossibleTargets()) { // go through all their possible targets
-                // squares
-
-                if(targetSquare == king.current){
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-*/
 
     private boolean checkCheckMate(Player p) {
         Piece king = board.getKingSquare(p).getCurrentPiece();
@@ -231,7 +217,8 @@ class Game {
             }
 
         } else if (checkInput(move, "move")) {
-            if (board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+            if (board.move(translate(move.charAt(1)), translate(move.charAt(2)), translate(move.charAt(4)),
+                    translate(move.charAt(5)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -239,7 +226,8 @@ class Game {
             }
 
         } else if (checkInput(move, "eat")) {
-            if (board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)), translate(move.charAt(4)), currentPlayer.getColor())) {
+            if (board.eat(translate(move.charAt(1)), translate(move.charAt(2)), translate(move.charAt(4)),
+                    translate(move.charAt(5)), currentPlayer.getColor())) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -247,11 +235,18 @@ class Game {
             }
 
         } else if(checkInput(move, "promotion")) {
-            return false;
-        }
+            if (board.promotion(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+                    translate(move.charAt(4)), move.substring(6, 7), currentPlayer.getColor())){
+                return true;
+            } else {
+                userInterface.printInvalidMove();
+                return false;
+            }
 
-        else if (checkInput(move, "en passant")) {
-            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)), translate(move.charAt(5)))) {
+
+        } else if (checkInput(move, "en passant")) {
+            if (enPassant(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(4)),
+                    translate(move.charAt(5)))) {
                 return true;
             } else {
                 userInterface.printInvalidMove();
@@ -430,19 +425,19 @@ class Game {
     private boolean checkInput(String move, String mode) {
         switch (mode) {
             case "move":
-                if (move.length() == 5) {
-                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("-") &&
-                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                if (move.length() == 6) {
+                    return move.substring(0, 1).matches("[TNBKQ]") && move.substring(1, 2).matches("[a-h]") &&
+                            move.substring(2, 3).matches("[0-9]") && move.substring(3, 4).matches("-") &&
+                            move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
                 } else {
                     return false;
                 }
 
             case "eat":
-                if (move.length() == 5) {
-                    return move.substring(0, 1).matches("[a-h]") && move.substring(1, 2).matches("[0-9]") &&
-                            move.substring(2, 3).matches("x") &&
-                            move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]");
+                if (move.length() == 6) {
+                    return move.substring(0, 1).matches("[TNBKQ]") && move.substring(1, 2).matches("[a-h]") &&
+                            move.substring(2, 3).matches("[0-9]") && move.substring(3, 4).matches("x") &&
+                            move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
                 } else {
                     return false;
                 }

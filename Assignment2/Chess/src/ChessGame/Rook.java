@@ -9,14 +9,10 @@ class Rook extends Piece {
         speed = 8;
     }
 
-    //needs to be implemented for Checkmate
-    public boolean isBlocking(Square blockedSquare, Square targetSquare) {
-        return false;
-    }
-
     public void getMoveSquares(final Square[][] squares) {
         possibleMoveSquares.clear();
         canEat.clear();
+
         straightUp(squares, speed);
         straightDown(squares, speed);
 

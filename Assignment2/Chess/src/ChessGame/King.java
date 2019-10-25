@@ -9,22 +9,19 @@ class King extends Piece {
         speed = 1;
     }
 
-    // TODO:
-
-
     public void getMoveSquares(final Square[][] squares) {
         possibleMoveSquares.clear();
         canEat.clear();
+
         straightDown(squares, speed);
         straightUp(squares, speed);
         straightLeft(squares, speed);
         straightRight(squares, speed);
+
         diagonalDownLeft(squares, speed);
         diagonalDownRight(squares, speed);
         diagonalUpLeft(squares, speed);
         diagonalUpRight(squares, speed);
-
-
     }
 
     @Override

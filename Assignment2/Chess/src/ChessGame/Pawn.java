@@ -1,7 +1,5 @@
 package ChessGame;
 
-import java.util.ArrayList;
-
 class Pawn extends Piece implements MovementStrategy, IPawn {
     private final int speed;
 
@@ -10,20 +8,6 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
 
         speed = 1;
     }
-
-    public boolean CanBeCaptured() {
-        return true;
-    }
-
-    /*
-    public boolean checkPromote() {
-        return true;
-    }
-
-    public boolean canBePromoted() {
-        return true;
-    }
-    */
 
     public void getMoveSquares(final Square[][] squares) {
         possibleMoveSquares.clear();
@@ -56,6 +40,10 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                 }
             }
 
+            if (squares[x][y - 1].isOccupied()) {
+                canEat.remove(squares[x][y - 1]);
+            }
+
         } else if (this.color == Color.BLACK) { // only moves down
             if (hasMoved) {
                 straightDown(squares, speed);
@@ -78,6 +66,10 @@ class Pawn extends Piece implements MovementStrategy, IPawn {
                         canEat.add(temp);
                     }
                 }
+            }
+
+            if (squares[x][y - 1].isOccupied()) {
+                canEat.remove(squares[x][y - 1]);
             }
         }
     }
