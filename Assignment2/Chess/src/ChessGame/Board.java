@@ -5,12 +5,14 @@ import java.util.ArrayList;
 class Board {
     final private Square[][] squares;
     final private Game game;
+    final private Ui ui;
     private PiecePot piecePot;
     Piece oldPiece;
 
     //Constructor
-    Board(Game game) {
+    Board(Game game, Ui ui) {
         this.game = game;
+        this.ui = ui;
 
         squares = new Square[8][8];
         initBoard();
@@ -65,21 +67,20 @@ class Board {
         squares[5][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[5][7])));
 
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
-        squares[0][1].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[0][1])));
 
 
     }
+
+
 
     Square getSquare(int row, int column) {
         return squares[row][column];
     }
 
+
+
     boolean move(int x1, int y1, int x2, int y2, Color color) {
         if (!squares[x1][y1].isOccupied()) {
-            return false;
-        }
-
-        if (squares[x2][y2].isOccupied()) {
             return false;
         }
 
@@ -92,6 +93,10 @@ class Board {
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
 
+            if(squares[x2][y2].getCurrentPiece().getClass() == Pawn.class){ // Check whether moved piece was pawn
+                System.out.println("Moved Pawn!");
+                checkPromote(squares[x2][y2].getCurrentPiece());
+            }
             return true;
         }
         else {
@@ -148,6 +153,10 @@ class Board {
         }
     }
 
+    String lostPieces() {
+        return piecePot.lostPieces();
+    }
+
     void enPassant(int x1, int y1, int x2, int y2, Color color) {
         squares[x2][y2].addPiece(squares[x1][y1].removePiece());
 
@@ -156,48 +165,6 @@ class Board {
         } else {
             piecePot.remove(squares[x2][y2 + 1].removePiece());
         }
-    }
-
-    boolean promotion(int x1, int y1, int x2, int y2, String piece, Color color) {
-        if (!move(x1, y1, x2, y2, color)) {
-            return false;
-        }
-
-        Piece promoted;
-
-        switch (piece) {
-            case "T":
-                promoted = new Rook(color, squares[x2][y2]);
-                break;
-
-            case "N":
-                promoted = new Knight(color, squares[x2][y2]);
-                break;
-
-            case "B":
-                promoted = new Bishop(color, squares[x2][y2]);
-                break;
-
-            default:
-                promoted = new Queen(color, squares[x2][y2]);
-                break;
-        }
-
-        Piece pawn = squares[x2][y2].removePiece();
-        squares[x2][y2].addPiece(promoted);
-        piecePot.replace(pawn, promoted);
-
-        return true;
-    }
-
-    // performs a fakemove: A move that is not checked if it's valid
-    private void doFakeMove(int x1, int y1, int x2, int y2) {
-       squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
-       squares[x2][y2].addPiece(squares[x1][y1].removePiece());
-    }
-
-    String lostPieces() {
-        return piecePot.lostPieces();
     }
 
     ArrayList<Piece> getFriendlies(Player p){
@@ -237,21 +204,6 @@ class Board {
         }
     }
 
-    //checks if a certain move will lead to the player being checked
-    private boolean moveChecked(Color color, int x1, int y1, int x2, int y2){
-        boolean Checked = false;
-
-        doFakeMove(x1, y1, x2, y2) ;
-        this.refresh();
-        if (game.checkCheck(game.getPlayer(color))){
-            Checked = true;
-        }
-        doFakeMove(x2, y2, x1, y1);
-        this.refresh();
-
-        return Checked;
-    }
-
     public String toString() {
         StringBuilder board = new StringBuilder();
 
@@ -274,7 +226,6 @@ class Board {
 
         return board.toString();
     }
-
 
 
     //checks if a certain move will lead to the player being checked
@@ -339,5 +290,4 @@ class Board {
             }
         }
     }
-
 }
