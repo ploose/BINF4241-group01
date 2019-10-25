@@ -57,6 +57,7 @@ class Board {
         }
         */
 
+
         squares[0][0].addPiece(piecePot.add(new King(Color.BLACK, squares[0][0])));
         squares[6][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][1])));
 
@@ -64,6 +65,8 @@ class Board {
         squares[6][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[6][7])));
         squares[0][7].addPiece(piecePot.add(new Rook(Color.WHITE, squares[0][7])));
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
+
+
     }
 
 
