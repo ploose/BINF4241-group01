@@ -1,12 +1,8 @@
-# Assignment 2: Chess by BINF4241-group25 (Brunner Tim, Looser Patrick, Marty Pascal)
+# Assignment 2: Chess Game by BINF4241-group25 (Brunner Tim, Looser Patrick, Marty Pascal)
 
-## Rules
-These are the rules of our chess game implementation: 
+## Specifications
+These are the specifications of our Chess implementation: 
+- We use the Long algebraic notation for the User-Input.
+- The game is considered won iff the winning player manages to checkmate his opponent.
 
 
-
-## Features
-- Raytracing
-- Finisher moves
-- 8k support
-- 64 core processing
