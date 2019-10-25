@@ -336,6 +336,7 @@ class Game {
                 }
             }
 
+
             Piece tmp = squareOne.removePiece();
 
             board.move(7, 0, 5, 0, currentPlayer.getColor());

@@ -7,6 +7,7 @@ class Board {
     final private Game game;
     final private Ui ui;
     private PiecePot piecePot;
+    Piece oldPiece;
 
     //Constructor
     Board(Game game, Ui ui) {
@@ -61,7 +62,9 @@ class Board {
 
 
         squares[0][0].addPiece(piecePot.add(new King(Color.BLACK, squares[0][0])));
+
         squares[6][6].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][6])));
+        squares[5][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[5][7])));
 
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
 
@@ -84,10 +87,8 @@ class Board {
         if (!(color == squares[x1][y1].getCurrentPiece().getColor())) {
             return false;
         }
-
-        if (moveChecked(color,x1,y1, x2, y2)){
-            return false;
-            }
+        // check if the move leads to a check situation
+        if (moveChecked(color,x1,y1, x2, y2)){ return false; }
 
         if (squares[x1][y1].getCurrentPiece().move(squares[x1][y1], squares[x2][y2], squares)) {
             squares[x2][y2].addPiece(squares[x1][y1].removePiece());
@@ -105,9 +106,27 @@ class Board {
 
 
     // performs a fakemove: A move that is not checked if it's valid
-    public void doFakeMove(int x1, int y1, int x2, int y2, Color color) {
+    public void doFakeMove(int x1, int y1, int x2, int y2, FakemoveMode mode) {
+
+        // check
        squares[x1][y1].getCurrentPiece().forcedMove(squares[x1][y1], squares[x2][y2], squares);
-       squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+
+       // If there is a piece standing where he want to move (eat situation), the eaten piece will be stored
+       if (squares[x2][y2] != null && mode == FakemoveMode.doMove){
+           oldPiece = squares[x2][y2].removePiece();
+           squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+        }
+       // If there is a piece that has to take its place again, this will be executed while undoing
+       else if (mode == FakemoveMode.undoMove && oldPiece != null){
+           squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+           squares[x1][y1].addPiece(oldPiece);
+           oldPiece = null;
+       }
+       else{
+           squares[x2][y2].addPiece(squares[x1][y1].removePiece());
+       }
+        System.out.print(this);
+
 
 
     }
@@ -122,6 +141,7 @@ class Board {
         if (!(color == squares[x1][y1].getCurrentPiece().getColor())) {
             return false;
         }
+        if (moveChecked(color,x1,y1, x2, y2)){ return false; }
 
         if (squares[x1][y1].getCurrentPiece().eat(squares[x1][y1], squares[x2][y2], squares)) {
             piecePot.remove(squares[x2][y2].removePiece());
@@ -212,12 +232,12 @@ class Board {
     private boolean moveChecked(Color color, int x1, int y1, int x2, int y2){
         boolean Checked = false;
 
-        doFakeMove( x1, y1, x2, y2, color) ;
+        doFakeMove( x1, y1, x2, y2, FakemoveMode.doMove) ;
         this.refresh();
         if (game.checkCheck(game.getPlayer(color))){
             Checked = true;
         }
-        doFakeMove(x2,y2,x1,y1,color);
+        doFakeMove(x2,y2,x1,y1,FakemoveMode.undoMove);
         this.refresh();
 
         return Checked;
