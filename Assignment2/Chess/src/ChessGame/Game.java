@@ -229,10 +229,10 @@ class Game {
             }
 
         } else if (checkInput(move, "eat")) {
-            if (board.eat(translate(move.charAt(1)), translate(move.charAt(2)), translate(move.charAt(4)),
+            if (move.length() == 6 && board.eat(translate(move.charAt(1)), translate(move.charAt(2)), translate(move.charAt(4)),
                     translate(move.charAt(5)), currentPlayer.getColor())) {
                 return true;
-            }else if (move.length() == 5 && board.move(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
+            }else if (move.length() == 5 && board.eat(translate(move.charAt(0)), translate(move.charAt(1)), translate(move.charAt(3)),
                     translate(move.charAt(4)), currentPlayer.getColor())) {
                 return true;
             } else {
@@ -343,7 +343,7 @@ class Game {
                             move.substring(4, 5).matches("[a-h]") && move.substring(5, 6).matches("[0-9]");
                 }else if (move.length() == 5) {
                     return move.substring(0, 1).matches("[a-h]") &&
-                            move.substring(1, 2).matches("[0-9]") && move.substring(2, 3).matches("-") &&
+                            move.substring(1, 2).matches("[0-9]") && move.substring(2, 3).matches("x") &&
                             move.substring(3, 4).matches("[a-h]") && move.substring(4, 5).matches("[0-9]") &&
                             (board.getSquare(translate(move.charAt(0)), translate(move.charAt(1))).getCurrentPiece().getClass() == Pawn.class);
 
@@ -380,41 +380,57 @@ class Game {
 
         switch (current) {
             case 'a':
+                num = 0;
+                break;
             case '8':
                 num = 0;
                 break;
 
             case 'b':
+                num = 1;
+                break;
             case '7':
                 num = 1;
                 break;
 
             case 'c':
+                num = 2;
+                break;
             case '6':
                 num = 2;
                 break;
 
             case 'd':
+                num = 3;
+                break;
             case '5':
                 num = 3;
                 break;
 
             case 'e':
+                num = 4;
+                break;
             case '4':
                 num = 4;
                 break;
 
             case 'f':
+                num = 5;
+                break;
             case '3':
                 num = 5;
                 break;
 
             case 'g':
+                num = 6;
+                break;
             case '2':
                 num = 6;
                 break;
 
             case 'h':
+                num = 7;
+                break;
             case '1':
                 num = 7;
                 break;
