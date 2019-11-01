@@ -7,6 +7,8 @@ class PiecePot {
     private ArrayList<Piece> whitePlayerList;
     private ArrayList<Piece> blackPlayerListOffBoard;
     private ArrayList<Piece> whitePlayerListOffBoard;
+    private int blackPlayerListOffBoardSize;
+    private int whitePlayerListOffBoardSize;
 
     PiecePot() {
         blackPlayerList = new ArrayList<>();
@@ -14,13 +16,18 @@ class PiecePot {
 
         blackPlayerListOffBoard = new ArrayList<>();
         whitePlayerListOffBoard = new ArrayList<>();
+
+        blackPlayerListOffBoardSize = 16;
+        whitePlayerListOffBoardSize = 16;
     }
 
     Piece add(Piece piece) {
         if (piece.getColor() == Color.BLACK) {
             blackPlayerList.add(piece);
+            blackPlayerListOffBoardSize -= 1;
         } else {
             whitePlayerList.add(piece);
+            whitePlayerListOffBoardSize -= 1;
         }
 
         return piece;
@@ -30,9 +37,11 @@ class PiecePot {
         if (piece.getColor() == Color.BLACK) {
             blackPlayerList.remove(piece);
             blackPlayerListOffBoard.add(piece);
+            blackPlayerListOffBoardSize += 1;
         } else {
             whitePlayerList.remove(piece);
             whitePlayerListOffBoard.add(piece);
+            whitePlayerListOffBoardSize += 1;
         }
     }
 
@@ -74,6 +83,23 @@ class PiecePot {
         list.append("\n");
 
         return list.toString();
+    }
+
+    public Piece getBlackPlayerListOffBoard(int i){
+        return blackPlayerListOffBoard.get(i);
+    }
+
+    public Piece getWhitePlayerListOffBoard(int i){
+        return whitePlayerListOffBoard.get(i);
+    }
+
+    public int blackPlayerListOffBoardSize(){
+        int temp = blackPlayerListOffBoardSize;
+        return temp;
+    }
+    public int whitePlayerListOffBoardSize(){
+        int temp = whitePlayerListOffBoardSize;
+        return temp;
     }
 }
 

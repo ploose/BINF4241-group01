@@ -6,6 +6,7 @@ class Board {
     final private Square[][] squares;
     final private Game game;
     private PiecePot piecePot;
+    private Scoreboard scoreboard;
 
     //Constructor
     Board(Game game) {
@@ -16,6 +17,10 @@ class Board {
 
         piecePot = new PiecePot();
         setPieces();
+
+        scoreboard = Scoreboard.getInstance();
+        scoreboard.init(piecePot);
+
     }
 
     // setting up the board
@@ -286,8 +291,12 @@ class Board {
         squares[x2][y2].addPiece(squares[x1][y1].removePiece());
     }
 
-    String lostPieces() {
-        return piecePot.lostPieces();
+    String lostPieces() { return piecePot.lostPieces(); }
+
+    String scores(){ return scoreboard.toString();}
+
+    public void refreshScoreboard(){
+        scoreboard.refresh();
     }
 
     ArrayList<Piece> getFriendlies(Player p){
