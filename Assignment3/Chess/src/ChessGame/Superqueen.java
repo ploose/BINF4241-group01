@@ -2,7 +2,7 @@ package ChessGame;
 
 import java.util.ArrayList;
 
-public class Superqueen extends Piece implements MovementStrategy, SuperqueenMovementStrategy {
+public class Superqueen extends Queen implements MovementStrategy, SuperqueenMovementStrategy {
 
     private final int speed;
 

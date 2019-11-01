@@ -52,7 +52,7 @@ class Board {
 
         Superqueen superqueenWhite = new Superqueen(Color.WHITE, squares[3][7]);
         Queen queenWhite = new SuperqueenAdapter(superqueenWhite);
-        squares[3][0].addPiece(piecePot.add(queenWhite));
+        squares[3][7].addPiece(piecePot.add(queenWhite));
 
         /* Generic Queen
         squares[3][0].addPiece(piecePot.add(new Queen(Color.BLACK, squares[3][0])));
