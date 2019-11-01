@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Knight extends Piece implements GenericMovementStrategy, MovementStrategy {
+class Knight extends Piece {
 
     Knight(Color color, Square current) {
         super(color, current);

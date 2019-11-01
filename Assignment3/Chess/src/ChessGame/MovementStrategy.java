@@ -6,9 +6,6 @@ public interface MovementStrategy {
     boolean eat(Square current, Square next, final Square[][] squares);
     boolean hasMoved();
     Color getColor();
-
-
-
 }
 
 

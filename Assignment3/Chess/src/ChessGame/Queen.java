@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Queen extends Piece implements GenericMovementStrategy, MovementStrategy {
+class Queen extends Piece {
     private final int speed;
 
     Queen(Color color, Square current){
