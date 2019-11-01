@@ -1,6 +1,8 @@
 package ChessGame;
 
-public class SuperqueenAdapter implements MovementStrategy, GenericMovementStrategy  {
+import java.util.ArrayList;
+
+public class SuperqueenAdapter extends Queen implements MovementStrategy, GenericMovementStrategy  {
 
     //private final int speed;
     Superqueen superqueen;
@@ -16,6 +18,10 @@ public class SuperqueenAdapter implements MovementStrategy, GenericMovementStrat
 
     public void getMoveSquares(final Square[][] squares){
         superqueen.getSuperqueenMoveSquares(squares);
+        this.possibleMoveSquares = superqueen.possibleMoveSquares;
+        this.canEat = superqueen.canEat;
+
+
     }
 
     @Override

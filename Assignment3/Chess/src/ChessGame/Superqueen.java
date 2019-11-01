@@ -7,6 +7,7 @@ public class Superqueen extends Piece implements MovementStrategy, SuperqueenMov
 
     private final int speed;
 
+
     Superqueen(Color color, Square current) {
         super(color, current);
 
@@ -26,6 +27,7 @@ public class Superqueen extends Piece implements MovementStrategy, SuperqueenMov
         possibleMoveSquares.clear();
         canEat.clear();
         Square temp, current = this.current;
+        canEat = getEat(squares);
 
         // teleport
 
@@ -36,18 +38,23 @@ public class Superqueen extends Piece implements MovementStrategy, SuperqueenMov
             square = squaresIterator.next();
 
             temp = square;
-                if (temp.isOccupied()) {
-                    if (hasEnemy(temp)) {
-                        canEat.add(temp);
-                    }
-                } else {
+
                     possibleMoveSquares.add(temp);
                 }
             }
-        }
-    }
 
 
+
+
+    public ArrayList<Square> getEat(final Square[][] squares){
+
+        ArrayList<Square> temp;
+        Queen dummyQueen = new Queen(this.color,this.current);
+        dummyQueen.getMoveSquares(squares);
+        temp = dummyQueen.canEat;
+        return temp;
+}
+}
 
 
 
