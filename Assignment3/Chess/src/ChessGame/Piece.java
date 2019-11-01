@@ -35,7 +35,7 @@ abstract class Piece{
                         this.current = next;
                         return true;
                 } else {
-                        return false;
+                     return false;
                 }
         }
 

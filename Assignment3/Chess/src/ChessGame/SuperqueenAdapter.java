@@ -1,9 +1,10 @@
 package ChessGame;
 
-public class SuperqueenAdapter extends Queen implements MovementStrategy, GenericMovementStrategy  {
+public class SuperqueenAdapter implements MovementStrategy, GenericMovementStrategy  {
 
     //private final int speed;
     Superqueen superqueen;
+
 
     SuperqueenAdapter(Superqueen superqueen){
         super(superqueen.color, superqueen.current);

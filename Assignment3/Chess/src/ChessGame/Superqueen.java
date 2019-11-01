@@ -1,8 +1,9 @@
 package ChessGame;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Superqueen extends Queen implements MovementStrategy, SuperqueenMovementStrategy {
+public class Superqueen extends Piece implements MovementStrategy, SuperqueenMovementStrategy {
 
     private final int speed;
 
@@ -24,16 +25,17 @@ public class Superqueen extends Queen implements MovementStrategy, SuperqueenMov
     public void getSuperqueenMoveSquares(final Square[][] squares) {
         possibleMoveSquares.clear();
         canEat.clear();
-
-        possibleMoveSquares.clear();
-        canEat.clear();
         Square temp, current = this.current;
 
         // teleport
-        for (Square[] squareRow : squares) {
-            for (Square square : squareRow) {
 
-                temp = square;
+        SquaresIterator squaresIterator = new SquaresIterator(squares);
+        Square square = current;
+
+        while (squaresIterator.hasNext()){
+            square = squaresIterator.next();
+
+            temp = square;
                 if (temp.isOccupied()) {
                     if (hasEnemy(temp)) {
                         canEat.add(temp);
@@ -44,7 +46,6 @@ public class Superqueen extends Queen implements MovementStrategy, SuperqueenMov
             }
         }
     }
-}
 
 
 
