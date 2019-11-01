@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Bishop extends Piece {
+class Bishop extends Piece implements GenericMovementStrategy, MovementStrategy {
     private final int speed;
 
     Bishop(Color color, Square current){

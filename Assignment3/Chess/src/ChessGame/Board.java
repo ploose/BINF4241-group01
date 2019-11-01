@@ -44,9 +44,20 @@ class Board {
         squares[2][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[2][7])));
         squares[5][7].addPiece(piecePot.add(new Bishop(Color.WHITE, squares[5][7])));
 
+        // Superqueen
+
+        Superqueen superqueenBlack = new Superqueen(Color.BLACK, squares[3][0]);
+        Queen queenBlack = new SuperqueenAdapter(superqueenBlack);
+        squares[3][0].addPiece(piecePot.add(queenBlack));
+
+        Superqueen superqueenWhite = new Superqueen(Color.WHITE, squares[3][7]);
+        Queen queenWhite = new SuperqueenAdapter(superqueenWhite);
+        squares[3][0].addPiece(piecePot.add(queenWhite));
+
+        /* Generic Queen
         squares[3][0].addPiece(piecePot.add(new Queen(Color.BLACK, squares[3][0])));
         squares[3][7].addPiece(piecePot.add(new Queen(Color.WHITE, squares[3][7])));
-
+*/
         squares[4][0].addPiece(piecePot.add(new King(Color.BLACK, squares[4][0])));
         squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
 

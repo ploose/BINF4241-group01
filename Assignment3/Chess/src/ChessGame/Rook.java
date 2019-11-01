@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Rook extends Piece {
+class Rook extends Piece implements GenericMovementStrategy, MovementStrategy {
     private final int speed;
 
     Rook(Color color, Square current) {

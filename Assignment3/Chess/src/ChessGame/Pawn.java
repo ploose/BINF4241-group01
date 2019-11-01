@@ -1,6 +1,6 @@
 package ChessGame;
 
-class Pawn extends Piece implements MovementStrategy {
+class Pawn extends Piece implements GenericMovementStrategy, MovementStrategy {
     private final int speed;
 
     Pawn(Color color, Square current) {

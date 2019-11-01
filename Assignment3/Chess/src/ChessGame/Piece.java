@@ -2,7 +2,7 @@ package ChessGame;
 
 import java.util.ArrayList;
 
-abstract class Piece implements MovementStrategy{
+abstract class Piece{
         final protected Color color;
         protected Square current;
         protected boolean hasMoved;
