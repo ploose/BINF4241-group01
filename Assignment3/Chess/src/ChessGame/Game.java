@@ -47,6 +47,7 @@ class Game {
         isRunning = true;
 
         userInterface.printBoard(board.toString());
+        userInterface.printPieces(board.getPieces());
 
         while (isRunning) {
             boolean isValidMove = false;
@@ -83,7 +84,6 @@ class Game {
             userInterface.printScore(board.lostPieces());
             board.refreshScoreboard();
             userInterface.printScoreBoard(board.scores());
-
 
 
             swapPlayer();

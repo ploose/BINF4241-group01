@@ -31,6 +31,10 @@ class Ui {
         System.out.println("Your piece is not allowed to do that! Please enter another move.");
     }
 
+    void printPieces(String String){
+        System.out.println(String);
+    }
+
     boolean printWrongInput() {
         System.out.println("Invalid Input!");
         return false;

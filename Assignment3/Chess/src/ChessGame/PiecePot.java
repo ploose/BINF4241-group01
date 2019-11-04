@@ -53,6 +53,33 @@ class PiecePot {
         }
     }
 
+    public String getPiecesOnBoard(){
+        String StringBuilder;
+        String BlackPieces = getBlackPiecesOnBoard();
+        String WhitePieces = getWhitePiecesOnBoard();
+
+        StringBuilder = WhitePieces + "\n" + BlackPieces;
+        return StringBuilder;
+    }
+
+    private String getWhitePiecesOnBoard(){
+        ChessPieceIterator iterator = new ChessPieceIterator(this.whitePlayerList);
+        String Pieces = "white pieces on board: ";
+        while (iterator.hasNext()) {
+            Pieces = Pieces.concat(iterator.next().toString() + " ");
+        }
+        return Pieces;
+
+    }
+    private String getBlackPiecesOnBoard(){
+        ChessPieceIterator iterator = new ChessPieceIterator(this.blackPlayerList);
+        String Pieces = "black pieces on board: ";
+        while (iterator.hasNext()) {
+            Pieces = Pieces.concat(iterator.next().toString() + " ");
+        }
+        return Pieces;
+    }
+
     void replace(Piece o, Piece n){
         if(o.getColor() == n.getColor()){
             if(o.getColor() == Color.BLACK){

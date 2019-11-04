@@ -369,4 +369,8 @@ class Board {
 
         return board.toString();
     }
+
+    public String getPieces(){
+        return piecePot.getPiecesOnBoard();
+    }
 }
