@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{pgf-umlsd}
+\usepackage{float}
+
+\title{%
+  Software construction \\
+  \large Assignment 3 - Task 2
+}
+
+\begin{document}
+
+\maketitle
+
+\section{board.refresh()}
+\begin{figure}[H]
+	\centering
+	\begin{sequencediagram}
+		\newthread{G}{:game}{}
+		\newinst[2]{B}{:board}{}
+		\newinst[2]{S}{:squares}{}
+		\newinst[2]{P}{:currentPiece}{}
+		      
+		% refresh() call
+		\begin{call}{G}{refresh()}{B}{}	
+			% isOccupied() call  	ø
+			
+			  
+			\begin{sdblock}{loop}{[for each square]}
+				\begin{call}{B}{isOccupied()}{S}{boolean}
+				\end{call}
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{call}{B}{getCurrentPiece()}{S}{currentPiece}
+					\end{call}
+					
+			  		\begin{messcall}{B}{getMoveSquares(squares)}{P}
+					\end{messcall}
+			  		
+			  		
+			  	\end{sdblock}
+    
+    
+			\end{sdblock}	
+		\end{call}
+	
+	
+	
+	\end{sequencediagram}
+\end{figure}
+
+\end{document}
