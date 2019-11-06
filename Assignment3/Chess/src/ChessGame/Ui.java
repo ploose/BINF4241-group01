@@ -25,8 +25,14 @@ class Ui {
         System.out.print(score);
     }
 
+    void printScoreBoard(String toString){System.out.println(toString);}
+
     void printInvalidMove() {
         System.out.println("Your piece is not allowed to do that! Please enter another move.");
+    }
+
+    void printPieces(String String){
+        System.out.println(String);
     }
 
     boolean printWrongInput() {

@@ -10,6 +10,7 @@ class Game {
     private String move;
     private ArrayList<String> log;
 
+
     Game() {
         userInterface = new Ui();
         board = new Board(this);
@@ -21,6 +22,9 @@ class Game {
         currentPlayer = black;
 
         log = new ArrayList<>();
+
+
+
 
         run();
     }
@@ -43,6 +47,7 @@ class Game {
         isRunning = true;
 
         userInterface.printBoard(board.toString());
+        userInterface.printPieces(board.getPieces());
 
         while (isRunning) {
             boolean isValidMove = false;
@@ -77,6 +82,9 @@ class Game {
 
             userInterface.printBoard(board.toString());
             userInterface.printScore(board.lostPieces());
+            board.refreshScoreboard();
+            userInterface.printScoreBoard(board.scores());
+
 
             swapPlayer();
         }
@@ -380,6 +388,7 @@ class Game {
                 return false;
         }
     }
+
 
     private int translate(char current) {
         int num = 0;
