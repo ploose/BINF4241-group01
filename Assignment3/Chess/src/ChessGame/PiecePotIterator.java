@@ -12,12 +12,6 @@ class PiecePotIterator implements Iterator<Piece> {
         position = 0;
     }
 
-    PiecePotIterator(Iterator<Piece> other) {
-        readOut(other);
-
-        position = 0;
-    }
-
     public boolean hasNext() {
         return position < piecesAlive.size() && piecesAlive.get(position) != null;
     }
@@ -32,11 +26,5 @@ class PiecePotIterator implements Iterator<Piece> {
 
     void remove(Piece piece) {
         piecesAlive.remove(piece);
-    }
-
-    private void readOut(Iterator<Piece> other) {
-        while (other.hasNext()) {
-            piecesAlive.add(other.next());
-        }
     }
 }

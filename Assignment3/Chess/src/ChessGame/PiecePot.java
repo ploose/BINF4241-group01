@@ -72,6 +72,10 @@ class PiecePot {
         return blackPlayerListOffBoard.size();
     }
 
+    String getPiecesOnBoard() {
+        return "";
+    }
+
     String lostPieces() {
         StringBuilder list = new StringBuilder();
 

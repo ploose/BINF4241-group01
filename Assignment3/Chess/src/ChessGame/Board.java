@@ -1,6 +1,5 @@
 package ChessGame;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 class Board {
@@ -8,10 +7,10 @@ class Board {
     final private Game game;
     private PiecePot piecePot;
     private Scoreboard scoreboard;
+    private static Board uniqueInstance;
 
-    //TODO: Singleton
     //Constructor
-    Board(Game game) {
+    private Board(Game game) {
         this.game = game;
 
         squares = new Square[8][8];
@@ -23,6 +22,14 @@ class Board {
         scoreboard = Scoreboard.getInstance();
         scoreboard.init(piecePot);
 
+    }
+
+    static Board getUniqueInstance(Game game) {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Board(game);
+        }
+
+        return uniqueInstance;
     }
 
     // setting up the board
@@ -287,7 +294,7 @@ class Board {
         }
     }
 
-    // performs a fakemove: A move that is not checked if it's valid
+    // performs a fake move: A move that is not checked if it's valid
     private void doFakeMove(int x1, int y1, int x2, int y2) {
         squares[x1][y1].getCurrentPiece().forcedMove(squares[x2][y2], squares);
         squares[x2][y2].addPiece(squares[x1][y1].removePiece());
@@ -297,7 +304,7 @@ class Board {
 
     String scores(){ return scoreboard.toString();}
 
-    public void refreshScoreboard(){
+    void refreshScoreboard(){
         scoreboard.refresh();
     }
 
@@ -376,7 +383,7 @@ class Board {
         return board.toString();
     }
 
-    public String getPieces(){
+    String getPieces(){
         return piecePot.getPiecesOnBoard();
     }
 }

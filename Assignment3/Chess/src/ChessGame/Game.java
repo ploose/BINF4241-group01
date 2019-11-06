@@ -13,7 +13,7 @@ class Game {
 
     Game() {
         userInterface = new Ui();
-        board = new Board(this);
+        board = Board.getUniqueInstance(this);
 
         isRunning = false;
 
@@ -22,9 +22,6 @@ class Game {
         currentPlayer = black;
 
         log = new ArrayList<>();
-
-
-
 
         run();
     }
@@ -37,8 +34,7 @@ class Game {
     Player getPlayer(Color color) {
         if (color == Color.BLACK){
             return black;
-        }
-        else{
+        } else {
             return white;
         }
     }
@@ -82,9 +78,9 @@ class Game {
 
             userInterface.printBoard(board.toString());
             userInterface.printScore(board.lostPieces());
+
             board.refreshScoreboard();
             userInterface.printScoreBoard(board.scores());
-
 
             swapPlayer();
         }
