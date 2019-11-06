@@ -6,7 +6,7 @@ public class ChessPieceIterator implements IIterator{
     private ArrayList<Piece> pieceList;
     private int position;
 
-    public ChessPieceIterator(ArrayList<Piece> pieceList){
+    ChessPieceIterator(ArrayList<Piece> pieceList){
         this.pieceList = pieceList;
     }
 
