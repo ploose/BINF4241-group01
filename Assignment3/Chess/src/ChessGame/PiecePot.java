@@ -72,8 +72,35 @@ class PiecePot {
         return blackPlayerListOffBoard.size();
     }
 
-    String getPiecesOnBoard() {
-        return "";
+    String getPiecesOnBoard(){
+        String StringBuilder;
+        String BlackPieces = getBlackPiecesOnBoard();
+        String WhitePieces = getWhitePiecesOnBoard();
+
+        StringBuilder = WhitePieces + "\n" + BlackPieces;
+        return StringBuilder;
+    }
+
+    private String getBlackPiecesOnBoard() {
+        ChessPieceIterator iterator = new ChessPieceIterator(blackPlayerList);
+        String Pieces = "white pieces on board: ";
+
+        while (iterator.hasNext()) {
+            Pieces = Pieces.concat(iterator.next().toString() + " ");
+        }
+
+        return Pieces;
+    }
+
+    private String getWhitePiecesOnBoard() {
+        ChessPieceIterator iterator = new ChessPieceIterator(whitePlayerList);
+        String Pieces = "black pieces on board: ";
+
+        while (iterator.hasNext()) {
+            Pieces = Pieces.concat(iterator.next().toString() + " ");
+        }
+
+        return Pieces;
     }
 
     String lostPieces() {

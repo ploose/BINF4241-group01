@@ -3,10 +3,8 @@ package ChessGame;
 import java.util.ArrayList;
 
 public class ChessPieceIterator implements IIterator{
-
-    ArrayList<Piece> pieceList;
-    int position;
-
+    private ArrayList<Piece> pieceList;
+    private int position;
 
     public ChessPieceIterator(ArrayList<Piece> pieceList){
         this.pieceList = pieceList;
@@ -19,12 +17,7 @@ public class ChessPieceIterator implements IIterator{
     }
 
     public boolean hasNext(){
-        if (position >= pieceList.size() || pieceList.get(position) == null){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return position < pieceList.size() && pieceList.get(position) != null;
     }
 
 }
