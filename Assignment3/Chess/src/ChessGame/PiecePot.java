@@ -1,7 +1,6 @@
 package ChessGame;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 class PiecePot {
     private ArrayList<Piece> blackPlayerList;
@@ -37,18 +36,6 @@ class PiecePot {
         }
     }
 
-
-    /*
-    ArrayList<Piece> getPiecesAlive(Color c){
-        if(c == Color.BLACK){
-            return new ArrayList<>(blackPlayerList);
-        }else{
-            return new ArrayList<>(whitePlayerList);
-        }
-    }
-
-     */
-
     PiecePotIterator getPiecesAlive(Color color) {
         if (color == Color.BLACK) {
             return new PiecePotIterator(blackPlayerList);
@@ -67,6 +54,22 @@ class PiecePot {
                 whitePlayerList.add(o);
             }
         }
+    }
+
+    Piece getBlackPlayerListOffBoard(int i) {
+        return blackPlayerListOffBoard.get(i);
+    }
+
+    Piece getWhitePlayerListOffBoard(int i) {
+        return whitePlayerListOffBoard.get(i);
+    }
+
+    int whitePlayerListOffBoardSize() {
+        return whitePlayerListOffBoard.size();
+    }
+
+    int blackPlayerListOffBoardSize() {
+        return blackPlayerListOffBoard.size();
     }
 
     String lostPieces() {
