@@ -83,31 +83,29 @@ class Game {
     }
 
     // returns true if there is at least one remaining attacker for the king
-    private boolean isKingTarget(Piece king,  ArrayList<Piece> enemyPieces){
-
-        Iterator<Piece> ep = enemyPieces.iterator();
+    private boolean isKingFree(Piece king,  Iterator<Piece> enemyPieces){
         Piece enemyPiece;
 
-        while (ep.hasNext()){
-            enemyPiece = ep.next();
+        while (enemyPieces.hasNext()){
+            enemyPiece = enemyPieces.next();
             if(enemyPiece.getPossibleTargets().contains(king.current)){ // returns true if king is possible target
-                return true;
+                return false;
             }
         }
-        return false;
+
+        return true;
     }
 
     boolean checkCheck(Player p) {
         Piece king = board.getKingSquare(p).getCurrentPiece();
-        ArrayList<Piece> enemyPieces = board.getEnemies(p);
+        Iterator<Piece> enemyPieces = board.getEnemies(p);
 
-        Iterator<Piece> ep = enemyPieces.iterator();
         Iterator<Square> ts;
         Square targetSquare;
         Piece piece;
 
-        while (ep.hasNext()) {
-            piece = ep.next();
+        while (enemyPieces.hasNext()) {
+            piece = enemyPieces.next();
             ts = piece.getPossibleTargets().iterator();
             while (ts.hasNext()) {
                 targetSquare = ts.next();
@@ -117,83 +115,91 @@ class Game {
                 }
             }
         }
+
         return false;
     }
 
     private boolean checkCheckMate(Player p) {
-        Piece king = board.getKingSquare(p).getCurrentPiece();
-        ArrayList<Piece> friendlyPieces = board.getFriendlies(p);
-        ArrayList<Piece> enemyPieces = board.getEnemies(p);
-        Square tempSquare;
-        Piece tempPiece;
+        Piece king = board.getKingSquare(p).getCurrentPiece(), tempPiece, friendlyPiece;
 
-        if (!isKingTarget(king, enemyPieces)) {
-            return false;
-        }
-        Piece friendlyPiece;
-        Square moveSquare;
-        Square targetSquare;
+        PiecePotIterator friendlyPieces = board.getFriendlies(p);
+        PiecePotIterator enemyPieces = board.getEnemies(p);
 
-        if (!isKingTarget(king, enemyPieces)) {
+        Square tempSquare, moveSquare, targetSquare;
+
+        if (isKingFree(king, enemyPieces)) {
             return false;
         }
 
-        Iterator<Piece> fp = friendlyPieces.iterator();
+        enemyPieces.restart();
 
         // run through all friendly pieces
-        while (fp.hasNext()) {
-            friendlyPiece = fp.next();
+        while (friendlyPieces.hasNext()) {
+            friendlyPiece = friendlyPieces.next();
             tempSquare = friendlyPiece.current;
-            Iterator<Square> ms = friendlyPiece.getPossibleMoveSquares().iterator();
-            while (ms.hasNext()) {
-                moveSquare = ms.next();
+
+            for (Square square : friendlyPiece.getPossibleMoveSquares()) {
+                moveSquare = square;
+
                 tempSquare.removePiece(); // temporarily remove piece for checking
                 moveSquare.addPiece(friendlyPiece); // temporarily adds piece for checking
+
                 friendlyPiece.current = moveSquare;
                 board.refresh(); // refresh the move & eat squares of all pieces alive
 
-                if (!isKingTarget(king, enemyPieces)) { // If the king can now move again he isn't in a checkMate
+                if (isKingFree(king, enemyPieces)) { // If the king can now move again he isn't in a checkMate
                     moveSquare.removePiece(); // remove piece
                     tempSquare.addPiece(friendlyPiece); // add piece back
+
                     friendlyPiece.current = tempSquare;
                     board.refresh(); // refresh the move & eat squares of all pieces alive
+
                     return false;
                 }
 
+                enemyPieces.restart();
+
                 moveSquare.removePiece(); // remove piece
                 tempSquare.addPiece(friendlyPiece); // add piece back
+
                 friendlyPiece.current = tempSquare;
                 board.refresh(); // refresh the move & eat squares of all pieces alive
             }
 
-            Iterator<Square> ts = friendlyPiece.getPossibleTargets().iterator();
-            while (ts.hasNext()) {
-                targetSquare = ts.next();
+            for (Square square : friendlyPiece.getPossibleTargets()) {
+                targetSquare = square;
+
                 tempSquare.removePiece(); // temporarily remove piece for checking
                 tempPiece = targetSquare.removePiece(); // temporarily remove target for checking
+
                 enemyPieces.remove(tempPiece);
                 targetSquare.addPiece(friendlyPiece); // temporarily adds piece for checking
+
                 friendlyPiece.current = targetSquare;
                 board.refresh(); // refresh the move & eat squares of all pieces alive
 
-                if (!isKingTarget(king, enemyPieces)) { // If the king can now move again he isn't in a checkMate
+                if (isKingFree(king, enemyPieces)) { // If the king can now move again he isn't in a checkMate
                     targetSquare.removePiece(); // remove piece
                     targetSquare.addPiece(tempPiece); // add target back
-                    enemyPieces.add(tempPiece);
+
                     tempSquare.addPiece(friendlyPiece); // add piece back
+
                     friendlyPiece.current = tempSquare;
                     board.refresh(); // refresh the move & eat squares of all pieces alive
+
                     return false;
                 }
 
                 targetSquare.removePiece(); // remove piece
                 targetSquare.addPiece(tempPiece); // add target back
-                enemyPieces.add(tempPiece);
+
                 tempSquare.addPiece(friendlyPiece); // add piece back
                 friendlyPiece.current = tempSquare;
+
                 board.refresh(); // refresh the move & eat squares of all pieces alive
             }
         }
+
         return true;
     }
 
@@ -380,57 +386,41 @@ class Game {
 
         switch (current) {
             case 'a':
-                num = 0;
-                break;
             case '8':
                 num = 0;
                 break;
 
             case 'b':
-                num = 1;
-                break;
             case '7':
                 num = 1;
                 break;
 
             case 'c':
-                num = 2;
-                break;
             case '6':
                 num = 2;
                 break;
 
             case 'd':
-                num = 3;
-                break;
             case '5':
                 num = 3;
                 break;
 
             case 'e':
-                num = 4;
-                break;
             case '4':
                 num = 4;
                 break;
 
             case 'f':
-                num = 5;
-                break;
             case '3':
                 num = 5;
                 break;
 
             case 'g':
-                num = 6;
-                break;
             case '2':
                 num = 6;
                 break;
 
             case 'h':
-                num = 7;
-                break;
             case '1':
                 num = 7;
                 break;

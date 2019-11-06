@@ -1,6 +1,7 @@
 package ChessGame;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 class PiecePot {
     private ArrayList<Piece> blackPlayerList;
@@ -36,11 +37,23 @@ class PiecePot {
         }
     }
 
+
+    /*
     ArrayList<Piece> getPiecesAlive(Color c){
         if(c == Color.BLACK){
             return new ArrayList<>(blackPlayerList);
         }else{
             return new ArrayList<>(whitePlayerList);
+        }
+    }
+
+     */
+
+    PiecePotIterator getPiecesAlive(Color color) {
+        if (color == Color.BLACK) {
+            return new PiecePotIterator(blackPlayerList);
+        } else {
+            return new PiecePotIterator(whitePlayerList);
         }
     }
 

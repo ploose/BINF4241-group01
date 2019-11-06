@@ -1,12 +1,14 @@
 package ChessGame;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 class Board {
     final private Square[][] squares;
     final private Game game;
     private PiecePot piecePot;
 
+    //TODO: Singleton
     //Constructor
     Board(Game game) {
         this.game = game;
@@ -290,11 +292,11 @@ class Board {
         return piecePot.lostPieces();
     }
 
-    ArrayList<Piece> getFriendlies(Player p){
+    PiecePotIterator getFriendlies(Player p){
         return piecePot.getPiecesAlive(p.getColor());
     }
 
-    ArrayList<Piece> getEnemies(Player p){
+    PiecePotIterator getEnemies(Player p){
         if(p.getColor() == Color.BLACK){
             return piecePot.getPiecesAlive(Color.WHITE);
         }else{
@@ -304,12 +306,16 @@ class Board {
 
     Square getKingSquare(Player p){
         Square kingSquare = null;
-        for(Piece piece : piecePot.getPiecesAlive(p.getColor())){
-            // System.out.println("Debug: " + piece.getClass() + " | " + King.class);
-            if(piece.getClass() == King.class){
-                kingSquare = piece.current;
+        Iterator<Piece> piecesAlive = piecePot.getPiecesAlive(p.getColor());
+
+        while (piecesAlive.hasNext()) {
+            Piece currentPiece = piecesAlive.next();
+
+            if (currentPiece.getClass() == King.class) {
+                kingSquare = currentPiece.current;
             }
         }
+
         return kingSquare;
     }
 

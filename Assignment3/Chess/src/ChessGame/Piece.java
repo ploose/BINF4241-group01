@@ -303,7 +303,7 @@ abstract class Piece implements MovementStrategy{
 
         // Returns true if given square holds enemy, false if friendly
         protected boolean hasEnemy(Square s) {
-                Piece target = s.removePiece();
+            Piece target = s.removePiece();
                 s.addPiece(target);
 
                 return target.color != this.color;
