@@ -1,6 +1,9 @@
-\documentclass{article}
+\documentclass[6pt,landscape]{article}
+\usepackage[landscape]{geometry}
 \usepackage{pgf-umlsd}
 \usepackage{float}
+
+\usepackage{adjustbox}
 
 \title{%
   Software construction \\
@@ -8,43 +11,188 @@
 }
 
 \begin{document}
+\pagenumbering{gobble}
 
 \maketitle
-
-\section{board.refresh()}
+\section{Board.getUniqueInstance(this)}
 \begin{figure}[H]
 	\centering
+	
+  	\begin{adjustbox}{width=\textwidth}
 	\begin{sequencediagram}
-		\newthread{G}{:game}{}
-		\newinst[2]{B}{:board}{}
-		\newinst[2]{S}{:squares}{}
-		\newinst[2]{P}{:currentPiece}{}
+		\newthread{G}{: Game}{}
+		\newinst[1]{B}{: Board}{}
+		\newinst[1]{S}{squares: Square[ ][ ]}{}
+		\newinst[1]{s}{square: Square}{}
+		\newinst[1]{P}{piece: Piece}{}
+		\newinst[1]{PP}{: PiecePot}{}
+		\newinst[1]{SB}{: Scoreboard}{}
+		
 		      
-		% refresh() call
-		\begin{call}{G}{refresh()}{B}{}	
-			% isOccupied() call  	ø
-			
-			  
-			\begin{sdblock}{loop}{[for each square]}
-				\begin{call}{B}{isOccupied()}{S}{boolean}
-				\end{call}
-				\begin{sdblock}{alt}{[boolean = true]}
-					\begin{call}{B}{getCurrentPiece()}{S}{currentPiece}
-					\end{call}
+		\begin{call}{G}{getUniqueInstance(this)}{B}{uniqueInstance}	
+			\begin{sdblock}{alt}{[uniqueInstance == null]}
+				
+				% Call constructor
+				\begin{callself}{B}{Board(game)}{}
+					\begin{mess}{B}{new Square[8][8]}{S}{}
+					\end{mess}
 					
-			  		\begin{messcall}{B}{getMoveSquares(squares)}{P}
+					\begin{callself}{B}{initBoard()}{}
+						\begin{sdblock}{loop}{[for each column \& row in squares]}
+							\begin{messcall}{B}{new Square(column, row)}{s}
+							\end{messcall}
+						\end{sdblock}
+						
+						\begin{messcall}{B}{new PiecePot()}{PP}
+						\end{messcall}
+					\end{callself}
+					
+					\begin{callself}{B}{setPieces()}{}
+						\begin{sdblock}{loop}{[for each Piece to be placed at the start]}
+							\begin{call}{B}{new Piece(Color, squares(column, row))}{P}{piece}
+							\end{call}
+							\begin{messcall}{B}{addPiece(piece)}{PP}
+							\end{messcall}
+						\end{sdblock}
+						
+					\end{callself}
+					
+					\begin{call}{B}{getInstance()}{SB}{}
+					\end{call}
+					\begin{messcall}{B}{init(piecePot)}{SB}
 					\end{messcall}
+					
+					
+				\end{callself}
 			  		
-			  		
-			  	\end{sdblock}
-    
-    
-			\end{sdblock}	
+			\end{sdblock}
 		\end{call}
 	
 	
 	
 	\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
+\section{Board.move(x1, y1, x2, y2, Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth, height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[10]{B}{: Board}{}
+			\newinst[4]{s1}{square1: Square}{}
+			\newinst[4]{s2}{square2: Square}{}
+			\newinst[4]{P}{currentPiece: Piece}{}
+			
+			\begin{call}{G}{move(x1, y1, x2, y2, Color)}{B}{}	
+				
+				
+				\begin{call}{B}{isOccupied()}{s1}{boolean}
+				\end{call}
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 					  		
+				\end{sdblock}
+				
+				\begin{call}{B}{isOccupied()}{s2}{boolean}
+				\end{call}
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 					  		
+				\end{sdblock}
+				
+				\begin{call}{B}{getCurrentPiece()}{s1}{color0}
+					\begin{call}{s1}{getColor()}{P}{color0}
+					\end{call}
+				\end{call}
+				\begin{sdblock}{alt}{[Color != color0]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 					  		
+				\end{sdblock}
+				
+				\begin{callself}{B}{moveChecked(color,x1,y1, x2, y2)}{boolean}
+					\begin{callself}{B}{doFakeMove(x1, y1, x2, y2)}{}
+					\end{callself}
+					
+					\begin{callself}{B}{refresh()}{}
+					\end{callself}
+					
+					\begin{call}{B}{getPlayer(color)}{G}{player}
+					\end{call}
+					\begin{call}{B}{checkCheck(player)}{G}{boolean}
+					\end{call}
+				
+					\begin{callself}{B}{doFakeMove(x2, y2, x1, y1)}{}
+					\end{callself}
+					
+					\begin{callself}{B}{refresh())}{}
+					\end{callself}
+				\end{callself}
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 					  		
+				\end{sdblock}
+				
+				\begin{call}{B}{getCurrentPiece()}{s1}{color0}
+					\begin{call}{s1}{move(square1, square2, squares)}{P}{boolean}
+					\end{call}
+				\end{call}
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{call}{B}{removePiece()}{s1}{piece}
+					\end{call}
+					\begin{messcall}{B}{addPiece(piece)}{s2}
+					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+					\end{messcall} 	
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[else]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 	
+				\end{sdblock}
+				
+				
+			\end{call}{G}
+				  	
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
+\section{Board.refresh()}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[2]{B}{: Board}{}
+			\newinst[2]{S}{squares: Squares[ ][ ]}{}
+			\newinst[2]{P}{currentPiece: Piece}{}
+			      
+			% refresh() call
+			\begin{call}{G}{refresh()}{B}{}	
+				\begin{sdblock}{loop}{[for each square]}
+					% isOccupied() call  	ø
+					\begin{call}{B}{isOccupied()}{S}{boolean}
+					\end{call}
+					\begin{sdblock}{alt}{[boolean = true]}
+						\begin{call}{B}{getCurrentPiece()}{S}{currentPiece}
+						\end{call}
+						
+				  		\begin{messcall}{B}{getMoveSquares(squares)}{P}
+						\end{messcall}
+				  		
+				  		
+				  	\end{sdblock}
+	    
+	    
+				\end{sdblock}	
+			\end{call}
+		
+		
+		
+		\end{sequencediagram}
+	\end{adjustbox}
 \end{figure}
 
 \end{document}
