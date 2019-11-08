@@ -173,7 +173,7 @@
 			\newinst[4]{s2}{square2: Square}{}
 			\newinst[4]{P}{currentPiece: Piece}{}
 			
-			\begin{call}{G}{move(x1, y1, x2, y2, Color)}{B}{}	
+			\begin{call}{G}{eat(x1, y1, x2, y2, Color)}{B}{}	
 				\begin{call}{B}{isOccupied()}{s1}{boolean}
 				\end{call}
 				\begin{sdblock}{alt}{[boolean = true]}
@@ -216,6 +216,104 @@
 	\end{adjustbox}
 \end{figure}
 
+\section{Board.enPassant(x1, y1, x2, y2, Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth, height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[4]{B}{: Board}{}
+			\newinst[1]{s1}{square1: Square}{}
+			\newinst[1]{s2}{square2: Square}{}
+			\newinst[1]{s3}{square\_over\_square2: Square}{}
+			\newinst[1]{s4}{square\_under\_square2: Square}{}
+			\newinst[1]{P}{currentPiece: Piece}{}
+			
+			\begin{messcall}{G}{enPassant(x1, y1, x2, y2, Color)}{B}{}	
+			    \begin{call}{B}{removePiece()}{s1}{piece}
+				\end{call}
+				\begin{messcall}{B}{addPiece(piece)}{s2}
+				\end{messcall}
+				
+				\begin{sdblock}{alt}{[color = Black]}
+				    \begin{call}{B}{removePiece()}{s3}{piece}
+				    \end{call}
+				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\end{messcall}
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[else]}
+				    \begin{call}{B}{removePiece()}{s4}{piece}
+				    \end{call}
+				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\end{messcall}
+				\end{sdblock}
+			\end{messcall}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
+\section{Board.promition(x1, y1, x2, y2, String, Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth, height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[4]{B}{: Board}{}
+			\newinst[1]{s1}{square1: Square}{}
+			\newinst[1]{s2}{square2: Square}{}
+			\newinst[1]{P}{piece: Piece}{}
+			
+			\begin{messcall}{G}{promotion(x1, y1, x2, y2, String, Color)}{B}{}	
+				\begin{callself}{B}{move(x1, y1, x2, y2, color)}{boolean}
+				\end{callself}
+				\begin{sdblock}{alt}{[boolean = false]}
+				    \begin{messcall}{B}{false}{G}
+					\end{messcall} 	
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[String = "T"]}
+				    \begin{call}{B}{new Rook(Color, squares(column, row))}{P}{piece}
+					\end{call}
+				\end{sdblock}
+				\begin{sdblock}{alt}{[String = "N"]}
+				    \begin{call}{B}{new Knight(Color, squares(column, row))}{P}{piece}
+					\end{call}
+				\end{sdblock}
+				\begin{sdblock}{alt}{[String = "B"]}
+				    \begin{call}{B}{new Bishop(Color, squares(column, row))}{P}{piece}
+					\end{call}
+				\end{sdblock}
+				\begin{sdblock}{alt}{[else]}
+				    \begin{call}{B}{new Queen(Color, squares(column, row))}{P}{piece}
+					\end{call}
+				\end{sdblock}
+			
+				
+			
+			
+			    \begin{call}{B}{removePiece()}{s1}{piece}
+				\end{call}
+				\begin{messcall}{B}{addPiece(piece)}{s2}
+				\end{messcall}
+				
+				\begin{sdblock}{alt}{[color = Black]}
+				    \begin{call}{B}{removePiece()}{s3}{piece}
+				    \end{call}
+				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\end{messcall}
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[else]}
+				    \begin{call}{B}{removePiece()}{s4}{piece}
+				    \end{call}
+				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\end{messcall}
+				\end{sdblock}
+			\end{messcall}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
 
 \section{Board.refresh()}
 \begin{figure}[H]

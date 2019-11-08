@@ -253,6 +253,57 @@
 	\end{adjustbox}
 \end{figure}
 
+\section{Board.promition(x1, y1, x2, y2, String, Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth, height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[4]{B}{: Board}{}
+			\newinst[1]{s1}{square1: Square}{}
+			\newinst[1]{s2}{square2: Square}{}
+			\newinst[1]{P}{piece: Piece}{}
+			\newinst[1]{PP}{: PiecePot}{}
+			
+			\begin{call}{G}{promotion(x1, y1, x2, y2, String, Color)}{B}{true}	
+				\begin{callself}{B}{move(x1, y1, x2, y2, color)}{boolean}
+				\end{callself}
+				\begin{sdblock}{alt}{[boolean = false]}
+				    \begin{messcall}{B}{false}{G}
+					\end{messcall} 	
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[String = "T"]}
+				    \begin{call}{B}{new Rook(Color, squares(column, row))}{P}{promoted}
+					\end{call}
+				\end{sdblock}
+				\begin{sdblock}{alt}{[String = "N"]}
+				    \begin{call}{B}{new Knight(Color, squares(column, row))}{P}{promoted}
+					\end{call}
+				\end{sdblock}
+				\begin{sdblock}{alt}{[String = "B"]}
+				    \begin{call}{B}{new Bishop(Color, squares(column, row))}{P}{promoted}
+					\end{call}
+				\end{sdblock}
+				\begin{sdblock}{alt}{[else]}
+				    \begin{call}{B}{new Queen(Color, squares(column, row))}{P}{promoted}
+					\end{call}
+				\end{sdblock}
+			
+			    \begin{call}{B}{removePiece()}{s2}{pawn}
+				\end{call}
+				
+				\begin{messcall}{B}{addPiece(promoted)}{s2}{}
+				\end{messcall}
+				
+				\begin{messcall}{B}{replace(pawn, promoted)}{PP}{}
+				\end{messcall}
+				
+			\end{call}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
 \section{Board.refresh()}
 \begin{figure}[H]
 	\centering
