@@ -215,7 +215,7 @@ class Board {
 
             Piece tmp = squareOne.removePiece();
 
-            move(0, 0, 3, 0, color);
+            move(0, 7, 3, 7, color);
             squares[2][0].addPiece(tmp);
             tmp.hasMoved();
 
@@ -235,7 +235,7 @@ class Board {
                 return false;
             }
 
-            for (int i = 5; i < 6; i++) {
+            for (int i = 5; i < 7; i++) {
                 if (squares[i][0].isOccupied()) {
                     return false;
                 }
@@ -264,7 +264,7 @@ class Board {
                 return false;
             }
 
-            for (int i = 5; i < 6; i++) {
+            for (int i = 5; i < 7; i++) {
                 if (squares[i][7].isOccupied()) {
                     return false;
                 }
@@ -296,7 +296,7 @@ class Board {
 
     void refreshScoreboard(){
         scoreboard.refresh();
-    }
+    } // TODO ?
 
     PiecePotIterator getFriendlies(Player p){
         return piecePot.getPiecesAlive(p.getColor());
