@@ -1,5 +1,6 @@
-\documentclass[6pt,landscape]{article}
-\usepackage[landscape]{geometry}
+%\documentclass[8pt,landscape]{article}
+\documentclass[8pt]{article}
+%\usepackage[landscape]{geometry}
 \usepackage{pgf-umlsd}
 \usepackage{float}
 
@@ -21,7 +22,7 @@
   	\begin{adjustbox}{width=\textwidth}
 	\begin{sequencediagram}
 		\newthread{G}{: Game}{}
-		\newinst[1]{B}{: Board}{}
+		\newinst[4]{B}{: Board}{}
 		\newinst[1]{S}{squares: Square[ ][ ]}{}
 		\newinst[1]{s}{square: Square}{}
 		\newinst[1]{P}{piece: Piece}{}
@@ -219,7 +220,7 @@
 \section{Board.enPassant(x1, y1, x2, y2, Color)}
 \begin{figure}[H]
 	\centering
-  	\begin{adjustbox}{width=\textwidth, height=\textheight}
+  	\begin{adjustbox}{width=\textwidth, height=\textheight /2}
 		\begin{sequencediagram}
 			\newthread{G}{: Game}{}
 			\newinst[4]{B}{: Board}{}
@@ -263,8 +264,9 @@
 			\newinst[1]{s1}{square1: Square}{}
 			\newinst[1]{s2}{square2: Square}{}
 			\newinst[1]{P}{piece: Piece}{}
+			\newinst[1]{PP}{: PiecePot}{}
 			
-			\begin{messcall}{G}{promotion(x1, y1, x2, y2, String, Color)}{B}{}	
+			\begin{call}{G}{promotion(x1, y1, x2, y2, String, Color)}{B}{true}	
 				\begin{callself}{B}{move(x1, y1, x2, y2, color)}{boolean}
 				\end{callself}
 				\begin{sdblock}{alt}{[boolean = false]}
@@ -273,44 +275,260 @@
 				\end{sdblock}
 				
 				\begin{sdblock}{alt}{[String = "T"]}
-				    \begin{call}{B}{new Rook(Color, squares(column, row))}{P}{piece}
+				    \begin{call}{B}{new Rook(Color, squares(column, row))}{P}{promoted}
 					\end{call}
 				\end{sdblock}
 				\begin{sdblock}{alt}{[String = "N"]}
-				    \begin{call}{B}{new Knight(Color, squares(column, row))}{P}{piece}
+				    \begin{call}{B}{new Knight(Color, squares(column, row))}{P}{promoted}
 					\end{call}
 				\end{sdblock}
 				\begin{sdblock}{alt}{[String = "B"]}
-				    \begin{call}{B}{new Bishop(Color, squares(column, row))}{P}{piece}
+				    \begin{call}{B}{new Bishop(Color, squares(column, row))}{P}{promoted}
 					\end{call}
 				\end{sdblock}
 				\begin{sdblock}{alt}{[else]}
-				    \begin{call}{B}{new Queen(Color, squares(column, row))}{P}{piece}
+				    \begin{call}{B}{new Queen(Color, squares(column, row))}{P}{promoted}
 					\end{call}
 				\end{sdblock}
 			
-				
-			
-			
-			    \begin{call}{B}{removePiece()}{s1}{piece}
+			    \begin{call}{B}{removePiece()}{s2}{pawn}
 				\end{call}
-				\begin{messcall}{B}{addPiece(piece)}{s2}
+				
+				\begin{messcall}{B}{addPiece(promoted)}{s2}{}
 				\end{messcall}
 				
+				\begin{messcall}{B}{replace(pawn, promoted)}{PP}{}
+				\end{messcall}
+				
+			\end{call}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
+\section{Board.castleLong(Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[4]{B}{: Board}{}
+			\newinst[1]{s0}{square: Square}{}
+			\newinst[1]{s1}{square1: Square}{}
+			\newinst[1]{s2}{square2: Square}{}
+			\newinst[1]{K}{king: Piece}{}
+			\newinst[1]{R}{rook: Piece}{}
+			\begin{call}{G}{castleLong(Color)}{B}{true}	
 				\begin{sdblock}{alt}{[color = Black]}
-				    \begin{call}{B}{removePiece()}{s3}{piece}
-				    \end{call}
-				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\begin{call}{B}{}{s1}{boolean0}	
+					\end{call}	
+					\begin{call}{B}{}{s2}{boolean1}	
+					\end{call}	
+				    \begin{sdblock}{alt}{[!(boolean0 \&\& boolean1)]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{call}{B}{getCurrentPiece()}{s1}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{K}{boolean0}	
+					\end{call}
+					\begin{call}{B}{getCurrentPiece()}{s2}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{R}{boolean1}	
+					\end{call}
+				    \begin{sdblock}{alt}{[boolean0 $ || $ boolean1]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{sdblock}{loop}{[go through squares between left Rook and King (i = 1 to 3)]}
+						\begin{call}{B}{isOccupied()}{s0}{boolean}	
+						\end{call}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+						\begin{callself}{B}{moveChecked(Color, 4, 0, i, 0)}{boolean}	
+						\end{callself}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+					\end{sdblock}
+					
+					\begin{call}{B}{removePiece()}{s1}{temp}	
+					\end{call}
+					\begin{callself}{B}{move(0, 0, 3, 0, color)}{boolean}	
+					\end{callself}
+					\begin{messcall}{B}{hasMoved()}{K}	
 					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+				   	\end{messcall}
 				\end{sdblock}
 				
 				\begin{sdblock}{alt}{[else]}
-				    \begin{call}{B}{removePiece()}{s4}{piece}
-				    \end{call}
-				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\begin{call}{B}{}{s1}{boolean0}	
+					\end{call}	
+					\begin{call}{B}{}{s2}{boolean1}	
+					\end{call}	
+				    \begin{sdblock}{alt}{[!(boolean0 \&\& boolean1)]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{call}{B}{getCurrentPiece()}{s1}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{K}{boolean0}	
+					\end{call}
+					\begin{call}{B}{getCurrentPiece()}{s2}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{R}{boolean1}	
+					\end{call}
+				    \begin{sdblock}{alt}{[boolean0 $ || $ boolean1]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{sdblock}{loop}{[go through squares between left Rook and King (i = 1 to 3)]}
+						\begin{call}{B}{isOccupied()}{s0}{boolean}	
+						\end{call}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+						\begin{callself}{B}{moveChecked(Color, 4, 7, i, 7)}{boolean}	
+						\end{callself}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+					\end{sdblock}
+					
+					\begin{call}{B}{removePiece()}{s1}{temp}	
+					\end{call}
+					\begin{callself}{B}{move(0, 7, 3, 7, color)}{boolean}	
+					\end{callself}
+					\begin{messcall}{B}{hasMoved()}{K}	
 					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+				   	\end{messcall}
 				\end{sdblock}
-			\end{messcall}{G}
+				
+			\end{call}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
+\section{Board.castleShort(Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[4]{B}{: Board}{}
+			\newinst[1]{s0}{square: Square}{}
+			\newinst[1]{s1}{square1: Square}{}
+			\newinst[1]{s2}{square2: Square}{}
+			\newinst[1]{K}{king: Piece}{}
+			\newinst[1]{R}{rook: Piece}{}
+			\begin{call}{G}{castleShort(Color)}{B}{true}	
+				\begin{sdblock}{alt}{[color = Black]}
+					\begin{call}{B}{}{s1}{boolean0}	
+					\end{call}	
+					\begin{call}{B}{}{s2}{boolean1}	
+					\end{call}	
+				    \begin{sdblock}{alt}{[!(boolean0 \&\& boolean1)]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{call}{B}{getCurrentPiece()}{s1}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{K}{boolean0}	
+					\end{call}
+					\begin{call}{B}{getCurrentPiece()}{s2}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{R}{boolean1}	
+					\end{call}
+				    \begin{sdblock}{alt}{[boolean0 $ || $ boolean1]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{sdblock}{loop}{[go through squares between left Rook and King (i = 5 to 6)]}
+						\begin{call}{B}{isOccupied()}{s0}{boolean}	
+						\end{call}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+						\begin{callself}{B}{moveChecked(Color, 4, 0, i, 0)}{boolean}	
+						\end{callself}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+					\end{sdblock}
+					
+					\begin{call}{B}{removePiece()}{s1}{temp}	
+					\end{call}
+					\begin{callself}{B}{move(7, 0, 5, 0, color)}{boolean}	
+					\end{callself}
+					\begin{messcall}{B}{hasMoved()}{K}	
+					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+				   	\end{messcall}
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[else]}
+					\begin{call}{B}{}{s1}{boolean0}	
+					\end{call}	
+					\begin{call}{B}{}{s2}{boolean1}	
+					\end{call}	
+				    \begin{sdblock}{alt}{[!(boolean0 \&\& boolean1)]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{call}{B}{getCurrentPiece()}{s1}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{K}{boolean0}	
+					\end{call}
+					\begin{call}{B}{getCurrentPiece()}{s2}{piece}	
+					\end{call}	
+					\begin{call}{B}{hasMoved()}{R}{boolean1}	
+					\end{call}
+				    \begin{sdblock}{alt}{[boolean0 $ || $ boolean1]}
+				   		\begin{messcall}{B}{false}{G}
+				   		\end{messcall}
+					\end{sdblock}
+					
+					\begin{sdblock}{loop}{[go through squares between left Rook and King (i = 5 to 6)]}
+						\begin{call}{B}{isOccupied()}{s0}{boolean}	
+						\end{call}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+						\begin{callself}{B}{moveChecked(Color, 4, 7, i, 7)}{boolean}	
+						\end{callself}
+						\begin{sdblock}{alt}{[boolean = true]}
+				   			\begin{messcall}{B}{false}{G}
+				   			\end{messcall}
+						\end{sdblock}
+					\end{sdblock}
+					
+					\begin{call}{B}{removePiece()}{s1}{temp}	
+					\end{call}
+					\begin{callself}{B}{move(7, 7, 5, 7, color)}{boolean}	
+					\end{callself}
+					\begin{messcall}{B}{hasMoved()}{K}	
+					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+				   	\end{messcall}
+				\end{sdblock}
+				
+			\end{call}{G}
 		\end{sequencediagram}
 	\end{adjustbox}
 \end{figure}
