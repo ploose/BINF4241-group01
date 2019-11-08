@@ -68,16 +68,6 @@ class Board {
             squares[i][1].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[i][1])));
             squares[i][6].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[i][6])));
         }
-
-
-/*
-        squares[0][0].addPiece(piecePot.add(new King(Color.BLACK, squares[0][0])));
-        squares[6][6].addPiece(piecePot.add(new Pawn(Color.BLACK, squares[6][6])));
-
-        squares[4][7].addPiece(piecePot.add(new King(Color.WHITE, squares[4][7])));
-        squares[0][1].addPiece(piecePot.add(new Pawn(Color.WHITE, squares[0][1])));
-*/
-
     }
 
     Square getSquare(int row, int column) {

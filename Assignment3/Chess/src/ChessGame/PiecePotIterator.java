@@ -20,7 +20,7 @@ class PiecePotIterator implements Iterator<Piece> {
         return piecesAlive.get(position++);
     }
 
-   void restart() {
+    void restart() {
         position = 0;
     }
 
