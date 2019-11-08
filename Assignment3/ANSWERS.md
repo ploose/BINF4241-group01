@@ -10,6 +10,8 @@ We chose the class Board to be implemented as a singleton. It would make no sens
 in one game. To achive this, we added a new field, named uniqueInstance of the type board. Additionally, we
 added the method getUniqueInstance, which returns the unique instance of the board and creates it first if needed.
 
+The class and the sequence diagrams can be found in the files "class diagram part 1" and "sequence diagram part 1".
+
 
 #Part 3:
 We've decided to implement the second functionality (Scoreboard and ChessPieceIterator).
