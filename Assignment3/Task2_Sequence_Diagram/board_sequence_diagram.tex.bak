@@ -80,10 +80,10 @@
   	\begin{adjustbox}{width=\textwidth, height=\textheight}
 		\begin{sequencediagram}
 			\newthread{G}{: Game}{}
-			\newinst[6]{B}{: Board}{}
-			\newinst[3]{s1}{square1: Square}{}
-			\newinst[3]{s2}{square2: Square}{}
-			\newinst[3]{P}{currentPiece: Piece}{}
+			\newinst[10]{B}{: Board}{}
+			\newinst[4]{s1}{square1: Square}{}
+			\newinst[4]{s2}{square2: Square}{}
+			\newinst[4]{P}{currentPiece: Piece}{}
 			
 			\begin{call}{G}{move(x1, y1, x2, y2, Color)}{B}{}	
 				
@@ -102,10 +102,13 @@
 					\end{messcall} 					  		
 				\end{sdblock}
 				
-				\begin{call}{B}{getCurrentPiece()}{s1}{color0}
-					\begin{call}{s1}{getColor()}{P}{color0}
-					\end{call}
+				\begin{call}{B}{getCurrentPiece()}{s1}{piece}
 				\end{call}
+				
+				\begin{call}{B}{getColor()}{P}{color0}
+				\end{call}
+					
+					
 				\begin{sdblock}{alt}{[Color != color0]}
 					\begin{messcall}{B}{false}{G}
 					\end{messcall} 					  		
@@ -134,17 +137,24 @@
 					\end{messcall} 					  		
 				\end{sdblock}
 				
-				\begin{call}{B}{getCurrentPiece()}{s1}{color0}
-					\begin{call}{s1}{move(s1, s2, squares)}{P}{boolean}
-					\end{call}
-				\end{call}
-				\begin{sdblock}{alt}{[boolean = true]}
-					\begin{call}{s1}{removePiece()}{P}{piece}
-					\end{call}
-					\begin{messcall}{s2}{addPiece(piece)}{P}
-					\end{messcall}
+				\begin{call}{B}{getCurrentPiece()}{s1}{piece}
 					
-									  		
+				\end{call}
+				\begin{call}{B}{move(square1, square2, squares)}{P}{boolean}
+				\end{call}
+					
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{call}{B}{removePiece()}{s1}{piece}
+					\end{call}
+					\begin{messcall}{B}{addPiece(piece)}{s2}
+					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+					\end{messcall} 	
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[else]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 	
 				\end{sdblock}
 				
 				
