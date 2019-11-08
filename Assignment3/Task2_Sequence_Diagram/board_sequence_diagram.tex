@@ -262,7 +262,7 @@
 		\begin{sequencediagram}
 			\newthread{G}{: Game}{}
 			\newinst[5]{B}{: Board}{}
-			\newinst[1]{s1}{square1: Square}{}
+			%\newinst[1]{s1}{square1: Square}{}
 			\newinst[1]{s2}{square2: Square}{}
 			\newinst[1]{P}{piece: Piece}{}
 			\newinst[1]{PP}{: PiecePot}{}
@@ -541,10 +541,9 @@
 		\begin{sequencediagram}
 			\newthread{G}{: Game}{}
 			\newinst[2]{B}{: Board}{}
-			
 			\newinst[2]{SB}{: Scoreboard}{}
-			\newinst[2]{P}{piece: Piece}{}
-			\newinst[1]{PP}{: PiecePot}{}
+			%\newinst[2]{P}{piece: Piece}{}
+			\newinst[4]{PP}{: PiecePot}{}
 			      
 			\begin{call}{G}{refreshScoreboard()}{B}{}	
 				\begin{call}{B}{refresh()}{SB}{}
