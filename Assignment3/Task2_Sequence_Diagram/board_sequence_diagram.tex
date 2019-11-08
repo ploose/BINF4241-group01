@@ -52,16 +52,17 @@
 						\begin{sdblock}{loop}{[for each Piece to be placed at the start]}
 							\begin{call}{B}{new Piece(Color, squares(column, row))}{P}{piece}
 							\end{call}
-							\begin{messcall}{B}{addPiece(piece)}{PP}
-							\end{messcall}
+							
+							\begin{call}{B}{addPiece(piece)}{PP}{}
+							\end{call}
 						\end{sdblock}
 						
 					\end{callself}
 					
 					\begin{call}{B}{getInstance()}{SB}{}
 					\end{call}
-					\begin{messcall}{B}{init(piecePot)}{SB}
-					\end{messcall}
+					\begin{call}{B}{init(piecePot)}{SB}{}
+					\end{call}
 					
 					
 				\end{callself}
@@ -145,8 +146,8 @@
 				\begin{sdblock}{alt}{[boolean == true]}
 					\begin{call}{B}{removePiece()}{s1}{piece}
 					\end{call}
-					\begin{messcall}{B}{addPiece(piece)}{s2}
-					\end{messcall}
+					\begin{call}{B}{addPiece(piece)}{s2}{}
+					\end{call}
 					\begin{messcall}{B}{true}{G}
 					\end{messcall} 	
 				\end{sdblock}
@@ -177,7 +178,7 @@
 			\begin{messcall}{G}{eat(x1, y1, x2, y2, Color)}{B}{}	
 				\begin{call}{B}{isOccupied()}{s1}{boolean}
 				\end{call}
-				\begin{sdblock}{alt}{[boolean == true]}
+				\begin{sdblock}{alt}{[boolean == false]}
 					\begin{messcall}{B}{false}{G}
 					\end{messcall} 					  		
 				\end{sdblock}
@@ -198,12 +199,12 @@
 				\begin{sdblock}{alt}{[boolean == true]}
 				    \begin{call}{B}{removePiece()}{s2}{piece}
 				    \end{call}
-				    \begin{messcall}{B}{removePiece(piece)}{P}{}
-					\end{messcall}
+				    \begin{call}{B}{removePiece(piece)}{P}{}
+					\end{call}
 					\begin{call}{B}{removePiece()}{s1}{piece}
 					\end{call}
-					\begin{messcall}{B}{addPiece(piece)}{s2}
-					\end{messcall}
+					\begin{call}{B}{addPiece(piece)}{s2}{}
+					\end{call}
 					\begin{messcall}{B}{true}{G}
 					\end{messcall} 	
 				\end{sdblock}
@@ -230,26 +231,26 @@
 			\newinst[1]{s4}{square\_under\_square2: Square}{}
 			\newinst[1]{P}{currentPiece: Piece}{}
 			
-			\begin{messcall}{G}{enPassant(x1, y1, x2, y2, Color)}{B}{}	
+			\begin{call}{G}{enPassant(x1, y1, x2, y2, Color)}{B}{}	
 			    \begin{call}{B}{removePiece()}{s1}{piece}
 				\end{call}
-				\begin{messcall}{B}{addPiece(piece)}{s2}
-				\end{messcall}
+				\begin{call}{B}{addPiece(piece)}{s2}{}
+				\end{call}
 				
 				\begin{sdblock}{alt}{[color == Black]}
 				    \begin{call}{B}{removePiece()}{s3}{piece}
 				    \end{call}
-				    \begin{messcall}{B}{removePiece(piece)}{P}{}
-					\end{messcall}
+				    \begin{call}{B}{removePiece(piece)}{P}{}
+					\end{call}
 				\end{sdblock}
 				
 				\begin{sdblock}{alt}{[else]}
 				    \begin{call}{B}{removePiece()}{s4}{piece}
 				    \end{call}
-				    \begin{messcall}{B}{removePiece(piece)}{P}{}
-					\end{messcall}
+				    \begin{call}{B}{removePiece(piece)}{P}{}
+					\end{call}
 				\end{sdblock}
-			\end{messcall}{G}
+			\end{call}{G}
 		\end{sequencediagram}
 	\end{adjustbox}
 \end{figure}
@@ -294,11 +295,11 @@
 			    \begin{call}{B}{removePiece()}{s2}{pawn}
 				\end{call}
 				
-				\begin{messcall}{B}{addPiece(promoted)}{s2}{}
-				\end{messcall}
+				\begin{call}{B}{addPiece(promoted)}{s2}{}
+				\end{call}
 				
-				\begin{messcall}{B}{replace(pawn, promoted)}{PP}{}
-				\end{messcall}
+				\begin{call}{B}{replace(pawn, promoted)}{PP}{}
+				\end{call}
 				
 			\end{call}{G}
 		\end{sequencediagram}
@@ -360,8 +361,8 @@
 					\end{call}
 					\begin{callself}{B}{move(0, 0, 3, 0, color)}{boolean}	
 					\end{callself}
-					\begin{messcall}{B}{hasMoved()}{K}	
-					\end{messcall}
+					\begin{call}{B}{hasMoved()}{K}{}
+					\end{call}
 					\begin{messcall}{B}{true}{G}
 				   	\end{messcall}
 				\end{sdblock}
@@ -408,8 +409,8 @@
 					\end{call}
 					\begin{callself}{B}{move(0, 7, 3, 7, color)}{boolean}	
 					\end{callself}
-					\begin{messcall}{B}{hasMoved()}{K}	
-					\end{messcall}
+					\begin{call}{B}{hasMoved()}{K}{}
+					\end{call}
 					\begin{messcall}{B}{true}{G}
 				   	\end{messcall}
 				\end{sdblock}
@@ -474,8 +475,8 @@
 					\end{call}
 					\begin{callself}{B}{move(7, 0, 5, 0, color)}{boolean}	
 					\end{callself}
-					\begin{messcall}{B}{hasMoved()}{K}	
-					\end{messcall}
+					\begin{call}{B}{hasMoved()}{K}{}
+					\end{call}
 					\begin{messcall}{B}{true}{G}
 				   	\end{messcall}
 				\end{sdblock}
@@ -522,13 +523,57 @@
 					\end{call}
 					\begin{callself}{B}{move(7, 7, 5, 7, color)}{boolean}	
 					\end{callself}
-					\begin{messcall}{B}{hasMoved()}{K}	
-					\end{messcall}
+					\begin{call}{B}{hasMoved()}{K}{}
+					\end{call}
 					\begin{messcall}{B}{true}{G}
 				   	\end{messcall}
 				\end{sdblock}
 				
 			\end{messcall}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
+\section{Board.refreshScoreboard()}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[2]{B}{: Board}{}
+			
+			\newinst[2]{SB}{: Scoreboard}{}
+			\newinst[2]{P}{piece: Piece}{}
+			\newinst[1]{PP}{: PiecePot}{}
+			      
+			\begin{call}{G}{refreshScoreboard()}{B}{}	
+				\begin{call}{B}{refresh()}{SB}{}
+					\begin{callself}{SB}{getAmount()}{}
+						\begin{call}{SB}{whitePlayerListOffBoardSize()}{PP}{}
+						\end{call}
+						\begin{call}{SB}{blackPlayerListOffBoardSize()}{PP}{}
+						\end{call}
+					\end{callself}
+				
+					\begin{callself}{SB}{setBlackPlayerScore()}{}
+						\begin{sdblock}{loop}{[for each off-board white piece]}
+							\begin{call}{SB}{whitePlayerListOffBoardSize()}{PP}{}
+							\end{call}
+						\end{sdblock}
+					\end{callself}
+					
+					\begin{callself}{SB}{setWhitePlayerScore()}{}
+						\begin{sdblock}{loop}{[for each off-board black piece]}
+							\begin{call}{SB}{blackPlayerListOffBoardSize()}{PP}{}
+							\end{call}
+						\end{sdblock}
+					\end{callself}
+				\end{call}
+			
+			\end{call}
+		
+		
+		
 		\end{sequencediagram}
 	\end{adjustbox}
 \end{figure}
@@ -553,8 +598,8 @@
 						\begin{call}{B}{getCurrentPiece()}{S}{currentPiece}
 						\end{call}
 						
-				  		\begin{messcall}{B}{getMoveSquares(squares)}{P}
-						\end{messcall}
+				  		\begin{call}{B}{getMoveSquares(squares)}{P}{}
+						\end{call}
 				  		
 				  		
 				  	\end{sdblock}
@@ -562,8 +607,6 @@
 	    
 				\end{sdblock}	
 			\end{call}
-		
-		
 		
 		\end{sequencediagram}
 	\end{adjustbox}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.23)  8 NOV 2019 16:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.23)  8 NOV 2019 17:21
 entering extended mode
 **./board_sequence_diagram.tex
 (board_sequence_diagram.tex
@@ -532,7 +532,7 @@ Overfull \vbox (35.31079pt too high) has occurred while \output is active []
 Missing character: There is no G in font nullfont!
 Missing character: There is no G in font nullfont!
  [3]
-Overfull \hbox (0.55788pt too wide) in paragraph at lines 257--257
+Overfull \hbox (0.55788pt too wide) in paragraph at lines 258--258
 []\OT1/cmr/bx/n/14.4 Board.promition(x1, y1, x2, y2, String, Color) 
  []
 
@@ -543,7 +543,7 @@ Overfull \vbox (35.32883pt too high) has occurred while \output is active []
 
 [5]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 342.
+(Font)              <9> on input line 343.
 Missing character: There is no G in font nullfont!
 
 Overfull \vbox (35.2949pt too high) has occurred while \output is active []
@@ -555,24 +555,24 @@ Missing character: There is no G in font nullfont!
 Overfull \vbox (35.2949pt too high) has occurred while \output is active []
 
 
-[7] [8] (board_sequence_diagram.aux) ) 
+[7] [8] [9] (board_sequence_diagram.aux) ) 
 Here is how much of TeX's memory you used:
- 13680 strings out of 492972
- 277490 string characters out of 3135880
- 488964 words of memory out of 3000000
- 17293 multiletter control sequences out of 15000+200000
+ 13681 strings out of 492972
+ 277517 string characters out of 3135880
+ 490752 words of memory out of 3000000
+ 17294 multiletter control sequences out of 15000+200000
  8192 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,11n,80p,456b,1259s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on board_sequence_diagram.pdf (8 pages, 134993 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on board_sequence_diagram.pdf (9 pages, 140932 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
+ 83 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
