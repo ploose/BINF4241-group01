@@ -86,8 +86,6 @@
 			\newinst[4]{P}{currentPiece: Piece}{}
 			
 			\begin{call}{G}{move(x1, y1, x2, y2, Color)}{B}{}	
-				
-				
 				\begin{call}{B}{isOccupied()}{s1}{boolean}
 				\end{call}
 				\begin{sdblock}{alt}{[boolean = true]}
@@ -163,6 +161,61 @@
 		\end{sequencediagram}
 	\end{adjustbox}
 \end{figure}
+
+\section{Board.eat(x1, y1, x2, y2, Color)}
+\begin{figure}[H]
+	\centering
+  	\begin{adjustbox}{width=\textwidth, height=\textheight}
+		\begin{sequencediagram}
+			\newthread{G}{: Game}{}
+			\newinst[10]{B}{: Board}{}
+			\newinst[4]{s1}{square1: Square}{}
+			\newinst[4]{s2}{square2: Square}{}
+			\newinst[4]{P}{currentPiece: Piece}{}
+			
+			\begin{call}{G}{move(x1, y1, x2, y2, Color)}{B}{}	
+				\begin{call}{B}{isOccupied()}{s1}{boolean}
+				\end{call}
+				\begin{sdblock}{alt}{[boolean = true]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 					  		
+				\end{sdblock}
+				
+				\begin{call}{B}{getCurrentPiece()}{s1}{piece}
+				\end{call}
+				\begin{call}{B}{getColor()}{P}{color0}
+				\end{call}
+				\begin{sdblock}{alt}{[Color != color0]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 					  		
+				\end{sdblock}
+				
+				\begin{call}{B}{getCurrentPiece()}{s1}{piece}
+				\end{call}
+				\begin{call}{B}{eat(square1, square2, squares)}{P}{boolean}
+				\end{call}
+				\begin{sdblock}{alt}{[boolean = true]}
+				    \begin{call}{B}{removePiece()}{s2}{piece}
+				    \end{call}
+				    \begin{messcall}{B}{removePiece(piece)}{P}{}
+					\end{messcall}
+					\begin{call}{B}{removePiece()}{s1}{piece}
+					\end{call}
+					\begin{messcall}{B}{addPiece(piece)}{s2}
+					\end{messcall}
+					\begin{messcall}{B}{true}{G}
+					\end{messcall} 	
+				\end{sdblock}
+				
+				\begin{sdblock}{alt}{[else]}
+					\begin{messcall}{B}{false}{G}
+					\end{messcall} 	
+				\end{sdblock}
+			\end{call}{G}
+		\end{sequencediagram}
+	\end{adjustbox}
+\end{figure}
+
 
 \section{Board.refresh()}
 \begin{figure}[H]
