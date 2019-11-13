@@ -1,0 +1,11 @@
+classes:
+- smartphone (singleton)
+- smart device (abstract class)
+- oven (singleton)
+- microwave (singleton)
+- dishwasher (singleton)
+- washing machine (singleton)
+- cleaning robot (singleton)
+- command (interface)
+(- main)
+(- singleton (interface))
