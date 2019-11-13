@@ -1,2 +1,2 @@
-public class Smartdevice {
+public abstract class Smartdevice {
 }
