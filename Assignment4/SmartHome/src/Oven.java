@@ -22,7 +22,7 @@ public class Oven {
     public void setTimer(int timeInSeconds){
 
         timer = new TimerThread(timeInSeconds);
-        timer.run();
+        timer.run(); // TODO: shouldn't the timer start with startCooking?
     }
     public void setTemperature(int temperature){
         this.temperature = temperature;
