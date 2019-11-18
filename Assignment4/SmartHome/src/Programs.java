@@ -2,6 +2,10 @@ public class Programs {
     enum Program {
         ventilated,
         grill,
-        reheat
+        reheat,
+        glasses,
+        plates,
+        pans,
+        mixed
     }
 }
