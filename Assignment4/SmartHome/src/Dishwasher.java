@@ -1,15 +1,25 @@
 import java.util.Scanner;
 
-public class Dishwasher {
+class Dishwasher {
     private boolean isOn, isRunning;
     private int time;
     private Programs.Program program;
     private TimerThread timer;
 
-    Dishwasher() {
+    private static Dishwasher uniqueInstance;
+
+    private Dishwasher() {
         isOn = false;
         isRunning = false;
         program = null;
+    }
+
+    static Dishwasher getUniqueInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Dishwasher();
+        }
+
+        return uniqueInstance;
     }
 
     void switchOn() {
@@ -23,6 +33,8 @@ public class Dishwasher {
     void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
+        } else if (isRunning) {
+            System.out.println("Cannot turn the washing machine off, it is still running.");
         } else {
             isOn = false;
         }

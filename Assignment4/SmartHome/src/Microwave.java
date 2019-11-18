@@ -1,11 +1,9 @@
 public class Microwave implements IMicrowave {
     private boolean turnedOn, baking;
     private int temperature;
-    private Programs.Program program;
     private TimerThread timer;
 
     public Microwave(){
-        program = null;
         temperature = 0;
         turnedOn = false;
         baking = false;
@@ -29,7 +27,6 @@ public class Microwave implements IMicrowave {
         if (temperature != 0 && turnedOn){
             baking = true;
         }
-
     }
     public int checkTimer(){
         return timer.getTime();
