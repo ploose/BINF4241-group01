@@ -1,0 +1,225 @@
+\documentclass[landscape, a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{adjustbox}
+
+\usepackage{tikz-uml}
+
+\sloppy
+\hyphenpenalty 10000000
+
+\title{Software Construction: Assignment 4 - Class Diagram}
+
+\begin{document}
+
+\maketitle
+
+\section{Class Diagram}
+
+\begin{center}
+\begin{adjustbox}{width=\textwidth}
+\begin{tikzpicture}
+
+
+% ==Smart-Devices==
+\begin{umlpackage}[y=-10]{Smart-Devices}
+
+% --Cleaning Robot--
+\umlclass{CleaningRobot}
+{ % attributes
+    -turnedOn: boolean \\
+    -isCleaning: boolean \\
+    -battery: int \\
+    -chargeCycle: int \\
+    -dischargeCycle: int \\
+    ...
+    %-lock: Object \\
+    %-input: Scanner \\
+    %-uniqueInstance: CleaningRobot
+}{  %class-scope operations
+    +getInstance(): CleaningRobot \\
+    +run(): void \\
+    +switchOn(): void \\
+    +switchOff(): void \\
+    +setTimer(int timeInSeconds): void \\
+    +checkProgress(): double \\
+    +checkBattery(): int \\
+    +interruptProgram(): void \\
+    +execute(): void
+    ...
+    %-CleaningRobot()
+}
+
+% --Dishwasher--
+\umlclass[x=7]{Dishwasher}
+{ % attributes
+    -isOn: boolean \\
+    -time: int \\
+    -program: Program \\
+    -timer: TimerThread \\
+    ...
+    %-input: Scanner \\
+    %-uniqueInstance: Dishwasher
+}{  %class-scope operations
+    +getUniqueInstance(): Dishwasher \\
+    +run(): void \\
+    +switchOn(): void \\
+    +switchOff(): void \\
+    -getTimer(): int \\
+    -chooseProgram(): void \\
+    +start(): void \\
+    +stop(): void \\
+    +execute(): void
+    ...
+    %-Dishwasher()
+}
+
+% --Microwave--
+\umlclass[x=14.4]{Microwave}
+{ % attributes
+    -turnedoN: boolean \\
+    -baking: boolean \\
+    -temperature: int \\
+    -timer: TimerThread 
+}{  %class-scope operations
+    +switchOn(): void \\
+    +switchOff(): void \\
+    +setTimer(int timeInSeconds): void \\
+    +setTemperature(int temperature): void \\
+    +startBaking(): void \\
+    +checkTimer(): int \\
+    +interruptProgram(): void \\
+    ...
+    %-Microwave()
+}
+
+% --Oven--
+\umlclass[x=22.5]{Oven}
+{ % attributes
+    -turnedoN: boolean \\
+    -cooking: boolean \\
+    -temperature: int \\
+    -program: Program \\
+    -timer: TimerThread 
+}{  %class-scope operations
+    +switchOn(): void \\
+    +switchOff(): void \\
+    +setTimer(int timeInSeconds): void \\
+    +setTemperature(int temperature): void \\
+    +setProgram(Program program): void \\
+    +startCooking(): void \\
+    +checkTimer(): int \\
+    +interruptProgram(): void \\
+    ...
+    %-Oven()
+}
+
+% --Washing Machine--
+\umlclass[x=30.6]{WashingMachine}
+{ % attributes
+    -isOn: boolean \\
+    -isRunning: boolean \\
+    -time: int \\
+    -temperature: int \\
+    -program: Program \\
+    -timer: TimerThread 
+    ...
+    %-input: Scanner \\
+    %-uniqueInstance: WashingMachine
+}{  %class-scope operations
+    +getUniqueInstance(): WashingMachine \\
+    +run(): void \\
+    +switchOn(): void \\
+    +switchOff(): void \\
+    -setTemperature(int temperature): void \\
+    -getTimer(): int \\
+    -chooseProgram(): void \\
+    -start(): void \\
+    +execute(): void
+    ...
+    %-WashingMachine()
+}
+
+\end{umlpackage}
+
+
+% ==Smartphone ==
+\begin{umlpackage}[]{Smartphone}
+    \umlclass[]{Smartphone}
+{ % attributes
+    -cleaningRobot: CleaningRobot \\
+    -dishwasher: Dishwasher \\
+    -microwave: Microwave \\
+    -oven: oven \\
+    -washingMachine: WashingMachine \\
+    -command: Comand[] 
+}{  %class-scope operations
+    -getInstances(): void \\
+    -fillSlots(): void
+    ...
+    %-Smartphone()
+}
+\end{umlpackage}
+
+
+% ==Interfaces ==
+
+\begin{umlpackage}[]{Interface}
+% --Command interface--
+\umlinterface[x=15]{Command}{
+execute() : void \\ switchOn() : void \\ switchOff() : void
+}{}
+\begin{comment}
+% Robot interface
+\umlinterface[y=-5]{ICleaningRobot}{ 
+setTimer(timeInSeconds: int) : void \\ checkProgress() : double \\ checkBattery() : int \\ interruptProgram() : void
+}{}
+% Dishwasher interface
+\umlinterface[y=-5]{Dishwasher}{ 
+getTimer() : int \\ chooseProgram() : void \\ start() : void \\ stop() : void
+}{}
+% Microwave interface
+\umlinterface[y=-5]{IMicrowave}{ 
+setTimer(timeInSeconds: int) : void \\ setTemperature(temperature: int) : void \\ startBaking() : void \\ checkTimer() : int \\ interruptProgramm() : void
+}{}
+% Oven interface
+\umlinterface[y=-5]{IOVen}{ 
+setTimer(timeInSeconds: int) : void \\ setTemperature(temperature: int) : void \\ setProgram() : void  \\ startCooking() : void \\ checkTimer() : int \\ interruptProgramm() : void
+}{}
+% Washingmachine interface
+\umlinterface[y=-5]{IWashingMachine}{ 
+setTemperature(temperature: int) : void \\ getTimer() : int \\ chooseProgram(Scanner input) : void \\ start() : void
+}{}
+\end{comment}
+\end{umlpackage}
+
+
+% ==Relations==
+
+% Smartphone to Interface
+\umluniassoc[]{Smartphone}{Command}
+
+% Smartphone to Smart-Devices
+\umluniassoc[anchor2=90]{Smartphone}{CleaningRobot}
+\umluniassoc[anchor2=90]{Smartphone}{Dishwasher}
+\umluniassoc[anchor2=90]{Smartphone}{Microwave}
+\umluniassoc[anchor2=90]{Smartphone}{Oven}
+\umluniassoc[anchor2=90]{Smartphone}{WashingMachine}
+
+% Smart-Devices to Smartphone
+
+% Smart-Devices to Interface
+\umlimpl[anchor1=90]{CleaningRobot}{Command}
+\umlimpl[anchor1=90]{Dishwasher}{Command}
+\umlimpl[anchor1=90]{Microwave}{Command}
+\umlimpl[anchor1=90]{Oven}{Command}
+\umlimpl[anchor1=90]{WashingMachine}{Command}
+
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+
+\end{document}
