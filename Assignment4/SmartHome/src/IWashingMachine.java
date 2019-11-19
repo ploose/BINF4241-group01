@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public interface IWashingMachine extends Command{
+interface IWashingMachine extends Command{
     /*
     void setTemperature(int temperature);
     int getTimer();
