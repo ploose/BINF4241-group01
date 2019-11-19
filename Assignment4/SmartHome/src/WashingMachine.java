@@ -25,6 +25,7 @@ class WashingMachine implements IWashingMachine {
         return uniqueInstance;
     }
 
+    @Override
     public void switchOn() {
         if (isOn) {
             System.out.println("Washing machine is already on.");
@@ -35,6 +36,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
+    @Override
     public void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
@@ -143,6 +145,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
+    @Override
     public void execute() {
         if (!isOn) {
             System.out.println("The device is turned off.");
