@@ -3,8 +3,9 @@ import java.util.Scanner;
 class WashingMachine implements IWashingMachine {
     private boolean isOn, isRunning;
     private int time, temperature;
-    private Programs.Program program;
+    private Program program;
     private TimerThread timer;
+    private Scanner input;
 
     private static WashingMachine uniqueInstance;
 
@@ -12,6 +13,8 @@ class WashingMachine implements IWashingMachine {
         isOn = false;
         isRunning = false;
         program = null;
+
+        input = new Scanner(System.in);
     }
 
     static WashingMachine getUniqueInstance() {
@@ -25,7 +28,9 @@ class WashingMachine implements IWashingMachine {
     public void switchOn() {
         if (isOn) {
             System.out.println("Washing machine is already on.");
-        } else {
+        }
+
+        else {
             isOn = true;
         }
     }
@@ -33,17 +38,27 @@ class WashingMachine implements IWashingMachine {
     public void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
-        } else if (isRunning) {
+        }
+
+        else if (isRunning) {
             System.out.println("Cannot turn the washing machine off, it is still running.");
-        } else {
+        }
+
+        else {
             isOn = false;
         }
     }
 
     private void setTemperature(int temperature) {
+        if (isRunning) {
+            System.out.println("The washing machine is still running, please wait until it's finished");
+        }
+
         if (temperature > 20 && temperature < 100) {
             this.temperature = temperature;
-        } else {
+        }
+
+        else {
             System.out.println("This temperature is too hot or too low.");
         }
     }
@@ -61,12 +76,14 @@ class WashingMachine implements IWashingMachine {
 
         if (isRunning) {
             return timer.getTime();
-        } else {
+        }
+
+        else {
             return time;
         }
     }
 
-    private void chooseProgram(Scanner input) {
+    private void chooseProgram() {
         System.out.println("You can choose between the following programs:");
         System.out.print("-double rinse \n -intense \n -quick \n -spin");
 
@@ -74,24 +91,24 @@ class WashingMachine implements IWashingMachine {
 
         switch (decision) {
             case "double rinse":
-                program = Programs.Program.rinse;
+                program = Program.rinse;
                 time = 5;
 
             case "intense":
-                program = Programs.Program.intense;
+                program = Program.intense;
                 time = 6;
 
             case "quick":
-                program = Programs.Program.quick;
+                program = Program.quick;
                 time = 7;
 
             case "spin":
-                program = Programs.Program.spin;
+                program = Program.spin;
                 time = 8;
 
             default:
                 System.out.println("Wrong input.");
-                chooseProgram(input);
+                chooseProgram();
         }
     }
 
@@ -138,9 +155,9 @@ class WashingMachine implements IWashingMachine {
 
         else {
             System.out.println("You can choose following functions: ");
-            System.out.print("-set temperature (1) \n -get timer (2) \n -choose program (3) \n -start (4)");
+            System.out.print("-set temperature (1) \n -get timer (2) \n -choose program (3) \n");
+            System.out.print("-start (4) \n -exit (5) \n");
 
-            Scanner input = new Scanner(System.in);
             String decision = input.next();
 
             switch (decision) {
@@ -156,10 +173,13 @@ class WashingMachine implements IWashingMachine {
                     }
 
                 case "3":
-                    chooseProgram(input);
+                    chooseProgram();
 
                 case "4":
                     start();
+
+                case "5":
+                    System.out.println("Returning to main menu.");
 
                 default:
                     System.out.println("Wrong Input");

@@ -6,10 +6,12 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     private int battery = 100;
     private final int chargeCycle = 100, dischargeCycle = 500;
     private final Object lock = new Object();
+    private Scanner input;
 
     private volatile static CleaningRobot uniqueInstance;
 
     private CleaningRobot() {
+        input = new Scanner(System.in);
     }
 
     public static CleaningRobot getInstance() {
@@ -30,11 +32,14 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                     synchronized (lock) {
                         isCleaning = true;
                     }
-                } else if (elapsedTime >= requiredTime) {
+                }
+
+                else if (elapsedTime >= requiredTime) {
                     synchronized (lock) {
                         isCleaning = false;
                     }
                 }
+
                 if (isCleaning && battery > 0) { // Discharging
                     try {
                         Thread.sleep(dischargeCycle);
@@ -44,11 +49,14 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                                 battery--;
                             }
                         }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
 
-                } else if (battery < 100) { // Charging
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                else if (battery < 100) { // Charging
                     isCleaning = false;
                     try {
                         Thread.sleep(chargeCycle);
@@ -57,14 +65,20 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                                 battery++;
                             }
                         }
-                    } catch (InterruptedException e) {
+                    }
+
+                    catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-            } else {
+            }
+
+            else {
                 try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
+                }
+
+                catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -75,7 +89,9 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     public void switchOn() {
         if (requiredTime > 0 && battery == 100) {
             turnedOn = true;
-        } else {
+        }
+
+        else {
             System.out.println("Cleaning Robot has no set timer / is not fully charged!");
         }
     }
@@ -86,7 +102,9 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
             if (!isCleaning) { // TODO: should it be possible to alter time while in base?
                 this.requiredTime = timeInSeconds;
                 this.elapsedTime = 0;
-            } else {
+            }
+
+            else {
                 System.out.println("Can't set timer while cleaning!");
             }
         }
@@ -98,9 +116,11 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
             if (requiredTime == 0) {
                 return 1;
             }
+
             if (turnedOn) {
                 return elapsedTime / requiredTime;
             }
+
             return -1; // TODO: check turnedOn in phone?
         }
     }
@@ -112,6 +132,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                 int tmp = battery;
                 return tmp;
             }
+
             return -1; // TODO: check turnedOn in phone?
         }
     }
@@ -136,17 +157,20 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     public void execute() {
         if (!turnedOn) {
             System.out.println("The device is turned off.");
-        } else {
-            System.out.println("You can choose following functions: ");
-            System.out.print("-set timer (1) \n -check progress (2) \n -check battery (3) \n -reset (4)");
+        }
 
-            Scanner input = new Scanner(System.in);
+        else {
+            System.out.println("You can choose following functions: ");
+            System.out.print("-set timer (1) \n -check progress (2) \n -check battery (3) \n");
+            System.out.print("-reset (4) \n -exit (5)");
+
             String decision = input.next();
 
             switch (decision) {
                 case "1":
-                    System.out.print("Choose a temperature: ");
+                    System.out.print("Choose a time: ");
                     setTimer(input.nextInt());
+                    execute();
 
                 case "2":
                     double progress = checkProgress();
@@ -155,12 +179,19 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                         System.out.println("The robot has completed " + (progress * 100) + "% of the cleaning.");
                     }
 
+                    execute();
+
                 case "3":
                     System.out.println("The robot has " + checkBattery() + "% remaining battery charge.");
+                    execute();
 
                 case "4":
                     interruptProgram();
                     System.out.println("The program has been interrupted & reset. Robot is back in station.");
+                    execute();
+
+                case "5":
+                    System.out.println("Returning to main menu.");
 
                 default:
                     System.out.println("Wrong Input");

@@ -1,17 +1,15 @@
-class Programs {
-    enum Program {
-        ventilated,
-        grill,
-        reheat,
+enum Program {
+    ventilated,
+    grill,
+    reheat,
 
-        glasses,
-        plates,
-        pans,
-        mixed,
+    glasses,
+    plates,
+    pans,
+    mixed,
 
-        rinse,
-        intense,
-        quick,
-        spin
-    }
+    rinse,
+    intense,
+    quick,
+    spin
 }

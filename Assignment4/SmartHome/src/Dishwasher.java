@@ -1,17 +1,20 @@
 import java.util.Scanner;
 
 class Dishwasher implements IDishwasher, Command {
-    private boolean isOn, isRunning;
+    private boolean isOn;
     private int time;
-    private Programs.Program program;
+    private Program program;
     private TimerThread timer;
+    private Scanner input;
 
     private static Dishwasher uniqueInstance;
 
     private Dishwasher() {
         isOn = false;
-        isRunning = false;
         program = null;
+
+        input = new Scanner(System.in);
+        timer = new TimerThread(0);
     }
 
     static Dishwasher getUniqueInstance() {
@@ -25,7 +28,9 @@ class Dishwasher implements IDishwasher, Command {
     public void switchOn() {
         if (isOn) {
             System.out.println("Dishwasher is already on.");
-        } else {
+        }
+
+        else {
             isOn = true;
         }
     }
@@ -33,9 +38,13 @@ class Dishwasher implements IDishwasher, Command {
     public void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
-        } else if (isRunning) {
+        }
+
+        else if (timer.isRunning()) {
             System.out.println("Cannot turn the washing machine off, it is still running.");
-        } else {
+        }
+
+        else {
             isOn = false;
         }
     }
@@ -51,14 +60,16 @@ class Dishwasher implements IDishwasher, Command {
             return -2;
         }
 
-        if (isRunning) {
+        if (timer.isRunning()) {
             return timer.getTime();
-        } else {
+        }
+
+        else {
             return time;
         }
     }
 
-    private void chooseProgram(Scanner input) {
+    private void chooseProgram() {
         System.out.println("You can choose between the following programs:");
         System.out.print("-glasses \n -plates \n -pans \n -mixed");
 
@@ -66,24 +77,24 @@ class Dishwasher implements IDishwasher, Command {
 
         switch (decision) {
             case "glasses":
-                program = Programs.Program.glasses;
-                time = 5;
+                program = Program.glasses;
+                timer.setTimer(5);
 
             case "plates":
-                program = Programs.Program.plates;
-                time = 6;
+                program = Program.plates;
+                timer.setTimer(6);
 
             case "pans":
-                program = Programs.Program.pans;
-                time = 7;
+                program = Program.pans;
+                timer.setTimer(7);
 
             case "mixed":
-                program = Programs.Program.mixed;
-                time = 8;
+                program = Program.mixed;
+                timer.setTimer(8);
 
             default:
                 System.out.println("Wrong input. \n");
-                chooseProgram(input);
+                chooseProgram();
         }
     }
 
@@ -96,26 +107,14 @@ class Dishwasher implements IDishwasher, Command {
             System.out.println("You first need to choose a program");
         }
 
-        if (isRunning) {
+        if (timer.isRunning()) {
             System.out.println("The dishwasher has already started.");
         }
 
-        isRunning = true;
-
-        timer = new TimerThread(time);
         Thread runner = new Thread(timer);
         runner.start();
 
-        for (;;) {
-            if (!timer.isRunning()) {
-                break;
-            }
-        }
-
         time = 0;
-        timer = null;
-        program = null;
-        isRunning = false;
     }
 
     private void stop() {
@@ -123,14 +122,13 @@ class Dishwasher implements IDishwasher, Command {
             System.out.println("The dishwasher is not on.");
         }
 
-        if (!isRunning) {
+        if (!timer.isRunning()) {
             System.out.println("The dishwasher is not running.");
         }
 
         time = 0;
         timer = null;
         program = null;
-        isRunning = false;
     }
 
     public void execute() {
@@ -140,9 +138,9 @@ class Dishwasher implements IDishwasher, Command {
 
         else {
             System.out.println("You can choose following functions: ");
-            System.out.print("-get timer (1) \n -choose program (2) \n -start (3) \n -stop (4)");
+            System.out.print("-get timer (1) \n -choose program (2) \n -start (3) \n");
+            System.out.print("-stop (4) \n -exit (5)");
 
-            Scanner input = new Scanner(System.in);
             String decision = input.next();
 
             switch (decision) {
@@ -153,14 +151,22 @@ class Dishwasher implements IDishwasher, Command {
                         System.out.println("The device needs " + duration + "s to complete the action.");
                     }
 
+                    execute();
+
                 case "2":
-                    chooseProgram(input);
+                    chooseProgram();
+                    execute();
 
                 case "3":
                     start();
+                    execute();
 
                 case "4":
                     stop();
+                    execute();
+
+                case "5":
+                    System.out.println("Returning to main menu.");
 
                 default:
                     System.out.println("Wrong Input");
