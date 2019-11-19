@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class CleaningRobot implements ICleaningRobot, Runnable {
     private boolean turnedOn = false, isCleaning = false;
     private double requiredTime = 0, elapsedTime = 0;
@@ -7,9 +9,10 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
 
     private volatile static CleaningRobot uniqueInstance;
 
-    private CleaningRobot() {}
+    private CleaningRobot() {
+    }
 
-    public static CleaningRobot getInstance(){
+    public static CleaningRobot getInstance() {
         if (uniqueInstance == null) {
             synchronized (CleaningRobot.class) {
                 if (uniqueInstance == null) {
@@ -127,5 +130,42 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     @Override
     public void switchOff() {
         turnedOn = false;
+    }
+
+    @Override
+    public void execute() {
+        if (!turnedOn) {
+            System.out.println("The device is turned off.");
+        } else {
+            System.out.println("You can choose following functions: ");
+            System.out.print("-set timer (1) \n -check progress (2) \n -check battery (3) \n -reset (4)");
+
+            Scanner input = new Scanner(System.in);
+            String decision = input.next();
+
+            switch (decision) {
+                case "1":
+                    System.out.print("Choose a temperature: ");
+                    setTimer(input.nextInt());
+
+                case "2":
+                    double progress = checkProgress();
+
+                    if (checkProgress() >= 0) {
+                        System.out.println("The robot has completed " + (progress * 100) + "% of the cleaning.");
+                    }
+
+                case "3":
+                    System.out.println("The robot has " + checkBattery() + "% remaining battery charge.");
+
+                case "4":
+                    interruptProgram();
+                    System.out.println("The program has been interrupted & reset. Robot is back in station.");
+
+                default:
+                    System.out.println("Wrong Input");
+                    execute();
+            }
+        }
     }
 }
