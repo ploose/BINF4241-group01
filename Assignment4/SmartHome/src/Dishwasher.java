@@ -52,7 +52,12 @@ class Dishwasher implements IDishwasher, Command {
     }
 
     private int getTimer() {
-        if (!isOn) {
+        if (time == 0) {
+            System.out.println("The program has already terminated.");
+            return time;
+        }
+
+        else if (!isOn) {
             System.out.println("The dishwasher is off.");
             return -1;
         }
@@ -160,7 +165,7 @@ class Dishwasher implements IDishwasher, Command {
                 case "1":
                     int duration = getTimer();
 
-                    if (duration >= 0) {
+                    if (duration > 0) {
                         System.out.println("The device needs " + duration + "s to complete the action.");
                     }
 

@@ -68,7 +68,12 @@ class WashingMachine implements IWashingMachine {
     }
 
     private int getTimer() {
-        if (!isOn) {
+        if (time == 0) {
+            System.out.println("The program has already terminated.");
+            return time;
+        }
+
+        else if (!isOn) {
             System.out.println("The washing machine is off.");
             return -1;
         }
@@ -166,7 +171,7 @@ class WashingMachine implements IWashingMachine {
                 case "2":
                     int duration = getTimer();
 
-                    if (duration >= 0) {
+                    if (duration > 0) {
                         System.out.println("The device needs " + duration + "s to complete the action.");
                     }
 
