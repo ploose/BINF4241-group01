@@ -138,32 +138,34 @@ class Dishwasher implements IDishwasher, Command {
             System.out.println("The device is turned off.");
         }
 
-        System.out.println("You can choose following functions: ");
-        System.out.print("-get timer (1) \n -choose program (2) \n -start (3) \n -stop (4)");
+        else {
+            System.out.println("You can choose following functions: ");
+            System.out.print("-get timer (1) \n -choose program (2) \n -start (3) \n -stop (4)");
 
-        Scanner input = new Scanner(System.in);
-        String decision = input.next();
+            Scanner input = new Scanner(System.in);
+            String decision = input.next();
 
-        switch (decision) {
-            case "1":
-                int duration = getTimer();
+            switch (decision) {
+                case "1":
+                    int duration = getTimer();
 
-                if (duration >= 0) {
-                    System.out.println("The device needs " + duration + "s to complete the action.");
-                }
+                    if (duration >= 0) {
+                        System.out.println("The device needs " + duration + "s to complete the action.");
+                    }
 
-            case "2":
-                chooseProgram(input);
+                case "2":
+                    chooseProgram(input);
 
-            case "3":
-                start();
+                case "3":
+                    start();
 
-            case "4":
-                stop();
+                case "4":
+                    stop();
 
-            default:
-                System.out.println("Wrong Input");
-                execute();
+                default:
+                    System.out.println("Wrong Input");
+                    execute();
+            }
         }
     }
 }

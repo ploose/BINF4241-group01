@@ -1,4 +1,4 @@
-interface IDishwasher extends Command{
+interface IDishwasher extends Command {
     /*
     int getTimer();
     void chooseProgram();
