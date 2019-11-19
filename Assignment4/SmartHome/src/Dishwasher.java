@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Dishwasher {
+class Dishwasher implements IDishwasher, Command {
     private boolean isOn, isRunning;
     private int time;
     private Programs.Program program;
@@ -22,7 +22,7 @@ class Dishwasher {
         return uniqueInstance;
     }
 
-    void switchOn() {
+    public void switchOn() {
         if (isOn) {
             System.out.println("Dishwasher is already on.");
         } else {
@@ -30,7 +30,7 @@ class Dishwasher {
         }
     }
 
-    void switchOff() {
+    public void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
         } else if (isRunning) {
@@ -40,7 +40,7 @@ class Dishwasher {
         }
     }
 
-    int getTimer() {
+    public int getTimer() {
         if (!isOn) {
             System.out.println("The dishwasher is off.");
             return -1;
@@ -58,7 +58,7 @@ class Dishwasher {
         }
     }
 
-    void chooseProgram() {
+    public void chooseProgram() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("You can choose between the following programs:");
@@ -84,13 +84,14 @@ class Dishwasher {
                 time = 8;
 
             default:
-                System.out.println("Wrong input.");
+                System.out.println("Wrong input. \n");
+                chooseProgram();
         }
     }
 
-    void start() {
+    public void start() {
         if (!isOn) {
-            System.out.println("You first need to start the dischwasher.");
+            System.out.println("You first need to start the dishwasher.");
         }
 
         if (program == null) {
@@ -119,7 +120,7 @@ class Dishwasher {
         isRunning = false;
     }
 
-    void stop() {
+    public void stop() {
         if (!isOn) {
             System.out.println("The dishwasher is not on.");
         }
@@ -132,5 +133,9 @@ class Dishwasher {
         timer = null;
         program = null;
         isRunning = false;
+    }
+
+    public void execute() {
+
     }
 }

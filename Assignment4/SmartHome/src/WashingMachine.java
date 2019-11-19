@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class WashingMachine {
+class WashingMachine implements IWashingMachine {
     private boolean isOn, isRunning;
     private int time, temperature;
     private Programs.Program program;
@@ -22,7 +22,7 @@ class WashingMachine {
         return uniqueInstance;
     }
 
-    void switchOn() {
+    public void switchOn() {
         if (isOn) {
             System.out.println("Washing machine is already on.");
         } else {
@@ -30,7 +30,7 @@ class WashingMachine {
         }
     }
 
-    void switchOff() {
+    public void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
         } else if (isRunning) {
@@ -40,7 +40,7 @@ class WashingMachine {
         }
     }
 
-    void setTemperature(int temperature) {
+    public void setTemperature(int temperature) {
         if (temperature > 20 && temperature < 100) {
             this.temperature = temperature;
         } else {
@@ -48,7 +48,7 @@ class WashingMachine {
         }
     }
 
-    int getTimer() {
+    public int getTimer() {
         if (!isOn) {
             System.out.println("The washing machine is off.");
             return -1;
@@ -66,7 +66,7 @@ class WashingMachine {
         }
     }
 
-    void chooseProgram() {
+    public void chooseProgram() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("You can choose between the following programs:");
@@ -96,7 +96,7 @@ class WashingMachine {
         }
     }
 
-    void start() {
+    public void start() {
         if (!isOn) {
             System.out.println("You first need to start the washing machine.");
         }
@@ -119,7 +119,7 @@ class WashingMachine {
         isRunning = true;
         runner.start();
 
-        for (; ; ) {
+        for (;;) {
             if (!timer.isRunning()) {
                 break;
             }
@@ -130,6 +130,10 @@ class WashingMachine {
         program = null;
         isRunning = false;
         temperature = -1;
+    }
+
+    public void execute() {
+
     }
 }
 
