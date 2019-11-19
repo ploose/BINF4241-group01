@@ -5,11 +5,23 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     private final int chargeCycle = 100, dischargeCycle = 500;
     private final Object lock = new Object();
 
-    public CleaningRobot() {
+    private volatile static CleaningRobot uniqueInstance;
+
+    private CleaningRobot() {}
+
+    public static CleaningRobot getInstance(){
+        if (uniqueInstance == null) {
+            synchronized (CleaningRobot.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new CleaningRobot();
+                }
+            }
+        }
+        return uniqueInstance;
     }
 
     public void run() {
-        while (true) {
+        for (; ; ) {
             if (turnedOn) {
                 if (battery == 100 && elapsedTime < requiredTime) {
                     synchronized (lock) {
@@ -67,11 +79,13 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
 
     @Override
     public void setTimer(int timeInSeconds) {
-        if (!isCleaning) { // TODO: should it be possible to alter time while in base?
-            this.requiredTime = timeInSeconds;
-            this.elapsedTime = 0;
-        } else {
-            System.out.println("Can't set timer while cleaning!");
+        synchronized (lock) {
+            if (!isCleaning) { // TODO: should it be possible to alter time while in base?
+                this.requiredTime = timeInSeconds;
+                this.elapsedTime = 0;
+            } else {
+                System.out.println("Can't set timer while cleaning!");
+            }
         }
     }
 
@@ -100,11 +114,11 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     }
 
     @Override
-    public void interruptProgram() {
+    public void interruptProgram() { // TODO: Also turnedOn = false?
         if (turnedOn) {
             synchronized (lock) {
                 this.requiredTime = 0;
-                this.elapsedTime = -0.5;
+                this.elapsedTime = -((double) dischargeCycle / 1000); // TODO: fix?
                 this.isCleaning = false;
             }
         }
