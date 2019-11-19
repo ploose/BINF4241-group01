@@ -55,12 +55,12 @@ class Dishwasher implements IDishwasher, Command {
             return -1;
         }
 
-        if (program == null) {
+        else if (program == null) {
             System.out.println("You first have to choose a program.");
             return -2;
         }
 
-        if (timer.isRunning()) {
+        else if (timer.isRunning()) {
             return timer.getTime();
         }
 
@@ -78,19 +78,23 @@ class Dishwasher implements IDishwasher, Command {
         switch (decision) {
             case "glasses":
                 program = Program.glasses;
-                timer.setTimer(5);
+                time = 5;
+                timer.setTimer(time);
 
             case "plates":
                 program = Program.plates;
-                timer.setTimer(6);
+                time = 6;
+                timer.setTimer(time);
 
             case "pans":
                 program = Program.pans;
-                timer.setTimer(7);
+                time = 7;
+                timer.setTimer(time);
 
             case "mixed":
                 program = Program.mixed;
-                timer.setTimer(8);
+                time = 8;
+                timer.setTimer(time);
 
             default:
                 System.out.println("Wrong input. \n");
@@ -103,18 +107,20 @@ class Dishwasher implements IDishwasher, Command {
             System.out.println("You first need to start the dishwasher.");
         }
 
-        if (program == null) {
+        else if (program == null) {
             System.out.println("You first need to choose a program");
         }
 
-        if (timer.isRunning()) {
+        else if (timer.isRunning()) {
             System.out.println("The dishwasher has already started.");
         }
 
-        Thread runner = new Thread(timer);
-        runner.start();
+        else {
+            Thread runner = new Thread(timer);
+            runner.start();
 
-        time = 0;
+            time = 0;
+        }
     }
 
     private void stop() {
@@ -122,13 +128,17 @@ class Dishwasher implements IDishwasher, Command {
             System.out.println("The dishwasher is not on.");
         }
 
-        if (!timer.isRunning()) {
+        else if (!timer.isRunning()) {
             System.out.println("The dishwasher is not running.");
         }
 
-        time = 0;
-        timer = null;
-        program = null;
+        else {
+            time = 0;
+            timer = null;
+            program = null;
+
+            timer = new TimerThread(0);
+        }
     }
 
     public void execute() {

@@ -24,12 +24,15 @@ public class TimerThread implements Runnable{
             running = true;
             time = timer;
 
-            while (time != 0) {
+            while (time > 0) {
                 Thread.sleep(1000);
                 --time;
             }
+
             running = false;
-        } catch (InterruptedException e) {
+        }
+
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class WashingMachine implements IWashingMachine {
-    private boolean isOn, isRunning;
+    private boolean isOn;
     private int time, temperature;
     private Program program;
     private TimerThread timer;
@@ -11,10 +11,10 @@ class WashingMachine implements IWashingMachine {
 
     private WashingMachine() {
         isOn = false;
-        isRunning = false;
         program = null;
 
         input = new Scanner(System.in);
+        timer = new TimerThread(0);
     }
 
     static WashingMachine getUniqueInstance() {
@@ -40,7 +40,7 @@ class WashingMachine implements IWashingMachine {
             System.out.println("Dishwasher is already off.");
         }
 
-        else if (isRunning) {
+        else if (timer.isRunning()) {
             System.out.println("Cannot turn the washing machine off, it is still running.");
         }
 
@@ -50,16 +50,18 @@ class WashingMachine implements IWashingMachine {
     }
 
     private void setTemperature(int temperature) {
-        if (isRunning) {
+        if (timer.isRunning()) {
             System.out.println("The washing machine is still running, please wait until it's finished");
         }
 
-        if (temperature > 20 && temperature < 100) {
+        else if (temperature > 20 && temperature < 100) {
             this.temperature = temperature;
         }
 
         else {
-            System.out.println("This temperature is too hot or too low.");
+            System.out.println("This temperature is too hot or too low. Please choose a temperature between " +
+                    "20 and 100 degrees.");
+            this.temperature = -1;
         }
     }
 
@@ -74,7 +76,7 @@ class WashingMachine implements IWashingMachine {
             return -2;
         }
 
-        if (isRunning) {
+        if (timer.isRunning()) {
             return timer.getTime();
         }
 
@@ -93,18 +95,22 @@ class WashingMachine implements IWashingMachine {
             case "double rinse":
                 program = Program.rinse;
                 time = 5;
+                timer.setTimer(time);
 
             case "intense":
                 program = Program.intense;
                 time = 6;
+                timer.setTimer(time);
 
             case "quick":
                 program = Program.quick;
                 time = 7;
+                timer.setTimer(time);
 
             case "spin":
                 program = Program.spin;
                 time = 8;
+                timer.setTimer(time);
 
             default:
                 System.out.println("Wrong input.");
@@ -117,35 +123,24 @@ class WashingMachine implements IWashingMachine {
             System.out.println("You first need to start the washing machine.");
         }
 
-        if (program == null) {
+        else if (program == null) {
             System.out.println("You first need to choose a program");
         }
 
-        if (temperature == -1) {
-            System.out.println("You need to enter a temperature");
+        else if (temperature == -1) {
+            System.out.println("You need to enter a valid temperature");
         }
 
-        if (isRunning) {
+        else if (timer.isRunning()) {
             System.out.println("The washing machine  has already started.");
         }
 
-        timer = new TimerThread(time);
-        Thread runner = new Thread(timer);
+        else {
+            Thread runner = new Thread(timer);
+            runner.start();
 
-        isRunning = true;
-        runner.start();
-
-        for (;;) {
-            if (!timer.isRunning()) {
-                break;
-            }
+            time = 0;
         }
-
-        time = 0;
-        timer = null;
-        program = null;
-        isRunning = false;
-        temperature = -1;
     }
 
     public void execute() {
