@@ -16,8 +16,8 @@ public class Smartphone {
     private void getInstances() {
         cleaningRobot = CleaningRobot.getInstance();
         dishwasher = Dishwasher.getUniqueInstance();
-        microwave = new Microwave(); //TODO: singleton
-        oven = new Oven(); //TODO: singleton
+        microwave = Microwave.getUniqueInstance();
+        oven = Oven.getUniqueInstance();
         washingMachine = WashingMachine.getUniqueInstance();
     }
 

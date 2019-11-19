@@ -5,14 +5,24 @@ public class Oven implements IOven{
     private int temperature;
     private Program program;
     private boolean cooking;
-    TimerThread timer;
+    private TimerThread timer;
 
-    Oven(){
+    private static Oven uniqueInstance;
+
+    private Oven(){
         program = null;
         temperature = 0;
         turnedOn = false;
         cooking = false;
         TimerThread timer = new TimerThread(0);
+    }
+
+    static Oven getUniqueInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Oven();
+        }
+
+        return uniqueInstance;
     }
 
     public void switchOn(){

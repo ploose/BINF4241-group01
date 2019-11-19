@@ -3,13 +3,24 @@ public class Microwave implements IMicrowave {
     private int temperature;
     private TimerThread timer;
 
-    public Microwave(){
+    private static Microwave uniqueInstance;
+
+    private Microwave(){
         temperature = 0;
         turnedOn = false;
         baking = false;
         timer = new TimerThread(3);
     }
 
+    static Microwave getUniqueInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Microwave();
+        }
+
+        return uniqueInstance;
+    }
+
+    @Override
     public void switchOn(){
         turnedOn = true;
     }
@@ -38,7 +49,13 @@ public class Microwave implements IMicrowave {
         }
     }
 
+    @Override
     public void switchOff(){
         turnedOn = false;
+    }
+
+    @Override
+    public void execute() {
+
     }
 }
