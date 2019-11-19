@@ -40,7 +40,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
-    public void setTemperature(int temperature) {
+    private void setTemperature(int temperature) {
         if (temperature > 20 && temperature < 100) {
             this.temperature = temperature;
         } else {
@@ -48,7 +48,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
-    public int getTimer() {
+    private int getTimer() {
         if (!isOn) {
             System.out.println("The washing machine is off.");
             return -1;
@@ -66,9 +66,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
-    public void chooseProgram() {
-        Scanner input = new Scanner(System.in);
-
+    private void chooseProgram(Scanner input) {
         System.out.println("You can choose between the following programs:");
         System.out.print("-double rinse \n -intense \n -quick \n -spin");
 
@@ -96,7 +94,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
-    public void start() {
+    private void start() {
         if (!isOn) {
             System.out.println("You first need to start the washing machine.");
         }
@@ -133,7 +131,37 @@ class WashingMachine implements IWashingMachine {
     }
 
     public void execute() {
+        if (!isOn) {
+            System.out.println("The device is turned off.");
+        }
 
+        System.out.println("You can choose following functions: ");
+        System.out.print("-set temperature (1) \n -get timer (2) \n -choose program (3) \n -start (4)");
+
+        Scanner input = new Scanner(System.in);
+        String decision = input.next();
+
+        switch (decision) {
+            case "1":
+                System.out.print("Choose a temperature: ");
+                setTemperature(input.nextInt());
+
+            case "2:":
+                int duration = getTimer();
+
+                if (duration >= 0) {
+                    System.out.println("The device needs " + duration + "s to complete the action.");
+                }
+
+            case "3":
+                chooseProgram(input);
+
+            case "4":
+                start();
+
+            default:
+                System.out.println("Wrong Input");
+                execute();
+        }
     }
 }
-
