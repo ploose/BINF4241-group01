@@ -40,7 +40,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    public int getTimer() {
+    private int getTimer() {
         if (!isOn) {
             System.out.println("The dishwasher is off.");
             return -1;
@@ -58,9 +58,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    public void chooseProgram() {
-        Scanner input = new Scanner(System.in);
-
+    private void chooseProgram(Scanner input) {
         System.out.println("You can choose between the following programs:");
         System.out.print("-glasses \n -plates \n -pans \n -mixed");
 
@@ -85,11 +83,11 @@ class Dishwasher implements IDishwasher, Command {
 
             default:
                 System.out.println("Wrong input. \n");
-                chooseProgram();
+                chooseProgram(input);
         }
     }
 
-    public void start() {
+    private void start() {
         if (!isOn) {
             System.out.println("You first need to start the dishwasher.");
         }
@@ -120,7 +118,7 @@ class Dishwasher implements IDishwasher, Command {
         isRunning = false;
     }
 
-    public void stop() {
+    private void stop() {
         if (!isOn) {
             System.out.println("The dishwasher is not on.");
         }
@@ -136,6 +134,36 @@ class Dishwasher implements IDishwasher, Command {
     }
 
     public void execute() {
+        if (!isOn) {
+            System.out.println("The device is turned off.");
+        }
 
+        System.out.println("You can choose following functions: ");
+        System.out.print("-get timer (1) \n -choose program (2) \n -start (3) \n -stop (4)");
+
+        Scanner input = new Scanner(System.in);
+        String decision = input.next();
+
+        switch (decision) {
+            case "1":
+                int duration = getTimer();
+
+                if (duration >= 0) {
+                    System.out.println("The device needs " + duration + "s to complete the action.");
+                }
+
+            case "2":
+                chooseProgram(input);
+
+            case "3":
+                start();
+
+            case "4":
+                stop();
+
+            default:
+                System.out.println("Wrong Input");
+                execute();
+        }
     }
 }

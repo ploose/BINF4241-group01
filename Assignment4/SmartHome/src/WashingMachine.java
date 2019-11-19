@@ -91,6 +91,7 @@ class WashingMachine implements IWashingMachine {
 
             default:
                 System.out.println("Wrong input.");
+                chooseProgram(input);
         }
     }
 
@@ -146,7 +147,7 @@ class WashingMachine implements IWashingMachine {
                 System.out.print("Choose a temperature: ");
                 setTemperature(input.nextInt());
 
-            case "2:":
+            case "2":
                 int duration = getTimer();
 
                 if (duration >= 0) {
