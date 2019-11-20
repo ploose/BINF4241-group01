@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Oven implements IOven{
 
@@ -6,6 +7,7 @@ public class Oven implements IOven{
     private Program program;
     private boolean cooking;
     private TimerThread timer;
+    private Scanner input;
 
     private static Oven uniqueInstance;
 
@@ -15,6 +17,7 @@ public class Oven implements IOven{
         turnedOn = false;
         cooking = false;
         TimerThread timer = new TimerThread(0);
+        input = new Scanner(System.in);
     }
 
     static Oven getUniqueInstance() {
@@ -38,7 +41,7 @@ public class Oven implements IOven{
         this.temperature = temperature;
     }
 
-    public void setProgram(){   //TODO
+    public void setProgram(Program program){   //TODO
         this.program = null;
     }
 
@@ -64,6 +67,41 @@ public class Oven implements IOven{
     }
 
     public void execute() {
+        if (!turnedOn) {
+            System.out.println("The device is turned off.");
+        }
+
+        else {
+            System.out.println("You can choose following functions: ");
+            System.out.print("-set temperature (1) \n -get timer (2) \n -start (3) \n");
+            System.out.print("-exit (4) \n -exit (5) \n");
+
+            String decision = input.next();
+
+            switch (decision) {
+                case "1":
+                    System.out.print("Choose a temperature: ");
+                    setTemperature(input.nextInt());
+
+                case "2":
+                    int duration = checkTimer();
+
+                    if (duration > 0) {
+                        System.out.println("The device needs " + duration + "s to complete the action.");
+                    }
+
+
+                case "3":
+                    startCooking();
+
+                case "4":
+                    System.out.println("Returning to main menu.");
+
+                default:
+                    System.out.println("Wrong Input");
+                    execute();
+            }
+        }
         //TODO
     }
 }
