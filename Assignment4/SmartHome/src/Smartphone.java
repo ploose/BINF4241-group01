@@ -10,13 +10,16 @@ public class Smartphone {
     private Command[] commands;
     private ArrayList<Command> turnedOn;
     private Scanner input;
+    private boolean isRunning;
 
-    Smartphone() {
+    private Smartphone() {
+        isRunning = true;
         getInstances();
 
         commands = new Command[5];
         fillSlots();
 
+        turnedOn = new ArrayList<>();
         input = new Scanner(System.in);
     }
 
@@ -36,39 +39,51 @@ public class Smartphone {
         commands[4] = washingMachine;
     }
 
-    private void run() {    //TODO
+    public static void main(String[] args) {
+        Smartphone huawei = new Smartphone();
+
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
         System.out.print("The app is starting. \n Please wait.");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ignored) {}
 
-        for (;;) {
+        while (huawei.isRunning) {
             System.out.println("This is the main page. You have the following options: ");
             System.out.print("-Open cleaning robot page (1) \n -Open dishwasher page (2) \n -Open Microwave page (3)" +
                     " \n " + "-Open oven page (4) \n -Open washing machine page (5) \n -See all active smart devices " +
                     "(6)" + " \n -Close app (7)");
 
-            String decision = input.next();
+            String decision = huawei.input.next();
 
             switch (decision) {
                 case "1":
-                    openCleaningRobotPage();
+                    huawei.openCleaningRobotPage();
+                    break;
 
                 case "2":
-                    openDishwasherPage();
+                    huawei.openDishwasherPage();
+                    break;
 
                 case "3":
-                    openMicrowavePage();
+                    huawei.openMicrowavePage();
+                    break;
 
                 case "4":
-                    openOvenPage();
+                    huawei.openOvenPage();
+                    break;
 
                 case "5":
-                    openWashingMachinePage();
+                    huawei.openWashingMachinePage();
+                    break;
 
                 case "6":
-                    listAllTurnedOnDevices();
+                    huawei.listAllTurnedOnDevices();
+                    break;
 
                 case "7":
+                    huawei.isRunning = false;
                     break;
 
                 default:
@@ -251,5 +266,13 @@ public class Smartphone {
         for (Command elem : turnedOn) {
             System.out.println(elem.toString());
         }
+    }
+
+    private void add(Command add) {
+        //TODO
+    }
+
+    private void remove(Command remove) {
+        //TODO
     }
 }

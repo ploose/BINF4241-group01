@@ -26,32 +26,37 @@ class Dishwasher implements IDishwasher, Command {
     }
 
     @Override
-    public void switchOn() {
+    public boolean switchOn() {
         if (isOn) {
             System.out.println("Dishwasher is already on.");
+            return false;
         }
 
         else {
             isOn = true;
+            return true;
         }
     }
 
     @Override
-    public void switchOff() {
+    public boolean switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
+            return false;
         }
 
         else if (timer.isRunning()) {
-            System.out.println("Cannot turn the washing machine off, it is still running.");
+            System.out.println("Cannot turn the dishwasher off, it is still running.");
+            return false;
         }
 
         else {
             isOn = false;
+            return true;
         }
     }
 
-    private int getTimer() {
+    public int getTimer() {
         if (time == 0) {
             System.out.println("The program has already terminated.");
             return time;
@@ -76,7 +81,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private void chooseProgram() {
+    public void chooseProgram() {
         System.out.println("You can choose between the following programs:");
         System.out.print("-glasses \n -plates \n -pans \n -mixed");
 
@@ -109,7 +114,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private void start() {
+    public void start() {
         if (!isOn) {
             System.out.println("You first need to start the dishwasher.");
         }
@@ -130,7 +135,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private void stop() {
+    public void stop() {
         if (!isOn) {
             System.out.println("The dishwasher is not on.");
         }

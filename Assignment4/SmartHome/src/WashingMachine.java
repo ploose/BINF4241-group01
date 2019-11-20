@@ -26,28 +26,33 @@ class WashingMachine implements IWashingMachine {
     }
 
     @Override
-    public void switchOn() {
+    public boolean switchOn() {
         if (isOn) {
             System.out.println("Washing machine is already on.");
+            return false;
         }
 
         else {
             isOn = true;
+            return true;
         }
     }
 
     @Override
-    public void switchOff() {
+    public boolean switchOff() {
         if (!isOn) {
-            System.out.println("Dishwasher is already off.");
+            System.out.println("Washing machine is already off.");
+            return false;
         }
 
         else if (timer.isRunning()) {
             System.out.println("Cannot turn the washing machine off, it is still running.");
+            return false;
         }
 
         else {
             isOn = false;
+            return true;
         }
     }
 
