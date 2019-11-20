@@ -44,16 +44,21 @@ public class Smartphone {
 
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
-        System.out.print("The app is starting. \n Please wait.");
+        System.out.println("The app is starting. \n Please wait. \n");
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ignored) {}
 
         while (huawei.isRunning) {
             System.out.println("This is the main page. You have the following options: ");
-            System.out.print("-Open cleaning robot page (1) \n -Open dishwasher page (2) \n -Open Microwave page (3)" +
-                    " \n " + "-Open oven page (4) \n -Open washing machine page (5) \n -See all active smart devices " +
-                    "(6)" + " \n -Close app (7)");
+            System.out.print("-Open cleaning robot page (1) \n" +
+                    "-Open dishwasher page (2) \n" +
+                    "-Open Microwave page (3) \n" +
+                    "-Open oven page (4) \n" +
+                    "-Open washing machine page (5) \n" +
+                    "-See all active smart devices (6) \n" +
+                    "-Close app (7) \n");
 
             String decision = huawei.input.next();
 
@@ -87,14 +92,17 @@ public class Smartphone {
                     break;
 
                 default:
-                    System.out.println("Wrong input.");
+                    System.out.println("Wrong input. \n");
             }
         }
     }
 
     private void openCleaningRobotPage() {
         System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n -turn off (2) \n -open functions (3) \n -return to main page (4) \n");
+        System.out.print("-turn on (1) \n" +
+                "-turn off (2) \n" +
+                "-open functions (3) \n" +
+                "-return to main page (4) \n");
 
         String decision = input.next();
 
@@ -119,11 +127,11 @@ public class Smartphone {
                 break;
 
             case "4":
-                System.out.println("Returning to main page.");
+                System.out.println("Returning to main page. \n");
                 break;
 
             default:
-                System.out.println("Wrong Input.");
+                System.out.println("Wrong Input. \n");
                 openCleaningRobotPage();
                 break;
         }
@@ -131,7 +139,10 @@ public class Smartphone {
 
     private void openDishwasherPage() {
         System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n -turn off (2) \n -open functions (3) \n -return to main page (4) \n");
+        System.out.print("-turn on (1) \n" +
+                "-turn off (2) \n" +
+                "-open functions (3) \n" +
+                "-return to main page (4) \n");
 
         String decision = input.next();
 
@@ -156,11 +167,11 @@ public class Smartphone {
                 break;
 
             case "4":
-                System.out.println("Returning to main page.");
+                System.out.println("Returning to main page. \n");
                 break;
 
             default:
-                System.out.println("Wrong Input.");
+                System.out.println("Wrong Input. \n");
                 openDishwasherPage();
                 break;
         }
@@ -168,7 +179,10 @@ public class Smartphone {
 
     private void openMicrowavePage() {
         System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n -turn off (2) \n -open functions (3) \n -return to main page (4) \n");
+        System.out.print("-turn on (1) \n" +
+                "-turn off (2) \n" +
+                "-open functions (3) \n" +
+                "-return to main page (4) \n");
 
         String decision = input.next();
 
@@ -193,11 +207,11 @@ public class Smartphone {
                 break;
 
             case "4":
-                System.out.println("Returning to main page.");
+                System.out.println("Returning to main page. \n");
                 break;
 
             default:
-                System.out.println("Wrong Input.");
+                System.out.println("Wrong Input. \n");
                 openMicrowavePage();
                 break;
         }
@@ -205,7 +219,10 @@ public class Smartphone {
 
     private void openOvenPage() {
         System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n -turn off (2) \n -open functions (3) \n -return to main page (4) \n");
+        System.out.print("-turn on (1) \n" +
+                "-turn off (2) \n" +
+                "-open functions (3) \n" +
+                "-return to main page (4) \n");
 
         String decision = input.next();
 
@@ -230,11 +247,11 @@ public class Smartphone {
                 break;
 
             case "4":
-                System.out.println("Returning to main page.");
+                System.out.println("Returning to main page. \n");
                 break;
 
             default:
-                System.out.println("Wrong Input.");
+                System.out.println("Wrong Input. \n");
                 openOvenPage();
                 break;
         }
@@ -242,7 +259,10 @@ public class Smartphone {
 
     private void openWashingMachinePage() {
         System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n -turn off (2) \n -open functions (3) \n -return to main page (4) \n");
+        System.out.print("-turn on (1) \n" +
+                "-turn off (2) \n" +
+                "-open functions (3) \n" +
+                "-return to main page (4) \n");
 
         String decision = input.next();
 
@@ -267,11 +287,11 @@ public class Smartphone {
                 break;
 
             case "4":
-                System.out.println("Returning to main page.");
+                System.out.println("Returning to main page. \n");
                 break;
 
             default:
-                System.out.println("Wrong Input.");
+                System.out.println("Wrong Input. \n");
                 openWashingMachinePage();
                 break;
         }
