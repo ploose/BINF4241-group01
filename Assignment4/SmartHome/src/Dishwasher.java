@@ -6,20 +6,20 @@ class Dishwasher implements IDishwasher {
     private Program program;
     private TimerThread timer;
     private Scanner input;
-
+    private Smartphone huawei;
     private static Dishwasher uniqueInstance;
 
-    private Dishwasher() {
+    private Dishwasher(Smartphone huawei) {
         isOn = false;
         program = null;
-
+        this.huawei = huawei;
         input = new Scanner(System.in);
         timer = new TimerThread(0);
     }
 
-    static Dishwasher getUniqueInstance() {
+    static Dishwasher getUniqueInstance(Smartphone huawei) {
         if (uniqueInstance == null) {
-            uniqueInstance = new Dishwasher();
+            uniqueInstance = new Dishwasher(huawei);
         }
 
         return uniqueInstance;
@@ -208,7 +208,7 @@ class Dishwasher implements IDishwasher {
 
                 case "5":
                     System.out.println("Returning to dishwasher page. \n");
-                    break;
+                    huawei.mainPage();
 
                 default:
                     System.out.println("Wrong Input \n");

@@ -12,6 +12,7 @@ public class Smartphone {
     private Scanner input;
     private boolean isRunning;
 
+
     private Smartphone() {
         isRunning = true;
         getInstances();
@@ -24,11 +25,11 @@ public class Smartphone {
     }
 
     private void getInstances() {
-        cleaningRobot = CleaningRobot.getInstance();
-        dishwasher = Dishwasher.getUniqueInstance();
-        microwave = Microwave.getUniqueInstance();
-        oven = Oven.getUniqueInstance();
-        washingMachine = WashingMachine.getUniqueInstance();
+        cleaningRobot = CleaningRobot.getInstance(this);
+        dishwasher = Dishwasher.getUniqueInstance(this);
+        microwave = Microwave.getUniqueInstance(this);
+        oven = Oven.getUniqueInstance(this);
+        washingMachine = WashingMachine.getUniqueInstance(this);
     }
 
     private void fillSlots() {
@@ -51,45 +52,50 @@ public class Smartphone {
             Thread.sleep(2000);
         } catch (InterruptedException ignored) {}
 
-        while (huawei.isRunning) {
+        huawei.mainPage();
+
+    }
+
+    public void mainPage() {
+        while (this.isRunning) {
             System.out.println("This is the main page. You have the following options: ");
             System.out.print("-Open cleaning robot page (1) \n" +
                     "-Open dishwasher page (2) \n" +
-                    "-Open Microwave page (3) \n" +
+                    "-Open microwave page (3) \n" +
                     "-Open oven page (4) \n" +
                     "-Open washing machine page (5) \n" +
                     "-See all active smart devices (6) \n" +
                     "-Close app (7) \n");
 
-            String decision = huawei.input.next();
+            String decision = this.input.next();
 
             switch (decision) {
                 case "1":
-                    huawei.openCleaningRobotPage();
+                    this.openCleaningRobotPage();
                     break;
 
                 case "2":
-                    huawei.openDishwasherPage();
+                    this.openDishwasherPage();
                     break;
 
                 case "3":
-                    huawei.openMicrowavePage();
+                    this.openMicrowavePage();
                     break;
 
                 case "4":
-                    huawei.openOvenPage();
+                    this.openOvenPage();
                     break;
 
                 case "5":
-                    huawei.openWashingMachinePage();
+                    this.openWashingMachinePage();
                     break;
 
                 case "6":
-                    huawei.listAllTurnedOnDevices();
+                    this.listAllTurnedOnDevices();
                     break;
 
                 case "7":
-                    huawei.isRunning = false;
+                    this.isRunning = false;
                     break;
 
                 default:
@@ -209,6 +215,7 @@ public class Smartphone {
 
             case "4":
                 System.out.println("Returning to main page. \n");
+                this.mainPage();
                 break;
 
             default:

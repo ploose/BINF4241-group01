@@ -6,20 +6,21 @@ class WashingMachine implements IWashingMachine {
     private Program program;
     private TimerThread timer;
     private Scanner input;
+    private Smartphone huawei;
 
     private static WashingMachine uniqueInstance;
 
-    private WashingMachine() {
+    private WashingMachine(Smartphone huawei) {
         isOn = false;
         program = null;
-
+        this.huawei = huawei;
         input = new Scanner(System.in);
         timer = new TimerThread(0);
     }
 
-    static WashingMachine getUniqueInstance() {
+    static WashingMachine getUniqueInstance(Smartphone huawei) {
         if (uniqueInstance == null) {
-            uniqueInstance = new WashingMachine();
+            uniqueInstance = new WashingMachine(huawei);
         }
 
         return uniqueInstance;
@@ -102,10 +103,10 @@ class WashingMachine implements IWashingMachine {
     @Override
     public void chooseProgram() {
         System.out.println("You can choose between the following programs:");
-        System.out.print("-double rinse (1) \n" +
-                "-intense (2) \n" +
-                "-quick (3) \n" +
-                "-spin (4) \n");
+        System.out.print("-double rinse (1)\n" +
+                "-intense (2)\n" +
+                "-quick (3)\n" +
+                "-spin (4)\n");
 
         String decision = input.next();
 
@@ -207,7 +208,7 @@ class WashingMachine implements IWashingMachine {
 
                 case "5":
                     System.out.println("Returning to washing machine page. \n");
-                    break;
+                    huawei.mainPage();
 
                 default:
                     System.out.println("Wrong Input. \n");

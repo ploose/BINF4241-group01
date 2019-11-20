@@ -1,17 +1,17 @@
 public class TimerThread implements Runnable{
     private boolean running;
-    private int time, timer;
+    private int time;
 
     TimerThread(int timeInSeconds){
-        timer = timeInSeconds;
+        time = timeInSeconds;
     }
 
     int getTime(){
         return this.time;
     }
 
-    void setTimer(int timer) {
-        this.timer = timer;
+    void setTimer(int time) {
+        this.time = time;
     }
 
     boolean isRunning(){
@@ -22,7 +22,7 @@ public class TimerThread implements Runnable{
     public void run() {
         try {
             running = true;
-            time = timer;
+
 
             while (time > 0) {
                 Thread.sleep(1000);

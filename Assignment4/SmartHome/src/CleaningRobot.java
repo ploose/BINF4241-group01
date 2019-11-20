@@ -8,19 +8,22 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     private final int chargeCycle = 100, dischargeCycle = 500;
     private final Object lock = new Object();
     private Scanner input;
+    private Smartphone huawei;
 
     private volatile static CleaningRobot uniqueInstance;
     private volatile static Thread uniqueThread;
 
-    private CleaningRobot() {
+    private CleaningRobot(Smartphone huawei) {
         input = new Scanner(System.in);
+        this.huawei = huawei;
+
     }
 
-    static CleaningRobot getInstance() {
+    static CleaningRobot getInstance(Smartphone huawei) {
         if (uniqueInstance == null) {
             synchronized (CleaningRobot.class) {
                 if (uniqueInstance == null) {
-                    uniqueInstance = new CleaningRobot();
+                    uniqueInstance = new CleaningRobot(huawei);
                     uniqueThread = new Thread(uniqueInstance, "Robot Thread");
                     uniqueThread.start();
                 }
@@ -220,6 +223,8 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
 
                 case "6":
                     System.out.println("Returning to main menu.");
+                    huawei.mainPage();
+
 
                 default:
                     System.out.println("Wrong Input");

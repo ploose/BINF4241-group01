@@ -9,21 +9,24 @@ public class Oven implements IOven{
     private TimerThread timer;
     private Scanner input;
     int time;
+    private Smartphone huawei;
+
 
     private static Oven uniqueInstance;
 
-    private Oven(){
+    private Oven(Smartphone huawei){
         program = null;
         temperature = 0;
         turnedOn = false;
         cooking = false;
-        TimerThread timer = new TimerThread(0);
+        timer = new TimerThread(0);
         input = new Scanner(System.in);
+        this.huawei = huawei;
     }
 
-    static Oven getUniqueInstance() {
+    static Oven getUniqueInstance(Smartphone huawei) {
         if (uniqueInstance == null) {
-            uniqueInstance = new Oven();
+            uniqueInstance = new Oven(huawei);
         }
 
         return uniqueInstance;
@@ -42,7 +45,7 @@ public class Oven implements IOven{
 
     public void setTimer(int timeInSeconds){
         timer = new TimerThread(timeInSeconds);
-        timer.run(); // TODO: shouldn't the timer start with startCooking?
+
     }
 
     public void setTemperature(int temperature){
@@ -51,7 +54,7 @@ public class Oven implements IOven{
 
     public void setProgram(){   //TODO
         System.out.println("You can choose between the following programs:");
-        System.out.print("-double rinse \n -intense \n -quick \n -spin");
+        System.out.print("-ventilated\n -grill\n-reheat\n");
 
         String decision = input.next();
 
@@ -60,28 +63,45 @@ public class Oven implements IOven{
                 program = Program.ventilated;
                 time = 5;
                 timer.setTimer(time);
+                break;
 
             case "grill":
                 program = Program.grill;
                 time = 6;
                 timer.setTimer(time);
+                break;
 
             case "reheat":
                 program = Program.reheat;
                 time = 7;
                 timer.setTimer(time);
+                break;
 
             default:
                 System.out.println("Wrong input.");
                 setProgram();
+                break;
         }
 
     }
 
     public void startCooking(){
-        if (program != null && temperature != 0 && turnedOn == true){
-            cooking = true;
+
+        if (timer.getTime() == 0) {
+            System.out.println("Set the timer first. \n");
+            execute();
         }
+        else if (!turnedOn) {
+            System.out.println("The oven is off. \n");
+            execute();
+        }
+        else if (temperature == 0){
+            System.out.println("There is no temperature set.");
+        }
+        cooking = true;
+        Thread runner = new Thread(timer);
+        runner.start();
+        cooking = false;
     }
 
     public int checkTimer(){
@@ -116,26 +136,32 @@ public class Oven implements IOven{
                 case "1":
                     System.out.print("Choose a temperature: ");
                     setTemperature(input.nextInt());
-
+                    break;
                 case "2":
                     int duration = checkTimer();
 
                     if (duration > 0) {
                         System.out.println("The device needs " + duration + "s to complete the action.");
                     }
+                    else{
+                        System.out.println("The timer is not set.");
+                    }
+                    break;
 
                 case "3":
                     setProgram();
-
+                    break;
                 case "4":
                     startCooking();
-
+                    break;
                 case "5":
                     System.out.println("Returning to main menu.");
-
+                    huawei.mainPage();
+                    break;
                 default:
                     System.out.println("Wrong Input");
                     execute();
+                    break;
             }
         }
     }
