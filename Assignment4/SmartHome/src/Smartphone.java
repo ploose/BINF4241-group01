@@ -11,7 +11,7 @@ public class Smartphone {
     private ArrayList<Command> turnedOn;
     private Scanner input;
 
-    Smartphone() {
+    private Smartphone() {
         getInstances();
 
         commands = new Command[5];
@@ -37,10 +37,15 @@ public class Smartphone {
         commands[4] = washingMachine;
     }
 
-    private void run() {
+    public static void main(String[] args) {
+        Smartphone huawei = new Smartphone();
+
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
-        System.out.print("The app is starting. \n Please wait."); //TODO: waiting
+        System.out.print("The app is starting. \n Please wait.");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ignored) {}
 
         for (;;) {
             System.out.println("This is the main page. You have the following options: ");
@@ -48,26 +53,26 @@ public class Smartphone {
                     " \n " + "-Open oven page (4) \n -Open washing machine page (5) \n -See all active smart devices " +
                     "(6)" + " \n -Close app (7)");
 
-            String decision = input.next();
+            String decision = huawei.input.next();
 
             switch (decision) {
                 case "1":
-                    openCleaningRobotPage();
+                    huawei.openCleaningRobotPage();
 
                 case "2":
-                    openDishwasherPage();
+                    huawei.openDishwasherPage();
 
                 case "3":
-                    openMicrowavePage();
+                    huawei.openMicrowavePage();
 
                 case "4":
-                    openOvenPage();
+                    huawei.openOvenPage();
 
                 case "5":
-                    openWashingMachinePage();
+                    huawei.openWashingMachinePage();
 
                 case "6":
-                    listAllTurnedOnDevices();
+                    huawei.listAllTurnedOnDevices();
 
                 case "7":
                     break;
