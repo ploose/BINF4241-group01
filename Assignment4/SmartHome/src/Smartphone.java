@@ -10,11 +10,9 @@ public class Smartphone {
     private Command[] commands;
     private ArrayList<Command> turnedOn;
     private Scanner input;
-    private boolean isRunning;
 
 
     private Smartphone() {
-        isRunning = true;
         getInstances();
 
         commands = new Command[5];
@@ -53,11 +51,10 @@ public class Smartphone {
         } catch (InterruptedException ignored) {}
 
         huawei.mainPage();
-
     }
 
-    public void mainPage() {
-        while (this.isRunning) {
+    void mainPage() {
+        for (;;) {
             System.out.println("This is the main page. You have the following options: ");
             System.out.print("-Open cleaning robot page (1) \n" +
                     "-Open dishwasher page (2) \n" +
@@ -95,8 +92,7 @@ public class Smartphone {
                     break;
 
                 case "7":
-                    this.isRunning = false;
-                    break;
+                    return;
 
                 default:
                     System.out.println("Wrong input. \n");
