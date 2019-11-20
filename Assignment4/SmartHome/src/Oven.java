@@ -29,8 +29,15 @@ public class Oven implements IOven{
         return uniqueInstance;
     }
 
-    public void switchOn(){
-        turnedOn = true;
+    public boolean switchOn(){
+        if (turnedOn) {
+            return false;
+        }
+
+        else {
+            turnedOn = true;
+            return true;
+        }
     }
 
     public void setTimer(int timeInSeconds){
@@ -82,14 +89,15 @@ public class Oven implements IOven{
     }
 
     public void interruptProgram() {
-        if (cooking == true && turnedOn == true) {
+        if (cooking && turnedOn == true) {
             cooking = false;
             program = null;
         }
     }
 
-    public void switchOff(){
+    public boolean switchOff(){
         turnedOn = false;
+        return true;
     }
 
     public void execute() {

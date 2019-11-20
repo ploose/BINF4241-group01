@@ -100,18 +100,22 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                commands[0].switchOn();
-                add(commands[0]);
-
+                if (commands[0].switchOn()) {
+                    add(commands[0]);
+                }
+                openCleaningRobotPage();
                 break;
 
             case "2":
-                commands[0].switchOff();
-                remove(commands[0]);
+                if (commands[0].switchOff()) {
+                    remove(commands[0]);
+                }
+                openCleaningRobotPage();
                 break;
 
             case "3":
                 commands[0].execute();
+                openCleaningRobotPage();
                 break;
 
             case "4":
@@ -133,18 +137,22 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                commands[1].switchOn();
-                add(commands[1]);
-
+                if (commands[1].switchOn()) {
+                    add(commands[1]);
+                }
+                openDishwasherPage();
                 break;
 
             case "2":
-                commands[1].switchOff();
-                remove(commands[1]);
+                if (commands[1].switchOff()) {
+                    remove(commands[1]);
+                }
+                openDishwasherPage();
                 break;
 
             case "3":
                 commands[1].execute();
+                openDishwasherPage();
                 break;
 
             case "4":
@@ -166,18 +174,22 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                commands[2].switchOn();
-                add(commands[2]);
-
+                if (commands[2].switchOn()) {
+                    add(commands[2]);
+                }
+                openMicrowavePage();
                 break;
 
             case "2":
-                commands[2].switchOff();
-                remove(commands[2]);
+                if (commands[2].switchOff()) {
+                    remove(commands[2]);
+                }
+                openMicrowavePage();
                 break;
 
             case "3":
                 commands[2].execute();
+                openMicrowavePage();
                 break;
 
             case "4":
@@ -199,18 +211,22 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                commands[3].switchOn();
-                add(commands[3]);
-
+                if (commands[3].switchOn()) {
+                    add(commands[3]);
+                }
+                openOvenPage();
                 break;
 
             case "2":
-                commands[3].switchOff();
-                remove(commands[3]);
+                if (commands[3].switchOff()) {
+                    remove(commands[3]);
+                }
+                openOvenPage();
                 break;
 
             case "3":
                 commands[3].execute();
+                openOvenPage();
                 break;
 
             case "4":
@@ -232,18 +248,22 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                commands[4].switchOn();
-                add(commands[4]);
-
+                if (commands[4].switchOn()) {
+                    add(commands[4]);
+                }
+                openWashingMachinePage();
                 break;
 
             case "2":
-                commands[4].switchOff();
-                remove(commands[4]);
+                if (commands[4].switchOff()) {
+                    remove(commands[4]);
+                }
+                openWashingMachinePage();
                 break;
 
             case "3":
                 commands[4].execute();
+                openWashingMachinePage();
                 break;
 
             case "4":

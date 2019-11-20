@@ -14,7 +14,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         input = new Scanner(System.in);
     }
 
-    public static CleaningRobot getInstance() {
+    static CleaningRobot getInstance() {
         if (uniqueInstance == null) {
             synchronized (CleaningRobot.class) {
                 if (uniqueInstance == null) {
@@ -88,13 +88,15 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     //TODO: start() / completeOutstanding() method?
 
     @Override
-    public void switchOn() {
+    public boolean switchOn() {
         if (requiredTime > 0 && battery == 100) {
             turnedOn = true;
+            return true;
         }
 
         else {
             System.out.println("Cleaning Robot has no set timer / is not fully charged!");
+            return false;
         }
     }
 
@@ -151,8 +153,9 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     }
 
     @Override
-    public void switchOff() {
+    public boolean switchOff() {
         turnedOn = false;
+        return true;
     }
 
     @Override
