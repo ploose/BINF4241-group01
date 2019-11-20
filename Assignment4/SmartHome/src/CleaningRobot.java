@@ -85,6 +85,8 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         }
     }
 
+    //TODO: start() / completeOutstanding() method?
+
     @Override
     public boolean switchOn() {
         if (requiredTime > 0 && battery == 100) {
