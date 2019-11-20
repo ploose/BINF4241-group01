@@ -58,21 +58,27 @@ public class Smartphone {
             switch (decision) {
                 case "1":
                     huawei.openCleaningRobotPage();
+                    break;
 
                 case "2":
                     huawei.openDishwasherPage();
+                    break;
 
                 case "3":
                     huawei.openMicrowavePage();
+                    break;
 
                 case "4":
                     huawei.openOvenPage();
+                    break;
 
                 case "5":
                     huawei.openWashingMachinePage();
+                    break;
 
                 case "6":
                     huawei.listAllTurnedOnDevices();
+                    break;
 
                 case "7":
                     break;
@@ -257,5 +263,13 @@ public class Smartphone {
         for (Command elem : turnedOn) {
             System.out.println(elem.toString());
         }
+    }
+
+    private void add(Command add) {
+        //TODO
+    }
+
+    private void remove(Command remove) {
+        //TODO
     }
 }

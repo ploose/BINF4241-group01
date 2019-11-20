@@ -56,7 +56,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private int getTimer() {
+    public int getTimer() {
         if (time == 0) {
             System.out.println("The program has already terminated.");
             return time;
@@ -81,7 +81,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private void chooseProgram() {
+    public void chooseProgram() {
         System.out.println("You can choose between the following programs:");
         System.out.print("-glasses \n -plates \n -pans \n -mixed");
 
@@ -114,7 +114,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private void start() {
+    public void start() {
         if (!isOn) {
             System.out.println("You first need to start the dishwasher.");
         }
@@ -135,7 +135,7 @@ class Dishwasher implements IDishwasher, Command {
         }
     }
 
-    private void stop() {
+    public void stop() {
         if (!isOn) {
             System.out.println("The dishwasher is not on.");
         }
