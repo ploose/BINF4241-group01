@@ -26,33 +26,28 @@ class Dishwasher implements IDishwasher, Command {
     }
 
     @Override
-    public boolean switchOn() {
+    public void switchOn() {
         if (isOn) {
             System.out.println("Dishwasher is already on.");
-            return false;
         }
 
         else {
             isOn = true;
-            return true;
         }
     }
 
     @Override
-    public boolean switchOff() {
+    public void switchOff() {
         if (!isOn) {
             System.out.println("Dishwasher is already off.");
-            return false;
         }
 
         else if (timer.isRunning()) {
             System.out.println("Cannot turn the dishwasher off, it is still running.");
-            return false;
         }
 
         else {
             isOn = false;
-            return true;
         }
     }
 
