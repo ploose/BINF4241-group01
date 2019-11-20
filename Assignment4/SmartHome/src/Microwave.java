@@ -65,8 +65,8 @@ public class Microwave implements IMicrowave {
 
         else {
             System.out.println("You can choose following functions: ");
-            System.out.print("-set temperature (1) \n -get timer (2) \n -choose program (3) \n");
-            System.out.print("-start (4) \n -exit (5) \n");
+            System.out.print("-set temperature (1) \n -get timer (2) \n -start(3) \n");
+            System.out.print("-exit (4) \n");
 
             String decision = input.next();
 
@@ -82,13 +82,11 @@ public class Microwave implements IMicrowave {
                         System.out.println("The device needs " + duration + "s to complete the action.");
                     }
 
+
                 case "3":
-                    chooseProgram();
+                    startBaking();
 
                 case "4":
-                    start();
-
-                case "5":
                     System.out.println("Returning to main menu.");
 
                 default:

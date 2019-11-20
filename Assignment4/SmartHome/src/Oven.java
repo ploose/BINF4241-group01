@@ -28,9 +28,8 @@ public class Oven implements IOven{
         return uniqueInstance;
     }
 
-    public boolean switchOn(){
+    public void switchOn(){
         turnedOn = true;
-        return true;
     }
 
     public void setTimer(int timeInSeconds){
@@ -47,7 +46,7 @@ public class Oven implements IOven{
     }
 
     public void startCooking(){
-        if (program != null && temperature != 0 && turnedOn){
+        if (program != null && temperature != 0 && turnedOn == true){
             cooking = true;
         }
     }
@@ -57,15 +56,14 @@ public class Oven implements IOven{
     }
 
     public void interruptProgram() {
-        if (cooking && turnedOn) {
+        if (cooking == true && turnedOn == true) {
             cooking = false;
             program = null;
         }
     }
 
-    public boolean switchOff(){
+    public void switchOff(){
         turnedOn = false;
-        return true;
     }
 
     public void execute() {
@@ -75,8 +73,8 @@ public class Oven implements IOven{
 
         else {
             System.out.println("You can choose following functions: ");
-            System.out.print("-set temperature (1) \n -get timer (2) \n -start (3) \n");
-            System.out.print("-exit (4) \n -exit (5) \n");
+            System.out.print("-set temperature (1) \n -get timer (2) \n -choose program (3) \n");
+            System.out.print("-start (4) \n -exit (5) \n");
 
             String decision = input.next();
 
@@ -92,11 +90,13 @@ public class Oven implements IOven{
                         System.out.println("The device needs " + duration + "s to complete the action.");
                     }
 
-
                 case "3":
-                    startCooking();
+                    setProgram();
 
                 case "4":
+                    startCooking();
+
+                case "5":
                     System.out.println("Returning to main menu.");
 
                 default:
