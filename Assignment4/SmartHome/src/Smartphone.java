@@ -100,15 +100,14 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                if (commands[0].switchOn()) {
-                    turnedOn.add(cleaningRobot);
-                }
+                commands[0].switchOn();
+                add(commands[0]);
+
                 break;
 
             case "2":
-                if (commands[0].switchOff()) {
-                    turnedOn.remove(cleaningRobot);
-                }
+                commands[0].switchOff();
+                remove(commands[0]);
                 break;
 
             case "3":
@@ -134,15 +133,14 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                if (commands[1].switchOn()) {
-                    turnedOn.add(dishwasher);
-                }
+                commands[1].switchOn();
+                add(commands[1]);
+
                 break;
 
             case "2":
-                if (commands[1].switchOff()) {
-                    turnedOn.remove(dishwasher);
-                }
+                commands[1].switchOff();
+                remove(commands[1]);
                 break;
 
             case "3":
@@ -168,15 +166,14 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                if (commands[2].switchOn()) {
-                    turnedOn.add(microwave);
-                }
+                commands[2].switchOn();
+                add(commands[2]);
+
                 break;
 
             case "2":
-                if (commands[2].switchOff()) {
-                    turnedOn.remove(microwave);
-                }
+                commands[2].switchOff();
+                remove(commands[2]);
                 break;
 
             case "3":
@@ -202,15 +199,14 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                if (commands[3].switchOn()) {
-                    turnedOn.add(oven);
-                }
+                commands[3].switchOn();
+                add(commands[3]);
+
                 break;
 
             case "2":
-                if (commands[3].switchOff()) {
-                    turnedOn.remove(oven);
-                }
+                commands[3].switchOff();
+                remove(commands[3]);
                 break;
 
             case "3":
@@ -236,15 +232,14 @@ public class Smartphone {
 
         switch (decision) {
             case "1":
-                if (commands[4].switchOn()) {
-                    turnedOn.add(washingMachine);
-                }
+                commands[4].switchOn();
+                add(commands[4]);
+
                 break;
 
             case "2":
-                if (commands[4].switchOff()) {
-                    turnedOn.remove(washingMachine);
-                }
+                commands[4].switchOff();
+                remove(commands[4]);
                 break;
 
             case "3":
@@ -269,10 +264,12 @@ public class Smartphone {
     }
 
     private void add(Command add) {
-        //TODO
+        if (!turnedOn.contains(add)) {
+            turnedOn.add(add);
+        }
     }
 
     private void remove(Command remove) {
-        //TODO
+        turnedOn.remove(remove);
     }
 }
