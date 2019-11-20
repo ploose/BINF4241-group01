@@ -8,6 +8,7 @@ public class Oven implements IOven{
     private boolean cooking;
     private TimerThread timer;
     private Scanner input;
+    int time;
 
     private static Oven uniqueInstance;
 
@@ -41,8 +42,33 @@ public class Oven implements IOven{
         this.temperature = temperature;
     }
 
-    public void setProgram(Program program){   //TODO
-        this.program = null;
+    public void setProgram(){   //TODO
+        System.out.println("You can choose between the following programs:");
+        System.out.print("-double rinse \n -intense \n -quick \n -spin");
+
+        String decision = input.next();
+
+        switch (decision) {
+            case "ventilated":
+                program = Program.ventilated;
+                time = 5;
+                timer.setTimer(time);
+
+            case "grill":
+                program = Program.grill;
+                time = 6;
+                timer.setTimer(time);
+
+            case "reheat":
+                program = Program.reheat;
+                time = 7;
+                timer.setTimer(time);
+
+            default:
+                System.out.println("Wrong input.");
+                setProgram();
+        }
+
     }
 
     public void startCooking(){
