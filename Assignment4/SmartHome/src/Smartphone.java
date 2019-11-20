@@ -44,7 +44,8 @@ public class Smartphone {
 
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
-        System.out.println("The app is starting. \n Please wait. \n");
+        System.out.println("The app is starting. \n" +
+                "Please wait. \n");
 
         try {
             Thread.sleep(2000);
@@ -302,7 +303,7 @@ public class Smartphone {
             System.out.println(elem.toString());
         }
 
-        System.out.println("\n");
+        System.out.print("\n");
     }
 
     private void add(Command add) {
