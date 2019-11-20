@@ -17,6 +17,7 @@ public class Smartphone {
         commands = new Command[5];
         fillSlots();
 
+        turnedOn = new ArrayList<>();
         input = new Scanner(System.in);
     }
 
@@ -36,10 +37,10 @@ public class Smartphone {
         commands[4] = washingMachine;
     }
 
-    private void run() {    //TODO
+    private void run() {
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
-        System.out.print("The app is starting. \n Please wait.");
+        System.out.print("The app is starting. \n Please wait."); //TODO: waiting
 
         for (;;) {
             System.out.println("This is the main page. You have the following options: ");

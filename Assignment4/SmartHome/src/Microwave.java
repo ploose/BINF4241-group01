@@ -21,8 +21,22 @@ public class Microwave implements IMicrowave {
     }
 
     @Override
-    public void switchOn(){
-        turnedOn = true;
+    public boolean switchOn(){
+        if (turnedOn) {
+            System.out.println("Microwave is already on.");
+            return false;
+        }
+
+        else {
+            turnedOn = true;
+            return true;
+        }
+    }
+
+    @Override
+    public boolean switchOff(){
+        turnedOn = false;
+        return true;
     }
 
     public void setTimer(int timeInSeconds){
@@ -49,13 +63,10 @@ public class Microwave implements IMicrowave {
         }
     }
 
-    @Override
-    public void switchOff(){
-        turnedOn = false;
-    }
+
 
     @Override
     public void execute() {
-
+        //TODO
     }
 }
