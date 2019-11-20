@@ -34,7 +34,7 @@ class Dishwasher implements IDishwasher {
 
         else {
             isOn = true;
-            return false;
+            return true;
         }
     }
 

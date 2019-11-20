@@ -301,6 +301,8 @@ public class Smartphone {
         for (Command elem : turnedOn) {
             System.out.println(elem.toString());
         }
+
+        System.out.println("\n");
     }
 
     private void add(Command add) {
