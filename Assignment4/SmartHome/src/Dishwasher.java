@@ -83,27 +83,27 @@ class Dishwasher implements IDishwasher, Command {
 
     public void chooseProgram() {
         System.out.println("You can choose between the following programs:");
-        System.out.print("-glasses \n -plates \n -pans \n -mixed");
+        System.out.print("-glasses (1) \n -plates (2) \n -pans (3) \n -mixed (4) \n");
 
         String decision = input.next();
 
         switch (decision) {
-            case "glasses":
+            case "1":
                 program = Program.glasses;
                 time = 5;
                 timer.setTimer(time);
 
-            case "plates":
+            case "2":
                 program = Program.plates;
                 time = 6;
                 timer.setTimer(time);
 
-            case "pans":
+            case "3":
                 program = Program.pans;
                 time = 7;
                 timer.setTimer(time);
 
-            case "mixed":
+            case "4":
                 program = Program.mixed;
                 time = 8;
                 timer.setTimer(time);
