@@ -217,4 +217,14 @@ class Dishwasher implements IDishwasher {
             }
         }
     }
+
+    public String toString() {
+        if (timer.isRunning()) {
+            return "The dishwasher is on and running.";
+        }
+
+        else {
+            return "The dishwasher is on.";
+        }
+    }
 }

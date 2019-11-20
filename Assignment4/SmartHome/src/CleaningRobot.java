@@ -204,4 +204,9 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
             }
         }
     }
+
+    public String toString() {
+        //TODO
+        return "";
+    }
 }

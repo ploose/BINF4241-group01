@@ -109,4 +109,13 @@ public class Microwave implements IMicrowave {
         }
     }
 
+    public String toString() {
+        if (timer.isRunning()) {
+            return "The microwave is on and running.";
+        }
+
+        else {
+            return "The microwave is on.";
+        }
     }
+}

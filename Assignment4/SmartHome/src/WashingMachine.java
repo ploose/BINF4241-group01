@@ -215,4 +215,14 @@ class WashingMachine implements IWashingMachine {
             }
         }
     }
+
+    public String toString() {
+        if (timer.isRunning()) {
+            return "The washing machine is on and running.";
+        }
+
+        else {
+            return "The washing machine is on.";
+        }
+    }
 }

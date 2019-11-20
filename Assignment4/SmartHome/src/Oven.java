@@ -138,6 +138,15 @@ public class Oven implements IOven{
                     execute();
             }
         }
-        //TODO
+    }
+
+    public String toString() {
+        if (timer.isRunning()) {
+            return "The oven is on and running.";
+        }
+
+        else {
+            return "The oven is on.";
+        }
     }
 }
