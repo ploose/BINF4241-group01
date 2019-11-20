@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Dishwasher implements IDishwasher, Command {
+class Dishwasher implements IDishwasher {
     private boolean isOn;
     private int time;
     private Program program;
@@ -207,7 +207,7 @@ class Dishwasher implements IDishwasher, Command {
                     break;
 
                 case "5":
-                    System.out.println("Returning to main menu. \n");
+                    System.out.println("Returning to dishwasher page. \n");
                     break;
 
                 default:
