@@ -10,8 +10,10 @@ public class Smartphone {
     private Command[] commands;
     private ArrayList<Command> turnedOn;
     private Scanner input;
+    private boolean isRunning;
 
     private Smartphone() {
+        isRunning = true;
         getInstances();
 
         commands = new Command[5];
@@ -47,7 +49,7 @@ public class Smartphone {
             Thread.sleep(2000);
         } catch (InterruptedException ignored) {}
 
-        for (;;) {
+        while (huawei.isRunning) {
             System.out.println("This is the main page. You have the following options: ");
             System.out.print("-Open cleaning robot page (1) \n -Open dishwasher page (2) \n -Open Microwave page (3)" +
                     " \n " + "-Open oven page (4) \n -Open washing machine page (5) \n -See all active smart devices " +
@@ -81,6 +83,7 @@ public class Smartphone {
                     break;
 
                 case "7":
+                    huawei.isRunning = false;
                     break;
 
                 default:
