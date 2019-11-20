@@ -97,21 +97,25 @@ class Dishwasher implements IDishwasher, Command {
                 program = Program.glasses;
                 time = 5;
                 timer.setTimer(time);
+                break;
 
             case "2":
                 program = Program.plates;
                 time = 6;
                 timer.setTimer(time);
+                break;
 
             case "3":
                 program = Program.pans;
                 time = 7;
                 timer.setTimer(time);
+                break;
 
             case "4":
                 program = Program.mixed;
                 time = 8;
                 timer.setTimer(time);
+                break;
 
             default:
                 System.out.println("Wrong input. \n");
@@ -185,25 +189,31 @@ class Dishwasher implements IDishwasher, Command {
                     }
 
                     execute();
+                    break;
 
                 case "2":
                     chooseProgram();
                     execute();
+                    break;
 
                 case "3":
                     start();
                     execute();
+                    break;
 
                 case "4":
                     stop();
                     execute();
+                    break;
 
                 case "5":
                     System.out.println("Returning to main menu. \n");
+                    break;
 
                 default:
                     System.out.println("Wrong Input \n");
                     execute();
+                    break;
             }
         }
     }
