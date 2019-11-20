@@ -85,27 +85,30 @@ class Dishwasher implements IDishwasher, Command {
     @Override
     public void chooseProgram() {
         System.out.println("You can choose between the following programs:");
-        System.out.print("-glasses \n -plates \n -pans \n -mixed");
+        System.out.print("-glasses (1) \n" +
+                "-plates (2) \n" +
+                "-pans (3) \n" +
+                "-mixed (4) \n");
 
         String decision = input.next();
 
         switch (decision) {
-            case "glasses\n":
+            case "1":
                 program = Program.glasses;
                 time = 5;
                 timer.setTimer(time);
 
-            case "plates":
+            case "2":
                 program = Program.plates;
                 time = 6;
                 timer.setTimer(time);
 
-            case "pans":
+            case "3":
                 program = Program.pans;
                 time = 7;
                 timer.setTimer(time);
 
-            case "mixed":
+            case "4":
                 program = Program.mixed;
                 time = 8;
                 timer.setTimer(time);
@@ -119,15 +122,15 @@ class Dishwasher implements IDishwasher, Command {
     @Override
     public void start() {
         if (!isOn) {
-            System.out.println("You first need to start the dishwasher.");
+            System.out.println("You first need to start the dishwasher. \n");
         }
 
         else if (program == null) {
-            System.out.println("You first need to choose a program");
+            System.out.println("You first need to choose a program. \n");
         }
 
         else if (timer.isRunning()) {
-            System.out.println("The dishwasher has already started.");
+            System.out.println("The dishwasher has already started. \n");
         }
 
         else {
@@ -141,11 +144,11 @@ class Dishwasher implements IDishwasher, Command {
     @Override
     public void stop() {
         if (!isOn) {
-            System.out.println("The dishwasher is not on.");
+            System.out.println("The dishwasher is not on. \n");
         }
 
         else if (!timer.isRunning()) {
-            System.out.println("The dishwasher is not running.");
+            System.out.println("The dishwasher is not running. \n");
         }
 
         else {
@@ -160,13 +163,16 @@ class Dishwasher implements IDishwasher, Command {
     @Override
     public void execute() {
         if (!isOn) {
-            System.out.println("The device is turned off.");
+            System.out.println("The device is turned off. \n");
         }
 
         else {
             System.out.println("You can choose following functions: ");
-            System.out.print("-get timer (1) \n -choose program (2) \n -start (3) \n");
-            System.out.print("-stop (4) \n -exit (5)");
+            System.out.print("-get timer (1) \n" +
+                    "-choose program (2) \n" +
+                    "-start (3) \n" +
+                    "-stop (4) \n" +
+                    "-exit (5) \n");
 
             String decision = input.next();
 
@@ -175,7 +181,7 @@ class Dishwasher implements IDishwasher, Command {
                     int duration = getTimer();
 
                     if (duration > 0) {
-                        System.out.println("The device needs " + duration + "s to complete the action.");
+                        System.out.println("The device needs " + duration + "s to complete the action. \n");
                     }
 
                     execute();
@@ -193,10 +199,10 @@ class Dishwasher implements IDishwasher, Command {
                     execute();
 
                 case "5":
-                    System.out.println("Returning to main menu.");
+                    System.out.println("Returning to main menu. \n");
 
                 default:
-                    System.out.println("Wrong Input");
+                    System.out.println("Wrong Input \n");
                     execute();
             }
         }
