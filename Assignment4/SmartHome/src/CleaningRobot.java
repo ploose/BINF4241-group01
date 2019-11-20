@@ -88,15 +88,13 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     //TODO: start() / completeOutstanding() method?
 
     @Override
-    public boolean switchOn() {
+    public void switchOn() {
         if (requiredTime > 0 && battery == 100) {
             turnedOn = true;
-            return true;
         }
 
         else {
             System.out.println("Cleaning Robot has no set timer / is not fully charged!");
-            return false;
         }
     }
 
@@ -153,9 +151,8 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     }
 
     @Override
-    public boolean switchOff() {
+    public void switchOff() {
         turnedOn = false;
-        return true;
     }
 
     @Override

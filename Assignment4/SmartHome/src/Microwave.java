@@ -26,6 +26,7 @@ public class Microwave implements IMicrowave {
     @Override
     public void switchOn(){
         turnedOn = true;
+        System.out.println("Switching on");
     }
 
     public void setTimer(int timeInSeconds){
