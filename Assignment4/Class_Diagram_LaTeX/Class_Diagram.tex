@@ -25,7 +25,7 @@
 
 
 % ==Smart-Devices==
-\begin{umlpackage}[y=-10]{Smart-Devices}
+\begin{umlpackage}[y=-12]{Smart-Devices}
 
 % --Cleaning Robot--
 \umlclass{CleaningRobot}
@@ -48,7 +48,7 @@
     +checkProgress(): double \\
     +checkBattery(): int \\
     +interruptProgram(): void \\
-    +execute(): void
+    +execute(): void \\
     ...
     %-CleaningRobot()
 }
@@ -72,7 +72,7 @@
     -chooseProgram(): void \\
     +start(): void \\
     +stop(): void \\
-    +execute(): void
+    +execute(): void \\
     ...
     %-Dishwasher()
 }
@@ -125,7 +125,7 @@
     -time: int \\
     -temperature: int \\
     -program: Program \\
-    -timer: TimerThread 
+    -timer: TimerThread \\
     ...
     %-input: Scanner \\
     %-uniqueInstance: WashingMachine
@@ -138,7 +138,7 @@
     -getTimer(): int \\
     -chooseProgram(): void \\
     -start(): void \\
-    +execute(): void
+    +execute(): void \\
     ...
     %-WashingMachine()
 }
@@ -153,12 +153,12 @@
     -cleaningRobot: CleaningRobot \\
     -dishwasher: Dishwasher \\
     -microwave: Microwave \\
-    -oven: oven \\
+    -oven: Oven \\
     -washingMachine: WashingMachine \\
     -command: Comand[] 
 }{  %class-scope operations
     -getInstances(): void \\
-    -fillSlots(): void
+    -fillSlots(): void \\
     ...
     %-Smartphone()
 }
@@ -167,33 +167,31 @@
 
 % ==Interfaces ==
 
-\begin{umlpackage}[]{Interface}
+\begin{umlpackage}[y=0, x=9]{Interfaces}
 % --Command interface--
-\umlinterface[x=15]{Command}{
+\umlinterface[x=14]{Command}{
 execute() : void \\ switchOn() : void \\ switchOff() : void
 }{}
-\begin{comment}
 % Robot interface
-\umlinterface[y=-5]{ICleaningRobot}{ 
+\umlinterface[y=-4.5]{ICleaningRobot}{ 
 setTimer(timeInSeconds: int) : void \\ checkProgress() : double \\ checkBattery() : int \\ interruptProgram() : void
 }{}
 % Dishwasher interface
-\umlinterface[y=-5]{Dishwasher}{ 
+\umlinterface[x=5.5, y=-4.5]{IDishwasher}{ 
 getTimer() : int \\ chooseProgram() : void \\ start() : void \\ stop() : void
 }{}
 % Microwave interface
-\umlinterface[y=-5]{IMicrowave}{ 
+\umlinterface[x=11.4, y=-4.5]{IMicrowave}{ 
 setTimer(timeInSeconds: int) : void \\ setTemperature(temperature: int) : void \\ startBaking() : void \\ checkTimer() : int \\ interruptProgramm() : void
 }{}
 % Oven interface
-\umlinterface[y=-5]{IOVen}{ 
+\umlinterface[x=18.5, y=-4.5]{IOven}{ 
 setTimer(timeInSeconds: int) : void \\ setTemperature(temperature: int) : void \\ setProgram() : void  \\ startCooking() : void \\ checkTimer() : int \\ interruptProgramm() : void
 }{}
 % Washingmachine interface
-\umlinterface[y=-5]{IWashingMachine}{ 
+\umlinterface[x=25.5, y=-4.5]{IWashingMachine}{ 
 setTemperature(temperature: int) : void \\ getTimer() : int \\ chooseProgram(Scanner input) : void \\ start() : void
 }{}
-\end{comment}
 \end{umlpackage}
 
 
@@ -211,12 +209,20 @@ setTemperature(temperature: int) : void \\ getTimer() : int \\ chooseProgram(Sca
 
 % Smart-Devices to Smartphone
 
-% Smart-Devices to Interface
-\umlimpl[anchor1=90]{CleaningRobot}{Command}
-\umlimpl[anchor1=90]{Dishwasher}{Command}
-\umlimpl[anchor1=90]{Microwave}{Command}
-\umlimpl[anchor1=90]{Oven}{Command}
-\umlimpl[anchor1=90]{WashingMachine}{Command}
+% Specific interfaces to command interface
+\umlinherit[anchor1=90]{ICleaningRobot}{Command}
+\umlinherit[anchor1=90]{IDishwasher}{Command}
+\umlinherit[anchor1=90]{IMicrowave}{Command}
+\umlinherit[anchor1=90]{IOven}{Command}
+\umlinherit[anchor1=90]{IWashingMachine}{Command}
+
+
+% Smart-Devices to specific interfaces
+\umlimpl[anchor1=90]{CleaningRobot}{ICleaningRobot}
+\umlimpl[anchor1=90]{Dishwasher}{IDishwasher}
+\umlimpl[anchor1=90]{Microwave}{IMicrowave}
+\umlimpl[anchor1=90]{Oven}{IOven}
+\umlimpl[anchor1=90]{WashingMachine}{IWashingMachine}
 
 \end{tikzpicture}
 \end{adjustbox}
