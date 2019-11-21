@@ -1,7 +1,7 @@
 public interface IMicrowave extends Command {
     void setTimer(int timeInSeconds);
     void setTemperature(int temperature);
-    void startBaking();
-    int checkTimer();
+    int getTimer();
+    void start();
     void interruptProgram();
 }

@@ -146,7 +146,7 @@ class Dishwasher implements IDishwasher {
     }
 
     @Override
-    public void stop() {
+    public void interruptProgram() {
         if (!isOn) {
             System.out.println("The dishwasher is not on. \n");
         }
@@ -202,7 +202,7 @@ class Dishwasher implements IDishwasher {
                     break;
 
                 case "4":
-                    stop();
+                    interruptProgram();
                     execute();
                     break;
 

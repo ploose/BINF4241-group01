@@ -52,7 +52,7 @@ public class Oven implements IOven{
         this.temperature = temperature;
     }
 
-    public void setProgram(){   //TODO
+    public void chooseProgram(){   //TODO
         System.out.println("You can choose between the following programs:");
         System.out.print("-ventilated (1)\n -grill (2)\n-reheat (3)\n");
 
@@ -79,13 +79,13 @@ public class Oven implements IOven{
 
             default:
                 System.out.println("Wrong input.");
-                setProgram();
+                chooseProgram();
                 break;
         }
 
     }
 
-    public void startCooking(){
+    public void start(){
 
         if (timer.getTime() == 0) {
             System.out.println("Set the timer first. \n");
@@ -104,7 +104,7 @@ public class Oven implements IOven{
         cooking = false;
     }
 
-    public int checkTimer(){
+    public int getTimer(){
         return timer.getTime();
     }
 
@@ -138,7 +138,7 @@ public class Oven implements IOven{
                     setTemperature(input.nextInt());
                     break;
                 case "2":
-                    int duration = checkTimer();
+                    int duration = getTimer();
 
                     if (duration > 0) {
                         System.out.println("The device needs " + duration + "s to complete the action.");
@@ -149,10 +149,10 @@ public class Oven implements IOven{
                     break;
 
                 case "3":
-                    setProgram();
+                    chooseProgram();
                     break;
                 case "4":
-                    startCooking();
+                    start();
                     break;
                 case "5":
                     System.out.println("Returning to main menu.");

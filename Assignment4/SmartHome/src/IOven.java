@@ -1,8 +1,8 @@
 public interface IOven extends Command{
     void setTimer(int time);
     void setTemperature(int temperature);
-    void setProgram();
-    void startCooking();
-    int checkTimer();
+    void chooseProgram();
+    void start();
+    int getTimer();
     void interruptProgram();
 }

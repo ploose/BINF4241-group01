@@ -1,4 +1,3 @@
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CleaningRobot implements ICleaningRobot, Runnable {
@@ -119,7 +118,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     }
 
     @Override
-    public double checkProgress() {
+    public double getProgress() {
         synchronized (lock) {
             if (requiredTime == 0) {
                 return 1;
@@ -136,7 +135,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     }
 
     @Override
-    public int checkBattery() {
+    public int getBattery() {
         synchronized (lock) {
             if (turnedOn) {
                 int tmp = battery;
@@ -204,16 +203,16 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                     execute();
 
                 case "3":
-                    double progress = checkProgress();
+                    double progress = getProgress();
 
-                    if (checkProgress() >= 0) {
+                    if (getProgress() >= 0) {
                         System.out.println("The robot has completed " + (progress * 100) + "% of the cleaning.");
                     }
 
                     execute();
 
                 case "4":
-                    System.out.println("The robot has " + checkBattery() + "% remaining battery charge.");
+                    System.out.println("The robot has " + getBattery() + "% remaining battery charge.");
                     execute();
 
                 case "5":

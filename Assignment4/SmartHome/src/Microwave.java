@@ -47,7 +47,7 @@ public class Microwave implements IMicrowave {
     }
 
     @Override
-    public void startBaking(){
+    public void start(){
         if (timer.getTime() == 0) {
             System.out.println("Set the timer first. \n");
             execute();
@@ -67,7 +67,7 @@ public class Microwave implements IMicrowave {
     }
 
     @Override
-    public int checkTimer(){
+    public int getTimer(){
         return timer.getTime();
     }
 
@@ -104,7 +104,7 @@ public class Microwave implements IMicrowave {
                     break;
 
                 case "2":
-                    int duration = checkTimer();
+                    int duration = getTimer();
 
                     if (duration > 0) {
                         System.out.println("The device needs " + duration + "s to complete the action.");
@@ -121,7 +121,7 @@ public class Microwave implements IMicrowave {
                     break;
 
                 case "4":
-                    startBaking();
+                    start();
                     break;
 
                 case "5":
