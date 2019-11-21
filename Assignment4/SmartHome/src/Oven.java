@@ -54,24 +54,24 @@ public class Oven implements IOven{
 
     public void setProgram(){   //TODO
         System.out.println("You can choose between the following programs:");
-        System.out.print("-ventilated\n -grill\n-reheat\n");
+        System.out.print("-ventilated (1)\n -grill (2)\n-reheat (3)\n");
 
         String decision = input.next();
 
         switch (decision) {
-            case "ventilated":
+            case "1":
                 program = Program.ventilated;
                 time = 5;
                 timer.setTimer(time);
                 break;
 
-            case "grill":
+            case "2":
                 program = Program.grill;
                 time = 6;
                 timer.setTimer(time);
                 break;
 
-            case "reheat":
+            case "3":
                 program = Program.reheat;
                 time = 7;
                 timer.setTimer(time);
