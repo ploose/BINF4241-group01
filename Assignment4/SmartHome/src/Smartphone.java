@@ -39,18 +39,25 @@ public class Smartphone {
     }
 
     public static void main(String[] args) {
-        Smartphone huawei = new Smartphone();
+        Smartphone nokia3310 = new Smartphone();
 
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
         System.out.println("The app is starting. \n" +
                 "Please wait. \n");
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ignored) {}
+        for (int i = 0; i < 5; i++) {
+            try {
+                Thread.sleep(500);
+                System.out.print(".");
+            } catch (InterruptedException ignored) { }
+        }
 
-        huawei.mainPage();
+        System.out.print("\n");
+
+        nokia3310.mainPage();
+
+        System.out.println("System disconnecting.");
     }
 
     void mainPage() {
@@ -96,6 +103,7 @@ public class Smartphone {
 
                 default:
                     System.out.println("Wrong input. \n");
+                    break;
             }
         }
     }
