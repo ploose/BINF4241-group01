@@ -53,7 +53,7 @@ public class Smartphone {
             } catch (InterruptedException ignored) { }
         }
 
-        System.out.print("\n");
+        System.out.println("\n");
 
         nokia3310.mainPage();
 
