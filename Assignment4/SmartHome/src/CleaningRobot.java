@@ -187,14 +187,14 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         } else {
             System.out.println("You can choose following functions: ");
             System.out.print("- start(1) \n- set timer (2) \n- check progress (3) \n- check battery (4) \n");
-            System.out.print("- reset (5) \n -exit (6)");
+            System.out.print("- reset (5) \n- exit (6)");
 
             String decision = input.next();
 
             switch (decision) {
                 case "1":
                     if (start()) {
-                        System.out.print("Robot started.");
+                        System.out.print("Robot started. ");
                     }
                     execute();
 
