@@ -58,7 +58,7 @@ class Dishwasher implements IDishwasher {
 
     @Override
     public int getTimer() {
-        if (time == 0) {
+        if (timer.getTime() == 0) {
             System.out.println("The program has already terminated.");
             return time;
         }
@@ -141,7 +141,7 @@ class Dishwasher implements IDishwasher {
             Thread runner = new Thread(timer);
             runner.start();
 
-            time = 0;
+
         }
     }
 
