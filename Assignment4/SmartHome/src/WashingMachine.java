@@ -76,7 +76,7 @@ class WashingMachine implements IWashingMachine {
 
     @Override
     public int getTimer() {
-        if (time == 0) {
+        if (timer.getTime() == 0) {
             System.out.println("The program has already terminated. \n");
             return time;
         }
