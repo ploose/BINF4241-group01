@@ -61,13 +61,13 @@ public class Smartphone {
     void mainPage() {
         for (;;) {
             System.out.println("This is the main page. You have the following options: ");
-            System.out.print("-Open cleaning robot page (1) \n" +
-                    "-Open dishwasher page (2) \n" +
-                    "-Open microwave page (3) \n" +
-                    "-Open oven page (4) \n" +
-                    "-Open washing machine page (5) \n" +
-                    "-See all active smart devices (6) \n" +
-                    "-Close app (7) \n");
+            System.out.print("- Open cleaning robot page (1) \n" +
+                    "- Open dishwasher page (2) \n" +
+                    "- Open microwave page (3) \n" +
+                    "- Open oven page (4) \n" +
+                    "- Open washing machine page (5) \n" +
+                    //"- See all active smart devices (6) \n" +
+                    "- Close app (6) \n");
 
             String decision = this.input.next();
 
@@ -97,11 +97,11 @@ public class Smartphone {
                     //this.openWashingMachinePage();
                     break;
 
-                case "6":
-                    this.listAllTurnedOnDevices();
-                    break;
+//                case "6":
+//                    this.listAllTurnedOnDevices();
+//                    break;
 
-                case "7":
+                case "6":
                     System.out.println("System disconnecting.");
                     System.exit(0);
 
@@ -394,6 +394,8 @@ public class Smartphone {
         }
     }
 */
+
+    // TODO: Do we really need this feature?
     private void listAllTurnedOnDevices() {
         for (Command elem : turnedOn) {
             System.out.println(elem.toString());

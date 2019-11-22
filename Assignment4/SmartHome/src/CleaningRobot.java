@@ -1,7 +1,8 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CleaningRobot implements ICleaningRobot, Runnable {
-    private boolean turnedOn = false, isCleaning = false;
+    private boolean turnedOn = true, isCleaning = false;
     private double requiredTime = 0, elapsedTime = 0;
     private int battery = 100;
     private final int chargeCycle = 100, dischargeCycle = 500;
@@ -35,15 +36,6 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     public void run() {
         for (; ; ) {
             if (turnedOn) {
-                // System.out.print(".");
-
-                // shouldn't do this automatically!
-//                if (battery == 100 && elapsedTime < requiredTime) { // restart if charged but not finished
-//                    synchronized (lock) {
-//                        isCleaning = true;
-//                    }
-//                } else if ....
-
                 if (elapsedTime >= requiredTime) { // go back to charging station when done
                     synchronized (lock) {
                         isCleaning = false;
@@ -109,11 +101,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
             if (requiredTime == 0) {
                 return 1;
             } else if (turnedOn) {
-                double progress = elapsedTime / requiredTime;
-
-                int temp = (int) (progress * 100.0);
-                return ((double) temp) / 100.0;
-
+                return elapsedTime / requiredTime;
             }
 
             return -1; // TODO: check turnedOn in phone?
@@ -237,33 +225,40 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                     System.out.println("Robot started. ");
                 }
                 //execute();
+                break;
 
             case "set timer":
                 System.out.print("Choose a time: ");
                 setTimer(input.nextInt());
                 //execute();
+                break;
 
             case "get progress":
-                double progress = getProgress();
+                double percentage = getProgress()*100;
+                DecimalFormat df = new DecimalFormat("#.##"); // trim to 2 decimal places
+                percentage = Double.parseDouble(df.format(percentage));
 
                 if (getProgress() >= 0) {
-                    System.out.println("The robot has completed " + (progress * 100) + "% of the cleaning.");
+                    System.out.println("The robot has completed " + (percentage) + "% of the cleaning.");
                 }
-
+                break;
                 //execute();
 
             case "get battery":
                 System.out.println("The robot has " + getBattery() + "% remaining battery charge.");
                 //execute();
+                break;
 
             case "stop":
                 interruptProgram();
                 System.out.println("The program has been interrupted & reset. Robot is returning to station.");
                 //execute();
+                break;
 
             default:
                 System.out.println("Wrong Input");
                 //execute();
+
         }
         return null;
     }
