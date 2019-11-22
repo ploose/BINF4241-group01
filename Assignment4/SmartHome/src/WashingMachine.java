@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 class WashingMachine implements IWashingMachine {
+    enum Program {
+        rinse,
+        intense,
+        quick,
+        spin
+    }
+
     private boolean turnedOn;
     private int time, temperature;
     private Program program;
@@ -171,6 +178,34 @@ class WashingMachine implements IWashingMachine {
                 break;
 
             case "choose program":
+                return new String[]{"rinse", "intense", "quick", "spin"};
+
+            case "rinse":
+                System.out.println("Set program to rinse.");
+                program = Program.rinse;
+                time = 5;
+                timer.setTimer(time);
+                break;
+
+            case "intense":
+                System.out.println("Set program to intense.");
+                program = Program.intense;
+                time = 6;
+                timer.setTimer(time);
+                break;
+
+            case "quick":
+                System.out.println("Set program to quick.");
+                program = Program.quick;
+                time = 7;
+                timer.setTimer(time);
+                break;
+
+            case "spin":
+                System.out.println("Set program to spin.");
+                program = Program.spin;
+                time = 8;
+                timer.setTimer(time);
                 break;
 
             case "start":

@@ -1,11 +1,17 @@
 import java.util.Scanner;
 
 class Dishwasher implements IDishwasher {
+    enum Program {
+        glasses,
+        plates,
+        pans,
+        mixed,
+    }
+
     private boolean turnedOn;
     private int time;
     private Program program;
     private TimerThread timer;
-    private Scanner input;
     private static Dishwasher uniqueInstance;
     private String[] optionsOn = {"start", "switch off", "get timer", "choose program", "stop"};
     private String[] optionsOff = {"switch on"};
@@ -13,7 +19,6 @@ class Dishwasher implements IDishwasher {
     private Dishwasher() {
         turnedOn = false;
         program = null;
-        input = new Scanner(System.in);
         timer = new TimerThread(0);
     }
 
@@ -137,7 +142,7 @@ class Dishwasher implements IDishwasher {
 
             case "choose program":
                 return new String[]{"glasses", "plates", "pans", "mixed"};
-            //execute();
+
             case "glasses":
                 System.out.println("Set program to ventilated.");
                 program = Program.glasses;
@@ -178,7 +183,7 @@ class Dishwasher implements IDishwasher {
 
     @Override
     public boolean isActive() {
-        if(turnedOn){
+        if (turnedOn) {
             return true;
         }
         return false;

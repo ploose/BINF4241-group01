@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Microwave implements IMicrowave {
     private boolean turnedOn, baking;
     private int temperature;
-    private int time = 0;
     private TimerThread timer;
     private Scanner input;
 
@@ -51,12 +50,10 @@ public class Microwave implements IMicrowave {
     public void start(){
         if (timer.getTime() == 0) {
             System.out.println("Set the timer first. \n");
-            //execute();
             return;
         }
         else if (!turnedOn) {
             System.out.println("The microwave is off. \n");
-            //execute();
             return;
         }
 
@@ -80,7 +77,7 @@ public class Microwave implements IMicrowave {
         if (baking && turnedOn) {
             System.out.println("Program interrupted.");
             baking = false;
-            time = 0;
+            timer = new TimerThread(0);
             temperature = 0;
         }else{
             System.out.println("Microwave is not in operation.");

@@ -4,12 +4,10 @@ public class Oven implements IOven {
 
     private boolean turnedOn;
     private int temperature;
-    private Program program;
     private boolean cooking;
     private TimerThread timer;
     private Scanner input;
-    int time;
-    //private String[] options = {"switch on", "switch off", "set temperature", "get timer", "choose program", "start", "exit"};
+
     private String[] optionsOn = {"switch off", "set timer", "set temperature", "get timer", "choose program", "start", "stop"};
     private String[] optionsOff = {"switch on"};
 
@@ -17,7 +15,6 @@ public class Oven implements IOven {
     private static Oven uniqueInstance;
 
     private Oven() {
-        program = null;
         temperature = 0;
         turnedOn = false;
         cooking = false;
@@ -76,7 +73,6 @@ public class Oven implements IOven {
     public void interruptProgram() {
         if (cooking && turnedOn == true) {
             cooking = false;
-            program = null;
             System.out.println("Interrupted oven.");
         }
 
@@ -169,23 +165,17 @@ public class Oven implements IOven {
 
             case "ventilated":
                 System.out.println("Set program to ventilated.");
-                program = Program.ventilated;
-                time = 5;
-                timer.setTimer(time);
+                timer.setTimer(5);
                 break;
 
             case "grill":
                 System.out.println("Set program to grill.");
-                program = Program.grill;
-                time = 6;
-                timer.setTimer(time);
+                timer.setTimer(6);
                 break;
 
             case "reheat":
                 System.out.println("Set program to reheat.");
-                program = Program.reheat;
-                time = 7;
-                timer.setTimer(time);
+                timer.setTimer(7);
                 break;
 
             default:
