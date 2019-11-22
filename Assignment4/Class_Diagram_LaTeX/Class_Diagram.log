@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.23)  22 NOV 2019 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.23)  22 NOV 2019 14:09
 entering extended mode
 **./Class_Diagram.tex
 (Class_Diagram.tex
@@ -831,10 +831,10 @@ Missing character: There is no s in font nullfont!
 {C:/Users/pmarty/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 (Class_Diagram.aux) ) 
 Here is how much of TeX's memory you used:
- 18018 strings out of 492972
- 391397 string characters out of 3135880
+ 18017 strings out of 492972
+ 391375 string characters out of 3135880
  615524 words of memory out of 3000000
- 21529 multiletter control sequences out of 15000+200000
+ 21528 multiletter control sequences out of 15000+200000
  12667 words of font info for 33 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,11n,84p,481b,1095s stack positions out of 5000i,500n,10000p,200000b,50000s

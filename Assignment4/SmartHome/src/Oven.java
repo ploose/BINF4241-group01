@@ -10,7 +10,7 @@ public class Oven implements IOven {
     private Scanner input;
     int time;
     //private String[] options = {"switch on", "switch off", "set temperature", "get timer", "choose program", "start", "exit"};
-    private String[] optionsOn = {"switch off", "set temperature", "get timer", "choose program", "start", "stop"};
+    private String[] optionsOn = {"switch off", "set timer", "set temperature", "get timer", "choose program", "start", "stop"};
     private String[] optionsOff = {"switch on"};
 
 
@@ -42,8 +42,8 @@ public class Oven implements IOven {
         }
     }
 
-    public void setTimer(int timeInSeconds) {
-        timer = new TimerThread(timeInSeconds);
+    public void setTimer(int time) {
+        timer = new TimerThread(time);
 
     }
 
@@ -51,48 +51,13 @@ public class Oven implements IOven {
         this.temperature = temperature;
     }
 
-    public void chooseProgram() {   //TODO
-        System.out.println("You can choose between the following programs:");
-        System.out.print("-ventilated (1)\n -grill (2)\n-reheat (3)\n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                program = Program.ventilated;
-                time = 5;
-                timer.setTimer(time);
-                break;
-
-            case "2":
-                program = Program.grill;
-                time = 6;
-                timer.setTimer(time);
-                break;
-
-            case "3":
-                program = Program.reheat;
-                time = 7;
-                timer.setTimer(time);
-                break;
-
-            default:
-                System.out.println("Wrong input.");
-                chooseProgram();
-                break;
-        }
-
-    }
-
     public void start() {
 
         if (timer.getTime() == 0) {
             System.out.println("Set the timer first. \n");
-            //execute();
             return;
         } else if (!turnedOn) {
             System.out.println("The oven is off. \n");
-            //execute();
             return;
         } else if (temperature == 0) {
             System.out.println("There is no temperature set.");
@@ -123,52 +88,6 @@ public class Oven implements IOven {
         return true;
     }
 
-    /*
-    public void execute() {
-        if (!turnedOn) {
-            System.out.println("The device is turned off.");
-        } else {
-            System.out.println("You can choose following functions: ");
-            System.out.print("-set temperature (1) \n-get timer (2) \n-choose program (3) \n");
-            System.out.print("-start (4) \n-exit (5) \n");
-
-            String decision = input.next();
-
-            switch (decision) {
-                case "1":
-                    System.out.print("Choose a temperature: ");
-                    setTemperature(input.nextInt());
-                    break;
-                case "2":
-                    int duration = getTimer();
-
-                    if (duration > 0) {
-                        System.out.println("The device needs " + duration + "s to complete the action.");
-                    } else {
-                        System.out.println("The timer is not set.");
-                    }
-                    break;
-
-                case "3":
-                    chooseProgram();
-                    break;
-                case "4":
-                    start();
-                    break;
-                case "5":
-                    System.out.println("Returning to main menu.");
-                    huawei.mainPage();
-                    break;
-                default:
-                    System.out.println("Wrong Input");
-                    execute();
-                    break;
-            }
-        }
-    }
-
-     */
-
     public String[] getOptions() {
         if(turnedOn){
             return optionsOn;
@@ -197,6 +116,15 @@ public class Oven implements IOven {
                 switchOff();
                 break;
 
+            case "set timer":
+                if (!turnedOn) {
+                    System.out.println("The device is turned off.");
+                    break;
+                }
+                System.out.print("Choose a time: ");
+                setTimer(input.nextInt());
+                break;
+
             case "set temperature":
                 if (!turnedOn) {
                     System.out.println("The device is turned off.");
@@ -205,6 +133,7 @@ public class Oven implements IOven {
                 System.out.print("Choose a temperature: ");
                 setTemperature(input.nextInt());
                 break;
+
             case "get timer":
                 if (!turnedOn) {
                     System.out.println("The device is turned off.");
@@ -225,8 +154,7 @@ public class Oven implements IOven {
                     break;
                 }
                 return new String[] {"ventilated", "grill", "reheat"};
-                //chooseProgram();
-                //break;
+
             case "start":
                 if (!turnedOn) {
                     System.out.println("The device is turned off.");
@@ -234,30 +162,34 @@ public class Oven implements IOven {
                 }
                 start();
                 break;
+
             case "stop":
                 interruptProgram();
                 break;
+
             case "ventilated":
                 System.out.println("Set program to ventilated.");
                 program = Program.ventilated;
                 time = 5;
                 timer.setTimer(time);
                 break;
+
             case "grill":
                 System.out.println("Set program to grill.");
                 program = Program.grill;
                 time = 6;
                 timer.setTimer(time);
                 break;
+
             case "reheat":
                 System.out.println("Set program to reheat.");
                 program = Program.reheat;
                 time = 7;
                 timer.setTimer(time);
                 break;
+
             default:
                 System.out.println("Wrong Input");
-                //execute();
                 break;
         }
 

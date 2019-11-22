@@ -58,7 +58,7 @@ public class Smartphone {
         nokia3310.mainPage();
     }
 
-    void mainPage() {
+    private void mainPage() {
         for (;;) {
             System.out.println("This is the main page. You have the following options: ");
             System.out.print("- Open cleaning robot page (1) \n" +

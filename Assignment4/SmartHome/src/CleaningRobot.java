@@ -82,10 +82,10 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     }
 
     @Override
-    public void setTimer(int timeInSeconds) {
+    public void setTimer(int time) {
         synchronized (lock) {
             if (!isCleaning) { // TODO: should it be possible to alter time while in base?
-                this.requiredTime = timeInSeconds;
+                this.requiredTime = time;
                 this.elapsedTime = 0;
             } else {
                 System.out.println("Can't set timer while cleaning!");
@@ -153,64 +153,6 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         }
     }
 
-
-    /*
-    public void execute() {
-
-        if (!turnedOn) {
-            System.out.println("The device is turned off.");
-        } else {
-            System.out.println("You can choose following functions: ");
-            System.out.print("- start(1) \n- set timer (2) \n- check progress (3) \n- check battery (4) \n");
-            System.out.println("- reset (5) \n- exit (6)");
-
-            String decision = input.next();
-
-            switch (decision) {
-                case "1":
-                    if (start()) {
-                        System.out.println("Robot started. ");
-                    }
-                    execute();
-
-                case "2":
-                    System.out.print("Choose a time: ");
-                    setTimer(input.nextInt());
-                    execute();
-
-                case "3":
-                    double progress = getProgress();
-
-                    if (getProgress() >= 0) {
-                        System.out.println("The robot has completed " + (progress * 100) + "% of the cleaning.");
-                    }
-
-                    execute();
-
-                case "4":
-                    System.out.println("The robot has " + getBattery() + "% remaining battery charge.");
-                    execute();
-
-                case "5":
-                    interruptProgram();
-                    System.out.println("The program has been interrupted & reset. Robot is returning to station.");
-                    execute();
-
-                case "6":
-                    System.out.println("Returning to main menu.");
-                    huawei.mainPage();
-
-
-                default:
-                    System.out.println("Wrong Input");
-                    execute();
-            }
-
-        }
-    }
-
-     */
-
     public String[] getOptions(){
         return optionsOn;
     }
@@ -222,13 +164,11 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                 if (start()) {
                     System.out.println("Robot started. ");
                 }
-                //execute();
                 break;
 
             case "set timer":
                 System.out.print("Choose a time: ");
                 setTimer(input.nextInt());
-                //execute();
                 break;
 
             case "get progress":
@@ -240,22 +180,18 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                     System.out.println("The robot has completed " + (percentage) + "% of the cleaning.");
                 }
                 break;
-                //execute();
 
             case "get battery":
                 System.out.println("The robot has " + getBattery() + "% remaining battery charge.");
-                //execute();
                 break;
 
             case "stop":
                 interruptProgram();
                 System.out.println("The program has been interrupted & reset. Robot is returning to station.");
-                //execute();
                 break;
 
             default:
                 System.out.println("Wrong Input");
-                //execute();
 
         }
         return null;

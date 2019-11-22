@@ -102,48 +102,6 @@ class WashingMachine implements IWashingMachine {
     }
 
     @Override
-    public void chooseProgram() {
-        System.out.println("You can choose between the following programs:");
-        System.out.print("-double rinse (1)\n" +
-                "-intense (2)\n" +
-                "-quick (3)\n" +
-                "-spin (4)\n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                program = Program.rinse;
-                time = 5;
-                timer.setTimer(time);
-                break;
-
-            case "2":
-                program = Program.intense;
-                time = 6;
-                timer.setTimer(time);
-                break;
-
-            case "3":
-                program = Program.quick;
-                time = 7;
-                timer.setTimer(time);
-                break;
-
-            case "4":
-                program = Program.spin;
-                time = 8;
-                timer.setTimer(time);
-                break;
-
-            default:
-                System.out.println("Wrong input.");
-                chooseProgram();
-                break;
-        }
-    }
-
-    @Override
     public void start() {
         if (!turnedOn) {
             System.out.println("You first need to start the washing machine. \n");
@@ -168,58 +126,6 @@ class WashingMachine implements IWashingMachine {
             time = 0;
         }
     }
-
-    /*
-    @Override
-    public void execute() {
-        if (!isOn) {
-            System.out.println("The device is turned off. \n");
-        }
-
-        else {
-            System.out.println("You can choose following functions: ");
-            System.out.print("-set temperature (1) \n" +
-                    "-get timer (2) \n" +
-                    "-choose program (3) \n" +
-                    "-start (4) \n" +
-                    "-exit (5) \n");
-
-            String decision = input.next();
-
-            switch (decision) {
-                case "1":
-                    System.out.print("Choose a temperature: ");
-                    setTemperature(input.nextInt());
-                    break;
-
-                case "2":
-                    int duration = getTimer();
-
-                    if (duration > 0) {
-                        System.out.println("The device needs " + duration + "s to complete the action. \n");
-                    }
-                    break;
-
-                case "3":
-                    chooseProgram();
-                    break;
-
-                case "4":
-                    start();
-                    break;
-
-                case "5":
-                    System.out.println("Returning to washing machine page. \n");
-                    huawei.mainPage();
-
-                default:
-                    System.out.println("Wrong Input. \n");
-                    execute();
-            }
-        }
-    }
-
-     */
 
     public String toString() {
         if (timer.isRunning()) {
@@ -265,7 +171,6 @@ class WashingMachine implements IWashingMachine {
                 break;
 
             case "choose program":
-                chooseProgram();
                 break;
 
             case "start":
@@ -274,7 +179,6 @@ class WashingMachine implements IWashingMachine {
 
             default:
                 System.out.println("Wrong Input. \n");
-                //execute();
         }
         return null;
     }

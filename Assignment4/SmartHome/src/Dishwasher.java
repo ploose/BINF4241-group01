@@ -69,47 +69,6 @@ class Dishwasher implements IDishwasher {
     }
 
     @Override
-    public void chooseProgram() {
-        System.out.println("You can choose between the following programs:");
-        System.out.print("-glasses (1) \n" +
-                "-plates (2) \n" +
-                "-pans (3) \n" +
-                "-mixed (4) \n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                program = Program.glasses;
-                time = 5;
-                timer.setTimer(time);
-                break;
-
-            case "2":
-                program = Program.plates;
-                time = 6;
-                timer.setTimer(time);
-                break;
-
-            case "3":
-                program = Program.pans;
-                time = 7;
-                timer.setTimer(time);
-                break;
-
-            case "4":
-                program = Program.mixed;
-                time = 8;
-                timer.setTimer(time);
-                break;
-
-            default:
-                System.out.println("Wrong input. \n");
-                chooseProgram();
-        }
-    }
-
-    @Override
     public void start() {
         if (!turnedOn) {
             System.out.println("You first need to start the dishwasher. \n");
@@ -140,62 +99,6 @@ class Dishwasher implements IDishwasher {
         }
     }
 
-    /*
-    public void execute() {
-        if (!turnedOn) {
-            System.out.println("The device is turned off. \n");
-        }
-
-        else {
-            System.out.println("You can choose following functions: ");
-            System.out.print("-get timer (1) \n" +
-                    "-choose program (2) \n" +
-                    "-start (3) \n" +
-                    "-stop (4) \n" +
-                    "-exit (5) \n");
-
-            String decision = input.next();
-
-            switch (decision) {
-                case "1":
-                    int duration = getTimer();
-
-                    if (duration > 0) {
-                        System.out.println("The device needs " + duration + "s to complete the action. \n");
-                    }
-
-                    execute();
-                    break;
-
-                case "2":
-                    chooseProgram();
-                    execute();
-                    break;
-
-                case "3":
-                    start();
-                    execute();
-                    break;
-
-                case "4":
-                    interruptProgram();
-                    execute();
-                    break;
-
-                case "5":
-                    System.out.println("Returning to dishwasher page. \n");
-                    huawei.mainPage();
-
-                default:
-                    System.out.println("Wrong Input \n");
-                    execute();
-                    break;
-            }
-        }
-    }
-
-     */
-
     public String toString() {
         if (timer.isRunning()) {
             return "The dishwasher is on and running.";
@@ -219,12 +122,10 @@ class Dishwasher implements IDishwasher {
 
             case "switch on":
                 switchOn();
-                //execute();
                 break;
 
             case "switch off":
                 switchOff();
-                //execute();
                 break;
             case "get timer":
                 int duration = getTimer();
@@ -232,8 +133,6 @@ class Dishwasher implements IDishwasher {
                 if (duration > 0) {
                     System.out.println("The device needs " + duration + "s to complete the action. \n");
                 }
-
-                //execute();
                 break;
 
             case "choose program":
@@ -263,18 +162,15 @@ class Dishwasher implements IDishwasher {
 
             case "start":
                 start();
-                //execute();
                 break;
 
             case "stop":
                 interruptProgram();
-                //execute();
                 break;
 
 
             default:
                 System.out.println("Wrong Input \n");
-                //execute();
                 break;
         }
         return null;
