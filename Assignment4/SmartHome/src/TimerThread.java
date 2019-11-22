@@ -38,8 +38,6 @@ public class TimerThread implements Runnable {
                 synchronized (lock){
                     --time;
                 }
-                //System.out.print(time);
-                //System.out.println(running);
             }
 
             synchronized (lock){

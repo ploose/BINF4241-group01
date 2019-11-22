@@ -41,10 +41,8 @@ public class Smartphone {
     public static void main(String[] args) {
         Smartphone nokia3310 = new Smartphone();
 
-        System.out.println("CD Project Green Dev Team presents:");
-        System.out.println("The smart home app");
-        System.out.print("The app is starting. \n" +
-                "Please wait");
+        System.out.println("CD Project Group 25 presents: The Smart Home App");
+        System.out.print("The app is starting");
 
         for (int i = 0; i < 5; i++) {
             try {
