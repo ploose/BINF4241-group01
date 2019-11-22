@@ -10,6 +10,9 @@ public class Microwave implements IMicrowave {
     private Smartphone huawei;
     private static Microwave uniqueInstance;
 
+    private String[] optionsOn = {"start","set temperature","set timer","get timer","stop", "switch off"};
+    private String[] optionsOff = {"switch on"};
+
 
     private Microwave(Smartphone huawei){
         temperature = 0;
@@ -50,15 +53,18 @@ public class Microwave implements IMicrowave {
     public void start(){
         if (timer.getTime() == 0) {
             System.out.println("Set the timer first. \n");
-            execute();
+            //execute();
+            return;
         }
         else if (!turnedOn) {
             System.out.println("The microwave is off. \n");
-            execute();
+            //execute();
+            return;
         }
 
         else if (temperature == 0){
             System.out.println("There is no temperature set.");
+            return;
         }
         baking = true;
         Thread runner = new Thread(timer);
@@ -74,8 +80,14 @@ public class Microwave implements IMicrowave {
     @Override
     public void interruptProgram() {
         if (baking && turnedOn) {
+            System.out.println("Program interrupted.");
             baking = false;
+            time = 0;
+            temperature = 0;
+        }else{
+            System.out.println("Microwave is not in operation.");
         }
+
     }
 
     @Override
@@ -84,7 +96,7 @@ public class Microwave implements IMicrowave {
         return true;
     }
 
-    @Override
+    /*
     public void execute() {
         if (!turnedOn) {
             System.out.println("The device is turned off.");
@@ -137,6 +149,7 @@ public class Microwave implements IMicrowave {
             }
         }
     }
+    */
 
     public String toString() {
         if (timer.isRunning()) {
@@ -147,4 +160,58 @@ public class Microwave implements IMicrowave {
             return "The microwave is on.";
         }
     }
+
+    @Override
+    public String[] getOptions() {
+        if(turnedOn){
+            return optionsOn;
+        }else{
+            return optionsOff;
+        }
+    }
+
+    @Override
+    public String[] execute(String decision) {
+        switch (decision) {
+            case "switch on":
+                switchOn();
+                break;
+            case "switch off":
+                switchOff();
+                break;
+            case "set temperature":
+                System.out.print("Choose a temperature: ");
+                setTemperature(input.nextInt());
+                break;
+
+            case "get timer":
+                int duration = getTimer();
+
+                if (duration > 0) {
+                    System.out.println("The device needs " + duration + "s to complete the action.");
+                }
+                else{
+                    System.out.println("Timer not set!");
+                }
+                break;
+
+            case "set timer":
+                System.out.print("Choose a time: ");
+                setTimer(input.nextInt());
+                //execute();
+                break;
+
+            case "stop":
+                start();
+                break;
+
+
+            default:
+                System.out.println("Wrong Input");
+                //execute();
+                break;
+        }
+        return null;
+    }
+
 }

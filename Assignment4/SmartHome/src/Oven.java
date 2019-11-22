@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Oven implements IOven{
+public class Oven implements IOven {
 
     private boolean turnedOn;
     private int temperature;
@@ -10,11 +10,15 @@ public class Oven implements IOven{
     private Scanner input;
     int time;
     private Smartphone huawei;
+    //private String[] options = {"switch on", "switch off", "set temperature", "get timer", "choose program", "start", "exit"};
+    private String[] optionsOn = {"switch off", "set temperature", "get timer", "choose program", "start", "exit"};
+    private String[] optionsOff = {"switch on"};
+    // TODO; lists for switched on/off
 
 
     private static Oven uniqueInstance;
 
-    private Oven(Smartphone huawei){
+    private Oven(Smartphone huawei) {
         program = null;
         temperature = 0;
         turnedOn = false;
@@ -32,27 +36,25 @@ public class Oven implements IOven{
         return uniqueInstance;
     }
 
-    public boolean switchOn(){
+    public boolean switchOn() {
         if (turnedOn) {
             return false;
-        }
-
-        else {
+        } else {
             turnedOn = true;
             return true;
         }
     }
 
-    public void setTimer(int timeInSeconds){
+    public void setTimer(int timeInSeconds) {
         timer = new TimerThread(timeInSeconds);
 
     }
 
-    public void setTemperature(int temperature){
+    public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
 
-    public void chooseProgram(){   //TODO
+    public void chooseProgram() {   //TODO
         System.out.println("You can choose between the following programs:");
         System.out.print("-ventilated (1)\n -grill (2)\n-reheat (3)\n");
 
@@ -85,18 +87,19 @@ public class Oven implements IOven{
 
     }
 
-    public void start(){
+    public void start() {
 
         if (timer.getTime() == 0) {
             System.out.println("Set the timer first. \n");
-            execute();
-        }
-        else if (!turnedOn) {
+            //execute();
+            return;
+        } else if (!turnedOn) {
             System.out.println("The oven is off. \n");
-            execute();
-        }
-        else if (temperature == 0){
+            //execute();
+            return;
+        } else if (temperature == 0) {
             System.out.println("There is no temperature set.");
+            return;
         }
         cooking = true;
         Thread runner = new Thread(timer);
@@ -104,7 +107,7 @@ public class Oven implements IOven{
         cooking = false;
     }
 
-    public int getTimer(){
+    public int getTimer() {
         return timer.getTime();
     }
 
@@ -115,17 +118,16 @@ public class Oven implements IOven{
         }
     }
 
-    public boolean switchOff(){
+    public boolean switchOff() {
         turnedOn = false;
         return true;
     }
 
+    /*
     public void execute() {
         if (!turnedOn) {
             System.out.println("The device is turned off.");
-        }
-
-        else {
+        } else {
             System.out.println("You can choose following functions: ");
             System.out.print("-set temperature (1) \n-get timer (2) \n-choose program (3) \n");
             System.out.print("-start (4) \n-exit (5) \n");
@@ -142,8 +144,7 @@ public class Oven implements IOven{
 
                     if (duration > 0) {
                         System.out.println("The device needs " + duration + "s to complete the action.");
-                    }
-                    else{
+                    } else {
                         System.out.println("The timer is not set.");
                     }
                     break;
@@ -166,12 +167,108 @@ public class Oven implements IOven{
         }
     }
 
+     */
+
+    public String[] getOptions() {
+        if(turnedOn){
+            return optionsOn;
+        }else{
+            return optionsOff;
+        }
+    }
+
+    public String[] execute(String decision) {
+        switch (decision) {
+            case "switch on":
+                if (turnedOn) {
+                    System.out.println("Device is already turned on.");
+                    break;
+                }
+                System.out.println("Switched on device.");
+                switchOn();
+                break;
+
+            case "switch off":
+                if (!turnedOn) {
+                    System.out.println("Device is already turned off.");
+                    break;
+                }
+                System.out.println("Switched off device.");
+                switchOff();
+                break;
+
+            case "set temperature":
+                if (!turnedOn) {
+                    System.out.println("The device is turned off.");
+                    break;
+                }
+                System.out.print("Choose a temperature: ");
+                setTemperature(input.nextInt());
+                break;
+            case "get timer":
+                if (!turnedOn) {
+                    System.out.println("The device is turned off.");
+                    break;
+                }
+                int duration = getTimer();
+
+                if (duration > 0) {
+                    System.out.println("The device needs " + duration + "s to complete the action.");
+                } else {
+                    System.out.println("The timer is not set.");
+                }
+                break;
+
+            case "choose program":
+                if (!turnedOn) {
+                    System.out.println("The device is turned off.");
+                    break;
+                }
+                return new String[] {"ventilated", "grill", "reheat"};
+                //chooseProgram();
+                //break;
+            case "start":
+                if (!turnedOn) {
+                    System.out.println("The device is turned off.");
+                    break;
+                }
+                start();
+                break;
+            case "exit":
+                System.out.println("Returning to main menu.");
+                huawei.mainPage();
+                break;
+            case "ventilated":
+                System.out.println("Set program to ventilated.");
+                program = Program.ventilated;
+                time = 5;
+                timer.setTimer(time);
+                break;
+            case "grill":
+                System.out.println("Set program to grill.");
+                program = Program.grill;
+                time = 6;
+                timer.setTimer(time);
+                break;
+            case "reheat":
+                System.out.println("Set program to reheat.");
+                program = Program.reheat;
+                time = 7;
+                timer.setTimer(time);
+                break;
+            default:
+                System.out.println("Wrong Input");
+                //execute();
+                break;
+        }
+
+        return null;
+    }
+
     public String toString() {
         if (timer.isRunning()) {
             return "The oven is on and running.";
-        }
-
-        else {
+        } else {
             return "The oven is on.";
         }
     }

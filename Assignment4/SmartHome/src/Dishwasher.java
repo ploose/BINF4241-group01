@@ -1,16 +1,18 @@
 import java.util.Scanner;
 
 class Dishwasher implements IDishwasher {
-    private boolean isOn;
+    private boolean turnedOn;
     private int time;
     private Program program;
     private TimerThread timer;
     private Scanner input;
     private Smartphone huawei;
     private static Dishwasher uniqueInstance;
+    private String[] optionsOn = {"start", "switch off", "get timer", "choose program", "stop"};
+    private String[] optionsOff = {"switch on"};
 
     private Dishwasher(Smartphone huawei) {
-        isOn = false;
+        turnedOn = false;
         program = null;
         this.huawei = huawei;
         input = new Scanner(System.in);
@@ -27,31 +29,25 @@ class Dishwasher implements IDishwasher {
 
     @Override
     public boolean switchOn() {
-        if (isOn) {
+        if (turnedOn) {
             System.out.println("Dishwasher is already on.");
             return false;
-        }
-
-        else {
-            isOn = true;
+        } else {
+            turnedOn = true;
             return true;
         }
     }
 
     @Override
     public boolean switchOff() {
-        if (!isOn) {
+        if (!turnedOn) {
             System.out.println("Dishwasher is already off.");
             return false;
-        }
-
-        else if (timer.isRunning()) {
+        } else if (timer.isRunning()) {
             System.out.println("Cannot turn the dishwasher off, it is still running.");
             return false;
-        }
-
-        else {
-            isOn = false;
+        } else {
+            turnedOn = false;
             return true;
         }
     }
@@ -61,23 +57,15 @@ class Dishwasher implements IDishwasher {
         if (timer.getTime() == 0) {
             System.out.println("The program has already terminated.");
             return time;
-        }
-
-        else if (!isOn) {
+        } else if (!turnedOn) {
             System.out.println("The dishwasher is off.");
             return -1;
-        }
-
-        else if (program == null) {
+        } else if (program == null) {
             System.out.println("You first have to choose a program.");
             return -2;
-        }
-
-        else if (timer.isRunning()) {
+        } else if (timer.isRunning()) {
             return timer.getTime();
-        }
-
-        else {
+        } else {
             return time;
         }
     }
@@ -125,19 +113,13 @@ class Dishwasher implements IDishwasher {
 
     @Override
     public void start() {
-        if (!isOn) {
+        if (!turnedOn) {
             System.out.println("You first need to start the dishwasher. \n");
-        }
-
-        else if (program == null) {
+        } else if (program == null) {
             System.out.println("You first need to choose a program. \n");
-        }
-
-        else if (timer.isRunning()) {
+        } else if (timer.isRunning()) {
             System.out.println("The dishwasher has already started. \n");
-        }
-
-        else {
+        } else {
             Thread runner = new Thread(timer);
             runner.start();
 
@@ -147,15 +129,11 @@ class Dishwasher implements IDishwasher {
 
     @Override
     public void interruptProgram() {
-        if (!isOn) {
+        if (!turnedOn) {
             System.out.println("The dishwasher is not on. \n");
-        }
-
-        else if (!timer.isRunning()) {
+        } else if (!timer.isRunning()) {
             System.out.println("The dishwasher is not running. \n");
-        }
-
-        else {
+        } else {
             time = 0;
             timer = null;
             program = null;
@@ -164,9 +142,9 @@ class Dishwasher implements IDishwasher {
         }
     }
 
-    @Override
+    /*
     public void execute() {
-        if (!isOn) {
+        if (!turnedOn) {
             System.out.println("The device is turned off. \n");
         }
 
@@ -218,13 +196,89 @@ class Dishwasher implements IDishwasher {
         }
     }
 
+     */
+
     public String toString() {
         if (timer.isRunning()) {
             return "The dishwasher is on and running.";
-        }
-
-        else {
+        } else {
             return "The dishwasher is on.";
         }
+    }
+
+    @Override
+    public String[] getOptions() {
+        if (turnedOn) {
+            return optionsOn;
+        } else {
+            return optionsOff;
+        }
+    }
+
+    @Override
+    public String[] execute(String decision) {
+        switch (decision) {
+
+            case "switch on":
+                switchOn();
+                //execute();
+                break;
+
+            case "switch off":
+                switchOff();
+                //execute();
+                break;
+            case "get timer":
+                int duration = getTimer();
+
+                if (duration > 0) {
+                    System.out.println("The device needs " + duration + "s to complete the action. \n");
+                }
+
+                //execute();
+                break;
+
+            case "choose program":
+                return new String[]{"glasses", "plates", "pans", "mixed"};
+            //execute();
+            case "glasses":
+                System.out.println("Set program to ventilated.");
+                program = Program.glasses;
+                time = 5;
+                timer.setTimer(time);
+                break;
+            case "plates":
+                program = Program.plates;
+                time = 6;
+                timer.setTimer(time);
+                break;
+            case "pans":
+                program = Program.pans;
+                time = 7;
+                timer.setTimer(time);
+                break;
+            case "mixed":
+                program = Program.mixed;
+                time = 8;
+                timer.setTimer(time);
+                break;
+
+            case "start":
+                start();
+                //execute();
+                break;
+
+            case "stop":
+                interruptProgram();
+                //execute();
+                break;
+
+
+            default:
+                System.out.println("Wrong Input \n");
+                //execute();
+                break;
+        }
+        return null;
     }
 }

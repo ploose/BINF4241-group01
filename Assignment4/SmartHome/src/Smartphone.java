@@ -73,23 +73,28 @@ public class Smartphone {
 
             switch (decision) {
                 case "1":
-                    this.openCleaningRobotPage();
+                    devicePage(cleaningRobot.getOptions(), cleaningRobot, false);
+                    //this.openCleaningRobotPage();
                     break;
 
                 case "2":
-                    this.openDishwasherPage();
+                    devicePage(dishwasher.getOptions(), dishwasher, false);
+                    //this.openDishwasherPage();
                     break;
 
                 case "3":
-                    this.openMicrowavePage();
+                    devicePage(microwave.getOptions(), microwave, false);
+                    //this.openMicrowavePage();
                     break;
 
                 case "4":
-                    this.openOvenPage();
+                    devicePage(oven.getOptions(), oven, false);
+                    //this.openOvenPage();
                     break;
 
                 case "5":
-                    this.openWashingMachinePage();
+                    devicePage(washingMachine.getOptions(), washingMachine, false);
+                    //this.openWashingMachinePage();
                     break;
 
                 case "6":
@@ -106,7 +111,7 @@ public class Smartphone {
             }
         }
     }
-
+    /*
     private void openCleaningRobotPage() {
         System.out.println("You have the following options: ");
         System.out.print("-turn on (1) \n" +
@@ -227,7 +232,88 @@ public class Smartphone {
                 break;
         }
     }
+    */
+    private void devicePage(String[] options, Command device, boolean recursion){
+        System.out.println("You have the following options: ");
+        int i = 1;
 
+        for(String option: options){
+            System.out.println("- " + option + " ("+i++ + ")");
+        }
+        System.out.println("- return to previous page ("+i + ")");
+
+        String decision = input.next();
+        if(decision.equals(String.valueOf(i))){
+            System.out.println("Returning to previous page. \n");
+            return;
+        }
+
+        i = 1;
+        String[] nestedMenu;
+
+        for(String option: options){
+            //System.out.println("Decision: "+ decision+", String.valueOf(i): "+ String.valueOf(i));
+            if(decision.equals(String.valueOf(i++))){
+                nestedMenu = device.execute(options[Integer.parseInt(decision)-1]);
+                if(nestedMenu!=null){
+                    // go into nested menu
+                    devicePage(nestedMenu, device, true);
+                }
+
+
+            }
+
+        }
+        if(recursion){ // return from recursion if this was a nested menu
+            return;
+        }
+        devicePage(device.getOptions(), device, false);
+    }
+
+    private void openOvenPage(){
+        String[] options = oven.getOptions();
+        return;
+        /*
+        System.out.println("You have the following options: ");
+        int i = 1;
+
+        // get & print device options
+        String[] options = oven.getOptions();
+        for(String option: options){
+            System.out.println("- " + option + " ("+i++ + ")");
+        }
+
+        System.out.println("- return to main page("+i++ + ")");
+
+        String decision = input.next();
+        if(decision.equals(String.valueOf(options.length))){
+            System.out.println("Returning to main page. \n");
+            return;
+        }
+
+        i = 1;
+        String[] nestedMenu;
+
+        for(String option: options){
+            //System.out.println("Decision: "+ decision+", String.valueOf(i): "+ String.valueOf(i));
+            if(decision.equals(String.valueOf(i++))){
+                nestedMenu = oven.selectOption(decision);
+                if(nestedMenu==null){
+                    // do  smthing..
+
+                }else{
+                    // go into nested menue....
+
+                }
+                openOvenPage();
+            }
+        }
+
+         */
+        // TODO: handle wrong input
+    }
+
+    /*
     private void openOvenPage() {
         System.out.println("You have the following options: ");
         System.out.print("-turn on (1) \n" +
@@ -307,7 +393,7 @@ public class Smartphone {
                 break;
         }
     }
-
+*/
     private void listAllTurnedOnDevices() {
         for (Command elem : turnedOn) {
             System.out.println(elem.toString());

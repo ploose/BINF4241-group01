@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class WashingMachine implements IWashingMachine {
-    private boolean isOn;
+    private boolean turnedOn;
     private int time, temperature;
     private Program program;
     private TimerThread timer;
@@ -10,8 +10,11 @@ class WashingMachine implements IWashingMachine {
 
     private static WashingMachine uniqueInstance;
 
+    private String[] optionsOn = {"start","set temperature", "choose program","get timer", "switch off"};
+    private String[] optionsOff = {"switch on"};
+
     private WashingMachine(Smartphone huawei) {
-        isOn = false;
+        turnedOn = false;
         program = null;
         this.huawei = huawei;
         input = new Scanner(System.in);
@@ -28,20 +31,20 @@ class WashingMachine implements IWashingMachine {
 
     @Override
     public boolean switchOn() {
-        if (isOn) {
+        if (turnedOn) {
             System.out.println("Washing machine is already on. \n");
             return false;
         }
 
         else {
-            isOn = true;
+            turnedOn = true;
             return true;
         }
     }
 
     @Override
     public boolean switchOff() {
-        if (!isOn) {
+        if (!turnedOn) {
             System.out.println("Washing machine is already off. \n");
             return false;
         }
@@ -52,7 +55,7 @@ class WashingMachine implements IWashingMachine {
         }
 
         else {
-            isOn = false;
+            turnedOn = false;
             return true;
         }
     }
@@ -81,7 +84,7 @@ class WashingMachine implements IWashingMachine {
             return time;
         }
 
-        else if (!isOn) {
+        else if (!turnedOn) {
             System.out.println("The washing machine is off. \n");
             return -1;
         }
@@ -144,7 +147,7 @@ class WashingMachine implements IWashingMachine {
 
     @Override
     public void start() {
-        if (!isOn) {
+        if (!turnedOn) {
             System.out.println("You first need to start the washing machine. \n");
         }
 
@@ -168,6 +171,7 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
+    /*
     @Override
     public void execute() {
         if (!isOn) {
@@ -217,6 +221,8 @@ class WashingMachine implements IWashingMachine {
         }
     }
 
+     */
+
     public String toString() {
         if (timer.isRunning()) {
             return "The washing machine is on and running.";
@@ -225,5 +231,53 @@ class WashingMachine implements IWashingMachine {
         else {
             return "The washing machine is on.";
         }
+    }
+
+    @Override
+    public String[] getOptions() {
+        if(turnedOn){
+            return optionsOn;
+        }else{
+            return optionsOff;
+        }
+    }
+
+    @Override
+    public String[] execute(String decision) {
+        switch (decision) {
+            case "switch on":
+                switchOn();
+                break;
+
+            case "switch off":
+                switchOff();
+                break;
+
+            case "set temperature":
+                System.out.print("Choose a temperature: ");
+                setTemperature(input.nextInt());
+                break;
+
+            case "get timer":
+                int duration = getTimer();
+
+                if (duration > 0) {
+                    System.out.println("The device needs " + duration + "s to complete the action. \n");
+                }
+                break;
+
+            case "choose program":
+                chooseProgram();
+                break;
+
+            case "start":
+                start();
+                break;
+
+            default:
+                System.out.println("Wrong Input. \n");
+                //execute();
+        }
+        return null;
     }
 }

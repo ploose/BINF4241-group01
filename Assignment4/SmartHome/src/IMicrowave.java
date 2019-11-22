@@ -1,4 +1,6 @@
 public interface IMicrowave extends Command {
+    boolean switchOn();
+    boolean switchOff();
     void setTimer(int timeInSeconds);
     void setTemperature(int temperature);
     int getTimer();

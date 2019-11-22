@@ -8,6 +8,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     private final Object lock = new Object();
     private Scanner input;
     private Smartphone huawei;
+    private String[] options = {"start","set timer", "get progress", "get battery", "stop"};
 
     private volatile static CleaningRobot uniqueInstance;
     private volatile static Thread uniqueThread;
@@ -90,21 +91,6 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         }
     }
 
-    //TODO: start() / completeOutstanding() method?
-
-    @Override
-    public boolean switchOn() {
-        if (!turnedOn) {
-            synchronized (lock) {
-                turnedOn = true;
-                return true;
-            }
-        }
-        System.out.println("Robot is already on.");
-        return false;
-
-    }
-
     @Override
     public void setTimer(int timeInSeconds) {
         synchronized (lock) {
@@ -181,13 +167,8 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         }
     }
 
-    @Override
-    public boolean switchOff() {
-        turnedOn = false;
-        return true;
-    }
 
-    @Override
+    /*
     public void execute() {
 
         if (!turnedOn) {
@@ -240,6 +221,51 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
             }
 
         }
+    }
+
+     */
+
+    public String[] getOptions(){
+        return options;
+    }
+
+    @Override
+    public String[] execute(String decision) {
+        switch (decision) {
+            case "start":
+                if (start()) {
+                    System.out.println("Robot started. ");
+                }
+                //execute();
+
+            case "set timer":
+                System.out.print("Choose a time: ");
+                setTimer(input.nextInt());
+                //execute();
+
+            case "get progress":
+                double progress = getProgress();
+
+                if (getProgress() >= 0) {
+                    System.out.println("The robot has completed " + (progress * 100) + "% of the cleaning.");
+                }
+
+                //execute();
+
+            case "get battery":
+                System.out.println("The robot has " + getBattery() + "% remaining battery charge.");
+                //execute();
+
+            case "stop":
+                interruptProgram();
+                System.out.println("The program has been interrupted & reset. Robot is returning to station.");
+                //execute();
+
+            default:
+                System.out.println("Wrong Input");
+                //execute();
+        }
+        return null;
     }
 
     public String toString() {
