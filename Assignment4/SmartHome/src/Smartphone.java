@@ -23,11 +23,11 @@ public class Smartphone {
     }
 
     private void getInstances() {
-        cleaningRobot = CleaningRobot.getInstance(this);
-        dishwasher = Dishwasher.getUniqueInstance(this);
-        microwave = Microwave.getUniqueInstance(this);
-        oven = Oven.getUniqueInstance(this);
-        washingMachine = WashingMachine.getUniqueInstance(this);
+        cleaningRobot = CleaningRobot.getInstance();
+        dishwasher = Dishwasher.getUniqueInstance();
+        microwave = Microwave.getUniqueInstance();
+        oven = Oven.getUniqueInstance();
+        washingMachine = WashingMachine.getUniqueInstance();
     }
 
     private void fillSlots() {
@@ -66,8 +66,8 @@ public class Smartphone {
                     "- Open microwave page (3) \n" +
                     "- Open oven page (4) \n" +
                     "- Open washing machine page (5) \n" +
-                    //"- See all active smart devices (6) \n" +
-                    "- Close app (6) \n");
+                    "- See all active smart devices (6) \n" +
+                    "- Close app (7) \n");
 
             String decision = this.input.next();
 
@@ -97,11 +97,11 @@ public class Smartphone {
                     //this.openWashingMachinePage();
                     break;
 
-//                case "6":
-//                    this.listAllTurnedOnDevices();
-//                    break;
-
                 case "6":
+                    this.listAllTurnedOnDevices();
+                    break;
+
+                case "7":
                     System.out.println("System disconnecting.");
                     System.exit(0);
 
@@ -397,20 +397,13 @@ public class Smartphone {
 
     // TODO: Do we really need this feature?
     private void listAllTurnedOnDevices() {
-        for (Command elem : turnedOn) {
-            System.out.println(elem.toString());
+        System.out.println("Active devices:");
+        for (Command elem : commands) {
+            if(elem.isActive()){
+                System.out.println("- "+elem.toString());
+            }
         }
-
         System.out.print("\n");
     }
 
-    private void add(Command add) {
-        if (!turnedOn.contains(add)) {
-            turnedOn.add(add);
-        }
-    }
-
-    private void remove(Command remove) {
-        turnedOn.remove(remove);
-    }
 }

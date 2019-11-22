@@ -6,22 +6,20 @@ class Dishwasher implements IDishwasher {
     private Program program;
     private TimerThread timer;
     private Scanner input;
-    private Smartphone huawei;
     private static Dishwasher uniqueInstance;
     private String[] optionsOn = {"start", "switch off", "get timer", "choose program", "stop"};
     private String[] optionsOff = {"switch on"};
 
-    private Dishwasher(Smartphone huawei) {
+    private Dishwasher() {
         turnedOn = false;
         program = null;
-        this.huawei = huawei;
         input = new Scanner(System.in);
         timer = new TimerThread(0);
     }
 
-    static Dishwasher getUniqueInstance(Smartphone huawei) {
+    static Dishwasher getUniqueInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new Dishwasher(huawei);
+            uniqueInstance = new Dishwasher();
         }
 
         return uniqueInstance;
@@ -280,5 +278,13 @@ class Dishwasher implements IDishwasher {
                 break;
         }
         return null;
+    }
+
+    @Override
+    public boolean isActive() {
+        if(turnedOn){
+            return true;
+        }
+        return false;
     }
 }

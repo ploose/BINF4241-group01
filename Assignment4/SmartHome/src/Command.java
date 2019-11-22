@@ -1,8 +1,6 @@
 public interface Command {
-    // void execute();
+    String toString();
     String[] getOptions();
     String[] execute(String decision);
-
-    //boolean switchOn();
-    //boolean switchOff();
+    boolean isActive();
 }

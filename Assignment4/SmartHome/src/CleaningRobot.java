@@ -8,23 +8,21 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     private final int chargeCycle = 100, dischargeCycle = 500;
     private final Object lock = new Object();
     private Scanner input;
-    private Smartphone huawei;
-    private String[] options = {"start","set timer", "get progress", "get battery", "stop"};
+    private String[] optionsOn = {"start","set timer", "get progress", "get battery", "stop"};
 
     private volatile static CleaningRobot uniqueInstance;
     private volatile static Thread uniqueThread;
 
-    private CleaningRobot(Smartphone huawei) {
+    private CleaningRobot() {
         input = new Scanner(System.in);
-        this.huawei = huawei;
 
     }
 
-    static CleaningRobot getInstance(Smartphone huawei) {
+    static CleaningRobot getInstance() {
         if (uniqueInstance == null) {
             synchronized (CleaningRobot.class) {
                 if (uniqueInstance == null) {
-                    uniqueInstance = new CleaningRobot(huawei);
+                    uniqueInstance = new CleaningRobot();
                     uniqueThread = new Thread(uniqueInstance, "Robot Thread");
                     uniqueThread.start();
                 }
@@ -214,7 +212,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
      */
 
     public String[] getOptions(){
-        return options;
+        return optionsOn;
     }
 
     @Override
@@ -263,8 +261,21 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         return null;
     }
 
+    @Override
+    public boolean isActive() {
+        if(turnedOn){
+            return true;
+        }
+        return false;
+    }
+
     public String toString() {
-        //TODO
-        return "";
+        if (isCleaning) {
+            return "The cleaning robot is on and running.";
+        }
+
+        else {
+            return "The cleaning robot is on.";
+        }
     }
 }

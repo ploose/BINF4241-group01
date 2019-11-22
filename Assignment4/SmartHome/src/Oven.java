@@ -9,28 +9,25 @@ public class Oven implements IOven {
     private TimerThread timer;
     private Scanner input;
     int time;
-    private Smartphone huawei;
     //private String[] options = {"switch on", "switch off", "set temperature", "get timer", "choose program", "start", "exit"};
-    private String[] optionsOn = {"switch off", "set temperature", "get timer", "choose program", "start", "exit"};
+    private String[] optionsOn = {"switch off", "set temperature", "get timer", "choose program", "start", "stop"};
     private String[] optionsOff = {"switch on"};
-    // TODO; lists for switched on/off
 
 
     private static Oven uniqueInstance;
 
-    private Oven(Smartphone huawei) {
+    private Oven() {
         program = null;
         temperature = 0;
         turnedOn = false;
         cooking = false;
         timer = new TimerThread(0);
         input = new Scanner(System.in);
-        this.huawei = huawei;
     }
 
-    static Oven getUniqueInstance(Smartphone huawei) {
+    static Oven getUniqueInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new Oven(huawei);
+            uniqueInstance = new Oven();
         }
 
         return uniqueInstance;
@@ -115,7 +112,10 @@ public class Oven implements IOven {
         if (cooking && turnedOn == true) {
             cooking = false;
             program = null;
+            System.out.println("Interrupted oven.");
         }
+
+        System.out.println("No oven operation to interrupt.");
     }
 
     public boolean switchOff() {
@@ -234,9 +234,8 @@ public class Oven implements IOven {
                 }
                 start();
                 break;
-            case "exit":
-                System.out.println("Returning to main menu.");
-                huawei.mainPage();
+            case "stop":
+                interruptProgram();
                 break;
             case "ventilated":
                 System.out.println("Set program to ventilated.");
@@ -263,6 +262,14 @@ public class Oven implements IOven {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean isActive() {
+        if(turnedOn){
+            return true;
+        }
+        return false;
     }
 
     public String toString() {

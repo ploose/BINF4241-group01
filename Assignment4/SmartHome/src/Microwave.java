@@ -7,25 +7,23 @@ public class Microwave implements IMicrowave {
     private TimerThread timer;
     private Scanner input;
 
-    private Smartphone huawei;
     private static Microwave uniqueInstance;
 
     private String[] optionsOn = {"start","set temperature","set timer","get timer","stop", "switch off"};
     private String[] optionsOff = {"switch on"};
 
 
-    private Microwave(Smartphone huawei){
+    private Microwave(){
         temperature = 0;
         turnedOn = false;
         baking = false;
         timer = new TimerThread(0);
         input = new Scanner(System.in);
-        this.huawei = huawei;
     }
 
-    static Microwave getUniqueInstance(Smartphone huawei) {
+    static Microwave getUniqueInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new Microwave(huawei);
+            uniqueInstance = new Microwave();
 
         }
 
@@ -202,6 +200,9 @@ public class Microwave implements IMicrowave {
                 break;
 
             case "stop":
+                interruptProgram();
+                break;
+            case "start":
                 start();
                 break;
 
@@ -212,6 +213,14 @@ public class Microwave implements IMicrowave {
                 break;
         }
         return null;
+    }
+
+    @Override
+    public boolean isActive() {
+        if(turnedOn){
+            return true;
+        }
+        return false;
     }
 
 }

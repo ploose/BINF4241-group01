@@ -6,24 +6,22 @@ class WashingMachine implements IWashingMachine {
     private Program program;
     private TimerThread timer;
     private Scanner input;
-    private Smartphone huawei;
 
     private static WashingMachine uniqueInstance;
 
     private String[] optionsOn = {"start","set temperature", "choose program","get timer", "switch off"};
     private String[] optionsOff = {"switch on"};
 
-    private WashingMachine(Smartphone huawei) {
+    private WashingMachine() {
         turnedOn = false;
         program = null;
-        this.huawei = huawei;
         input = new Scanner(System.in);
         timer = new TimerThread(0);
     }
 
-    static WashingMachine getUniqueInstance(Smartphone huawei) {
+    static WashingMachine getUniqueInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new WashingMachine(huawei);
+            uniqueInstance = new WashingMachine();
         }
 
         return uniqueInstance;
@@ -279,5 +277,13 @@ class WashingMachine implements IWashingMachine {
                 //execute();
         }
         return null;
+    }
+
+    @Override
+    public boolean isActive() {
+        if(turnedOn){
+            return true;
+        }
+        return false;
     }
 }
