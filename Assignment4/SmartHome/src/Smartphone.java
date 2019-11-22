@@ -56,8 +56,6 @@ public class Smartphone {
         System.out.println("\n");
 
         nokia3310.mainPage();
-
-        System.out.println("System disconnecting.");
     }
 
     void mainPage() {
@@ -99,7 +97,8 @@ public class Smartphone {
                     break;
 
                 case "7":
-                    return;
+                    System.out.println("System disconnecting.");
+                    System.exit(0);
 
                 default:
                     System.out.println("Wrong input. \n");

@@ -150,11 +150,20 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     public boolean start() {
         synchronized (lock) {
             if (turnedOn) {
-                if (requiredTime > 0 && battery == 100) {
+                if(requiredTime > 0 && requiredTime == elapsedTime){
+                    System.out.println("Robot already finished cleaning.");
+
+                }else if(isCleaning){
+                    System.out.println("Robot is already cleaning.");
+
+                } else if (requiredTime > 0 && battery == 100) {
+                    // System.out.println("Robot started cleaning.");
                     isCleaning = true;
                     return true;
-                } else {
-                    System.out.println("Cleaning Robot has no set timer or is not fully charged!");
+                } else if (battery < 100){
+                    System.out.println("Cleaning Robot is not fully charged!");
+                }else if(requiredTime == 0){
+                    System.out.println("Cleaning Robot has no set timer");
                 }
             }
             return false;
@@ -186,14 +195,14 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         } else {
             System.out.println("You can choose following functions: ");
             System.out.print("- start(1) \n- set timer (2) \n- check progress (3) \n- check battery (4) \n");
-            System.out.print("- reset (5) \n- exit (6)");
+            System.out.println("- reset (5) \n- exit (6)");
 
             String decision = input.next();
 
             switch (decision) {
                 case "1":
                     if (start()) {
-                        System.out.print("Robot started. ");
+                        System.out.println("Robot started. ");
                     }
                     execute();
 
