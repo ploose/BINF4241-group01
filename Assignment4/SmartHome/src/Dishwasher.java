@@ -8,13 +8,11 @@ class Dishwasher implements IDishwasher {
         mixed,
     }
 
-    private boolean turnedOn;
+    private boolean turnedOn, running;
     private int time;
     private Program program;
     private TimerThread timer;
     private static Dishwasher uniqueInstance;
-    private String[] optionsOn = {"start", "switch off", "get timer", "choose program", "stop"};
-    private String[] optionsOff = {"switch on"};
 
     private Dishwasher() {
         turnedOn = false;
@@ -58,8 +56,8 @@ class Dishwasher implements IDishwasher {
     @Override
     public int getTimer() {
         if (timer.getTime() == 0) {
-            System.out.println("The program has already terminated.");
-            return time;
+            System.out.println("The timer is not set or finished.");
+            return timer.getTime();
         } else if (!turnedOn) {
             System.out.println("The dishwasher is off.");
             return -1;
@@ -69,7 +67,7 @@ class Dishwasher implements IDishwasher {
         } else if (timer.isRunning()) {
             return timer.getTime();
         } else {
-            return time;
+            return timer.getTime();
         }
     }
 
@@ -79,13 +77,13 @@ class Dishwasher implements IDishwasher {
             System.out.println("You first need to start the dishwasher. \n");
         } else if (program == null) {
             System.out.println("You first need to choose a program. \n");
-        } else if (timer.isRunning()) {
+        } else if (running) {
             System.out.println("The dishwasher has already started. \n");
         } else {
+            System.out.println("is running");
+            running = true;
             Thread runner = new Thread(timer);
             runner.start();
-
-
         }
     }
 
@@ -99,7 +97,7 @@ class Dishwasher implements IDishwasher {
             time = 0;
             timer = null;
             program = null;
-
+            running = false;
             timer = new TimerThread(0);
         }
     }
@@ -115,16 +113,27 @@ class Dishwasher implements IDishwasher {
     @Override
     public String[] getOptions() {
         if (turnedOn) {
-            return optionsOn;
+            if (running) {
+                return new String[]{"get timer", "stop"};
+            } else if (timer.getTime() == 0 || program == null) {
+                return new String[]{"get timer", "choose program", "switch off"};
+            } else {
+                return new String[]{"start", "get timer", "choose program", "switch off"};
+            }
         } else {
-            return optionsOff;
+            return new String[]{"switch on"};
         }
     }
 
     @Override
     public String[] execute(String decision) {
-        switch (decision) {
 
+        if(timer.isRunning()){
+            running = true;
+        }else{
+            running = false;
+        }
+        switch (decision) {
             case "switch on":
                 switchOn();
                 break;

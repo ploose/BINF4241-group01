@@ -8,7 +8,6 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     private final int chargeCycle = 100, dischargeCycle = 500;
     private final Object lock = new Object();
     private Scanner input;
-    private String[] optionsOn = {"start","set timer", "get progress", "get battery", "stop"};
 
     private volatile static CleaningRobot uniqueInstance;
     private volatile static Thread uniqueThread;
@@ -122,19 +121,19 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     public boolean start() {
         synchronized (lock) {
             if (turnedOn) {
-                if(requiredTime > 0 && requiredTime == elapsedTime){
+                if (requiredTime > 0 && requiredTime == elapsedTime) {
                     System.out.println("Robot already finished cleaning.");
 
-                }else if(isCleaning){
+                } else if (isCleaning) {
                     System.out.println("Robot is already cleaning.");
 
                 } else if (requiredTime > 0 && battery == 100) {
                     // System.out.println("Robot started cleaning.");
                     isCleaning = true;
                     return true;
-                } else if (battery < 100){
+                } else if (battery < 100) {
                     System.out.println("Cleaning Robot is not fully charged!");
-                }else if(requiredTime == 0){
+                } else if (requiredTime == 0) {
                     System.out.println("Cleaning Robot has no set timer");
                 }
             }
@@ -153,8 +152,14 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
         }
     }
 
-    public String[] getOptions(){
-        return optionsOn;
+    public String[] getOptions() {
+        if (isCleaning) {
+            return new String[]{"get progress", "get progress", "get battery", "stop"};
+        } else if (battery == 100 && requiredTime > 0 && elapsedTime < requiredTime) {
+            return new String[]{"start", "set timer", "get progress", "get battery"};
+        }else{
+            return new String[]{"set timer", "get progress", "get battery"};
+        }
     }
 
     @Override
@@ -172,7 +177,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
                 break;
 
             case "get progress":
-                double percentage = getProgress()*100;
+                double percentage = getProgress() * 100;
                 DecimalFormat df = new DecimalFormat("#.##"); // trim to 2 decimal places
                 percentage = Double.parseDouble(df.format(percentage));
 
@@ -199,7 +204,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
 
     @Override
     public boolean isActive() {
-        if(turnedOn){
+        if (turnedOn) {
             return true;
         }
         return false;
@@ -208,9 +213,7 @@ public class CleaningRobot implements ICleaningRobot, Runnable {
     public String toString() {
         if (isCleaning) {
             return "The cleaning robot is on and running.";
-        }
-
-        else {
+        } else {
             return "The cleaning robot is on.";
         }
     }

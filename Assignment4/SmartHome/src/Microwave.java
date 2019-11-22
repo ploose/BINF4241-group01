@@ -1,21 +1,18 @@
 import java.util.Scanner;
 
 public class Microwave implements IMicrowave {
-    private boolean turnedOn, baking;
+    private boolean turnedOn, running;
     private int temperature;
     private TimerThread timer;
     private Scanner input;
 
     private static Microwave uniqueInstance;
 
-    private String[] optionsOn = {"start","set temperature","set timer","get timer","stop", "switch off"};
-    private String[] optionsOff = {"switch on"};
-
 
     private Microwave(){
         temperature = 0;
         turnedOn = false;
-        baking = false;
+        running = false;
         timer = new TimerThread(0);
         input = new Scanner(System.in);
     }
@@ -61,10 +58,9 @@ public class Microwave implements IMicrowave {
             System.out.println("There is no temperature set.");
             return;
         }
-        baking = true;
+        running = true;
         Thread runner = new Thread(timer);
         runner.start();
-        baking = false;
     }
 
     @Override
@@ -74,9 +70,9 @@ public class Microwave implements IMicrowave {
 
     @Override
     public void interruptProgram() {
-        if (baking && turnedOn) {
+        if (running && turnedOn) {
             System.out.println("Program interrupted.");
-            baking = false;
+            running = false;
             timer = new TimerThread(0);
             temperature = 0;
         }else{
@@ -103,15 +99,29 @@ public class Microwave implements IMicrowave {
 
     @Override
     public String[] getOptions() {
+
+
         if(turnedOn){
-            return optionsOn;
+            if(running){
+                return new String[]{"get timer", "stop"};
+            }else if(temperature != 0 && timer.getTime() > 0){
+                return new String[]{"start", "set timer", "set temperature", "get timer", "switch off"};
+            }else{
+                return new String[]{"set timer", "set temperature", "get timer", "switch off"};
+            }
         }else{
-            return optionsOff;
+            return new String[]{"switch on"};
         }
     }
 
     @Override
     public String[] execute(String decision) {
+        if(timer.isRunning()){
+            running = true;
+        }else{
+            running = false;
+        }
+
         switch (decision) {
             case "switch on":
                 switchOn();
@@ -133,7 +143,7 @@ public class Microwave implements IMicrowave {
                     System.out.println("The device needs " + duration + "s to complete the action.");
                 }
                 else{
-                    System.out.println("Timer not set!");
+                    System.out.println("The timer is not set or finished.");
                 }
                 break;
 

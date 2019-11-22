@@ -43,8 +43,8 @@ public class Smartphone {
 
         System.out.println("CD Project Green Dev Team presents:");
         System.out.println("The smart home app");
-        System.out.println("The app is starting. \n" +
-                "Please wait. \n");
+        System.out.print("The app is starting. \n" +
+                "Please wait");
 
         for (int i = 0; i < 5; i++) {
             try {
@@ -74,27 +74,22 @@ public class Smartphone {
             switch (decision) {
                 case "1":
                     devicePage(cleaningRobot.getOptions(), cleaningRobot, false);
-                    //this.openCleaningRobotPage();
                     break;
 
                 case "2":
                     devicePage(dishwasher.getOptions(), dishwasher, false);
-                    //this.openDishwasherPage();
                     break;
 
                 case "3":
                     devicePage(microwave.getOptions(), microwave, false);
-                    //this.openMicrowavePage();
                     break;
 
                 case "4":
                     devicePage(oven.getOptions(), oven, false);
-                    //this.openOvenPage();
                     break;
 
                 case "5":
                     devicePage(washingMachine.getOptions(), washingMachine, false);
-                    //this.openWashingMachinePage();
                     break;
 
                 case "6":
@@ -111,128 +106,7 @@ public class Smartphone {
             }
         }
     }
-    /*
-    private void openCleaningRobotPage() {
-        System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n" +
-                "-turn off (2) \n" +
-                "-open functions (3) \n" +
-                "-return to main page (4) \n");
 
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                if (commands[0].switchOn()) {
-                    add(commands[0]);
-                }
-                openCleaningRobotPage();
-                break;
-
-            case "2":
-                if (commands[0].switchOff()) {
-                    remove(commands[0]);
-                }
-                openCleaningRobotPage();
-                break;
-
-            case "3":
-                commands[0].execute();
-                openCleaningRobotPage();
-                break;
-
-            case "4":
-                System.out.println("Returning to main page. \n");
-                break;
-
-            default:
-                System.out.println("Wrong Input. \n");
-                openCleaningRobotPage();
-                break;
-        }
-    }
-
-    private void openDishwasherPage() {
-        System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n" +
-                "-turn off (2) \n" +
-                "-open functions (3) \n" +
-                "-return to main page (4) \n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                if (commands[1].switchOn()) {
-                    add(commands[1]);
-                }
-                openDishwasherPage();
-                break;
-
-            case "2":
-                if (commands[1].switchOff()) {
-                    remove(commands[1]);
-                }
-                openDishwasherPage();
-                break;
-
-            case "3":
-                commands[1].execute();
-                openDishwasherPage();
-                break;
-
-            case "4":
-                System.out.println("Returning to main page. \n");
-                break;
-
-            default:
-                System.out.println("Wrong Input. \n");
-                openDishwasherPage();
-                break;
-        }
-    }
-
-    private void openMicrowavePage() {
-        System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n" +
-                "-turn off (2) \n" +
-                "-open functions (3) \n" +
-                "-return to main page (4) \n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                if (commands[2].switchOn()) {
-                    add(commands[2]);
-                }
-                openMicrowavePage();
-                break;
-
-            case "2":
-                if (commands[2].switchOff()) {
-                    remove(commands[2]);
-                }
-                openMicrowavePage();
-                break;
-
-            case "3":
-                commands[2].execute();
-                openMicrowavePage();
-                break;
-
-            case "4":
-                System.out.println("Returning to main page. \n");
-                this.mainPage();
-                break;
-
-            default:
-                System.out.println("Wrong Input. \n");
-                openMicrowavePage();
-                break;
-        }
-    }
-    */
     private void devicePage(String[] options, Command device, boolean recursion){
         System.out.println("You have the following options: ");
         int i = 1;
@@ -270,132 +144,6 @@ public class Smartphone {
         devicePage(device.getOptions(), device, false);
     }
 
-    private void openOvenPage(){
-        String[] options = oven.getOptions();
-        return;
-        /*
-        System.out.println("You have the following options: ");
-        int i = 1;
-
-        // get & print device options
-        String[] options = oven.getOptions();
-        for(String option: options){
-            System.out.println("- " + option + " ("+i++ + ")");
-        }
-
-        System.out.println("- return to main page("+i++ + ")");
-
-        String decision = input.next();
-        if(decision.equals(String.valueOf(options.length))){
-            System.out.println("Returning to main page. \n");
-            return;
-        }
-
-        i = 1;
-        String[] nestedMenu;
-
-        for(String option: options){
-            //System.out.println("Decision: "+ decision+", String.valueOf(i): "+ String.valueOf(i));
-            if(decision.equals(String.valueOf(i++))){
-                nestedMenu = oven.selectOption(decision);
-                if(nestedMenu==null){
-                    // do  smthing..
-
-                }else{
-                    // go into nested menue....
-
-                }
-                openOvenPage();
-            }
-        }
-
-         */
-        // TODO: handle wrong input
-    }
-
-    /*
-    private void openOvenPage() {
-        System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n" +
-                "-turn off (2) \n" +
-                "-open functions (3) \n" +
-                "-return to main page (4) \n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                if (commands[3].switchOn()) {
-                    add(commands[3]);
-                }
-                openOvenPage();
-                break;
-
-            case "2":
-                if (commands[3].switchOff()) {
-                    remove(commands[3]);
-                }
-                openOvenPage();
-                break;
-
-            case "3":
-                commands[3].execute();
-                openOvenPage();
-                break;
-
-            case "4":
-                System.out.println("Returning to main page. \n");
-                break;
-
-            default:
-                System.out.println("Wrong Input. \n");
-                openOvenPage();
-                break;
-        }
-    }
-
-    private void openWashingMachinePage() {
-        System.out.println("You have the following options: ");
-        System.out.print("-turn on (1) \n" +
-                "-turn off (2) \n" +
-                "-open functions (3) \n" +
-                "-return to main page (4) \n");
-
-        String decision = input.next();
-
-        switch (decision) {
-            case "1":
-                if (commands[4].switchOn()) {
-                    add(commands[4]);
-                }
-                openWashingMachinePage();
-                break;
-
-            case "2":
-                if (commands[4].switchOff()) {
-                    remove(commands[4]);
-                }
-                openWashingMachinePage();
-                break;
-
-            case "3":
-                commands[4].execute();
-                openWashingMachinePage();
-                break;
-
-            case "4":
-                System.out.println("Returning to main page. \n");
-                break;
-
-            default:
-                System.out.println("Wrong Input. \n");
-                openWashingMachinePage();
-                break;
-        }
-    }
-*/
-
-    // TODO: Do we really need this feature?
     private void listAllTurnedOnDevices() {
         System.out.println("Active devices:");
         for (Command elem : commands) {
