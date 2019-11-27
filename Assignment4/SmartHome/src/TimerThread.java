@@ -1,38 +1,50 @@
-public class TimerThread implements Runnable{
+public class TimerThread implements Runnable {
     private boolean running;
     private int time;
+    private final Object lock = new Object();
 
-    TimerThread(int timeInSeconds){
+    TimerThread(int timeInSeconds) {
         time = timeInSeconds;
     }
 
-    int getTime(){
-        return this.time;
+    int getTime() {
+        synchronized (lock){
+            return this.time;
+        }
     }
 
     void setTimer(int time) {
-        this.time = time;
+        synchronized (lock){
+            this.time = time;
+        }
     }
 
-    boolean isRunning(){
-        return running;
+    boolean isRunning() {
+        synchronized (lock){
+            return running;
+        }
     }
 
     @Override
     public void run() {
         try {
-            running = true;
+            synchronized (lock){
+                running = true;
+            }
 
 
             while (time > 0) {
                 Thread.sleep(1000);
-                --time;
+                synchronized (lock){
+                    --time;
+                }
             }
 
-            running = false;
-        }
+            synchronized (lock){
+                running = false;
+            }
 
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

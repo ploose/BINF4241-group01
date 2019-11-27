@@ -1,28 +1,29 @@
 import java.util.Scanner;
 
 public class Oven implements IOven {
+    enum Program {
+        ventilated,
+        grill,
+        reheat
+    }
 
     private boolean turnedOn;
     private int temperature;
     private Program program;
-    private boolean cooking;
+    private boolean running;
     private TimerThread timer;
     private Scanner input;
-    int time;
-    //private String[] options = {"switch on", "switch off", "set temperature", "get timer", "choose program", "start", "exit"};
-    private String[] optionsOn = {"switch off", "set timer", "set temperature", "get timer", "choose program", "start", "stop"};
-    private String[] optionsOff = {"switch on"};
 
 
     private static Oven uniqueInstance;
 
     private Oven() {
-        program = null;
         temperature = 0;
         turnedOn = false;
-        cooking = false;
+        running = false;
         timer = new TimerThread(0);
         input = new Scanner(System.in);
+        program = null;
     }
 
     static Oven getUniqueInstance() {
@@ -63,10 +64,9 @@ public class Oven implements IOven {
             System.out.println("There is no temperature set.");
             return;
         }
-        cooking = true;
+        running = true;
         Thread runner = new Thread(timer);
         runner.start();
-        cooking = false;
     }
 
     public int getTimer() {
@@ -74,10 +74,12 @@ public class Oven implements IOven {
     }
 
     public void interruptProgram() {
-        if (cooking && turnedOn == true) {
-            cooking = false;
+        if (running && turnedOn == true) {
+            System.out.println("Program interrupted.");
+            running = false;
+            timer = new TimerThread(0);
+            temperature = 0;
             program = null;
-            System.out.println("Interrupted oven.");
         }
 
         System.out.println("No oven operation to interrupt.");
@@ -89,14 +91,25 @@ public class Oven implements IOven {
     }
 
     public String[] getOptions() {
-        if(turnedOn){
-            return optionsOn;
-        }else{
-            return optionsOff;
+        if (turnedOn) {
+            if (running) {
+                return new String[]{"get timer", "stop"};
+            } else if (temperature != 0 && timer.getTime() > 0 && program != null) {
+                return new String[]{"start", "set timer", "set temperature", "choose program", "get timer", "switch off"};
+            } else {
+                return new String[]{"set timer", "set temperature", "choose program", "get timer", "switch off"};
+            }
+        } else {
+            return new String[]{"switch on"};
         }
     }
 
     public String[] execute(String decision) {
+        if(timer.isRunning()){
+            running = true;
+        }else{
+            running = false;
+        }
         switch (decision) {
             case "switch on":
                 if (turnedOn) {
@@ -144,7 +157,7 @@ public class Oven implements IOven {
                 if (duration > 0) {
                     System.out.println("The device needs " + duration + "s to complete the action.");
                 } else {
-                    System.out.println("The timer is not set.");
+                    System.out.println("The timer is not set or finished.");
                 }
                 break;
 
@@ -153,7 +166,7 @@ public class Oven implements IOven {
                     System.out.println("The device is turned off.");
                     break;
                 }
-                return new String[] {"ventilated", "grill", "reheat"};
+                return new String[]{"ventilated", "grill", "reheat"};
 
             case "start":
                 if (!turnedOn) {
@@ -168,24 +181,18 @@ public class Oven implements IOven {
                 break;
 
             case "ventilated":
-                System.out.println("Set program to ventilated.");
                 program = Program.ventilated;
-                time = 5;
-                timer.setTimer(time);
+                System.out.println("Set program to ventilated.");
                 break;
 
             case "grill":
-                System.out.println("Set program to grill.");
                 program = Program.grill;
-                time = 6;
-                timer.setTimer(time);
+                System.out.println("Set program to grill.");
                 break;
 
             case "reheat":
-                System.out.println("Set program to reheat.");
                 program = Program.reheat;
-                time = 7;
-                timer.setTimer(time);
+                System.out.println("Set program to reheat.");
                 break;
 
             default:
@@ -198,7 +205,7 @@ public class Oven implements IOven {
 
     @Override
     public boolean isActive() {
-        if(turnedOn){
+        if (turnedOn) {
             return true;
         }
         return false;

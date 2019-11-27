@@ -1,16 +1,20 @@
 import java.util.Scanner;
 
 class WashingMachine implements IWashingMachine {
-    private boolean turnedOn;
+    enum Program {
+        rinse,
+        intense,
+        quick,
+        spin
+    }
+
+    private boolean turnedOn, running;
     private int time, temperature;
     private Program program;
     private TimerThread timer;
     private Scanner input;
 
     private static WashingMachine uniqueInstance;
-
-    private String[] optionsOn = {"start","set temperature", "choose program","get timer", "switch off"};
-    private String[] optionsOff = {"switch on"};
 
     private WashingMachine() {
         turnedOn = false;
@@ -78,7 +82,7 @@ class WashingMachine implements IWashingMachine {
     @Override
     public int getTimer() {
         if (timer.getTime() == 0) {
-            System.out.println("The program has already terminated. \n");
+            System.out.println("The timer is not set or finished. \n");
             return time;
         }
 
@@ -120,6 +124,7 @@ class WashingMachine implements IWashingMachine {
         }
 
         else {
+            running = true;
             Thread runner = new Thread(timer);
             runner.start();
 
@@ -139,15 +144,27 @@ class WashingMachine implements IWashingMachine {
 
     @Override
     public String[] getOptions() {
-        if(turnedOn){
-            return optionsOn;
-        }else{
-            return optionsOff;
+
+        if (turnedOn) {
+            if (running) {
+                return new String[]{"get timer"};
+            } else if (timer.getTime() == 0 || program == null ) {
+                return new String[]{"get timer", "choose program", "switch off"};
+            } else {
+                return new String[]{"start", "get timer", "choose program", "switch off"};
+            }
+        } else {
+            return new String[]{"switch on"};
         }
     }
 
     @Override
     public String[] execute(String decision) {
+        if(timer.isRunning()){
+            running = true;
+        }else{
+            running = false;
+        }
         switch (decision) {
             case "switch on":
                 switchOn();
@@ -171,6 +188,34 @@ class WashingMachine implements IWashingMachine {
                 break;
 
             case "choose program":
+                return new String[]{"rinse", "intense", "quick", "spin"};
+
+            case "rinse":
+                System.out.println("Set program to rinse.");
+                program = Program.rinse;
+                time = 5;
+                timer.setTimer(time);
+                break;
+
+            case "intense":
+                System.out.println("Set program to intense.");
+                program = Program.intense;
+                time = 6;
+                timer.setTimer(time);
+                break;
+
+            case "quick":
+                System.out.println("Set program to quick.");
+                program = Program.quick;
+                time = 7;
+                timer.setTimer(time);
+                break;
+
+            case "spin":
+                System.out.println("Set program to spin.");
+                program = Program.spin;
+                time = 8;
+                timer.setTimer(time);
                 break;
 
             case "start":
