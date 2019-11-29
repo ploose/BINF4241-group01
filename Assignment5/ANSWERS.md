@@ -17,9 +17,23 @@ Part 3
 			If the unser enters an invalid input, the program asks the user to type a name with 2-10 letters.
 			If the input is valid, the program will start the game:
 
-At the beginnging, the program will list all playernames in the order they were entered. The dealer will be randomly chosen and also printed.
+
+
 The programs set up the game:
  - create the deck
+ - shuffle the deck
+ - give every player 7 cards
  - create a draw pile
  - create a discard pile
- 
+
+Some variables are set up:
+ - direction of game (standard: clockwise)
+ - dealer (randomly chosen)
+ - first player (left to the dealer)
+
+
+
+Output:	The program will list all playernames in the order they were entered.
+	The dealer will be randomly chosen and also printed.
+	"[First Player]'s turn!"
+
