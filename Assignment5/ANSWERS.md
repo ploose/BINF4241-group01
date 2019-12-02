@@ -37,3 +37,10 @@ Output:	The program will list all playernames in the order they were entered.
 	The dealer will be randomly chosen and also printed.
 	"[First Player]'s turn!"
 
+During the game, the game will take input about which card the user wants to play (e.g r9 for red nine) and checks if the move is valid.
+If the move is valid, perform any changes of the game that might occur (changing direction, change color, etc.)
+If the move is invalid, ask the user to input a correct move or draw a card.
+
+
+
+
