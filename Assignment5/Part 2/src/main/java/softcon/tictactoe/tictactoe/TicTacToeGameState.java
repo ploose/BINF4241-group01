@@ -12,8 +12,9 @@ import main.java.softcon.tictactoe.Position;
  * 
  */
 public class TicTacToeGameState implements DiscreteGameState {
-  public static enum Player {
+  public enum Player {
     O, X;
+
     public static Player opponentOf(Player player) {
       return player == X ? O : X;
     }
@@ -41,9 +42,11 @@ public class TicTacToeGameState implements DiscreteGameState {
     if (board == null) {
       throw new IllegalArgumentException("board cannot be null");
     }
+
     if (currentPlayer == null) {
       throw new IllegalArgumentException("currentPlayer cannot be null");
     }
+
     this.board = board;
     this.currentPlayer = currentPlayer;
   }
@@ -62,14 +65,17 @@ public class TicTacToeGameState implements DiscreteGameState {
   @Override
   public List<DiscreteGameState> availableStates() {
     List<Position> availableMoves = board.getOpenPositions();
-    List<DiscreteGameState> availableStates =
-        new ArrayList<DiscreteGameState>(availableMoves.size());
+    List<DiscreteGameState> availableStates = new ArrayList<>(availableMoves.size());
+
     for (Position move : availableMoves) {
       TicTacToeGameState newState = new TicTacToeGameState(this);
+
       newState.play(move.getRow(), move.getCol());
       newState.switchPlayer();
+
       availableStates.add(newState);
     }
+
     return availableStates;
   }
 
@@ -103,6 +109,7 @@ public class TicTacToeGameState implements DiscreteGameState {
         return true;
       }
     }
+
     return completesDiagonal(player);
   }
 
@@ -123,8 +130,8 @@ public class TicTacToeGameState implements DiscreteGameState {
       lastMove = new Position(row, col);
       return true;
     }
-    return false;
 
+    return false;
   }
 
   /**
@@ -147,6 +154,7 @@ public class TicTacToeGameState implements DiscreteGameState {
     Player col0 = board.getMark(0, col);
     Player col1 = board.getMark(1, col);
     Player col2 = board.getMark(2, col);
+
     return player == col0 && col0 == col1 && col1 == col2;
   }
 
@@ -165,6 +173,7 @@ public class TicTacToeGameState implements DiscreteGameState {
     Player row0 = board.getMark(row, 0);
     Player row1 = board.getMark(row, 1);
     Player row2 = board.getMark(row, 2);
+
     return player == row0 && row0 == row1 && row1 == row2;
   }
 }
