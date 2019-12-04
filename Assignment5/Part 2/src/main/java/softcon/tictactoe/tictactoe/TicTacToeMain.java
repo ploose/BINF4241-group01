@@ -1,11 +1,11 @@
-package softcon.tictactoe.tictactoe;
+package main.java.softcon.tictactoe.tictactoe;
 
 import java.util.Scanner;
 
-import softcon.tictactoe.ai.GameIntelligenceAgent;
-import softcon.tictactoe.ai.MinimaxAgent;
-import softcon.tictactoe.ai.heuristic.tictactoe.TicTacToeEvaluator;
-import softcon.tictactoe.tictactoe.TicTacToeGameState.Player;
+import main.java.softcon.tictactoe.ai.GameIntelligenceAgent;
+import main.java.softcon.tictactoe.ai.MinimaxAgent;
+import main.java.softcon.tictactoe.ai.heuristic.tictactoe.TicTacToeEvaluator;
+import main.java.softcon.tictactoe.tictactoe.TicTacToeGameState.Player;
 
 public class TicTacToeMain {
 
