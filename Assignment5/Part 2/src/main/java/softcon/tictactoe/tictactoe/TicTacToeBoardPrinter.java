@@ -6,8 +6,6 @@ import main.java.softcon.tictactoe.tictactoe.TicTacToeGameState.Player;
 
 /**
  * Prints a TicTacToe game board to the console.
- *
- * 
  */
 public class TicTacToeBoardPrinter {
 
@@ -24,8 +22,10 @@ public class TicTacToeBoardPrinter {
    */
   public void printGameBoard(GameBoard board) {
     printRow(0, board);
+
     printStream.println("-+-+-");
     printRow(1, board);
+
     printStream.println("-+-+-");
     printRow(2, board);
   }
@@ -38,5 +38,4 @@ public class TicTacToeBoardPrinter {
   private static String markToString(Player player) {
     return player == null ? " " : player.toString();
   }
-
 }

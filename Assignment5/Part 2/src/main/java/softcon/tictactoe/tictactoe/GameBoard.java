@@ -32,6 +32,7 @@ public class GameBoard {
     if (board == null) {
       throw new IllegalArgumentException("board cannot be null");
     }
+
     this.board = board;
   }
 
@@ -112,17 +113,21 @@ public class GameBoard {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+
     for (int row = 0; row < ROWS; row++) {
       for (int col = 0; col < COLS; col++) {
         TicTacToeGameState.Player p = board[row][col];
         if (p != null) {
           sb.append(p);
-        } else {
+        }
+
+        else {
           sb.append(' ');
         }
       }
       sb.append('\n');
     }
+
     return sb.toString();
   }
 
@@ -131,15 +136,19 @@ public class GameBoard {
     if (this == obj) {
       return true;
     }
+
     if (!(obj instanceof GameBoard)) {
       return false;
     }
+
     GameBoard other = (GameBoard) obj;
+
     for (int row = 0; row < ROWS; row++) {
       if (!Arrays.equals(board[row], other.board[row])) {
         return false;
       }
     }
+
     return true;
   }
 
@@ -147,9 +156,11 @@ public class GameBoard {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+
     for (int row = 0; row < ROWS; row++) {
       result = prime * result + Arrays.hashCode(board[row]);
     }
+
     return result;
   }
 

@@ -48,11 +48,13 @@ public class TicTacToeGameRunner {
    */
   public void run() {
     printInstructions();
+
     while (!game.isOver()) {
       moveHuman();
       moveComputer();
       boardPrinter.printGameBoard(game.getGameBoard());
     }
+
     printGameOver();
   }
 
@@ -67,9 +69,11 @@ public class TicTacToeGameRunner {
 
   void moveComputer() {
     TicTacToeGameState nextState = agent.evaluateNextState(game);
+
     if (nextState == null) {
       return;
     }
+
     Position nextMove = nextState.getLastMove();
     game.play(nextMove.getRow(), nextMove.getCol());
     game.switchPlayer();
@@ -77,6 +81,7 @@ public class TicTacToeGameRunner {
 
   void moveHuman() {
     Position userPosition;
+
     while (true) {
       do {
         printStream.print("Player X [row,col]: ");
@@ -88,7 +93,9 @@ public class TicTacToeGameRunner {
         if (game.play(userPosition.getRow(), userPosition.getCol())) {
           game.switchPlayer();
           return;
-        } else {
+        }
+
+        else {
           printStream.printf("(%d,%d) has already been taken. ", userPosition.getRow(),
               userPosition.getCol());
           printInstructions();
@@ -103,10 +110,14 @@ public class TicTacToeGameRunner {
 
   private void printGameOver() {
     if (game.hasWin(Player.X)) {
-      ((PrintStream) printStream).println("Player X won.");
-    } else if (game.hasWin(Player.O)) {
+      printStream.println("Player X won.");
+    }
+
+    else if (game.hasWin(Player.O)) {
       printStream.println("Player O won.");
-    } else {
+    }
+
+    else {
       printStream.println("Game ended in a draw.");
     }
   }
@@ -117,11 +128,14 @@ public class TicTacToeGameRunner {
 
   private Position parseUserInput(String input) {
     String[] posInput = input.split(",");
+
     if (posInput.length != 2) {
       printInstructions();
       return null;
     }
+
     int row, col;
+
     try {
       row = Integer.parseInt(posInput[0]);
       col = Integer.parseInt(posInput[1]);
@@ -129,7 +143,7 @@ public class TicTacToeGameRunner {
       printInstructions();
       return null;
     }
+
     return new Position(row, col);
   }
-
 }
