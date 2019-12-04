@@ -30,8 +30,18 @@
     (int col = 1; col < COLS; col++) to (int col = 0; col < COLS; col++).
     
 - TicTacToeGameStateTest:
-    -
-    -
+    - startingPlayerIsX / getAvailableStatesLastO / switchPlayer:
+      In the method getCurrentPlayer of the class TicTacToeGameState there was a bug, which forced the method to always
+      return the player O. The bug was fixed by simply return the field 'currentPlayer'.
+      
+    - hasWinCol / hasWinRow / isOverWin:
+      The bug failing the tests was found in the method hasWin of the class TicTacToeGameState. The problem was, that if
+      a player won by having 3 marks in one row/column, the method would return false and skip the hasWinDiagonal check.
+      
+    - hasWinDiagonal:
+      There was a bug in the completeDiagonal method of the class TicTacToeGameState. The method checked a wrong field
+      (field (1, 2)) for which it was never possible to reach a diagonal win. The bug could be fixed by changing the
+      field from (1, 2) to (2, 2).
 
 #Part 3
 
