@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e4e7913-fa38-471b-9791-00d12a9c79e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/UNO/src/UNO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UNO/test/UNOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UNO/test/PlayerpotTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ANSWERS.md" beforeDir="false" afterPath="$PROJECT_DIR$/../ANSWERS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Part3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Part3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UNO/UNO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UNO/UNO.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UNO/test/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/UNO/test/DeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UNO/test/DiscardpileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/UNO/test/DiscardpileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UNO/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/UNO/test/GameTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,11 +18,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -29,13 +39,16 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
     <property name="jdk.selected.JAVA_MODULE" value="11" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/junit-jupiter-5.4.2.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -84,6 +97,8 @@
       <option name="presentableId" value="Default" />
       <updated>1575290613089</updated>
       <workItem from="1575290614250" duration="2263000" />
+      <workItem from="1575476998502" duration="3745000" />
+      <workItem from="1575484804366" duration="6223000" />
     </task>
     <servers />
   </component>
@@ -95,7 +110,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

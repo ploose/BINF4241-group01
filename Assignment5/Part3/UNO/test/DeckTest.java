@@ -1,16 +1,22 @@
 import HelperClasses.ActionCard;
 import HelperClasses.Card;
-import HelperClasses.Discardpile;
 import HelperClasses.NumberCard;
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.*;
-import static org.junit.Assert.*;
-import org.junit.*;
-import java.util.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.AssertEquals.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.*;
 
 public class DeckTest {
 
@@ -25,6 +31,7 @@ public class DeckTest {
         d = new Deck();
         d.topCard = new NumberCard();
         d.cards = new ArrayList<Card>();
+        d.initialize();
     }
 
     /**
@@ -40,12 +47,12 @@ public class DeckTest {
     public void deckIsShuffledTest() {
         d.cards.clear();
         ArrayList<Card> firstDeckCards = new ArrayList<Card>(
-                new ActionCard(WILD),
-                new NumberCard(4, RED),
-                new ActionCard(DRAWTWO),
-                new NumberCard(5, GREEN),
-                new ActionCard(SKIP),
-                new NumberCard(7,YELLOW)
+                new ActionCard(Type.WILD),
+                new NumberCard(Color.RED, Num.FOUR),
+                new ActionCard(Type.DRAWTWO),
+                new NumberCard(Color.GREEN, Num.FIVE),
+                new ActionCard(Type.SKIP),
+                new NumberCard(Color.YELLOW, Num.SEVEN)
         );
         d.cards.addAll(firstDeckCards);
         d.shuffle();
@@ -60,7 +67,7 @@ public class DeckTest {
     @Test
     public void drawTopCardTest() {
         d.cards.clear();
-        NumberCard numbercard = new NumberCard(4,RED);
+        NumberCard numbercard = new NumberCard(Color.RED, Num.FOUR);
         d.cards.add(numbercard);
         assertEquals("Top cards is not drawn!", d.draw(), numbercard);
     }
@@ -74,7 +81,7 @@ public class DeckTest {
     @Test
     public void drawLastCardTest() {
         d.cards.clear();
-        d.cards.add(new NumberCard(3, RED));
+        d.cards.add(new NumberCard(Color.RED, Num.FOUR));
         d.draw();
         assertTrue(d.cards.isempty());
     }
@@ -96,8 +103,8 @@ public class DeckTest {
     public void drawTwoCardsTest() {
         d.cards.clear();
 
-        NumberCard num1 = new NumberCard(4,RED);
-        ActionCard act1 = new ActionCard(WILD);
+        NumberCard num1 = new NumberCard(Color.RED, Num.FOUR);
+        ActionCard act1 = new ActionCard(Type.WILD);
         d.cards.add(num1);
         d.cards.add(act1);
         assertEquals("Not Right first card drawn!", d.draw(), act1 );
@@ -111,12 +118,12 @@ public class DeckTest {
     public void combineTest() {
         d.cards.clear();
         ArrayList<Card> firstDeckCards = new ArrayList<Card>(
-                new ActionCard(WILD),
-                new NumberCard(4, RED),
-                new ActionCard(DRAWTWO),
-                new NumberCard(5, GREEN),
-                new ActionCard(SKIP),
-                new NumberCard(7,YELLOW)
+                new ActionCard(Type.WILD),
+                new NumberCard(Color.RED, Num.FOUR),
+                new ActionCard(Type.DRAWTWO),
+                new NumberCard(Color.GREEN, Num.SEVEN),
+                new ActionCard(Type.SKIP),
+                new NumberCard(Color.YELLOW, Num.EIGHT)
         );
         d.cards.addAll(firstDeckCards);
         ArrayList<Card> secondsDeckCards = new ArrayList<Card>();
@@ -130,12 +137,12 @@ public class DeckTest {
     public void combineEmptyDeck() {
         d.cards.clear();
         ArrayList<Card> firstDeckCards = new ArrayList<Card>(
-                new ActionCard(WILD),
-                new NumberCard(4, RED),
-                new ActionCard(DRAWTWO),
-                new NumberCard(5, GREEN),
-                new ActionCard(SKIP),
-                new NumberCard(7,YELLOW)
+                new ActionCard(Type.WILD),
+                new NumberCard(Color.RED, Num.FOUR),
+                new ActionCard(Type.DRAWTWO),
+                new NumberCard(Color.GREEN, Num.SEVEN),
+                new ActionCard(Type.SKIP),
+                new NumberCard(Color.YELLOW, Num.EIGHT)
         );
         d.cards.addAll(firstDeckCards);
 
@@ -148,12 +155,12 @@ public class DeckTest {
     public void combineEmptyDeck() {
         d.cards.clear();
         ArrayList<Card> firstDeckCards = new ArrayList<Card>(
-                new ActionCard(WILD),
-                new NumberCard(4, RED),
-                new ActionCard(DRAWTWO),
-                new NumberCard(5, GREEN),
-                new ActionCard(SKIP),
-                new NumberCard(7,YELLOW)
+                new ActionCard(Type.WILD),
+                new NumberCard(Color.RED, Num.FOUR),
+                new ActionCard(Type.DRAWTWO),
+                new NumberCard(Color.GREEN, Num.SEVEN),
+                new ActionCard(Type.SKIP),
+                new NumberCard(Color.YELLOW, Num.EIGHT)
         );
         d.cards.addAll(firstDeckCards);
 
@@ -167,12 +174,12 @@ public class DeckTest {
     public void combineIntoEmptyDeck() {
         d.cards.clear();
         ArrayList<Card> firstDeckCards = new ArrayList<Card>(
-                new ActionCard(WILD),
-                new NumberCard(4, RED),
-                new ActionCard(DRAWTWO),
-                new NumberCard(5, GREEN),
-                new ActionCard(SKIP),
-                new NumberCard(7,YELLOW)
+                new ActionCard(Type.WILD),
+                new NumberCard(Color.RED, Num.FOUR),
+                new ActionCard(Type.DRAWTWO),
+                new NumberCard(Color.GREEN, Num.SEVEN),
+                new ActionCard(Type.SKIP),
+                new NumberCard(Color.YELLOW, Num.EIGHT)
         );
         ArrayList<Card> secondsDeckCards = new ArrayList<Card>();
         secondsDeckCards.addAll(firstDeckCards);

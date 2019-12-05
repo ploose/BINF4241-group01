@@ -24,7 +24,7 @@ Discardpile d;
         @Before
         public void setUp() {
             d = new Discardpile();
-            d.topCard = new NumberCard();
+            d.topCard = new NumberCard(Color.RED, Number.FOUR);
             d.discardCards = new ArrayList<Card>();
         }
 
@@ -49,7 +49,7 @@ Discardpile d;
 
     @Test
     public void getTopCardTest() {
-        Card numberCard = new NumberCard(4, RED);
+        Card numberCard = new NumberCard(Color.RED, Num.FOUR);
         d.discardCards.clear();
         d.discardCards.add(numberCard);
         assertEquals("Expected red 4!", numberCard, d.setTopCard());
@@ -76,8 +76,8 @@ Discardpile d;
     @Test
     public void setTopCardTest(){
         d.discardCards.clear();
-        actionCard = new ActionCard(WILD);
-        d.discardCards.add(new NumberCard(4, RED));
+        actionCard = new ActionCard(Type.WILD);
+        d.discardCards.add(new NumberCard(Color.RED, Num.FOUR));
         d.discardCards.add(actionCard);
         d.setTopCard();
         assertEquals("Top card not right!", d.topCard, actionCard);
@@ -99,8 +99,8 @@ Discardpile d;
     @Test (expected = NullPointerException.class)
     public void nonemptyPileEmptyTest() {
         d.discardCards.clear();
-        d.discardCards.add(new NumberCard(4,RED));
-        d.discardCards.add(new ActionCard(WILD));
+        d.discardCards.add(new NumberCard(Color.RED, Num.FOUR));
+        d.discardCards.add(new ActionCard(Type.WILD));
         d.empty();
         d.discardCards.get(0);
     }
@@ -108,8 +108,8 @@ Discardpile d;
     @Test
     public void returnPileTest() {
         d.discardCards.clear();
-        d.discardCards.add(new NumberCard(4,RED));
-        d.discardCards.add(new ActionCard(WILD));
+        d.discardCards.add(new NumberCard(Color.RED, Num.FOUR));
+        d.discardCards.add(new ActionCard(Type.WILD));
         assertEquals("Does not return the discardpile!", d.empty(), d.discardCards);
     }
 

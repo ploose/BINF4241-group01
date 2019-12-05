@@ -81,5 +81,9 @@ If the move is valid, perform any changes of the game that might occur (changing
 If the move is invalid, ask the user to input a correct move or draw a card.
 
 
+Comments to the class diagram:
 
+- Some variables are not explicitly mentioned in the class diagram, as it is visible from the class diagram. Such variables are marked with "...".
+- Deck initialization is not being tested, as this is very trivial.
+- The Game class method initialize() sets up alle the necessary objects for the game to run (create players, create deck, ...).
 
