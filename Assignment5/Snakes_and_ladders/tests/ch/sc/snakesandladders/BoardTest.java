@@ -1,5 +1,6 @@
 package ch.sc.snakesandladders;
 
+import ch.sc.squares.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -22,7 +23,30 @@ public class BoardTest {
 
     @Test
     public void testFirstInit() {
-        //TODO
+        Board board = new Board(100, players);
+
+        assertTrue("First Square is not instance of FirstSquare.", board.findSquare(0) instanceof FirstSquare);
+
+        for (int i = 1; i < 99; ++i) {
+            assertTrue("Wrong field found: field " + i, board.findSquare(i) instanceof NormalSquare ||
+                    board.findSquare(i) instanceof SnakeSquare || board.findSquare(i) instanceof LadderSquare);
+        }
+
+        assertTrue("Last Square is not instance of LastSquare.", board.findSquare(99) instanceof LastSquare);
+    }
+
+    @Test
+    public void testNoLoop() {
+        Board board = new Board(100, players);
+
+        for (int i = 1; i < board.getSize() - 1; ++i) {
+            for (int j = 1; j < 7; ++j) {
+                if (board.findSquare(i) instanceof NormalSquare) {
+                    assertNotEquals("Endless Loop found.  Square: " + i + " jump distance: " + j,
+                            board.findSquare(i).moveAndLand(j, new Player("test")), board.findSquare(i));
+                }
+            }
+        }
     }
 
     @Test
@@ -42,6 +66,11 @@ public class BoardTest {
         board.setWinner(players.getCurrentPlayer());
 
         assertEquals("Sam", board.getWinner().getName());
+    }
+
+    @Test
+    public void testFindSquare() {
+        //TODO
     }
 
     @After
