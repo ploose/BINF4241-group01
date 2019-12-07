@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 
 public class DiceTest {
-    private Dice dice;
     private ArrayList<Integer> diceFaces;
     private ArrayList<Integer> thrownFaces;
 
@@ -17,15 +16,14 @@ public class DiceTest {
      */
     @Before
     public void setUp() {
-        dice = new Dice(); // creating dice instance
-        diceFaces = new ArrayList<Integer>(); // creating ArrayList containing all valid faces
+        diceFaces = new ArrayList<>(); // creating ArrayList containing all valid faces
         diceFaces.add(1);
         diceFaces.add(2);
         diceFaces.add(3);
         diceFaces.add(4);
         diceFaces.add(5);
         diceFaces.add(6);
-        thrownFaces = new ArrayList<Integer>(); // creating empty ArrayList to save all thrown faces
+        thrownFaces = new ArrayList<>(); // creating empty ArrayList to save all thrown faces
     }
 
     /**
@@ -39,13 +37,15 @@ public class DiceTest {
     public void testRange() {
         int face;
         boolean failed = false;
+
         for (int i = 0; i < 1000000; i++) {
-            face = dice.throwDice();
+            face = Dice.throwDice();
             if (!diceFaces.contains(face)) {
                 System.out.println(face + " is not valid face!");
                 failed = true;
             }
         }
+
         assertFalse("Dice threw illegal number (not in 1-6)", failed);
     }
 
@@ -62,16 +62,19 @@ public class DiceTest {
         boolean failed = false;
         // throw dice a lot and see whether all valid results have been thrown (probabilistic test!)
         for (int i = 0; i < 1000000; i++) {
-            face = dice.throwDice();
+            face = Dice.throwDice();
             if (!thrownFaces.contains(face)) {
                 thrownFaces.add(face);
             }
         }
+
         for (int f : diceFaces) {
             if (!thrownFaces.contains(f)) {
                 failed = true;
+                break;
             }
         }
+
         assertFalse("Dice didn't throw all valid faces", failed);
     }
 }
