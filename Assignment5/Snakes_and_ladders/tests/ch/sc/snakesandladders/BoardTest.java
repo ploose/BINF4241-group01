@@ -68,11 +68,6 @@ public class BoardTest {
         assertEquals("Sam", board.getWinner().getName());
     }
 
-    @Test
-    public void testFindSquare() {
-        //TODO
-    }
-
     @After
     public void tearDown() {
         for (Player player : list) {
