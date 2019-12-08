@@ -1,10 +1,9 @@
-import HelperClasses.ActionCard;
-import HelperClasses.Card;
-import HelperClasses.Discardpile;
-import HelperClasses.NumberCard;
+import HelperClasses.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.*;
+
+import static jdk.vm.ci.sparc.SPARC.d2;
 import static org.junit.Assert.*;
 import org.junit.*;
 
@@ -68,7 +67,7 @@ public class GameTest {
     @Test (expected = IllegalArgumentException.class)
     void invalidInputTest() {
         dis.topCard = new NumberCard(Color.RED, Num.FOUR);
-        g.isValidMove(5);
+        g.isValidMove(new Card());
     }
 
     /**
@@ -91,7 +90,7 @@ public class GameTest {
     @Test
     public void playWrongCardTest() {
             dis.topCard = new NumberCard(Color.RED,Num.EIGHT);
-            NumberCard card = new NumberCard(Color.BLUE, Num.FIVE)
+            NumberCard card = new NumberCard(Color.BLUE, Num.FIVE);
             g.playCard(card);
 
             assertNotEquals("Invalid move has been made", dis.topCard,card);
@@ -101,7 +100,7 @@ public class GameTest {
     @Test
     public void playRightCardTest() {
         dis.topCard = new NumberCard(Color.RED,Num.EIGHT);
-        NumberCard card = new NumberCard(Color.RED, Num.FIVE)
+        NumberCard card = new NumberCard(Color.RED, Num.FIVE);
         g.playCard(card);
 
         assertEquals("Valid move could not be made", dis.topCard,card);
@@ -149,7 +148,7 @@ public class GameTest {
     public void skippedNextTurnTest() {
         Player player = g.playerpot.getCurrentPlayer();
         Player player2 = g.playerpot.getNextPlayer();
-        dis.topCard = new ActionCard(Type.SKIP);
+        dis.topCard = new ActionCard(CardType.SKIP);
         g.nextTurn();
         assertNotEquals("Skipping not working!", g.playerpot.getCurrentPlayer(), player2);
     }

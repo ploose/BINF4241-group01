@@ -1,4 +1,8 @@
 package HelperClasses;
 
-public class NumberCard {
+import java.awt.*;
+
+public class NumberCard extends Card{
+    public NumberCard(Color red, Num five) {
+    }
 }

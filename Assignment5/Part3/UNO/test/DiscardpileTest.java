@@ -1,12 +1,11 @@
-import HelperClasses.ActionCard;
-import HelperClasses.Card;
-import HelperClasses.Discardpile;
-import HelperClasses.NumberCard;
+import HelperClasses.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.junit.*;
+
+import java.awt.*;
 import java.util.*;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ Discardpile d;
         @Before
         public void setUp() {
             d = new Discardpile();
-            d.topCard = new NumberCard(Color.RED, Number.FOUR);
+            d.topCard = new NumberCard(Color.RED, Num.FOUR);
             d.discardCards = new ArrayList<Card>();
         }
 
@@ -52,7 +51,7 @@ Discardpile d;
         Card numberCard = new NumberCard(Color.RED, Num.FOUR);
         d.discardCards.clear();
         d.discardCards.add(numberCard);
-        assertEquals("Expected red 4!", numberCard, d.setTopCard());
+        assertEquals("Expected red 4!", numberCard, d.getTopCard());
     }
 
 
@@ -76,7 +75,7 @@ Discardpile d;
     @Test
     public void setTopCardTest(){
         d.discardCards.clear();
-        actionCard = new ActionCard(Type.WILD);
+        ActionCard actionCard = new ActionCard(CardType.WILD);
         d.discardCards.add(new NumberCard(Color.RED, Num.FOUR));
         d.discardCards.add(actionCard);
         d.setTopCard();
@@ -100,7 +99,7 @@ Discardpile d;
     public void nonemptyPileEmptyTest() {
         d.discardCards.clear();
         d.discardCards.add(new NumberCard(Color.RED, Num.FOUR));
-        d.discardCards.add(new ActionCard(Type.WILD));
+        d.discardCards.add(new ActionCard(CardType.WILD));
         d.empty();
         d.discardCards.get(0);
     }
@@ -109,7 +108,7 @@ Discardpile d;
     public void returnPileTest() {
         d.discardCards.clear();
         d.discardCards.add(new NumberCard(Color.RED, Num.FOUR));
-        d.discardCards.add(new ActionCard(Type.WILD));
+        d.discardCards.add(new ActionCard(CardType.WILD));
         assertEquals("Does not return the discardpile!", d.empty(), d.discardCards);
     }
 

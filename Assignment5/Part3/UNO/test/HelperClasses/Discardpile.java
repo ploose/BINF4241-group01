@@ -3,10 +3,18 @@ package HelperClasses;
 import java.util.ArrayList;
 
 public class Discardpile {
-    public NumberCard topCard;
+    public Card topCard;
 
-    public ArrayList<Card> discardCards;
+    public Card[] discardCards;
 
-    public void getTopCard() {
+    public Card getTopCard() {
+        return new Card();
+    }
+
+    public void setTopCard() {
+    }
+
+    public ArrayList<Card> empty() {
+        return new ArrayList<Card>();
     }
 }
