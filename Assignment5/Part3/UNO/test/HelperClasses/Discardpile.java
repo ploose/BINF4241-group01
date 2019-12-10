@@ -17,4 +17,13 @@ public class Discardpile {
     public ArrayList<Card> empty() {
         return new ArrayList<Card>();
     }
+
+    public void clear() {
+    }
+
+    public void add(Card numberCard) {
+    }
+
+    public void get(int i) {
+    }
 }

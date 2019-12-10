@@ -1,17 +1,13 @@
+package Tests;
+
 import HelperClasses.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.*;
-
-import static jdk.vm.ci.sparc.SPARC.d2;
-import static org.junit.Assert.*;
-import org.junit.*;
 
 import java.awt.*;
-import java.lang.reflect.Type;
-import java.util.*;
 
-import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 public class GameTest {
 
@@ -21,10 +17,17 @@ public class GameTest {
      * This class tests the functionalities of the discardpile
      */
 
+    /**
+     * Test fixture
+     */
+
     Game g;
     Discardpile dis;
     Deck deck;
 
+    /**
+     * Setting up test fixture.
+     */
 
     @Before
     public void setUp() {
@@ -38,7 +41,7 @@ public class GameTest {
     }
 
     /**
-     * Testing isValidMove(Card)
+     * Testing if an invalid move due to color difference is recognized correctly.
      */
     @Test
     void invalidMoveByColorTest() {
@@ -46,24 +49,35 @@ public class GameTest {
         assertFalse("Invalid move was not flagged invalid!", g.isValidMove(new NumberCard(Color.YELLOW, Num.FOUR)));
     }
 
+    /**
+     * Testing if an invalid move due to number difference is recognized correctly.
+     */
     @Test
     void invalidMoveByNumberTest() {
         dis.topCard = new NumberCard(Color.RED, Num.FOUR);
         assertFalse("Invalid move was not flagged invalid!", g.isValidMove(new NumberCard(Color.RED, Num.FIVE)));
     }
 
+    /**
+     * Testing if a valid move is recognized correctly (by number).
+     */
     @Test
     void validMoveByNumberTest() {
         dis.topCard = new NumberCard(Color.RED, Num.FOUR);
         assertTrue("Valid move was not flagged valid!", g.isValidMove(new NumberCard(Color.YELLOW, Num.FOUR)));
     }
-
+    /**
+     * Testing if a valid move is recognized correctly (by color).
+     */
     @Test
     void validMoveByColorTest() {
         dis.topCard = new NumberCard(Color.RED, Num.FOUR);
         assertTrue("Valid move was not flagged valid!", g.isValidMove(new NumberCard(Color.RED, Num.FIVE)));
     }
 
+    /**
+     * testing if isValidMove() accepts an invalid argument.
+     */
     @Test (expected = IllegalArgumentException.class)
     void invalidInputTest() {
         dis.topCard = new NumberCard(Color.RED, Num.FOUR);
@@ -71,20 +85,20 @@ public class GameTest {
     }
 
     /**
-     * Testing draw()
-     * This is very short, because the draw method is reall implemented in the deck class.
+     * Testing draw() method. Tests if the top card is drawn/returned correctly.
+     * This is very short, because the draw method is really implemented in the deck class.
      */
     @Test
     public void drawTest() {
         NumberCard numberCard = new NumberCard(Color.RED, Num.FOUR);
-        deck.cards.add(numberCard);
+        deck.add(numberCard);
         assertEquals("game draw method not drawing the correct card!", g.draw(), numberCard);
     }
 
 
 
     /**
-     * Testing playCard()
+     * Tests if the playCard(Card) method allows for invalid moves.
      */
 
     @Test
@@ -97,6 +111,9 @@ public class GameTest {
 
     }
 
+    /**
+     * Tests if a valid move is recognized correctly.
+     */
     @Test
     public void playRightCardTest() {
         dis.topCard = new NumberCard(Color.RED,Num.EIGHT);
@@ -109,7 +126,7 @@ public class GameTest {
 
 
     /**
-     * Testing getDirection()
+     * Tests if the direction correctly changes and returned when calling getDirection().
      */
 
     @Test
@@ -122,17 +139,21 @@ public class GameTest {
         assertEquals("Direction not changed successfully!",g.getDirection(),d2 );
     }
 
+    /**
+     * Tests if the direction correctly changes and returned when calling getDirection() after changing the direction to the same.
+     */
+
     @Test
     void directionChangeToSameTest() {
         Direction d1 = Direction.CLOCKWISE;
         g.direction = d1;
         assertEquals("Direction not changed successfully!",g.getDirection(),d1 );
         g.direction = d1;
-        assertEquals("Direction not changed successfully!",g.getDirection(),d2 );
+        assertEquals("Direction not changed successfully!",g.getDirection(),d1 );
     }
 
     /**
-     * Testing nextTurn()
+     * Tests if nextTurn() correctly changes the current player to the next player according to the direction of the game.
      */
 
     @Test
@@ -144,6 +165,9 @@ public class GameTest {
         assertEquals("Next turn without skipping not working!", g.playerpot.getCurrentPlayer(), player2);
     }
 
+    /**
+     * Tests if a player gets skipped correctly.
+     */
     @Test
     public void skippedNextTurnTest() {
         Player player = g.playerpot.getCurrentPlayer();

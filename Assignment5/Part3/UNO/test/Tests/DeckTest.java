@@ -1,23 +1,19 @@
+package Tests;
+
 import HelperClasses.*;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import HelperClasses.*;
-import org.junit.Before;
+
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.junit.*;
-
-import java.awt.*;
-import java.util.*;
-
-import java.util.ArrayList;
 
 
-import static org.junit.Assert.*;
+
+import static junit.framework.TestCase.fail;
+
 
 public class DeckTest {
 
@@ -25,8 +21,15 @@ public class DeckTest {
      * This class tests the functionalities of the deck
      */
 
+
+    /**
+     * test fixture
+     */
     Deck d;
 
+    /**
+     * Sets up the necessary fixture
+     */
     @Before
     public void setUp() {
         d = new Deck();
@@ -36,7 +39,7 @@ public class DeckTest {
     }
 
     /**
-     * Testing shuffle()
+     * See if it is possible to shuffle an empty deck
      */
     @Test (expected = NullPointerException.class)
     void emptyDeckShuffleTest() {
@@ -44,6 +47,9 @@ public class DeckTest {
         d.shuffle();
     }
 
+    /**
+     * Tests if the deck is properly shuffled. Might have to be done a few times (because of the randomness).
+     */
     @Test
     public void deckIsShuffledTest() {
         d.clear();
@@ -62,7 +68,7 @@ public class DeckTest {
 
 
     /**
-     * Testing draw()
+     * Testing if the top card gets drawn correctly.
      */
     @Test
     public void drawTopCardTest() {
@@ -72,12 +78,18 @@ public class DeckTest {
         assertEquals("Top cards is not drawn!", d.draw(), numbercard);
     }
 
+    /**
+     * Tests the nullptr when drawin from an empty deck.
+     */
     @Test (expected = NullPointerException.class)
     public void drawEmptyDeckTest() {
         d.clear();
         d.draw();
     }
 
+    /**
+     * Tests if the deck is marked as empty when the last card is drawn.
+     */
     @Test
     public void drawLastCardTest() {
         d.clear();
@@ -86,6 +98,9 @@ public class DeckTest {
         assertTrue(d.isempty());
     }
 
+    /**
+     * Tests the nullptr that should be given when drawing from a null element in the deck.
+     */
     @Test
     public void drawNullTest() {
         d.clear();
@@ -98,6 +113,10 @@ public class DeckTest {
         }
         fail("NullPointerException expected");
     }
+
+    /**
+     * Tests if draw() properly draws the first two cards.
+     */
 
     @Test
     public void drawTwoCardsTest() {
@@ -112,7 +131,7 @@ public class DeckTest {
     }
 
     /**
-     * Testing combine()
+     * Testing combine() method. This test checks if the methods successfully combines two decks.
      */
     @Test
     public void combineTest() {
@@ -133,7 +152,9 @@ public class DeckTest {
         assertEquals("Decks have not been combined correctly!", d.cards, secondsDeckCards);
     }
 
-
+    /**
+     * This tests checks if combine() successfully combines an empty deck into a full deck
+     */
 
     @Test
     public void combineEmptyDeck() {
@@ -153,6 +174,10 @@ public class DeckTest {
         d.combine(secondsDeckCards);
         assertEquals("Empty deck has not been merged correctly", d.cards, firstDeckCards);
     }
+
+    /**
+     * Testing if a deck successfully combines into a empty deck
+     */
 
     @Test
     public void combineIntoEmptyDeck() {
