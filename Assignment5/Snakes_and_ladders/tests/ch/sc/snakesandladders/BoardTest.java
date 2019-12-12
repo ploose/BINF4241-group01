@@ -40,11 +40,9 @@ public class BoardTest {
         Board board = new Board(100, players);
 
         for (int i = 1; i < board.getSize() - 1; ++i) {
-            for (int j = 1; j < 7; ++j) {
-                if (board.findSquare(i) instanceof NormalSquare) {
-                    assertNotEquals("Endless Loop found.  Square: " + i + " jump distance: " + j,
-                            board.findSquare(i).moveAndLand(j, new Player("test")), board.findSquare(i));
-                }
+            if (board.findSquare(i) instanceof LadderSquare || board.findSquare(i) instanceof SnakeSquare) {
+                assertNotEquals("Endless loop found on field: " + i,
+                        board.findSquare(i), board.findSquare(i).moveAndLand(0, players.getCurrentPlayer()));
             }
         }
     }
