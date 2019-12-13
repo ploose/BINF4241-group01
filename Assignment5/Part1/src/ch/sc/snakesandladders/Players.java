@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
-class Players {
+// TODO: Mention change to public in Javadoc / Answers
+public class Players {
     private LinkedList<Player> playerQueue;
 
-    Players(ArrayList<Player> playerList){
+    public Players(ArrayList<Player> playerList){
         playerQueue = new LinkedList<>();
         initQueue(playerList);
     }

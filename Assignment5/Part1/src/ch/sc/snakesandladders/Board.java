@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-
+// TODO: Mention change to public in Javadoc / Readme
 public class Board {
 
     private ArrayList<Square> squareList;
@@ -17,7 +17,7 @@ public class Board {
     private Players players;
     private Queue<Point> tupleQueue;
 
-    Board(int size, Players players) {   //Constructor
+    public Board(int size, Players players) {   //Constructor
         // TODO: mention fix in Javadoc
         if(size <= 2){
             throw new IllegalArgumentException("Board.board");

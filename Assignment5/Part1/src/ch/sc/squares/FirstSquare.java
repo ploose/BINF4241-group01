@@ -5,6 +5,14 @@ import ch.sc.snakesandladders.*;
 public class FirstSquare extends Square {
     public FirstSquare(Board board, int index) {
         super(board, index);
+        // TODO: Fixes in Javadoc / Readme
+        if(board == null) {
+            throw new NullPointerException();
+        }
+        if(index != 0){
+            throw new IllegalArgumentException();
+        }
+
     }
 
     public Square requestLanding(Player p) {
