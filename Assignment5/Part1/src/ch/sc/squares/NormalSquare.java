@@ -1,7 +1,7 @@
 package ch.sc.squares;
 
 import ch.sc.snakesandladders.*;
-
+// TODO: Fix document
 public class NormalSquare extends Square {
 
     public NormalSquare(Board board, int index) {

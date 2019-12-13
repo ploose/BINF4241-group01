@@ -30,9 +30,6 @@ public class SnakeSquare extends Square {
         if(index < indexNext){
             throw new IllegalArgumentException("indexNext needs to be smaller than index.");
         }
-        if(index < 0 || index >= board.getSize()){
-            throw new IllegalArgumentException("index needs to be in range.");
-        }
         if(indexNext < 0 || indexNext >= board.getSize()){
             throw new IllegalArgumentException("indexNext needs to be in range.");
         }

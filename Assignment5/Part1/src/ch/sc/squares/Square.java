@@ -7,13 +7,21 @@ import ch.sc.snakesandladders.*;
 public abstract class Square {
     Board board;
     private int index; // Index of tile instance
-    private boolean singleSpace; // boolean that indicates, whether the tile is limited to one player (if true) or if there is no limit (if false)
+    // TODO: Fix documenting
+    protected boolean singleSpace; // boolean that indicates, whether the tile is limited to one player (if true) or if there is no limit (if false)
     private ArrayList<Player> currentPlayers = new ArrayList<>(); // ArrayList with all players that are currently on the tile
 
     Square(Board board, int index) {
         this.board = board;
         this.index = index;
         this.singleSpace = true;
+        // TODO: Fixes in doc
+        if(board == null){
+            throw new NullPointerException();
+        }
+        if(index < 0 || index > board.getSize()-1){
+            throw new IllegalArgumentException("indexNext needs to be in range.");
+        }
     }
 
     // Tile is occupied iff it's a singleSpace and there is already a player on it, otherwise it is not occupied.
@@ -27,10 +35,22 @@ public abstract class Square {
 
 
     public void addPlayer(Player p) {
-        this.currentPlayers.add(p);
+        // TODO: Document fix
+        if(p == null){
+            throw new NullPointerException();
+        }
+        if(!isOccupied()){
+            this.currentPlayers.add(p);
+        }else{
+            throw new IllegalStateException("Can't add player to occupied singleSpace square.");
+        }
     }
-    // TODO: remove non-conained player?
+    // TODO: remove non-contained player?
     public void removePlayer(Player p) {
+        // TODO: Document fix
+        if(p == null){
+            throw new NullPointerException();
+        }
         currentPlayers.remove(p);
     }
 

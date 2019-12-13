@@ -6,9 +6,7 @@ public class FirstSquare extends Square {
     public FirstSquare(Board board, int index) {
         super(board, index);
         // TODO: Fixes in Javadoc / Readme
-        if(board == null) {
-            throw new NullPointerException();
-        }
+        this.singleSpace = false;
         if(index != 0){
             throw new IllegalArgumentException();
         }
