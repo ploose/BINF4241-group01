@@ -29,7 +29,7 @@ public abstract class Square {
     public void addPlayer(Player p) {
         this.currentPlayers.add(p);
     }
-
+    // TODO: remove non-conained player?
     public void removePlayer(Player p) {
         currentPlayers.remove(p);
     }

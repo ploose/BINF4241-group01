@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class BoardTest {
     private ArrayList<Player> list;
     private Players players;
-
+    // TODO: add missing javadoc
     @Before
     public void setUp() {
         list = new ArrayList<>();

@@ -19,6 +19,12 @@ public class Player {
         CurrentSquare = currentSquare;
     }
 
+    // TODO: Javadoc
+    // Only used for testing!!!
+    Square getCurrentSquare(){
+        return CurrentSquare;
+    }
+
     // Moves the player forward to the square calculated by
     void moveFwd(int steps){
         CurrentSquare.removePlayer(this);
