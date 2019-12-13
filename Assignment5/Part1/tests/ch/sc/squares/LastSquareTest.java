@@ -55,7 +55,7 @@ public class LastSquareTest {
         }
         fail("IllegalArgumentException expected");
     }
-    
+
     @Test
     public void testToString() {
         Square square = new LastSquare(board, board.getSize() - 1);

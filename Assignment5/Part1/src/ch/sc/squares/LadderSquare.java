@@ -8,6 +8,10 @@ public class LadderSquare extends Square {
 
     public LadderSquare(Board board, int index, int indexNext) {
         super(board, index);
+
+        this.indexNext = indexNext;
+        jumpDistance = indexNext - index;
+
         if(index == indexNext){
             throw new IllegalArgumentException("Ladder can't connect to itself.");
         }
@@ -16,6 +20,12 @@ public class LadderSquare extends Square {
         }
         if(index == board.getSize()-1){
             throw new IllegalArgumentException("Ladder can't be placed on last square.");
+        }
+        if(indexNext == 0){
+            throw new IllegalArgumentException("Ladder can't go to first square.");
+        }
+        if(indexNext == board.getSize()-1){
+            throw new IllegalArgumentException("Ladder can't go to  last square.");
         }
         if(index > indexNext){
             throw new IllegalArgumentException("indexNext needs to be greater than index.");
@@ -26,8 +36,6 @@ public class LadderSquare extends Square {
         if(indexNext < 0 || indexNext >= board.getSize()){
             throw new IllegalArgumentException("indexNext needs to be in range.");
         }
-        this.indexNext = indexNext;
-        jumpDistance = indexNext - index;
     }
 
     public Square requestLanding(Player p) {
