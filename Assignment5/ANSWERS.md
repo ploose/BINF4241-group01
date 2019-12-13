@@ -1,4 +1,17 @@
 #Part 1
+- Implemented & documented all tests
+## General Findings
+In general there were no fundamental bugs in our code. What we found out due to the testing is,
+that we relied on checking whether a parameter was valid (e.g. in the correct range) at only one point in the code.
+The code has now been adapted to make the classes more independent from each other. They now individually check 
+whether the received parameters are indeed to the required specification.
+
+## Further Remarks
+- The methods of the parent class square are only tested in the NormalSquareTest class. 
+Only square type which would differ in its usage / testing would be the FirstSquare, which is able to receive
+more than one player (therefore the tests for addPlayer() and isOccupied() whit an occupied square would be absent).
+- The moveAndLand() method in the square parent class hasn't been explicitly testet because it's already been indirectly
+tested in the PlayerTest class.
 
 
 #Part 2
