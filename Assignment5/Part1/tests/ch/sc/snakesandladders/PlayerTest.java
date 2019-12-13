@@ -28,6 +28,25 @@ public class PlayerTest {
     }
 
     @Test
+    public void testConstructNormal() {
+        try {
+            Player temp = new Player("Norman");
+        } catch (Exception e) {
+            fail("Exception when constructing with normal parameters.");
+        }
+    }
+
+    @Test
+    public void testConstructWithNull() {
+        try {
+            Player temp = new Player(null);
+        } catch (NullPointerException e) {
+            return;
+        }
+        fail("NullPointerException expected");
+    }
+
+    @Test
     public void testGetName() {
         assertEquals("getName() doesn't return correct playername.", "Sam", playerA.getName());
         assertEquals("getName() doesn't return correct playername.", "Nathalie", playerB.getName());

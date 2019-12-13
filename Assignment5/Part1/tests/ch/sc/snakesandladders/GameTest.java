@@ -59,10 +59,6 @@ public class GameTest {
 
     @Test
     public void testConstructWithFivePlayers() {
-//        list = new ArrayList<>();
-//        list.add(new Player("Sam"));
-//        list.add(new Player("Nathalie"));
-//        list.add(new Player("Alexis"));
         list.add(new Player("Boris"));
         list.add(new Player("Jeremy"));
         players = new Players(list);

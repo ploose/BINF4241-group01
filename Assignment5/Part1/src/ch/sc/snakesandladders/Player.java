@@ -8,6 +8,7 @@ public class Player {
 
 
     public Player(String name) {
+        if(name == null) throw new NullPointerException();
         this.name = name;
     }
 
