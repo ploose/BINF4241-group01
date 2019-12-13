@@ -18,6 +18,11 @@ public class Board {
     private Queue<Point> tupleQueue;
 
     Board(int size, Players players) {   //Constructor
+        // TODO: mention fix in Javadoc
+        if(size <= 2){
+            throw new IllegalArgumentException("Board.board");
+        }
+
         this.size = size;
         this.players = players;
 
