@@ -58,4 +58,13 @@ public class PlayerTest {
         assertEquals("Unexpected Player-Behavior when moving 'over' board-edge.",
                 board.findSquare(2), playerA.getCurrentSquare());
     }
+
+    @After
+    public void tearDown() {
+        for (Player player : list) {
+            player = null;
+        }
+
+        list = null;
+    }
 }

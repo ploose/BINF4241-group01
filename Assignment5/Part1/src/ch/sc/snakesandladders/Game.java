@@ -9,6 +9,14 @@ class Game {
     private Ui userInterface;
 
     Game(Players players, Ui userInterface, int size) {   //Constructor for the Game class
+        // TODO: Fixes in Javadoc
+        if(userInterface == null){
+            throw new NullPointerException();
+        }
+        if(players.getQueue().size() < 2 || players.getQueue().size() > 4){
+            throw new IllegalArgumentException("Game only accepts 2-4 players.");
+        }
+
         this.players = players;
         this.userInterface = userInterface;
         board = new Board(size, players);
