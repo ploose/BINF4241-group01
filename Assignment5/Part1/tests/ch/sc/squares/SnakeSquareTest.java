@@ -15,6 +15,10 @@ public class SnakeSquareTest {
     private Players players;
     private Board board;
     // TODO: Javadoc / Readme
+
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -27,6 +31,10 @@ public class SnakeSquareTest {
         board = new Board(10, players);
     }
 
+    /**
+     *  This test tries to construct a SnakeSquare with expected / normal parameters.
+     *  If this test is negative, there's probably a fundamental flaw.
+     */
     @Test
     public void testConstructorNormal() {
         try {
@@ -36,6 +44,10 @@ public class SnakeSquareTest {
         }
     }
 
+    /**
+     *  If we construct a square without a board, we want to get a NullPointerException.
+     *  This test validates that the wanted error is given.
+     */
     @Test
     public void testConstructorWithoutBoard() {
         try {
@@ -46,6 +58,13 @@ public class SnakeSquareTest {
         fail("NullPointerException expected");
     }
 
+    /**
+     * A SnakeSquare can only be placed between the firstSquare and the lastSquare, but not on them.
+     * Therefore the valid indices are 1 to (board.getSize()-2). If we try to construct a SnakeSquare with illegal
+     * parameters, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from an illegal square to a legal square leads to an IllegalArgumentException.
+     */
     @Test
     public void testConstructorWithIllegalIndexA() {
         try {
@@ -56,16 +75,27 @@ public class SnakeSquareTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * A SnakeSquare and its target square can only be placed between the firstSquare and the lastSquare, but not on
+     * them. Therefore the valid indices are 1 to (board.getSize()-2). If we try to construct a SnakeSquare with illegal
+     * parameters, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from a legal square to an illegal square leads to an IllegalArgumentException.
+     */
     @Test
-    public void testConstructorWithIllegalIndexAndJump() {
+    public void testConstructorWithIllegalIndexB() {
         try {
-            Square square = new SnakeSquare(board, board.getSize()-1, 0);
+            Square square = new SnakeSquare(board, 5, 0);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * A SnakeSquare's target can't be equal to the SnakeSquare itself. If we try to construct a SnakeSquare with
+     * itself as target, we want to receive an IllegalArgumentException, which this test validates.
+     */
     @Test
     public void testConstructorWithIllegalJumpA() {
         try {
@@ -76,26 +106,57 @@ public class SnakeSquareTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     *  A SnakeSquare's target can't be greater (or equal) to the SnakeSquare itself. If we try to construct a
+     *  SnakeSquare with a target index greater than its index, we want to receive an IllegalArgumentException,
+     *  which this test validates.
+     */
     @Test
     public void testConstructorWithIllegalJumpB() {
         try {
-            Square square = new SnakeSquare(board, 5, -1);
+            Square square = new SnakeSquare(board, 3, 5);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException expected");
     }
+
+    /**
+     * The SnakeSquare index needs to in the valid range (1 to (board.getSize()-2)). If an illegal index is given, we
+     * want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from an illegal square to a legal square leads to an IllegalArgumentException.
+     */
 
     @Test
-    public void testConstructorOutOfRangeIndex() {
+    public void testConstructorOutOfRangeIndexA() {
         try {
-            Square square = new SnakeSquare(board, -1, -10);
+            Square square = new SnakeSquare(board, 100, 5);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * The SnakeSquare's target index (indexNext) needs to in the valid range(1 to (board.getSize()-2)). If an illegal
+     * index is given, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from a legal square to an illegal square leads to an IllegalArgumentException.
+     */
+    @Test
+    public void testConstructorOutOfRangeIndexB() {
+        try {
+            Square square = new SnakeSquare(board, 5, -100);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        fail("IllegalArgumentException expected");
+    }
+
+    /**
+     *  This test validates whether the toString() method behaves as expected.
+     */
     @Test
     public void testToString() {
         Square square = new SnakeSquare(board, 5, 3);

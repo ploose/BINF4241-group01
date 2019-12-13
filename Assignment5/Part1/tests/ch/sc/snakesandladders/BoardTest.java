@@ -9,7 +9,10 @@ import java.util.ArrayList;
 public class BoardTest {
     private ArrayList<Player> list;
     private Players players;
-    // TODO: add missing javadoc
+
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -21,6 +24,10 @@ public class BoardTest {
         players = new Players(list);
     }
 
+    /**
+     * This test checks, that the first square is of type FirstSquare, the last square of type Last Square and all in-
+     * between either of type NormalSquare, SnakeSquare or LadderSquare.
+     */
     @Test
     public void testFirstInit() {
         Board board = new Board(100, players);
@@ -36,25 +43,18 @@ public class BoardTest {
     }
 
 
-    // TODO: Buggy test?
-//    @Test
-//    public void testNoLoop() {
-//        Board board = new Board(100, players);
-//
-//        for (int i = 1; i < board.getSize() - 1; ++i) {
-//            if (board.findSquare(i) instanceof LadderSquare || board.findSquare(i) instanceof SnakeSquare) {
-//                assertNotEquals("Endless loop found on field: " + i,
-//                        board.findSquare(i), board.findSquare(i).moveAndLand(0, players.getCurrentPlayer()));
-//            }
-//        }
-//    }
-
+    /**
+     *  This test checks that a board constructed with a given size also really has that size.
+     */
     @Test
     public void testConstructBoardNormal() {
         Board board1 = new Board(10, players);
         assertEquals("Board has wrong size.", 10, board1.getSize());
     }
 
+    /**
+     *  This test tries to construct a board with an illegal size and checks that an IllegalArgumentException is thrown.
+     */
     @Test
     public void testConstructBoardZero() {
         try {
@@ -65,6 +65,9 @@ public class BoardTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     *  This test tries to construct a board with an illegal size and checks that an IllegalArgumentException is thrown.
+     */
     @Test
     public void testConstructBoardNegative() {
         try {
@@ -75,6 +78,10 @@ public class BoardTest {
         fail("IllegalArgumentException expected");
     }
 
+
+    /**
+     *  Checking whether the setWinner() & getWinner() methods in Board work.
+     */
     @Test
     public void testSetGetWinner() {
         Board board = new Board(12, players);
@@ -83,6 +90,9 @@ public class BoardTest {
         assertEquals("Sam", board.getWinner().getName());
     }
 
+    /**
+     *  Cleanup after tests
+     */
     @After
     public void tearDown() {
         for (Player player : list) {

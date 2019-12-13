@@ -16,6 +16,10 @@ public class NormalSquareTest {
     private Player playerA, playerB;
     private Board board;
     // TODO: Javadoc / Readme
+
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -31,6 +35,10 @@ public class NormalSquareTest {
         board = new Board(100, players);
     }
 
+    /**
+     *  This test tries to construct a NormalSquare with expected / normal parameters.
+     *  If this test is negative, there's probably a fundamental flaw.
+     */
     @Test
     public void testConstructorNormal() {
         try {
@@ -40,6 +48,10 @@ public class NormalSquareTest {
         }
     }
 
+    /**
+     *  If we construct a square without a board, we want to get a NullPointerException.
+     *  This test validates that the wanted error is given.
+     */
     @Test
     public void testConstructorWithoutBoard() {
         try {
@@ -50,8 +62,14 @@ public class NormalSquareTest {
         fail("NullPointerException expected");
     }
 
+    /**
+     * The NormalSquare's index needs to be in the valid range(0 to (board.getSize()-1)). If an illegal
+     * index is given, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks an illegal value at the lower border.
+     */
     @Test
-    public void testConstructorWithIllegalIndex() {
+    public void testConstructorOutOfRangeIndexA() {
         try {
             Square square = new NormalSquare(board, -1);
         } catch (IllegalArgumentException e) {
@@ -60,19 +78,45 @@ public class NormalSquareTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * The NormalSquare's index needs to be in the valid range(0 to (board.getSize()-1)). If an illegal
+     * index is given, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks an illegal value at the upper border.
+     */
+    @Test
+    public void testConstructorOutOfRangeIndexB() {
+        try {
+            Square square = new NormalSquare(board, board.getSize());
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        fail("IllegalArgumentException expected");
+    }
+
+
+    /**
+     *  Testing whether NormalSquare returns a reference to itself, if unoccupied and called by a player.
+     */
     @Test
     public void testRequestLandingOnUnoccupied(){
         Square square = new NormalSquare(board, 1);
         assertEquals("Couldn't land on unoccupied square.", square, square.requestLanding(playerA));
     }
 
+    /**
+     *  Testing whether NormalSquare returns null, if occupied and called by a player.
+     */
     @Test
     public void testRequestLandingOnOccupied(){
         Square square = new NormalSquare(board, 1);
         square.addPlayer(playerB);
-        assertEquals("Couldn't land on unoccupied square.", null, square.requestLanding(playerA));
+        assertEquals("Could land on occupied square.", null, square.requestLanding(playerA));
     }
 
+    /**
+     *  This test validates whether the toString() method behaves as expected.
+     */
     @Test
     public void testToString() {
         Square square = new NormalSquare(board, 1);
@@ -82,6 +126,11 @@ public class NormalSquareTest {
     }
 
     // Testing general methods of the Square parent class
+
+
+    /**
+     * Testing whether the isOccupied() method returns false when unoccupied and true when occupied.
+     */
     @Test
     public void testIsOccupied(){
         Square square = new NormalSquare(board, 1);
@@ -91,6 +140,10 @@ public class NormalSquareTest {
         assertTrue("returns false although square is occupied.", square.isOccupied());
     }
 
+
+    /**
+     * Checking whether we can add a player to an unoccupied square (which we should be able to).
+     */
     @Test
     public void testAddPlayerOnUnoccupied(){
         Square square = new NormalSquare(board, 1);
@@ -102,6 +155,9 @@ public class NormalSquareTest {
 
     }
 
+    /**
+     * Checking that a NullPointerException is thrown when not passing any parameters to the addPlayer() method.
+     */
     @Test
     public void testAddNull(){
         Square square = new NormalSquare(board, 1);
@@ -114,6 +170,10 @@ public class NormalSquareTest {
 
     }
 
+    /**
+     * This test checks, that an IllegalStateException is thrown when we try to add a player to an already occupied
+     * NormalSquare (Note: The SingleSquare is able to have players added when already containing other players).
+     */
     @Test
     public void testAddPlayerOnOccupied(){
         Square square = new NormalSquare(board, 1);
@@ -126,6 +186,10 @@ public class NormalSquareTest {
         fail("Unexpected error when adding player to unnocupied square.");
     }
 
+
+    /**
+     * Checking that no unexpected errors are thrown when removing a player from its square.
+     */
     @Test
     public void testRemovePlayerNormal(){
         Square square = new NormalSquare(board, 1);
@@ -137,6 +201,9 @@ public class NormalSquareTest {
         }
     }
 
+    /**
+     * Checking that a NullPointerException is thrown when passing null as parameter to the removePlayer() method.
+     */
     @Test
     public void testRemovePlayerNull(){
         Square square = new NormalSquare(board, 1);
@@ -149,6 +216,10 @@ public class NormalSquareTest {
         fail("NullPointerException expected.");
     }
 
+
+    /**
+     * Testing that no unexpected error is thrown when removing a player from a square he's not on.
+     */
     @Test
     public void testRemovePlayerNotOnSquare(){
         Square square = new NormalSquare(board, 1);

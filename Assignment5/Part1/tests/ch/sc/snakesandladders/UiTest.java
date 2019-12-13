@@ -14,6 +14,9 @@ public class UiTest {
     private ArrayList<Player> list;
     private Players players;
 
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         userInterface = new Ui();
@@ -27,6 +30,10 @@ public class UiTest {
         players = new Players(list);
     }
 
+
+    /**
+     *  This test simulates a normal / legal user-input for the size (size>=2). If all works no error is thrown.
+     */
     @Test
     public void testGetBoardSizeWithLegalInput() {
         String input = "10";
@@ -40,6 +47,9 @@ public class UiTest {
         }
     }
 
+    /**
+     *  This test simulates an illegal user-input for the size (size<2). If we receive an exception, all is fine.
+     */
     @Test
     public void testGetBoardSizeWithIllegalInput() {
         String input = "1";
@@ -54,6 +64,12 @@ public class UiTest {
         fail("UI accepted illegal size parameter (x < 2)");
     }
 
+    /**
+     *  Sadly I couldn't make a working user-input for the getPlayers() method in Ui. The problem is, that the method
+     *  requires multiple user-inputs in a row, which couldn't be achieved with the method referred to in the forum.
+     *  I think the method can still be considered 'tested' though, as it itself checks correct user-input (as it is a
+     *  loop, until the user enters a valid input).
+     */
     // TODO: Test this or just write that it couldn't be done?
 //    @Test
 //    public void testGetPlayersNormalInput() {

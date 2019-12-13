@@ -10,7 +10,7 @@ public class PlayerTest {
     private ArrayList<Player> list;
     private Player playerA, playerB;
     private Players players;
-    // TODO: Javadoc
+
     /**
      * Setting up variables for the tests
      */
@@ -27,6 +27,10 @@ public class PlayerTest {
 
     }
 
+    /**
+     *  This test tries to construct a Player with expected / normal parameters.
+     *  If this test is negative, there's probably a fundamental flaw.
+     */
     @Test
     public void testConstructNormal() {
         try {
@@ -36,6 +40,10 @@ public class PlayerTest {
         }
     }
 
+    /**
+     *  If we construct a player without a name / with null as parameter, we want to get a NullPointerException.
+     *  This test validates that the wanted error is given.
+     */
     @Test
     public void testConstructWithNull() {
         try {
@@ -46,13 +54,18 @@ public class PlayerTest {
         fail("NullPointerException expected");
     }
 
+    /**
+     *  Checking whether the getName() method works as expected.
+     */
     @Test
     public void testGetName() {
         assertEquals("getName() doesn't return correct playername.", "Sam", playerA.getName());
         assertEquals("getName() doesn't return correct playername.", "Nathalie", playerB.getName());
     }
 
-    // TODO: Do we really need to test moveFwd as it is basically a fancy setter?
+    /**
+     *  Checking, whether the MoveFwd() method moves the player to the desired unoccupied square.
+     */
     @Test
     public void testMoveFwdNormal() {
         Board board = new Board(4, players);
@@ -61,6 +74,10 @@ public class PlayerTest {
                 playerA.getCurrentSquare());
     }
 
+    /**
+     *  Checking, whether the MoveFwd() method moves the player to the first square, when trying to land on an already
+     *  occupied square.
+     */
     @Test
     public void testMoveFwdToOccupied() {
         Board board = new Board(4, players);
@@ -70,6 +87,10 @@ public class PlayerTest {
                 board.findSquare(0), playerA.getCurrentSquare());
     }
 
+    /**
+     *  Checking whether the MoveFwd() method moves the player the remaining 'moves' back from the last square when
+     *  overshooting it.
+     */
     @Test
     public void testMoveOverBoard() {
         Board board = new Board(4, players);
@@ -78,6 +99,9 @@ public class PlayerTest {
                 board.findSquare(2), playerA.getCurrentSquare());
     }
 
+    /**
+     *  Cleanup after tests
+     */
     @After
     public void tearDown() {
         for (Player player : list) {

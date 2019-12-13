@@ -10,7 +10,9 @@ public class GameTest {
     private ArrayList<Player> list;
     private Players players;
 
-    // TODO: add missing javadoc
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -22,6 +24,10 @@ public class GameTest {
         players = new Players(list);
     }
 
+    /**
+     *  This test tries to construct the Game with expected / normal parameters.
+     *  If this test is negative, there's probably a fundamental flaw.
+     */
     @Test
     public void testConstructNormal() {
         try {
@@ -31,6 +37,10 @@ public class GameTest {
         }
     }
 
+    /**
+     * If we try to construct the Game without a Players object, we want to get a NullPointerException, which we
+     * test here.
+     */
     @Test
     public void testConstructWithoutPlayers() {
         try {
@@ -42,6 +52,10 @@ public class GameTest {
 
     }
 
+    /**
+     * The Game is for 2-4 players. Therefore we want to receive an IllegalArgumentException when trying to create a
+     * game with less players than that. We check whether we get the desired IllegalArgumentException here.
+     */
     @Test
     public void testConstructWithSinglePlayer() {
         list = new ArrayList<>();
@@ -57,6 +71,10 @@ public class GameTest {
 
     }
 
+    /**
+     * The Game is for 2-4 players. Therefore we want to receive an IllegalArgumentException when trying to create a
+     * game with more players than that. We check whether we get the desired IllegalArgumentException here.
+     */
     @Test
     public void testConstructWithFivePlayers() {
         list.add(new Player("Boris"));
@@ -71,6 +89,10 @@ public class GameTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     *  We want to receive a NullPointerException when trying to create the Game without a Ui object. This is tested
+     *  here.
+     */
     @Test
     public void testConstructWithoutUI() {
         try {
@@ -82,6 +104,10 @@ public class GameTest {
 
     }
 
+    /**
+     * The game boards size has no upper limit, but needs at least 2 squares. If we try to create a game with any
+     * less than that, we want to get an IllegalArgumentException, which we test here.
+     */
     @Test
     public void testConstructWithIllegalSize() {
         try {
@@ -93,6 +119,9 @@ public class GameTest {
 
     }
 
+    /**
+     *  Cleanup after tests
+     */
     @After
     public void tearDown() {
         for (Player player : list) {

@@ -15,6 +15,9 @@ public class LadderSquareTest {
     private Players players;
     private Board board;
     // TODO: Javadoc / Readme
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -27,6 +30,10 @@ public class LadderSquareTest {
         board = new Board(10, players);
     }
 
+    /**
+     *  This test tries to construct a LadderSquare with expected / normal parameters.
+     *  If this test is negative, there's probably a fundamental flaw.
+     */
     @Test
     public void testConstructorNormal() {
         try {
@@ -36,6 +43,10 @@ public class LadderSquareTest {
         }
     }
 
+    /**
+     *  If we construct a square without a board, we want to get a NullPointerException.
+     *  This test validates that the wanted error is given.
+     */
     @Test
     public void testConstructorWithoutBoard() {
         try {
@@ -46,6 +57,13 @@ public class LadderSquareTest {
         fail("NullPointerException expected");
     }
 
+    /**
+     * A LadderSquare can only be placed between the firstSquare and the lastSquare, but not on them.
+     * Therefore the valid indices are 1 to (board.getSize()-2). If we try to construct a LadderSquare with illegal
+     * parameters, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from an illegal square to a legal square leads to an IllegalArgumentException.
+     */
     @Test
     public void testConstructorWithIllegalIndexA() {
         try {
@@ -56,16 +74,27 @@ public class LadderSquareTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * A LadderSquare can only be placed between the firstSquare and the lastSquare, but not on them.
+     * Therefore the valid indices are 1 to (board.getSize()-2). If we try to construct a LadderSquare with illegal
+     * parameters, we want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from a legal square to an illegal square leads to an IllegalArgumentException.
+     */
     @Test
-    public void testConstructorWithIllegalIndexAndJump() {
+    public void testConstructorWithIllegalIndexB() {
         try {
-            Square square = new LadderSquare(board, board.getSize()-1, board.getSize()-1);
+            Square square = new LadderSquare(board, 5, board.getSize()-1);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * A LadderSquare's target can't be equal to the LadderSquare itself. If we try to construct a LadderSquare with
+     * itself as target, we want to receive an IllegalArgumentException, which this test validates.
+     */
     @Test
     public void testConstructorWithIllegalJumpA() {
         try {
@@ -76,26 +105,56 @@ public class LadderSquareTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     *  A LadderSquare's target can't be smaller (or equal) to the LadderSquare itself. If we try to construct a
+     *  LadderSquare with a target index greater than its index, we want to receive an IllegalArgumentException,
+     *  which this test validates.
+     */
     @Test
     public void testConstructorWithIllegalJumpB() {
         try {
-            Square square = new LadderSquare(board, 3, 100);
+            Square square = new LadderSquare(board, 5, 3);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * The LadderSquare index needs to in the valid range (1 to (board.getSize()-2)). If an illegal index is given, we
+     * want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from an illegal square to a legal square leads to an IllegalArgumentException.
+     */
     @Test
-    public void testConstructorOutOfRangeIndex() {
+    public void testConstructorOutOfRangeIndexA() {
         try {
-            Square square = new LadderSquare(board, -1, 5);
+            Square square = new LadderSquare(board, -100, 5);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     * The LadderSquare index needs to in the valid range (1 to (board.getSize()-2)). If an illegal index is given, we
+     * want to receive an IllegalArgumentException, which this test validates.
+     *
+     * This test checks that a jump from a legal square to an illegal square leads to an IllegalArgumentException.
+     */
+    @Test
+    public void testConstructorOutOfRangeIndexB() {
+        try {
+            Square square = new LadderSquare(board, 5, 100);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        fail("IllegalArgumentException expected");
+    }
+
+    /**
+     *  This test validates whether the toString() method behaves as expected.
+     */
     @Test
     public void testToString() {
         Square square = new LadderSquare(board, 3, 5);

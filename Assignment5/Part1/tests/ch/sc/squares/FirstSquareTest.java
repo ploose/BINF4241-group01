@@ -18,6 +18,9 @@ public class FirstSquareTest {
     private Board board;
     // TODO: Javadoc / Readme
 
+    /**
+     * Setting up variables for the tests
+     */
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -30,6 +33,10 @@ public class FirstSquareTest {
         board = new Board(100, players);
     }
 
+    /**
+     *  This test tries to construct a FirstSquare with expected / normal parameters.
+     *  If this test is negative, there's probably a fundamental flaw.
+     */
     @Test
     public void testConstructorNormal() {
         try {
@@ -39,6 +46,10 @@ public class FirstSquareTest {
         }
     }
 
+    /**
+     *  If we construct a square without a board, we want to get a NullPointerException.
+     *  This test validates that the wanted error is given.
+     */
     @Test
     public void testConstructorWithoutBoard() {
         try {
@@ -49,6 +60,11 @@ public class FirstSquareTest {
         fail("NullPointerException expected");
     }
 
+    /**
+     *  If we construct a square with an illegal index, in the case of the FirstSquare each index != 0
+     *  (i.e. the index of the first square), we want to get an IllegalArgumentException.
+     *  This test validates that the wanted error is given.
+     */
     @Test
     public void testConstructorWithIllegalIndex() {
         try {
@@ -59,6 +75,9 @@ public class FirstSquareTest {
         fail("IllegalArgumentException expected");
     }
 
+    /**
+     *  This test validates whether the toString() method behaves as expected.
+     */
     @Test
     public void testToString() {
         Square square = new FirstSquare(board, 0);
