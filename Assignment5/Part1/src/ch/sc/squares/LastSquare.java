@@ -6,6 +6,13 @@ public class LastSquare extends Square {
 
     public LastSquare(Board board, int index) {
         super(board, index);
+        // TODO: Fixes in Javadoc / Readme
+        if(board == null) {
+            throw new NullPointerException();
+        }
+        if(index != board.getSize()-1){
+            throw new IllegalArgumentException();
+        }
     }
 
     public Square requestLanding(Player winner) {

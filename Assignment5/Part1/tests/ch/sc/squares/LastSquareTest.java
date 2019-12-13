@@ -2,22 +2,19 @@ package ch.sc.squares;
 
 import ch.sc.snakesandladders.Board;
 import ch.sc.snakesandladders.Player;
-
 import ch.sc.snakesandladders.Players;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class FirstSquareTest {
+public class LastSquareTest {
     private ArrayList<Player> list;
     private Players players;
     private Board board;
     // TODO: Javadoc / Readme
-
     @Before
     public void setUp() {
         list = new ArrayList<>();
@@ -33,7 +30,7 @@ public class FirstSquareTest {
     @Test
     public void testConstructorNormal() {
         try {
-            FirstSquare square = new FirstSquare(board, 0);
+            Square square = new LastSquare(board, board.getSize() - 1);
         } catch (Exception e) {
             fail("Exception when constructing with normal parameters.");
         }
@@ -42,7 +39,7 @@ public class FirstSquareTest {
     @Test
     public void testConstructorWithoutBoard() {
         try {
-            FirstSquare square = new FirstSquare(null, 0);
+            Square square = new LastSquare(null, board.getSize() - 1);
         } catch (NullPointerException e) {
             return;
         }
@@ -52,7 +49,7 @@ public class FirstSquareTest {
     @Test
     public void testConstructorWithIllegalIndex() {
         try {
-            FirstSquare square = new FirstSquare(board, 10);
+            Square square = new LastSquare(board, 0);
         } catch (IllegalArgumentException e) {
             return;
         }
@@ -61,9 +58,9 @@ public class FirstSquareTest {
 
     @Test
     public void testToString() {
-        Square square = new FirstSquare(board, 0);
+        Square square = new LastSquare(board, board.getSize() - 1);
         square.addPlayer(new Player("Vlad"));
-        assertEquals("toString() is behaving unexpected.", "[1<Vlad>]",
+        assertEquals("toString() is behaving unexpected.", "[" + board.getSize() + "<Vlad>]",
                 square.toString());
     }
 }
