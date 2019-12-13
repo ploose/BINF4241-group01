@@ -19,6 +19,8 @@
     - switchPlayer
 
 ##Bugs:
+Disclaimer: I had to change the package name for my IDE.
+
 - GameBoardTest:
   - markTwice / markOnBoard:
     In the method mark of the class GameBoard was a bug which was resulting in that you were only able to place
